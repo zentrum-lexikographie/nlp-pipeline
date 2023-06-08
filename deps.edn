@@ -1,0 +1,14 @@
+{:deps    {org.clojure/data.csv                 {:mvn/version "1.0.1"}
+           camel-snake-kebab/camel-snake-kebab  {:mvn/version "0.4.3"}
+           de.ids_mannheim/KorAP-Tokenizer      {:mvn/version "2.2.2"}
+           com.github.pemistahl/lingua          {:mvn/version "1.2.2"}
+           hato/hato                            {:mvn/version "0.9.0"}
+           metosin/jsonista                     {:mvn/version "0.3.3"}
+           io.github.gremid/clj-xml             {:local/root "../../clj-xml"}
+           com.fasterxml.woodstox/woodstox-core {:mvn/version "6.5.0"}}
+ :aliases {:vis               {:extra-deps {dali/dali     {:mvn/version "1.0.2"}
+                                            garden/garden {:git/url "https://github.com/noprompt/garden.git"
+                                                           :git/sha "05590ecb5f6fa670856f3d1ab400aa4961047480"}}}
+           :clerk             {:extra-deps {io.github.nextjournal/clerk {:mvn/version "0.13.842"}}}
+           :nextjournal/clerk {:exec-fn   nextjournal.clerk/build!
+                               :exec-args {:index "notebooks/presentation.clj"}}}}

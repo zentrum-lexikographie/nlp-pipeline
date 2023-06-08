@@ -1,0 +1,12 @@
+version: "3"
+services:
+  index:
+    image: zdl/index
+    build:
+      context: docker/index
+    volumes:
+      - index:/var/solr
+    ports:
+      - "8983:8983"
+volumes:
+  index:

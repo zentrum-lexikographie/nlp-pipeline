@@ -1,0 +1,12 @@
+*~
+
+.clerk/
+.cpcache/
+.nrepl-port
+
+.python-version
+__pycache__
+*.pyc
+
+public/
+resources/
