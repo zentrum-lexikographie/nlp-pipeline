@@ -126,7 +126,7 @@
    :mtas.kwic.0.field       "text"
    :mtas.kwic.0.query.type  "cql"
    :mtas.kwic.0.query.value q
-   :mtas.kwic.0.left        "10"w
+   :mtas.kwic.0.left        "10"
    :mtas.kwic.0.right       "10"})
 
 (def send-mtas-query!
