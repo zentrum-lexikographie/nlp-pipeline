@@ -152,5 +152,3 @@
 (comment
   (sync-request! "data.dwds.de" 52710 "info")
   (time (sync-request! "data.dwds.de" 55020 (encode-query "Haus #separate" :limit 100))))
-
-

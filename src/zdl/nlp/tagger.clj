@@ -3,8 +3,7 @@
    [camel-snake-kebab.core :as csk]
    [clojure.data.csv :as csv]
    [clojure.java.io :as io]
-   [clojure.string :as str]
-   [zdl.nlp.annotation :as anno])
+   [clojure.string :as str])
   (:import
    (java.io Closeable Writer)
    (java.lang ProcessBuilder$Redirect)))
@@ -29,7 +28,8 @@
 
 (defn process
   [cmd xform]
-  (let [process (.. (ProcessBuilder. (into-array String cmd))
+  (let [cmd     ^"[Ljava.lang.String;" (into-array String cmd)
+        process (.. (ProcessBuilder. cmd)
                     (redirectError ProcessBuilder$Redirect/INHERIT)
                     (start))
         input   (io/writer (.getOutputStream process) :encoding "UTF-8")
@@ -280,3 +280,25 @@
          (some-> exception# deref throw)
          (when (pos? (exit-value tagger#))
            (throw (ex-info "Tagger exit value > 0" {})))))))
+
+(defn tag!
+  [tagger sentences]
+  (reify clojure.lang.IReduceInit
+    (reduce [_this f init]
+      (let [exception (future (sentences->tagger sentences tagger))
+            results   (map merge-sentences sentences (sentence-seq tagger))]
+        (try
+          (loop [acc init results results]
+            (let [result (first results)]
+              (if (or (reduced? acc) (nil? result))
+                (unreduced acc)
+                (recur (f acc result) (rest results)))))
+          (finally
+            (destroy tagger)
+            (some-> exception deref throw)
+            (when (pos? (exit-value tagger))
+              (throw (ex-info "Tagger exit value > 0" {})))))))))
+
+(defn tag->vec!
+  [tagger sentences]
+  (reduce conj [] (tag! tagger sentences)))

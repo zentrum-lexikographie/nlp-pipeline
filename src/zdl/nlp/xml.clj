@@ -59,4 +59,3 @@
 (defn strip-prolog
   [s]
   (str/replace s #"^<\?xml.*?\?>" ""))
-

@@ -1,16 +1,17 @@
 (ns zdl.nlp
   (:require
-   [zdl.nlp.tokenizer :refer [tokenize]]
    [zdl.nlp.annotation :as anno]
-   [zdl.nlp.tagger :refer [with-tagger combined spacy dwdsmor flair]]))
+   [zdl.nlp.tagger :refer [combined dwdsmor flair spacy tag!]]
+   [zdl.nlp.tokenizer :refer [tokenize]]))
 
 (defn -main
   [& _]
   (try
-    #_:clj-kondo/ignore
-    (with-tagger
-      [tagged (combined [(spacy) (flair) (dwdsmor)])]
-      (tokenize (slurp *in*))
-      (run! (comp println pr-str) (pmap anno/process tagged)))
+    (let [tagger (combined [(spacy) (flair) (dwdsmor)])
+          tokens (tokenize (slurp *in*))]
+      (reduce
+       (fn [_ result] (println (pr-str (anno/process result))))
+       nil
+       (tag! tagger tokens)))
     (finally
       (shutdown-agents))))

@@ -5,7 +5,8 @@
    [jsonista.core :as json]
    [zdl.nlp.ddc :as ddc]
    [zdl.nlp.env :as env]
-   [clojure.string :as str]))
+   [clojure.string :as str]
+   [clojure.java.io :as io]))
 
 (defn parse-list
   [corpora]
@@ -62,5 +63,3 @@
 
 (comment
   (for [[id info] (query-infos!)] [id (info ::meta-corpus?)]))
-
-
