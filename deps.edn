@@ -15,8 +15,13 @@
                                             garden/garden {:git/url "https://github.com/noprompt/garden.git"
                                                            :git/sha "05590ecb5f6fa670856f3d1ab400aa4961047480"}}}
            :build             {:ns-default build
-                               :extra-deps {io.github.clojure/tools.build {:git/tag "v0.9.3"
-                                                                           :git/sha "e537cd1"}}}
+                               :extra-deps {org.clojure/data.csv          {:mvn/version "1.0.1"}
+                                            io.github.clojure/tools.build {:git/tag "v0.9.3"
+                                                                           :git/sha "e537cd1"}
+                                            org.relaxng/jing              {:mvn/version "20181222"
+                                                                           :exclusions  [xml-apis/xml-apis
+                                                                                         net.sf.saxon/Saxon-HE]}
+                                            org.kohsuke.rngom/rngom       {:mvn/version "20100718"}}}
            :clerk             {:extra-deps {io.github.nextjournal/clerk {:mvn/version "0.13.842"}}}
            :nextjournal/clerk {:exec-fn   nextjournal.clerk/build!
                                :exec-args {:index "notebooks/presentation.clj"}}}}
