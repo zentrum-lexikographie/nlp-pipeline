@@ -7,6 +7,9 @@
 .python-version
 __pycache__
 *.pyc
+.pytest_cache/
 
 public/
 resources/
+
+.env

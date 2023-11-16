@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+click = "*"
+sfst-transduce = "*"
+simplemma = "*"
+spacy = "*"
+lxml = "*"
+jpype1 = "*"
+lingua-language-detector = "*"
+de-dwds-dep-hdt-lg = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_dep_hdt_lg/resolve/main/de_dwds_dep_hdt_lg-any-py3-none-any.whl"}
+de-dwds-ner-lg = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_ner_lg/resolve/main/de_dwds_ner_lg-any-py3-none-any.whl"}
+de-dwds-dep-hdt-dist = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_dep_hdt_dist/resolve/main/de_dwds_dep_hdt_dist-any-py3-none-any.whl"}
+
+[dev-packages]
+pylint = "*"
+flake8 = "*"
+pytest = "*"
+
+[requires]
+python_version = "3.9"
+python_full_version = "3.9.16"
