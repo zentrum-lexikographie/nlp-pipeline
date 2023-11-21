@@ -216,11 +216,17 @@ def serialize_annotations(chunk, text, dep_doc, ner_doc):
             _serialize_morph_attrs(word_element, word.morph, 'person', 'Person')
             _serialize_morph_attrs(word_element, word.morph, 'mood', 'Mood')
             _serialize_morph_attrs(word_element, word.morph, 'degree', 'Degree')
+        for rel, token_ids in dep_sentence._.dwds_colloc:
+            ET.SubElement(sent_element, SPAN_TAG, {
+                'type': 'collocation',
+                'subtype': rel.lower(),
+                'target': ' '.join(str(t - sent_offset) for t in token_ids)
+            })
         if ner_sentence is not None:
             for entity in ner_sentence.ents:
                 ET.SubElement(sent_element, SPAN_TAG, {
                     'type': 'entity',
-                    'subtype': str(entity.label_),
+                    'subtype': entity.label_.lower(),
                     'from': str(entity.start - sent_offset),
                     'to': str(entity.end - sent_offset - 1)
                 })

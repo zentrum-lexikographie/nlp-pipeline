@@ -7,10 +7,6 @@ from functools import cached_property, partial
 #pylint: disable=no-name-in-module
 from sfst_transduce import CompactTransducer
 
-import spacy
-import spacy.language
-import spacy.tokens
-
 _subcat_tags       = {'Pers', 'Refl', 'Def', 'Indef', 'Neg'}
 _auxiliary_tags    = {'haben', 'sein'}
 _degree_tags       = {'Pos', 'Comp', 'Sup'}
@@ -282,95 +278,6 @@ def create_transducer(transducer_path):
     transducer = CompactTransducer(transducer_path)
     transducer.both_layers = True
     return transducer
-
-_stts_to_smor_pos = {
-    'ADJA': {'ADJ', 'ORD', 'INDEF', 'CARD'},
-    'ADJD': {'ADJ'},
-    'APPO': {'POSTP'},
-    'APPR': {'PREP'},
-    'APPRART': {'PREPART'},
-    'APZR': {'PREP', 'POSTP'},
-    'ITJ': {'INTJ'},
-    'KOKOM': {'CONJ'},
-    'KON': {'CONJ'},
-    'KOUI': {'CONJ'},
-    'KOUS': {'CONJ'},
-    'NE': {'NPROP'},
-    'NN': {'NPROP', 'NN'},
-    'PDAT': {'DEM'},
-    'PDS': {'DEM'},
-    'PIAT': {'INDEF'},
-    'PIDAT': {'INDEF'},
-    'PIS': {'INDEF'},
-    'PPER': {'PPRO'},
-    'PPOSAT': {'POSS'},
-    'PPOSS': {'POSS'},
-    'PRELAT': {'REL'},
-    'PRELS': {'REL'},
-    'PRF': {'PPRO'},
-    'PROP': {'ADV', 'PROADV'},
-    'PTKA': {'PTCL'},
-    'PTKANT': {'PTCL', 'INTJ'},
-    'PTKNEG': {'PTCL'},
-    'PTKVZ': {'VPART', 'ADV', 'PREP'},
-    'PTKZU': {'PTCL'},
-    'PWAT': {'WPRO'},
-    'PWAV': {'ADV'},
-    'PWS': {'WPRO'},
-    'VAFIN': {'V'},
-    'VAIMP': {'V'},
-    'VAINF': {'V'},
-    'VAPP': {'V'},
-    'VMFIN': {'V'},
-    'VMINF': {'V'},
-    'VMPP': {'V'},
-    'VVFIN': {'V'},
-    'VVIMP': {'V'},
-    'VVINF': {'V'},
-    'VVIZU': {'V'},
-    'VVPP': {'V'}
-}
-
-def score_analysis(v, morph, attr, score):
-    if v is not None:
-        for morph_v in morph.get(attr):
-            if v == morph_v:
-                return score
-    return 0
-
-def rank_analysis(analysis, token):
-    rank = 0
-    rank += score_analysis(analysis.gender, token.morph, 'Gender', 1)
-    rank += score_analysis(analysis.case, token.morph, 'Case', 1)
-    rank += score_analysis(analysis.stts_number, token.morph, 'Number', 1)
-    rank += score_analysis(analysis.tense, token.morph, 'Tense', 1)
-    rank += score_analysis(analysis.person, token.morph, 'Person', 1)
-    rank += score_analysis(analysis.mood, token.morph, 'Mood', 1)
-    rank += score_analysis(analysis.stts_degree, token.morph, 'Degree', 1)
-    return rank
-
-#pylint: disable=unused-argument
-def annotate_doc(nlp, transducer, doc):
-    for token in doc:
-        pos_set = _stts_to_smor_pos.get(token.tag_)
-        if pos_set is not None:
-            ranking = []
-            for analysis in analyse_word(transducer, token.text):
-                if analysis.pos in pos_set:
-                    ranking.append((rank_analysis(analysis, token), analysis))
-            if len(ranking) > 0:
-                ranking.sort(key=(lambda v: -v[0]))
-                token._.dwdsmor_lemma = ranking[0][1].lemma
-    return doc
-
-#pylint: disable=unused-argument
-@spacy.language.Language.factory(
-    'dwdsmor', default_config={'transducer_path': 'dwdsmor.ca'}
-)
-def create_component(nlp, name, transducer_path=None):
-    if not spacy.tokens.Token.has_extension('dwds_morph'):
-        spacy.tokens.Token.set_extension('dwdsmor_lemma', default=None)
-    return partial(annotate_doc, nlp, create_transducer(transducer_path))
 
 def main():
     transducer = create_transducer('resources/dwdsmor/dwdsmor.ca')

@@ -57,7 +57,7 @@ def annotate_corpus(nlp, xml_in=sys.stdin.buffer, xml_out=sys.stdout.buffer,
 def main():
     '''Command line interface.'''
     nlp = zdl.spacy.pipeline(
-        ner=False, dwdsmor_path='resources/dwdsmor/dwdsmor.ca'
+        model_type='dist', ner=True, dwdsmor_path='resources/dwdsmor/dwdsmor.ca'
     )
     annotate_corpus(nlp, batch_size=1)
 
