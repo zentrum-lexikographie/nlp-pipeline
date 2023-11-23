@@ -1,6 +1,5 @@
 (ns zdl.nlp.vis
   (:require
-   [clojure.java.browse :refer [browse-url]]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [dali]
@@ -261,13 +260,3 @@
 (defn png-file
   [sentence f]
   (dali.io/render-png (document sentence) (io/file f)))
-
-(def sample
-  (read-string (slurp (io/file "sample-sentence.tagged.edn"))))
-
-(comment
-  (collocations (first sample))
-  (let [f (io/file "sample.svg")
-        sentence (first sample)]
-    (svg-file sentence f)
-    (browse-url (.toURL f))))
