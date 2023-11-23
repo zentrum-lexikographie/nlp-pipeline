@@ -1,12 +1,11 @@
 (ns zdl.nlp.ddc.corpora
   (:require
    [clojure.core.async :as a]
+   [clojure.string :as str]
    [hato.client :as hc]
    [jsonista.core :as json]
    [zdl.nlp.ddc :as ddc]
-   [zdl.nlp.env :as env]
-   [clojure.string :as str]
-   [clojure.java.io :as io]))
+   [zdl.nlp.env :as env]))
 
 (defn parse-list
   [corpora]

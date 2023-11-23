@@ -1,6 +1,4 @@
 (ns zdl.nlp.env
-  (:require
-   [clojure.java.io :as io])
   (:import
    (io.github.cdimascio.dotenv Dotenv)))
 

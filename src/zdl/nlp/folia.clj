@@ -1,9 +1,8 @@
 (ns zdl.nlp.folia
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]
-            [gremid.xml :as gxml]
-            [zdl.nlp.xml :as xml]
-            [zdl.nlp.annotation :as anno]))
+  (:require
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [zdl.nlp.annotation :as anno]))
 
 (defn tag->str
   [k]
