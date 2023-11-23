@@ -4,4 +4,4 @@
 ((python-mode
   (python-test-runner pytest))
  (clojure-mode . ((cider-preferred-build-tool . clojure-cli)
-                  (cider-clojure-cli-aliases . ":nlp:ddc:sqlite:vis:clerk:env/dev:env/test"))))
+                  (cider-clojure-cli-aliases . ":nlp:ddc:sqlite:vis:clerk:python:env/dev:env/test"))))
