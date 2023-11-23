@@ -3,7 +3,7 @@ import sys
 
 import lxml.etree as ET
 
-import zdl.spacy
+import zdl.spacy.pipe
 import zdl.tei
 
 #pylint: disable=c-extension-no-member
@@ -56,8 +56,9 @@ def annotate_corpus(nlp, xml_in=sys.stdin.buffer, xml_out=sys.stdout.buffer,
 
 def main():
     '''Command line interface.'''
-    nlp = zdl.spacy.pipeline(
-        model_type='dist', ner=True, dwdsmor_path='resources/dwdsmor/dwdsmor.ca'
+    nlp = zdl.spacy.pipe.create(
+        model_type='dist', ner=True, korap=False,
+        dwdsmor_path='resources/dwdsmor/dwdsmor.ca'
     )
     annotate_corpus(nlp, batch_size=1)
 
