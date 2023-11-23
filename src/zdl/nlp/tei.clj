@@ -4,7 +4,7 @@
    [clojure.string :as str]
    [gremid.xml :as gxml])
   (:import
-   (javax.xml.stream XMLEventFactory  XMLStreamConstants)
+   (javax.xml.stream XMLEventFactory XMLStreamConstants)
    (javax.xml.stream.events Characters StartElement XMLEvent)
    (org.codehaus.stax2.evt XMLEventFactory2)))
 
@@ -122,5 +122,89 @@
   [events]
   (gxml/events->subtrees build-segment text-segment? events))
 
+(defn corpus-segment?
+  [^XMLEvent event]
+  (and (.isStartElement event)
+       (#{"teiHeader" "TEI"} (event->local-name event))))
+
+(defn folia-class-prop
+  [k v]
+  (when v [k {:class v}]))
+
+(defn folia-feat-prop
+  [k v]
+  (when v [:feat {:subset (name k) :class v}]))
+
+(defn folia-id
+  [prefix k n]
+  (str prefix "." k "." n))
+
+(defn folia-sentence
+  ([node]
+   (folia-sentence "s" node))
+  ([id node]
+   (let [word-id (partial folia-id id "w")
+         tokens  (gxml/elements :w node)
+         entities (->> (gxml/elements :span node)
+                       (filter #(= "entity" (gxml/attr :type %))))]
+     [:s {:xml:id id}
+      (folia-class-prop :lang (get-in node [:attrs :xml:lang]))
+      (for [{:keys [attrs] :as token} tokens]
+        (let [text (gxml/text-content token)]
+          [:w (cond-> {:xml:id (word-id (some-> attrs :n parse-long))}
+                (not (str/ends-with? text " ")) (assoc :space "no"))
+           [:t (str/trim text)]
+           (folia-class-prop :lemma (attrs :lemma))
+           (into
+            (folia-class-prop :pos (attrs :pos))
+            (list
+             (folia-feat-prop :num    (some-> attrs :number))
+             (folia-feat-prop :gender (some-> attrs :gender ))
+             (folia-feat-prop :case   (some-> attrs :case))
+             (folia-feat-prop :person (some-> attrs :person))
+             (folia-feat-prop :tense  (some-> attrs :tense))))]))
+      (when (some (partial gxml/attr :dep) tokens)
+        [:dependencies
+         (for [{{:keys [n head dep]} :attrs} tokens :when head]
+           [:dependency {:class dep}
+            [:hd  [:wref {:id (word-id (parse-long head))}]]
+            [:dep [:wref {:id (word-id (parse-long n))}]]])])
+      (when (seq entities)
+        [:entities
+         (for [{{:keys [subtype from to]} :attrs} entities]
+           [:entity {:class subtype}
+            (for [n (range (parse-long from) (inc (parse-long to)))]
+              [:wref {:id (word-id n)}])])])
+      #_(when collocations
+        [:collocations
+         (for [{:keys [k path]} collocations]
+           [:collocation {:class (tag->str k)}
+            (for [n path]
+              [:wref {:id (word-id n)}])])])])))
+
+(defn folia
+  ([node]
+   (first (folia false false node)))
+  ([div? chunk? {:keys [tag content] :as node}]
+   (if (= :s tag)
+     (list (folia-sentence node))
+     (let [chunk-tag? (some? (#{:ab :head :p} tag))
+           chunk??    (or chunk? chunk-tag?)
+           div??      (or div? (= :div tag))
+           content    (mapcat #(folia div?? chunk?? %) content)]
+       (when (seq content)
+         (cond
+           (= :TEI tag) (list [:FoLiA {:xmlns "http://ilk.uvt.nl/folia"}
+                               [:text content]])
+           (not div?)   (if (= :div tag) (list [:div content]) content)
+           (not chunk?) (if chunk-tag? (list [:p content]) content)
+           :else        content))))))
+
 (comment
-  (gxml/read-events (io/file "test")))
+  (->> (io/file "kafka.annotated.tei.xml")
+       #_(io/file "/home/gregor/kern.corpus.xml")
+       (gxml/read-events)
+       (gxml/events->subtrees corpus-segment?)
+       (filter (comp (partial = :TEI) :tag))
+       (map folia)
+       (take 1)))
