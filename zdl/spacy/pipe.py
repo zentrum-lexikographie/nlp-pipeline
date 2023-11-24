@@ -19,14 +19,6 @@ def _tokens_to_doc(vocab, tokens):
 def _nop_tokenizer(doc):
     return doc
 
-def _merge_ner(dep_docs, ner_docs):
-    for dep_doc, ner_doc in zip(dep_docs, ner_docs):
-        dep_doc.set_ents([
-            spacy.tokens.Span(dep_doc, entity.start, entity.end, entity.label_)
-            for entity in ner_doc.ents
-        ])
-        yield dep_doc
-
 def _tokenize(korap, dep_tagger, ner_tagger, texts):
     if korap:
         texts = (zdl.korap.tokenize(t) for t in texts)
@@ -38,21 +30,20 @@ def _tokenize(korap, dep_tagger, ner_tagger, texts):
         dep_docs, ner_docs = tee(texts)
         return (dep_docs, ner_docs)
 
-def _tag(dep_tagger, ner_tagger, custom_components, dep_docs, ner_docs):
-    dep_docs = dep_tagger.pipe(dep_docs, disable=custom_components)
-    ner_docs = ner_tagger.pipe(ner_docs) if ner_tagger is not None else None
-    return _merge_ner(dep_docs, ner_docs) if ner_docs is not None else dep_docs
+def _merge_ner(dep_docs, ner_docs):
+    for dep_doc, ner_doc in zip(dep_docs, ner_docs):
+        dep_doc.set_ents([
+            spacy.tokens.Span(dep_doc, entity.start, entity.end, entity.label_)
+            for entity in ner_doc.ents
+        ])
+        yield dep_doc
 
-def _annotate(dep_tagger, dep_tagger_components, docs):
-    return dep_tagger.pipe(
-        docs, disable=dep_tagger_components, batch_size=32, n_process=1
-    )
-
-def _pipe(korap, dep_tagger, ner_tagger, dep_tagger_components,
-          custom_components, texts):
+def _pipe(korap, dep_tagger, ner_tagger, custom_tagger, texts):
     dep_docs, ner_docs = _tokenize(korap, dep_tagger, ner_tagger, texts)
-    docs = _tag(dep_tagger, ner_tagger, custom_components, dep_docs, ner_docs)
-    docs = _annotate(dep_tagger, dep_tagger_components, docs)
+    dep_docs = dep_tagger.pipe(dep_docs)
+    ner_docs = ner_tagger.pipe(ner_docs) if ner_tagger is not None else None
+    docs = _merge_ner(dep_docs, ner_docs) if ner_docs is not None else dep_docs
+    docs = custom_tagger.pipe(docs, batch_size=32, n_process=-1)
     return docs
 
 def create(ner=True, model_type='lg', korap=True, gpu=False, dwdsmor_path=None):
@@ -64,13 +55,12 @@ def create(ner=True, model_type='lg', korap=True, gpu=False, dwdsmor_path=None):
 
     # POS/Dependency tagger configuration, including custom components
     dep_tagger = spacy.load(f'de_dwds_dep_hdt_{model_type}')
-    dep_tagger_components = list(dep_tagger.pipe_names)
+
+    # Custom tagging
+    custom_tagger = spacy.blank('de', vocab=dep_tagger.vocab)
     if dwdsmor_path is not None:
-        dep_tagger.add_pipe('dwdsmor', config={'transducer_path': dwdsmor_path})
-    dep_tagger.add_pipe('dwds_colloc')
-    custom_components = list(
-        set(dep_tagger.pipe_names).difference(dep_tagger_components)
-    )
+        custom_tagger.add_pipe('dwdsmor', config={'transducer_path': dwdsmor_path})
+    custom_tagger.add_pipe('dwds_colloc')
 
     # NER tagger configuration
     ner_tagger = None
@@ -88,9 +78,4 @@ def create(ner=True, model_type='lg', korap=True, gpu=False, dwdsmor_path=None):
         if ner is True:
             ner_tagger.add_pipe('sentencizer', first=True)
 
-    return partial(
-        _pipe,
-        korap,
-        dep_tagger, ner_tagger,
-        dep_tagger_components, custom_components
-    )
+    return partial(_pipe, korap, dep_tagger, ner_tagger, custom_tagger)

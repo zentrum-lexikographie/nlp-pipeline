@@ -71,13 +71,18 @@ def _rank(analysis, token):
     rank += _score(analysis.stts_degree, token.morph, 'Degree', 1)
     return rank
 
+_transducer = None
+
 #pylint: disable=unused-argument
-def _annotate(nlp, transducer, doc):
+def _annotate(nlp, transducer_path, doc):
+    global _transducer
+    if _transducer is None:
+       _transducer = zdl.dwdsmor.create_transducer(transducer_path) 
     for token in doc:
         pos_set = _stts_to_smor_pos.get(token.tag_)
         if pos_set is not None:
             ranking = []
-            for analysis in zdl.dwdsmor.analyse_word(transducer, token.text):
+            for analysis in zdl.dwdsmor.analyse_word(_transducer, token.text):
                 if analysis.pos in pos_set:
                     ranking.append((_rank(analysis, token), analysis))
             if len(ranking) > 0:
@@ -92,6 +97,4 @@ def _annotate(nlp, transducer, doc):
 def component(nlp, name, transducer_path=None):
     if not spacy.tokens.Token.has_extension('dwdsmor_lemma'):
         spacy.tokens.Token.set_extension('dwdsmor_lemma', default=None)
-    return partial(
-        _annotate, nlp, zdl.dwdsmor.create_transducer(transducer_path)
-    )
+    return partial(_annotate, nlp, transducer_path)
