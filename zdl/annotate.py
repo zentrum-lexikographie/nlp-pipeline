@@ -11,9 +11,9 @@ def annotate_tei_docs(nlp, tei_docs):
     '''Annotates a batch of <TEI/> documents.'''
     chunks = [c for d in tei_docs for c in zdl.tei.iter_chunks(d)]
     texts = [zdl.tei.extract_text(c) for c in chunks]
-    dep_docs, ner_docs = nlp([t.content for t in texts])
-    for chunk, text, dep_doc, ner_doc in zip(chunks, texts, dep_docs, ner_docs):
-        zdl.tei.serialize_annotations(chunk, text, dep_doc, ner_doc)
+    docs = nlp([t.content for t in texts])
+    for chunk, text, doc in zip(chunks, texts, docs):
+        zdl.tei.serialize_annotations(chunk, text, doc)
     return tei_docs
 
 

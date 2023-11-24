@@ -6,6 +6,7 @@ from itertools import repeat
 from pathlib import Path
 
 import lxml.etree as ET
+import spacy.tokens
 
 from zdl.log import logger
 
@@ -174,7 +175,7 @@ def _serialize_morph_attrs(word_element, morph, xml_attr, morph_attr):
     if len(morph_vals) > 0:
         word_element.attrib[xml_attr] = ','.join(v.lower() for v in morph_vals)
 
-def serialize_annotations(chunk, text, dep_doc, ner_doc):
+def serialize_annotations(chunk, text, doc):
     '''Serializes spaCy NLP annotations to TEI-P5/XML.'''
     clear_children(chunk)
     milestones = list(text.milestones)
@@ -187,24 +188,21 @@ def serialize_annotations(chunk, text, dep_doc, ner_doc):
                 milestones.pop(0)
             else:
                 break
-    dep_sents = dep_doc.sents
-    ner_sents = ner_doc.sents if ner_doc is not None else repeat(None)
-    for dep_sentence, ner_sentence in zip(dep_sents, ner_sents):
+    has_dwdsmor_lemma = spacy.tokens.Token.has_extension('dwdsmor_lemma')
+    has_dwds_colloc = spacy.tokens.Span.has_extension('dwds_colloc')
+    for sent in doc.sents:
         sent_element = ET.SubElement(chunk, S_TAG)
-        sent_offset = (dep_sentence[0].i - 1) if len(dep_sentence) > 0 else -1
-        for word in dep_sentence:
+        sent_offset = (sent[0].i - 1) if len(sent) > 0 else -1
+        for word in sent:
             serialize_milestones(sent_element, word.idx)
+            lemma = word.lemma_
+            if has_dwdsmor_lemma and word._.dwdsmor_lemma:
+                lemma = word._.dwdsmor_lemma
             word_element = ET.SubElement(sent_element, W_TAG,{
                 'n': str(word.i - sent_offset),
-                'lemma': word._.dwdsmor_lemma or word.lemma_,
+                'lemma': lemma,
                 'pos': word.tag_.lower()
             })
-            if word._.dwdsmor_lemma is not None:
-                if word._.dwdsmor_lemma != word.lemma_:
-                    logger.info(
-                        '%-30s | %-30s | %-30s',
-                        word.text, word._.dwdsmor_lemma, word.lemma_
-                    )
             word_element.text = word.text_with_ws
             if word.dep_ != 'ROOT':
                 word_element.attrib['dep'] = word.dep_.lower()
@@ -216,18 +214,18 @@ def serialize_annotations(chunk, text, dep_doc, ner_doc):
             _serialize_morph_attrs(word_element, word.morph, 'person', 'Person')
             _serialize_morph_attrs(word_element, word.morph, 'mood', 'Mood')
             _serialize_morph_attrs(word_element, word.morph, 'degree', 'Degree')
-        for rel, token_ids in dep_sentence._.dwds_colloc:
-            ET.SubElement(sent_element, SPAN_TAG, {
-                'type': 'collocation',
-                'subtype': rel.lower(),
-                'target': ' '.join(str(t - sent_offset) for t in token_ids)
-            })
-        if ner_sentence is not None:
-            for entity in ner_sentence.ents:
+        if has_dwds_colloc:
+            for rel, token_ids in sent._.dwds_colloc:
                 ET.SubElement(sent_element, SPAN_TAG, {
-                    'type': 'entity',
-                    'subtype': entity.label_.lower(),
-                    'from': str(entity.start - sent_offset),
-                    'to': str(entity.end - sent_offset - 1)
+                    'type': 'collocation',
+                    'subtype': rel.lower(),
+                    'target': ' '.join(str(t - sent_offset) for t in token_ids)
                 })
+        for entity in sent.ents:
+            ET.SubElement(sent_element, SPAN_TAG, {
+                'type': 'entity',
+                'subtype': entity.label_.lower(),
+                'from': str(entity.start - sent_offset),
+                'to': str(entity.end - sent_offset - 1)
+            })
     serialize_milestones(chunk, len(text.content))
