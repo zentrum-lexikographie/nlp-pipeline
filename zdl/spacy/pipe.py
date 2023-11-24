@@ -48,5 +48,6 @@ def create(ner=True, model_type='lg', korap=True, gpu=False, dwdsmor_path=None):
             ner_tagger.tokenizer = _nop_tokenizer
     else:
         dep_tagger.add_pipe('sentencizer', first=True)
-        ner_tagger.add_pipe('sentencizer', first=True)
+        if ner is True:
+            ner_tagger.add_pipe('sentencizer', first=True)
     return partial(_annotate, korap, dep_tagger, ner_tagger)
