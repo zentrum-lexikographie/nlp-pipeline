@@ -7,7 +7,6 @@ name = "pypi"
 click = "*"
 sfst-transduce = "*"
 simplemma = "*"
-spacy = "*"
 lxml = "*"
 jpype1 = "*"
 lingua-language-detector = "*"
@@ -15,6 +14,7 @@ de-dwds-dep-hdt-lg = {file = "https://huggingface.co/zentrum-lexikographie/de_dw
 de-dwds-ner-lg = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_ner_lg/resolve/main/de_dwds_ner_lg-any-py3-none-any.whl"}
 de-dwds-dep-hdt-dist = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_dep_hdt_dist/resolve/main/de_dwds_dep_hdt_dist-any-py3-none-any.whl"}
 de-dwds-ner-dist = {file = "https://huggingface.co/zentrum-lexikographie/de_dwds_ner_dist/resolve/main/de_dwds_ner_dist-any-py3-none-any.whl"}
+spacy = {extras = ["transformers", "cuda117"], version = "*"}
 
 [dev-packages]
 pylint = "*"
