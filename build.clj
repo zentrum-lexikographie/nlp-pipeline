@@ -148,3 +148,10 @@
              :uber-file "top-lemma.jar"
              :main      main})
     (b/delete {:path classes})))
+
+(defn compile-java
+  [_]
+  (b/javac
+   {:src-dirs   ["java"]
+    :class-dir  "classes"
+    :basis      (b/create-basis {:project "deps.edn"})}))
