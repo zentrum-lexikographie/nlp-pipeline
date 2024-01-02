@@ -1,19 +1,10 @@
-(ns zdl.nlp.index
-  (:require [camel-snake-kebab.core :as csk]
-            [camel-snake-kebab.extras :as cske]
-            [hato.client :as hc]
-            [jsonista.core :as json]
-            [gremid.xml :as gxml]
-            [zdl.nlp.folia :as folia]
-            [zdl.nlp.xml :as xml]
-            [clojure.java.io :as io]
-            [clojure.string :as str]))
-
-(def ->kebab-case
-  (memoize csk/->kebab-case-keyword))
-
-(def transform-keys->kebab-case
-  (partial cske/transform-keys ->kebab-case))
+(ns zdl.nlp.mtas
+  (:require
+   [clojure.string :as str]
+   [gremid.xml :as gxml]
+   [hato.client :as hc]
+   [jsonista.core :as json]
+   [zdl.nlp.xml :as xml]))
 
 ;; ## Solr
 
@@ -30,12 +21,12 @@
     :as           :stream
     :url          solr-query-uri
     :query-params (merge
-                   {:wt "json"
-                    :q  "*:*"
-                    :df "id"}
+                   {"wt" "json"
+                    "q"  "*:*"
+                    "df" "id"}
                    params)}
    (hc/request)
-   (update :body (comp transform-keys->kebab-case json/read-value))))
+   (update :body json/read-value)))
 
 
 (def update-batch-size
@@ -48,7 +39,7 @@
      {:method       :post
       :as           :stream
       :url          solr-update-uri
-      :query-params {:wt "json"}
+      :query-params {"wt" "json"}
       :headers      {"Content-Type" "text/xml"}
       :body         (xml/xml->str (gxml/sexp->node [:update cmd-batch]))}
      (hc/request))))
@@ -97,7 +88,8 @@
 
 (defn parse-kwic
   [{[{results :list}] :kwic}]
-  (zipmap
+  (map
+   list
    (map :document-key results)
    (for [result results]
      (for [doc-result (get result :list)]
@@ -117,47 +109,38 @@
 
 (defn build-mtas-query
   [fq q]
-  {:q                       (mtas-cql q)
-   :fq                      fq
-   :rows                    "100"
-   :mtas                    "true"
-   :mtas.kwic               "true"
-   :mtas.kwic.0.key         "kwic"
-   :mtas.kwic.0.field       "text"
-   :mtas.kwic.0.query.type  "cql"
-   :mtas.kwic.0.query.value q
-   :mtas.kwic.0.left        "10"
-   :mtas.kwic.0.right       "10"})
+  {"q"                       (mtas-cql q)
+   "fq"                      fq
+   "rows"                    "100"
+   "mtas"                    "true"
+   "mtas.kwic"               "true"
+   "mtas.kwic.0.key"         "kwic"
+   "mtas.kwic.0.field"       "text"
+   "mtas.kwic.0.query.type"  "cql"
+   "mtas.kwic.0.query.value" q
+   "mtas.kwic.0.left"        "10"
+   "mtas.kwic.0.right"       "10"})
 
 (def send-mtas-query!
-  (comp parse-mtas-response send-query!  build-mtas-query))
+  (comp #_parse-mtas-response send-query! build-mtas-query))
 
 (comment
-  (->>
-   (read-string (slurp (io/file "sample-sentence.tagged.edn")))
-   (map-indexed (fn [i s] (folia/sentence (str "s." (inc i)) s))))
-
   (clear!)
-  (let [sentences (read-string (slurp (io/file "sample-sentence.tagged.edn")))
-        sentences (map-indexed (fn [i s] (folia/sentence (str "s." (inc i)) s))
-                               sentences)
-        text      [:FoLiA {:xmlns "http://ilk.uvt.nl/folia"}
-                   [:text [:p sentences]]]
-        doc       [:doc
-                   [:field {:name "id"} (str (random-uuid))]
-                   [:field {:name "timestamp"} (System/currentTimeMillis)]
-                   [:field {:name "title"} "ChatGPT und Turing"]
-                   [:field {:name "date"} "2023-06-10T00:00:00Z"]
-                   [:field {:name "date_range"} "2023-06"]
-                   [:field {:name "text_type"} "folia"]
-                   [:field {:name "text"} (xml/xml->str (gxml/sexp->node text))]]]
+  (let [doc [:doc
+             [:field {:name "id"} (str (random-uuid))]
+             [:field {:name "timestamp"} (System/currentTimeMillis)]
+             [:field {:name "title"} "ChatGPT und Turing"]
+             [:field {:name "date"} "2023-06-10T00:00:00Z"]
+             [:field {:name "date_range"} "2023-06"]
+             [:field {:name "text_type"} "csv"]
+             [:field {:name "text"} "0,t,Test,0,0,0\n1,t,Hallo,0,1,1"]]]
     (send-update! [[:delete [:query "*:*"]] [:add doc] [:commit]]))
 
-  (send-query! {:mtas                "true"
-                :mtas.version        "true"
-                :mtas.prefix         "true"
-                :mtas.prefix.0.field "text"
-                :mtas.prefix.0.key   "prefixes"})
+  (send-query! {"mtas"                "true"
+                "mtas.version"        "true"
+                "mtas.prefix"         "true"
+                "mtas.prefix.0.field" "text"
+                "mtas.prefix.0.key"   "prefixes"})
 
   (send-mtas-query! "title:chatgpt && date_range:[2023-01 TO 2024-01}"
-                    "<ent=\"PER\"/>"))
+                    "<t=\"Ha..o\"/>"))

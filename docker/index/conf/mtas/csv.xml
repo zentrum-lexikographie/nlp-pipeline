@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mtas>
+  <index>
+    <parent index="true" />
+    <offset index="false" />
+    <realoffset index="false" />
+    <payload index="false" />
+  </index>
+  <parser name="mtas.analysis.parser.MtasCSVParser">
+    <autorepair value="true" />
+    <makeunique value="true" />
+  </parser>
+</mtas>

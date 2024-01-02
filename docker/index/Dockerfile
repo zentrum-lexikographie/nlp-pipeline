@@ -8,11 +8,7 @@ RUN install -o $SOLR_USER -g $SOLR_GROUP\
 USER $SOLR_USER
 
 ADD --chown=8983:8983\
-    https://github.com/textexploration/mtas/releases/download/v8.8.2.0/mtas-8.8.2.0.jar\
-    /opt/solr/server/solr/configsets/zdl/lib/
-
-ADD --chown=8983:8983\
-    https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar\
+    mtas/target/mtas-8.11.1.1-SNAPSHOT.jar\
     /opt/solr/server/solr/configsets/zdl/lib/
 
 ADD --chown=8983:8983\

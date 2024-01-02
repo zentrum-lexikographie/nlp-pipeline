@@ -1,5 +1,6 @@
 (ns zdl.nlp.vis
   (:require
+   [clojure.java.browse :refer [browse-url]]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [dali]
@@ -10,7 +11,10 @@
    [dali.syntax :as d]
    [garden.core :refer [css]]
    [net.cgrand.enlive-html :as en]
-   [retrograde :as retro]))
+   [retrograde :as retro]
+   [zdl.nlp.deps :as deps])
+  (:import
+   (java.io File)))
 
 ;; ## Styling
 
@@ -22,7 +26,9 @@
 
 (def styles
   (css [[:text {:font-family "Source Sans Pro"}]
-        [:text.token {:fill :forestgreen :font-weight :bold}]
+        [:text.token {:font-weight :bold}]
+        [:text.oov {:fill :maroon}]
+        [:text.iv  {:fill :forestgreen}]
         [:text.dep :text.tags :text.entity  {:fill tagger-orange}]
         [:text.lemma :text.collocation {:fill dwds-blue}]
         [:polyline.entity :polyline.collocation {:stroke-width 2 :fill :none}]
@@ -85,35 +91,28 @@
   [:text (merge {:font-size 16} attrs) s
    (when title? [:title s])])
 
-;; ## Turn data model into text/descriptions
-
-(defn tag->str
-  [v]
-  (if (keyword? v) (str/upper-case (name v)) (str v)))
-
 ;; ## Dependency tree
 
 (defn dep-node
   [{:keys [n deprel]}]
   [:g
-   (text (tag->str deprel) {:id (el-id "dep-" n) :class :dep})
+   (text deprel {:id (el-id "dep-" n) :class :dep})
    [:dali/surround
     {:select (select-el "dep-" n) :padding 32 :attrs {:class :dep-box}}]])
 
 (defn dep-tree-levels
-  ([token]
-   (dep-tree-levels 0 token))
-  ([l {:keys [n deps]}]
-   (cons [n l] (mapcat (partial dep-tree-levels (inc l)) deps))))
+  ([deps root]
+   (dep-tree-levels deps 0 root))
+  ([deps l n]
+   (cons [n l] (mapcat (partial dep-tree-levels deps (inc l)) (deps n)))))
 
 (defn dep-tree-nodes
-  [{:keys [tokens dep-tree]}]
-  (when dep-tree
-    (let [dep-tree-levels    (into {} (dep-tree-levels dep-tree))
-          max-dep-tree-level (reduce max (vals dep-tree-levels))]
-      (for [level (range (inc max-dep-tree-level))
-            token tokens]
-        (if (= level (dep-tree-levels (:n token))) (dep-node token) :_)))))
+  [{:keys [tokens deps]}]
+  (let [dep-tree-levels    (into {} (dep-tree-levels deps (:n (deps/root tokens))))
+        max-dep-tree-level (reduce max (vals dep-tree-levels))]
+    (for [level (range (inc max-dep-tree-level))
+          token tokens]
+      (if (= level (dep-tree-levels (:n token))) (dep-node token) :_))))
 
 (defn dep-tree-edge-coords
   [bounds-from bounds-to]
@@ -153,10 +152,15 @@
   [y [_ [x1 _] [_ _]] [_ [x2 _] [w2 _]]]
   [[x1 y] [(+ x2 w2) y]])
 
+(defn entity->ranges
+  [{:keys [targets] :as entity}]
+  (let [targets (sort targets)]
+    (assoc entity :start (first targets) :end (last targets))))
+
 (defn entities
   [{:keys [entities]}]
   (let [levels (->> entities
-                    (map-indexed #(assoc (update %2 :end dec) :n %1))
+                    (map-indexed #(assoc (entity->ranges %2) :n %1))
                     (sort-by (juxt #(- (:end %) (:start %)) :start))
                     (reduce (partial assign-range-level <) []))]
     (for [[li level] (map-indexed list levels)
@@ -174,13 +178,13 @@
          [:dali/place {:relative-to [(el-id "entity-" n) :bottom]
                        :anchor      :top
                        :offset      [0 8]}
-          [:text {:class :entity :font-size 16} (tag->str (:label entity))]]]))))
+          [:text {:class :entity :font-size 16} (:label entity)]]]))))
 
 ;; ## Collocations
 
 (defn collocation->relations
-  [{:keys [path] :as collocation}]
-  (for [[start end] (partition 2 1 (sort path))]
+  [{:keys [targets] :as collocation}]
+  (for [[start end] (partition 2 1 (sort targets))]
     (assoc collocation :start start :end end)))
 
 (defn collocation-range-coords
@@ -211,24 +215,27 @@
                        :offset      [0 8]}
           [:text {:class     :collocation
                   :font-size 16}
-           (format "%s (%d)" (tag->str (:k collocation)) n)]]]))))
+           (format "%s (%d)" (:label collocation) n)]]]))))
 
 ;; ## Tokens and tagging
 
 (def token->tags
-  (juxt :xpos :number :gender :case :person :tense))
+  (juxt :upos :xpos :number :gender :case :person :tense))
 
 (defn tagging
   [{:keys [tokens]}]
   (concat
    (for [[ti t] (map-indexed #(vector %1 (token->tags %2)) tokens)]
      [:text {:id (el-id "tags-" ti) :class :tags :font-size 16}
-      (or (not-empty (str/join ", " (map tag->str (remove nil? t)))) "–")])
-   (for [{:keys [text n]} tokens]
-     [:text {:id (keyword (str "t" n)) :class :token :font-size 24}
+      (or (not-empty (str/join ", " (remove nil? t))) "–")])
+   (for [{:keys [oov? text n]} tokens]
+     [:text {:id (keyword (str "t" n))
+             :class (str "token " (if oov? "oov" "iv"))
+             :font-size 24}
       text])
-   (for [{:keys [lemma n]} tokens]
-     [:text {:id (el-id "lemma-" n) :class :lemma :font-size 24} (or lemma "–")])))
+   (for [{:keys [lemma n] dwdsmor-lemma :zdl.nlp.dwdsmor/lemma} tokens]
+     [:text {:id (el-id "lemma-" n) :class :lemma :font-size 24}
+      (or dwdsmor-lemma lemma "–")])))
 
 ;; ## Annotation document
 
@@ -260,3 +267,10 @@
 (defn png-file
   [sentence f]
   (dali.io/render-png (document sentence) (io/file f)))
+
+(defn show!
+  [sentence]
+  (let [temp-svg (File/createTempFile "zdl-nlp-vis-" ".svg")]
+    (.deleteOnExit temp-svg)
+    (svg-file sentence temp-svg)
+    (browse-url (.toURL temp-svg))))

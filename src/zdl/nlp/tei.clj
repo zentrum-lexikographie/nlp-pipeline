@@ -11,22 +11,25 @@
 (def schema-categories
   (read-string (slurp (io/resource "zdl/nlp/zdl-corpus.edn"))))
 
-(def container-event?
+(def container-tag?
   (comp some? (into #{} (:containers schema-categories))))
 
-(def content-event?
+(def content-tag?
   (comp some? (into #{} (:content schema-categories))))
 
-(def whitespace-ms-event?
+(def ms-tag?
+  (comp some? #{"anchor" "milestone"}))
+
+(def whitespace-ms-tag?
   (comp some? #{"cb" "lb" "pb"}))
 
-(def text-event?
+(def text-tag?
   (comp (partial = "text")))
 
-(def text-unit-event?
+(def text-unit-tag?
   (comp some? #{"ab" "head" "p"}))
 
-(def sentence-event?
+(def sentence-tag?
   (partial = "s"))
 
 (defn event->local-name
@@ -56,50 +59,48 @@
                           (.createCharacters event-factory  txt*))
                         event)]
             (cons event (normalize-space (rest events) stack)))
+
           XMLStreamConstants/START_DOCUMENT
-          (normalize-space (rest events) (conj stack :container))
+          (cons event (normalize-space (rest events) (conj stack :container)))
+
           XMLStreamConstants/START_ELEMENT
-          (->> (let [ln (event->local-name event)]
-                 (cond
-                   (content-event? ln)      :content
-                   (container-event? ln)    :container
-                   (.isStartDocument event) :document
-                   :else                    :other))
-               (conj stack)
-               (normalize-space (rest events)))
+          (let [ln (event->local-name event)
+                state (cond
+                        (content-tag? ln)   :content
+                        (container-tag? ln) :container
+                        :else                 :other)
+                stack (conj stack state)]
+            (cons event (normalize-space (rest events) stack)))
+
           XMLStreamConstants/END_ELEMENT
-          (normalize-space (rest events) (pop stack))
+          (cons event (normalize-space (rest events) (pop stack)))
+
           XMLStreamConstants/END_DOCUMENT
-          (normalize-space (rest events) (pop stack))))))))
+          (cons event (normalize-space (rest events) (pop stack)))
+
+          (cons event (normalize-space (rest events) stack))))))))
 
 (def whitespace-event
   (.createCharacters event-factory " "))
 
 (defn splice-whitespace
-  [^XMLEvent event]
-  (cond->> (list event)
-    (and (.isStartElement event)
-         (whitespace-ms-event? (event->local-name event)))
+  [^XMLEvent evt]
+  (cond->> (list evt)
+    (and (.isStartElement evt) (whitespace-ms-tag? (event->local-name evt)))
     (cons whitespace-event)))
-
-(defn text-segment?
-  [^XMLEvent event]
-  (and (.isStartElement event)
-       (#{"ab" "head" "p"} (event->local-name event))))
 
 (defn milestone-event?
   [^XMLEvent event]
   (and (.isStartElement event)
        (let [ln (event->local-name event)]
-         (or (whitespace-ms-event? ln)
-             (some? (#{"anchor" "milestone"} ln))))))
+         (or (whitespace-ms-tag? ln) (ms-tag? ln)))))
 
-(defn build-segment
+(defn build-text-segment
   [events]
   (let [start (first events)]
     (loop [events     events
-           text       (StringBuilder.)
-           milestones []]
+           milestones []
+           text       (StringBuilder.)]
       (if-let [^XMLEvent event (first events)]
         (cond
           (milestone-event? event) (recur (rest events)
@@ -115,12 +116,27 @@
                                           milestones
                                           text))
         {:start      start
-         :text       (str text)
+         :text       (.. text (toString) (trim))
          :milestones milestones}))))
+
+(defn text-segment-pred
+  []
+  (let [text-contexts (volatile! [false])]
+    (fn [^XMLEvent event]
+      (cond
+        (.isStartElement event)
+        (let [ln (event->local-name event)]
+          (cond
+            (= "text" ln) (do (vswap! text-contexts conj true) false)
+            (#{"ab" "head" "p"} ln) (peek @text-contexts)))
+
+        (.isEndElement event)
+        (let [ln (event->local-name event)]
+          (when (= "text" ln) (vswap! text-contexts pop) false))))))
 
 (defn segment
   [events]
-  (gxml/events->subtrees build-segment text-segment? events))
+  (gxml/events->subtrees build-text-segment (text-segment-pred) events))
 
 (defn corpus-segment?
   [^XMLEvent event]

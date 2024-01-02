@@ -1,8 +1,3 @@
-click==8.1.3
-datasketch==1.5.7
-flair==0.12.2
-sfst-transduce==1.0.1
-simplemma==0.5.0
-spacy[cuda116]==3.4.1
-spacy-transformers==1.1.8
-trankit==1.1.1
+spacy==3.7.2
+de-dwds-dep-hdt-lg @ https://huggingface.co/zentrum-lexikographie/de_dwds_dep_hdt_lg/resolve/main/de_dwds_dep_hdt_lg-any-py3-none-any.whl#sha256=8a50a1b245660436e12b744bb7e19da0e265453d6be77468626701cce4520d79
+de-dwds-ner-lg @ https://huggingface.co/zentrum-lexikographie/de_dwds_ner_lg/resolve/main/de_dwds_ner_lg-any-py3-none-any.whl#sha256=7fb8a5808e04bca4ad2ff34e7bdf59ca14f8c20ff82299db6d315a433f0db883

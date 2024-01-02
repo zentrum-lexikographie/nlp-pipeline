@@ -1,7 +1,6 @@
 (ns zdl.nlp.tokenizer
-  "Segmentation, tokenization and language detection."
+  "Segmentation and tokenization."
   (:import
-   (com.github.pemistahl.lingua.api Language LanguageDetector LanguageDetectorBuilder)
    (de.ids_mannheim.korap.tokenizer DerekoDfaTokenizer_de)
    (opennlp.tools.util Span)))
 
@@ -50,26 +49,11 @@
   (let [sentence-pairs (partition-all 2 1 sentences)]
     (map assoc-space-after* sentence-pairs)))
 
-;; ## Language Detection
-
-(def ^LanguageDetector language-detector
-  (..
-   (LanguageDetectorBuilder/fromLanguages
-    (into-array Language [Language/GERMAN Language/ENGLISH Language/FRENCH]))
-   (withPreloadedLanguageModels)
-   (build)))
-
-(defn detect-language
-  [s]
-  (let [lang (.detectLanguageOf language-detector s)]
-    (.. ^Language lang (getIsoCode639_3) (toString))))
-
-(defn assoc-language
-  [{:keys [text] :as sentence}]
-  (assoc sentence :language (detect-language text)))
-
 (defn tokenize
-  [s & {:keys [detect-language?] :or {detect-language? true}}]
-  (let [sentences (map (partial segment-tokens s)  (segment-sentences s))
-        sentences (assoc-space-after sentences)]
-    (vec (cond->> sentences detect-language? (map assoc-language)))))
+  [s]
+  {:text s
+   :sentences (vec (assoc-space-after (map (partial segment-tokens s)
+                                           (segment-sentences s))))})
+
+(comment
+  (tokenize "Das ist ein erster Test. Das ist ein zweiter Satz!"))
