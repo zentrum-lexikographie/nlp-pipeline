@@ -2,25 +2,26 @@
   "Segmentation and tokenization."
   (:import
    (de.ids_mannheim.korap.tokenizer DerekoDfaTokenizer_de)
-   (opennlp.tools.util Span)))
+   (opennlp.tools.util Span))
+  (:require [zdl.schema :as schema]))
 
 (def ^DerekoDfaTokenizer_de tokenizer
   (DerekoDfaTokenizer_de.))
 
 (defn span->map
   "Turn OpenNLP Span objects into maps."
-  ([s span]
-   (span->map 0 s span))
-  ([offset s ^Span span]
+  ([k s span]
+   (span->map k 0 s span))
+  ([k offset s ^Span span]
    (let [start (+ offset (.getStart span))
          end   (+ offset (.getEnd span))]
-     {:text  (subs s start end)
+     {k      (subs s start end)
       :start start
       :end   end})))
 
 (defn segment-sentences
   [s]
-  (map (partial span->map s) (.sentPosDetect tokenizer s)))
+  (map (partial span->map :text s) (.sentPosDetect tokenizer s)))
 
 (def index-tokens-xf
   (map-indexed #(assoc %2 :n %1)))
@@ -29,7 +30,7 @@
   [s {:keys [start text] :as sentence}]
   (assoc sentence :tokens
          (into []
-               (comp (map (partial span->map start s)) index-tokens-xf)
+               (comp (map (partial span->map :form start s)) index-tokens-xf)
                (.tokenizePos tokenizer text))))
 
 (defn assoc-space-after**
@@ -56,4 +57,6 @@
                                            (segment-sentences s))))})
 
 (comment
-  (tokenize "Das ist ein erster Test. Das ist ein zweiter Satz!"))
+  (every?
+   schema/valid-sentence?
+   (:sentences (tokenize "Das ist ein erster Test. Das ist ein zweiter Satz!"))))

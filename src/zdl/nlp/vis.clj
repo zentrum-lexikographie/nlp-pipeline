@@ -228,14 +228,14 @@
    (for [[ti t] (map-indexed #(vector %1 (token->tags %2)) tokens)]
      [:text {:id (el-id "tags-" ti) :class :tags :font-size 16}
       (or (not-empty (str/join ", " (remove nil? t))) "–")])
-   (for [{:keys [oov? text n]} tokens]
+   (for [{:keys [oov? form n]} tokens]
      [:text {:id (keyword (str "t" n))
              :class (str "token " (if oov? "oov" "iv"))
              :font-size 24}
-      text])
-   (for [{:keys [lemma n] dwdsmor-lemma :zdl.nlp.dwdsmor/lemma} tokens]
+      form])
+   (for [{:keys [lemma n]} tokens]
      [:text {:id (el-id "lemma-" n) :class :lemma :font-size 24}
-      (or dwdsmor-lemma lemma "–")])))
+      (or lemma "–")])))
 
 ;; ## Annotation document
 

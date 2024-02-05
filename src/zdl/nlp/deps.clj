@@ -42,19 +42,19 @@
 
 (defn case?
   [{:keys [deprel]}]
-  (= "case" deprel))
+  (= "CASE" deprel))
 
 (defn cop?
   [{:keys [deprel]}]
-  (= "cop" deprel))
+  (= "COP" deprel))
 
 (defn aux?
   [{:keys [upos]}]
   (= "AUX" upos))
 
 (defn gdet?
-  [{:keys [text]}]
-  (#{"des" "der" "eines" "einer"} text))
+  [{:keys [form]}]
+  (#{"des" "der" "eines" "einer"} form))
 
 (def cop-aux?
   (every-pred cop? aux?))
@@ -71,7 +71,7 @@
 (defn object-pred?
   [sentence [c1 _c2]]
   (let [deps (deps-tokens sentence c1)]
-    (some (fn [{:keys [text]}] (#{"als" "für"} text)) deps)))
+    (some (fn [{:keys [form]}] (#{"als" "für"} form)) deps)))
 
 (defn gmod?
   [sentence [c1 _c2]]
@@ -84,19 +84,19 @@
     (every? (complement cop?) deps)))
 
 (def collo-patterns
-  [(collo-pattern "GMOD"  [#{"NOUN"}              #{"nmod"}         #{"NOUN"}]                                                     gmod?)           
-   (collo-pattern "OBJ"   [#{"NOUN"}              #{"obj" "iobj"}   #{"VERB"}])
-   (collo-pattern "PRED"  [#{"NOUN"}              #{"nsubj"}        #{"NOUN" "VERB" "ADJ"}]                                        subject-pred?)
-   (collo-pattern "PRED"  [#{"NOUN" "VERB" "ADJ"} #{"obj" "obl"}    #{"VERB"}]                                                     object-pred?)
-   (collo-pattern "SUBJA" [#{"NOUN"}              #{"nsubj"}        #{"NOUN" "VERB" "ADJ"}]                                        subja?)
-   (collo-pattern "SUBJP" [#{"NOUN"}              #{"nsubj:pass"}   #{"VERB"}])
-   (collo-pattern "ADV"   [#{"ADJ" "ADV"}         #{"advmod"}       #{"VERB" "ADJ"}])
-   (collo-pattern "ATTR"  [#{"ADJ"}               #{"amod"}         #{"NOUN"}])
-   (collo-pattern "PP"    [#{"ADP"}               #{"case"}         #{"NOUN"}               #{"nmod"}       #{"NOUN"}])
-   (collo-pattern "PP"    [#{"ADP"}               #{"case"}         #{"NOUN" "ADJ" "ADV"}   #{"obl"}        #{"VERB"}])
-   (collo-pattern "VZ"    [#{"ADP"}               #{"compound:prt"} #{"VERB" "AUX" "ADJ"}])
-   (collo-pattern "KON"   [#{"CCONJ"}             #{"cc"}           #{"NOUN" "VERB" "ADJ"}  #{"conj"}       #{"NOUN" "VERB" "ADJ"}])
-   (collo-pattern "KOM"   [#{"CCONJ"}             #{"case"}         #{"NOUN"}               #{"obl" "nmod"} #{"ADJ" "VERB" "NOUN"}])])
+  [(collo-pattern "GMOD"  [#{"NOUN"}              #{"NMOD"}         #{"NOUN"}]                                                     gmod?)           
+   (collo-pattern "OBJ"   [#{"NOUN"}              #{"OBJ" "IOBJ"}   #{"VERB"}])
+   (collo-pattern "PRED"  [#{"NOUN"}              #{"NSUBJ"}        #{"NOUN" "VERB" "ADJ"}]                                        subject-pred?)
+   (collo-pattern "PRED"  [#{"NOUN" "VERB" "ADJ"} #{"OBJ" "OBL"}    #{"VERB"}]                                                     object-pred?)
+   (collo-pattern "SUBJA" [#{"NOUN"}              #{"NSUBJ"}        #{"NOUN" "VERB" "ADJ"}]                                        subja?)
+   (collo-pattern "SUBJP" [#{"NOUN"}              #{"NSUBJ:PASS"}   #{"VERB"}])
+   (collo-pattern "ADV"   [#{"ADJ" "ADV"}         #{"ADVMOD"}       #{"VERB" "ADJ"}])
+   (collo-pattern "ATTR"  [#{"ADJ"}               #{"AMOD"}         #{"NOUN"}])
+   (collo-pattern "PP"    [#{"ADP"}               #{"CASE"}         #{"NOUN"}               #{"NMOD"}       #{"NOUN"}])
+   (collo-pattern "PP"    [#{"ADP"}               #{"CASE"}         #{"NOUN" "ADJ" "ADV"}   #{"OBL"}        #{"VERB"}])
+   (collo-pattern "VZ"    [#{"ADP"}               #{"COMPOUND:PRT"} #{"VERB" "AUX" "ADJ"}])
+   (collo-pattern "KON"   [#{"CCONJ"}             #{"CC"}           #{"NOUN" "VERB" "ADJ"}  #{"CONJ"}       #{"NOUN" "VERB" "ADJ"}])
+   (collo-pattern "KOM"   [#{"CCONJ"}             #{"CASE"}         #{"NOUN"}               #{"OBL" "NMOD"} #{"ADJ" "VERB" "NOUN"}])])
 
 (defn collo-pattern-matches-token?
   [{:keys [pos? deprel?]} {:keys [upos deprel]}]

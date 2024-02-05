@@ -1,0 +1,114 @@
+(ns zdl.conllu
+  "Parses and serializes annotated sentences in CoNLL-U format."
+  (:require
+   [clojure.string :as str]
+   [jsonista.core :as json]
+   [zdl.schema :as schema]))
+
+(def feature-key-patches
+  {:space-after :space-after?})
+
+(def feature-map-decoder-xf
+  (comp
+   (map #(str/split % #"=" 2))
+   (map (fn [[k v]] [(schema/key-keyword k) (schema/tag-str v)]))))
+
+(defn decode-feature-map
+  [v]
+  (when-let [s (and (string? v) (not-empty v))]
+    (into {} feature-map-decoder-xf (str/split s #"\|"))))
+
+(defn decode-space-after?
+  [{:keys [space-after] :as token}]
+  (-> token
+      (dissoc :space-after)
+      (assoc :space-after? (not= "NO" space-after))))
+
+(defn decode-features
+  [{:keys [feats deps misc] :as token}]
+  (-> token
+      (dissoc :feats :deps :misc)
+      (merge (decode-feature-map feats)
+             (decode-feature-map deps)
+             (decode-feature-map misc))
+      (decode-space-after?)))
+
+(defn reset-n
+  [i token]
+  (-> token (dissoc :n) (assoc :n i)))
+
+(defn reset-head
+  [{:keys [head] :as token}]
+  (let [head (some-> head parse-long)]
+    (cond-> token head (assoc :head (when-not (zero? head) (dec head))))))
+
+(def metadata-decode-xf
+  (comp
+   (map #(re-find #"^#\s*([^=]+)\s*=?\s*(.*)$" %))
+   (remove nil?)
+   (map (fn [[_ k v]] [(str/trim k) (some-> v str/trim not-empty)]))))
+
+(defn decode-text
+  [s]
+  (try
+    (if-let [t (some-> s json/read-value)] (if (string? t) t s) s)
+    (catch com.fasterxml.jackson.core.JsonParseException _ s)))
+
+(defn decode-metadata
+  [lines]
+  (let [metadata (into {} metadata-decode-xf lines)
+        id       (metadata "id")
+        text     (metadata "text")]
+    (cond-> (dissoc metadata "id" "text")
+      id   (assoc :id id)
+      text (assoc :text (decode-text text)))))
+
+
+(defn unescape-underscore
+  "ConLL-U uses `_` as `nil`."
+  [s]
+  (str/replace s #"__" "_"))
+
+(defn decode-field
+  "Translates empty/`nil` values."
+  [v]
+  (when-not (= "_" v) (-> v unescape-underscore not-empty)))
+
+(def ^:dynamic *fields*
+  "Field names and order for token records."
+  [:n :form :lemma :upos :xpos :feats :head :deprel :deps :misc])
+
+(defn decode-token
+  "Tokens and their annotations are lines with field values separated by tabs or
+  at least two consecutive spaces."
+  [i s]
+  (->> (str/split s #"\t| {2,}") (map decode-field) (zipmap *fields*)
+       (decode-features) (reset-n i) (reset-head)))
+
+(defn comment-line?
+  "Comment lines with sentence metadata start with a hash symbol."
+  [s]
+  (str/starts-with? s "#"))
+
+(defn parse-chunk
+  [s]
+  (let [[metadata tokens] (split-with comment-line? s)]
+    (cond-> {}
+      (seq metadata) (merge (decode-metadata metadata))
+      (seq tokens)   (assoc :tokens (map-indexed decode-token tokens)))))
+
+(defn empty-line?
+  [s]
+  (= "" s))
+
+(def parse-xf
+  (comp
+   (partition-by empty-line?)
+   (remove (comp empty-line? first))
+   (map parse-chunk)
+   (map schema/decode-sentence)))
+
+(defn parse
+  "Parses sentences read from a given reader and separated by empty lines."
+  [lines]
+  (sequence parse-xf lines))

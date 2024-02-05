@@ -92,7 +92,7 @@
             token    (sentence :tokens)
             analysis (or (:dwdsmor token) [{}])
             :let     [{:keys [analysis rank]} analysis]]
-        [(:text token) (:lemma token) (or analysis "–") (or rank "–") (:deprel token) (:xpos token)
+        [(:form token) (:lemma token) (or analysis "–") (or rank "–") (:deprel token) (:xpos token)
          (:number token) (:gender token) (:case token) (:tense token)]))
 
 

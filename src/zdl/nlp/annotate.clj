@@ -16,8 +16,8 @@
     (->>
      (for [{:keys [tokens] :as sentence} sentences]
        (->>
-        (for [t tokens :let [a (dwdsmor/analyze (dwdsmor/fingerprint t) (t :text))]]
-          (cond-> t a (assoc ::dwdsmor/lemma (:lemma a))))
+        (for [t tokens :let [a (dwdsmor/analyze (dwdsmor/fingerprint t) (t :form))]]
+          (cond-> t a (assoc :lemma (:lemma a))))
         (vec) (assoc sentence :tokens)))
      (vec) (assoc segment :sentences))
     segment))
@@ -35,7 +35,7 @@
   [{:keys [sentences] :as segment}]
   (let [lemmata (->> (mapcat :tokens sentences)
                      (remove #(= "PUNCT" (:xpos %)))
-                     (map (some-fn ::dwdsmor/lemma :lemma :text))
+                     (map (some-fn :lemma :form))
                      (map str/lower-case)
                      (into #{}))]
     (assoc segment :fingerprint (hash/->hex (hash/sim-hash lemmata)))))

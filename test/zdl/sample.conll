@@ -1,0 +1,3010 @@
+# DDC:tokid.begin = 0
+# DDC:tokid.end = 766
+# DDC:meta.n_ = 0
+# DDC:meta.file_ = wikipedia01/../../ddc_xml/data/0000/00000001.ddc.xml
+# DDC:meta.date_ = 2023-03-10
+# DDC:meta.page_ = -1
+# DDC:meta.access = P
+# DDC:meta.avail = -
+# DDC:meta.basename = 0000/00000001
+# DDC:meta.bibl = Alan Smithee. In: Wikipedia: Die freie Enzyklopädie. 10.03.2023.
+# DDC:meta.biblSig = Alan Smithee. Wikipedia-Artikel. 2023.
+# DDC:meta.collection = wikipedia
+# DDC:meta.textClass = Wissenschaft:Alan Smithee:Fiktive Person:Sammelpseudonym
+# DDC:meta.timestamp = 2023-11-06T15:51:08Z
+# DDC:meta.title = Alan Smithee
+# DDC:meta.url = https://de.wikipedia.org/w/index.php?oldid=231690296
+# DDC:BREAK.s[-1] = 0
+# DDC:BREAK.c[-1] = 0
+# DDC:BREAK.p[-1] = 0
+# DDC:BREAK.file[-1] = 0
+# DDC:BREAK.textarea[-1] = 0
+# text = Alan Smithee steht als Pseudonym für einen fiktiven Regisseur , der Filme verantwortet , bei denen der eigentliche Regisseur seinen Namen nicht mit dem Werk in Verbindung gebracht haben möchte .
+1	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	3	nsubj	_	_
+2	Smithee	Smithee	PROPN	NE	_	1	flat:name	_	_
+3	steht	stehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+4	als	als	CCONJ	KOKOM	ConjType=Comp	5	case	_	_
+5	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	3	obl	_	_
+6	für	für	ADP	APPR	AdpType=Prep|Case=Acc	9	case	_	_
+7	einen	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	9	det	_	_
+8	fiktiven	fiktiv	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	9	amod	_	_
+9	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	5	nmod	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	13	punct	_	_
+11	der	d	PRON	PRELS	Case=Nom|Gender=Masc|Number=Sing|PronType=Dem,Rel	13	nsubj	_	_
+12	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	13	obj	_	_
+13	verantwortet	verantworten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	acl	_	SpaceAfter=No
+14	,	,	PUNCT	$,	PunctType=Comm	28	punct	_	_
+15	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+16	denen	die	PRON	PRELS	Case=Dat|Number=Plur|PronType=Dem,Rel	28	obl	_	_
+17	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	19	det	_	_
+18	eigentliche	eigentlich	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	19	amod	_	_
+19	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	28	nsubj	_	_
+20	seinen	seine	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	21	det	_	_
+21	Namen	Namen	NOUN	NN	Gender=Masc|Number=Sing	28	obj	_	_
+22	nicht	nicht	PART	PTKNEG	Polarity=Neg	28	advmod	_	_
+23	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+24	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	25	det	_	_
+25	Werk	Werk	NOUN	NN	Gender=Neut|Number=Sing	28	obl	_	_
+26	in	in	ADP	APPR	AdpType=Prep|Case=Acc	27	case	_	_
+27	Verbindung	Verbindung	NOUN	NN	Gender=Fem|Number=Sing	28	obl	_	_
+28	gebracht	bringen	VERB	VVPP	Aspect=Perf|VerbForm=Part	12	acl	_	_
+29	haben	haben	AUX	VAINF	VerbForm=Inf	28	aux	_	_
+30	möchte	mögen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	28	aux	_	_
+31	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[0] = 31
+# text = Von 1968 bis 2000 wurde es von der Directors Guild of America ( DGA ) für solche Situationen empfohlen .
+1	Von	von	ADP	APPR	AdpType=Prep|Case=Dat	2	case	_	_
+2	1968	1968	NUM	CARD	NumType=Card|Number=Plur	19	obl	_	_
+3	bis	bis	ADP	APPR	AdpType=Prep	4	case	_	_
+4	2000	2000	NUM	CARD	NumType=Card|Number=Plur	19	obl	_	_
+5	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	aux:pass	_	_
+6	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	19	nsubj:pass	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	9	case	_	_
+8	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	det	_	_
+9	Directors	directors	X	FM	Foreign=Yes	19	obl	_	_
+10	Guild	guild	X	FM	Foreign=Yes	9	flat	_	_
+11	of	of	X	FM	Foreign=Yes	9	flat	_	_
+12	America	america	PROPN	NE	Number=Sing	9	flat:name	_	_
+13	(	(	PUNCT	$(	PunctType=Brck	14	punct	_	SpaceAfter=No
+14	DGA	DGA	PROPN	NE	_	9	appos	_	SpaceAfter=No
+15	)	)	PUNCT	$(	PunctType=Brck	14	punct	_	_
+16	für	für	ADP	APPR	AdpType=Prep|Case=Acc	18	case	_	_
+17	solche	solch	DET	PIDAT	Case=Acc|Number=Plur|PronType=Dem	18	det	_	_
+18	Situationen	Situation	NOUN	NN	Gender=Fem|Number=Plur	19	obl	_	_
+19	empfohlen	empfehlen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+20	.	.	PUNCT	$,	PunctType=Comm	19	punct	_	_
+
+# DDC:BREAK.s[1] = 51
+# DDC:BREAK.p[0] = 51
+# text = Alternative Schreibweisen sind unter anderem die Ursprungsvariante Allen Smithee sowie Alan Smythee und Adam Smithee .
+1	Alternative	Alternative	ADJ	ADJA	Degree=Pos|Number=Plur	2	amod	_	_
+2	Schreibweisen	Schreibweise	NOUN	NN	Gender=Fem|Number=Plur	0	ROOT	_	_
+3	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	2	cop	_	_
+4	unter	unter	ADP	APPR	AdpType=Prep|Case=Dat	5	case	_	_
+5	anderem	ander	DET	PIS	Case=Dat|Gender=Neut|Number=Sing|PronType=Ind	7	det	_	_
+6	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
+7	Ursprungsvariante	Ursprungsvariante	NOUN	NN	Gender=Fem|Number=Sing	2	nsubj	_	_
+8	Allen	Allen	PROPN	NE	Gender=Masc|Number=Sing	7	flat:name	_	_
+9	Smithee	Smithee	PROPN	NE	_	7	flat:name	_	_
+10	sowie	sowie	CCONJ	KON	_	11	cc	_	_
+11	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	7	conj	_	_
+12	Smythee	Smythee	PROPN	NE	Number=Sing	11	flat:name	_	_
+13	und	und	CCONJ	KON	_	14	cc	_	_
+14	Adam	Adam	PROPN	NE	Gender=Masc|Number=Sing	11	conj	_	_
+15	Smithee	Smithee	PROPN	NE	_	14	flat:name	_	_
+16	.	.	PUNCT	$,	PunctType=Comm	7	dep	_	_
+
+# DDC:BREAK.s[2] = 67
+# text = Auch zwei teilweise asiatisch anmutende Schreibweisen Alan Smi Thee und Sumishii Aran gehören – so die Internet Movie Database – dazu .
+1	Auch	auch	ADV	ADV	_	6	advmod	_	_
+2	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	6	nummod	_	_
+3	teilweise	teilweise	ADV	ADV	_	5	advmod	_	_
+4	asiatisch	asiatisch	ADJ	ADJD	Degree=Pos|Variant=Short	5	xcomp	_	_
+5	anmutende	anmutend	ADJ	ADJA	Degree=Pos|Number=Plur	6	amod	_	_
+6	Schreibweisen	Schreibweise	NOUN	NN	Gender=Fem|Number=Plur	13	nsubj	_	_
+7	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	6	flat:name	_	_
+8	Smi	Smi	PROPN	NE	Number=Sing	6	flat:name	_	_
+9	Thee	Thee	PROPN	NE	Number=Sing	6	flat:name	_	_
+10	und	und	CCONJ	KON	_	11	cc	_	_
+11	Sumishii	Sumishii	PROPN	NE	_	6	conj	_	_
+12	Aran	Aran	PROPN	NE	_	11	flat:name	_	_
+13	gehören	gehören	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+14	–	–	PUNCT	$(	PunctType=Brck	17	punct	_	_
+15	so	so	ADV	ADV	Degree=Pos	17	advmod	_	_
+16	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+17	Internet	Internet	X	FM	Foreign=Yes	13	appos	_	_
+18	Movie	Movie	X	FM	Foreign=Yes	17	flat	_	_
+19	Database	Database	X	FM	Foreign=Yes	17	flat	_	_
+20	–	–	PUNCT	$(	PunctType=Brck	17	punct	_	_
+21	dazu	dazu	ADP	PTKVZ	PartType=Vbp	13	compound:prt	_	_
+22	.	.	PUNCT	$.	PunctType=Peri	13	punct	_	_
+
+# DDC:BREAK.s[3] = 89
+# DDC:BREAK.p[1] = 89
+# text = Das Pseudonym entstand 1968 infolge der Arbeiten am Western-Film Death of a Gunfighter ( deutscher Titel Frank Patch – Deine Stunden sind gezählt ) .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	3	nsubj	_	_
+3	entstand	entstehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	1968	1968	NUM	CARD	NumType=Card|Number=Plur	3	obl	_	_
+5	infolge	infolge	ADP	APPR	AdpType=Prep|Case=Gen	7	case	_	_
+6	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	7	det	_	_
+7	Arbeiten	Arbeit	NOUN	NN	Gender=Fem|Number=Plur	3	obl	_	_
+8	am	am	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	9	case	_	_
+9	Western-Film	Western-Film	NOUN	NN	Gender=Masc|Number=Sing	7	nmod	_	_
+10	Death	death	X	FM	Foreign=Yes	9	appos	_	_
+11	of	of	X	FM	Foreign=Yes	10	flat	_	_
+12	a	a	X	FM	Foreign=Yes	10	flat	_	_
+13	Gunfighter	gunfighter	X	FM	Foreign=Yes	10	flat	_	_
+14	(	(	PUNCT	$(	PunctType=Brck	16	punct	_	SpaceAfter=No
+15	deutscher	deutsch	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	16	amod	_	_
+16	Titel	Titel	NOUN	NN	Gender=Masc|Number=Sing	9	appos	_	_
+17	Frank	Frank	PROPN	NE	Gender=Masc|Number=Sing	16	flat:name	_	_
+18	Patch	Patch	PROPN	NE	Number=Sing	17	flat:name	_	_
+19	–	–	PUNCT	$(	PunctType=Brck	23	punct	_	_
+20	Deine	deine	DET	PPOSAT	Case=Nom|Definite=Def|Number=Plur|PronType=Art	21	det	_	_
+21	Stunden	Stunde	NOUN	NN	Gender=Fem|Number=Plur	23	nsubj:pass	_	_
+22	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	23	aux:pass	_	_
+23	gezählt	zählen	VERB	VVPP	Aspect=Perf|VerbForm=Part	9	appos	_	SpaceAfter=No
+24	)	)	PUNCT	$(	PunctType=Brck	23	punct	_	_
+25	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[4] = 114
+# text = Regisseur Robert Totten und Hauptdarsteller Richard Widmark gerieten in einen Streit , woraufhin Don Siegel als neuer Regisseur eingesetzt wurde .
+1	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	8	nsubj	_	_
+2	Robert	Robert	PROPN	NE	Gender=Masc|Number=Sing	1	flat:name	_	_
+3	Totten	Totten	PROPN	NE	Number=Sing	1	flat:name	_	_
+4	und	und	CCONJ	KON	_	5	cc	_	_
+5	Hauptdarsteller	Hauptdarsteller	NOUN	NN	Gender=Masc|Number=Sing	1	conj	_	_
+6	Richard	Richard	PROPN	NE	Gender=Masc|Number=Sing	5	flat:name	_	_
+7	Widmark	Widmark	PROPN	NE	_	5	flat:name	_	_
+8	gerieten	geraten	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+9	in	in	ADP	APPR	AdpType=Prep|Case=Acc	11	case	_	_
+10	einen	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	11	det	_	_
+11	Streit	Streit	NOUN	NN	Gender=Masc|Number=Sing	8	obj	_	SpaceAfter=No
+12	,	,	PUNCT	$,	PunctType=Comm	19	punct	_	_
+13	woraufhin	woraufhin	ADV	PWAV	PronType=Int	19	advmod	_	_
+14	Don	Don	PROPN	NE	Gender=Masc|Number=Sing	19	nsubj:pass	_	_
+15	Siegel	Siegel	PROPN	NE	Number=Sing	14	flat:name	_	_
+16	als	als	CCONJ	KOKOM	ConjType=Comp	18	case	_	_
+17	neuer	neu	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	18	amod	_	_
+18	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	19	obl	_	_
+19	eingesetzt	einsetzen	VERB	VVPP	Aspect=Perf|VerbForm=Part	8	acl	_	_
+20	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	aux:pass	_	_
+21	.	.	PUNCT	$,	PunctType=Comm	8	punct	_	_
+
+# DDC:BREAK.s[5] = 135
+# DDC:BREAK.p[2] = 135
+# text = Der Film trug nach Abschluss der Arbeiten noch deutlich Tottens Handschrift , der auch mehr Drehtage als Siegel daran gearbeitet hatte , weshalb dieser die Nennung seines Namens als Regisseur ablehnte .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	3	nsubj	_	_
+3	trug	tragen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	5	case	_	_
+5	Abschluss	Abschluß	NOUN	NN	Gender=Masc|Number=Sing	3	obl	_	_
+6	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	7	det	_	_
+7	Arbeiten	Arbeit	NOUN	NN	Gender=Fem|Number=Plur	5	nmod	_	_
+8	noch	noch	ADV	ADV	_	3	advmod	_	_
+9	deutlich	deutlich	ADJ	ADJD	Degree=Pos|Variant=Short	3	advmod	_	_
+10	Tottens	Totten	PROPN	NE	Case=Gen|Number=Sing	11	nmod	_	_
+11	Handschrift	Handschrift	NOUN	NN	Gender=Fem|Number=Sing	3	obj	_	SpaceAfter=No
+12	,	,	PUNCT	$,	PunctType=Comm	20	punct	_	_
+13	der	die	PRON	PRELS	Case=Nom|Gender=Masc|Number=Sing|PronType=Dem,Rel	20	nsubj	_	_
+14	auch	auch	ADV	ADV	_	16	advmod	_	_
+15	mehr	mehr	DET	PIAT	Degree=Cmp|PronType=Ind	16	det	_	_
+16	Drehtage	Drehtag	NOUN	NN	Gender=Masc|Number=Plur	20	obl	_	_
+17	als	als	CCONJ	KOKOM	ConjType=Comp	18	case	_	_
+18	Siegel	Siegel	NOUN	NN	Gender=Neut|Number=Sing	16	obl	_	_
+19	daran	daran	ADV	PROAV	PronType=Dem	20	advmod	_	_
+20	gearbeitet	arbeiten	VERB	VVPP	Aspect=Perf|VerbForm=Part	11	acl	_	_
+21	hatte	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	20	aux	_	SpaceAfter=No
+22	,	,	PUNCT	$,	PunctType=Comm	31	punct	_	_
+23	weshalb	weshalb	ADV	PWAV	PronType=Int	31	advmod	_	_
+24	dieser	diese	DET	PDS	Case=Nom|Gender=Masc|Number=Sing|PronType=Dem	31	nsubj	_	_
+25	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	26	det	_	_
+26	Nennung	Nennung	NOUN	NN	Gender=Fem|Number=Sing	31	obj	_	_
+27	seines	seine	DET	PPOSAT	Case=Gen|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	28	det	_	_
+28	Namens	Namen	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	26	nmod	_	_
+29	als	als	CCONJ	KOKOM	ConjType=Comp	30	case	_	_
+30	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	28	obl	_	_
+31	ablehnte	ablehnen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	11	acl	_	_
+32	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[6] = 167
+# text = Totten selbst lehnte aber ebenfalls ab .
+1	Totten	Totten	PROPN	NE	Number=Sing	3	nsubj	_	_
+2	selbst	selbst	ADV	ADV	_	1	advmod	_	_
+3	lehnte	lehnen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	aber	aber	ADV	ADV	_	3	advmod	_	_
+5	ebenfalls	ebenfalls	ADV	ADV	_	3	advmod	_	_
+6	ab	ab	ADP	PTKVZ	PartType=Vbp	3	compound:prt	_	_
+7	.	.	PUNCT	$,	PunctType=Comm	3	punct	_	_
+
+# DDC:BREAK.s[7] = 174
+# text = Als Lösung wurde Allen Smithee als ein möglichst einzigartiger Name gewählt .
+1	Als	als	CCONJ	KOKOM	ConjType=Comp	2	case	_	_
+2	Lösung	Lösung	NOUN	NN	Gender=Fem|Number=Sing	11	obl	_	_
+3	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	11	aux:pass	_	_
+4	Allen	Allen	PROPN	NE	Gender=Masc|Number=Sing	11	nsubj:pass	_	_
+5	Smithee	Smithee	PROPN	NE	_	4	flat:name	_	_
+6	als	als	CCONJ	KOKOM	ConjType=Comp	10	case	_	_
+7	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	10	det	_	_
+8	möglichst	möglichst	ADV	ADV	Degree=Sup	9	advmod	_	_
+9	einzigartiger	einzigartig	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	10	amod	_	_
+10	Name	Name	NOUN	NN	Case=Nom|Gender=Masc|Number=Sing	11	obl	_	_
+11	gewählt	wählen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+12	.	.	PUNCT	$,	PunctType=Comm	11	aux:pass	_	_
+
+# DDC:BREAK.s[8] = 186
+# DDC:BREAK.p[3] = 186
+# text = In den zeitgenössischen Kritiken wurde der Regisseur u. a. von Roger Ebert mit den Worten gelobt :
+1	In	in	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+2	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	4	det	_	_
+3	zeitgenössischen	zeitgenössisch	ADJ	ADJA	Degree=Pos|Number=Plur	4	amod	_	_
+4	Kritiken	Kritik	NOUN	NN	Gender=Fem|Number=Plur	16	obl	_	_
+5	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	16	aux:pass	_	_
+6	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	7	det	_	_
+7	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	16	nsubj:pass	_	_
+8	u.	u.	ADP	APPR	AdpType=Prep|Case=Dat	16	advmod	_	_
+9	a.	a.	DET	PIS	Gender=Neut|Number=Sing|PronType=Ind	16	obl	_	_
+10	von	von	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+11	Roger	Roger	PROPN	NE	Gender=Masc|Number=Sing	16	obl	_	_
+12	Ebert	Ebert	PROPN	NE	Number=Sing	11	flat:name	_	_
+13	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+14	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	15	det	_	_
+15	Worten	Wort	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	16	obl	_	_
+16	gelobt	geloben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+17	:	:	PUNCT	$.	PunctType=Peri	16	punct	_	_
+
+# DDC:BREAK.s[9] = 203
+# DDC:BREAK.p[4] = 203
+# text = 1997 kam die Parodie An Alan Smithee Film :
+1	1997	1997	NUM	CARD	NumType=Card|Number=Plur	2	obl	_	_
+2	kam	kommen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+3	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	Parodie	Parodie	NOUN	NN	Gender=Fem|Number=Sing	2	nsubj	_	_
+5	An	an	X	FM	Foreign=Yes	2	obj	_	_
+6	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	5	flat:name	_	_
+7	Smithee	Smithee	PROPN	NE	Number=Sing	5	flat:name	_	_
+8	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	5	appos	_	_
+9	:	:	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[10] = 212
+# text = Burn Hollywood Burn ( deutscher Titel Fahr zur Hölle Hollywood ) in die Kinos , was das Pseudonym einem größeren Publikum bekannt machte , nicht zuletzt weil Arthur Hiller , der eigentliche Regisseur des Films , selbst seinen Namen zurückzog und analog zum Filmtitel das Pseudonym Alan Smithee benutzte .
+1	Burn	Burn	X	FM	Foreign=Yes	40	nsubj	_	_
+2	Hollywood	Hollywood	PROPN	NE	Number=Sing	1	flat:name	_	_
+3	Burn	Burn	PROPN	NE	Number=Sing	1	flat:name	_	_
+4	(	(	PUNCT	$(	PunctType=Brck	6	punct	_	SpaceAfter=No
+5	deutscher	deutsch	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	6	amod	_	_
+6	Titel	Titel	NOUN	NN	Gender=Masc|Number=Sing	1	appos	_	_
+7	Fahr	Fahr	NOUN	NN	Gender=Neut|Number=Sing	6	appos	_	_
+8	zur	zur	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	case	_	_
+9	Hölle	Hölle	NOUN	NN	Gender=Fem|Number=Sing	7	nmod	_	_
+10	Hollywood	Hollywood	PROPN	NE	Number=Sing	9	flat:name	_	SpaceAfter=No
+11	)	)	PUNCT	$(	PunctType=Brck	6	punct	_	_
+12	in	in	ADP	APPR	AdpType=Prep|Case=Acc	14	case	_	_
+13	die	d	DET	ART	Case=Acc|Definite=Def|Number=Plur|PronType=Art	14	det	_	_
+14	Kinos	Kino	NOUN	NN	Gender=Neut|Number=Plur	1	nmod	_	SpaceAfter=No
+15	,	,	PUNCT	$,	PunctType=Comm	23	punct	_	_
+16	was	was	PRON	PRELS	Case=Nom|Gender=Neut|Number=Sing|PronType=Int,Rel	23	nsubj	_	_
+17	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	18	det	_	_
+18	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	22	obj	_	_
+19	einem	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	21	det	_	_
+20	größeren	groß	ADJ	ADJA	Degree=Cmp|Number=Sing	21	amod	_	_
+21	Publikum	Publikum	NOUN	NN	Case=Dat|Gender=Neut|Number=Sing	22	obj	_	_
+22	bekannt	bekannt	ADJ	ADJD	Degree=Pos|Variant=Short	23	xcomp	_	_
+23	machte	machen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	1	acl	_	SpaceAfter=No
+24	,	,	PUNCT	$,	PunctType=Comm	25	punct	_	_
+25	nicht	nicht	PART	PTKNEG	Polarity=Neg	26	advmod	_	_
+26	zuletzt	zuletzt	ADV	ADV	_	23	advmod	_	_
+27	weil	weil	SCONJ	KOUS	_	40	mark	_	_
+28	Arthur	Arthur	PROPN	NE	Gender=Masc|Number=Sing	40	nsubj	_	_
+29	Hiller	Hiller	PROPN	NE	Number=Sing	28	flat:name	_	SpaceAfter=No
+30	,	,	PUNCT	$,	PunctType=Comm	33	punct	_	_
+31	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	33	det	_	_
+32	eigentliche	eigentlich	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	33	amod	_	_
+33	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	28	appos	_	_
+34	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	35	det	_	_
+35	Films	Film	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	33	nmod	_	SpaceAfter=No
+36	,	,	PUNCT	$,	PunctType=Comm	33	punct	_	_
+37	selbst	selbst	ADV	ADV	_	40	advmod	_	_
+38	seinen	seine	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	39	det	_	_
+39	Namen	Namen	NOUN	NN	Gender=Masc|Number=Sing	40	obj	_	_
+40	zurückzog	zurückziehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+41	und	und	CCONJ	KON	_	49	cc	_	_
+42	analog	analog	ADJ	ADJD	Degree=Pos|Variant=Short	49	advcl	_	_
+43	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	44	case	_	_
+44	Filmtitel	Filmtitel	NOUN	NN	Gender=Masc|Number=Sing	42	obl	_	_
+45	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	46	det	_	_
+46	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	49	obj	_	_
+47	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	46	flat:name	_	_
+48	Smithee	Smithee	PROPN	NE	_	46	flat:name	_	_
+49	benutzte	benutzen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	40	conj	_	_
+50	.	.	PUNCT	$.	PunctType=Peri	40	punct	_	_
+
+# DDC:BREAK.s[11] = 262
+# text = Der Film gilt als einer der schlechtesten Filme der 1990er Jahre und gewann fünf Goldene Himbeeren .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	3	nsubj	_	_
+3	gilt	gelten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+4	als	als	CCONJ	KOKOM	ConjType=Comp	5	case	_	_
+5	einer	eine	DET	PIS	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	3	obl	_	_
+6	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	8	det	_	_
+7	schlechtesten	schlecht	ADJ	ADJA	Degree=Sup|Number=Plur	8	amod	_	_
+8	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	5	nmod	_	_
+9	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	11	det	_	_
+10	1990er	1990er	ADJ	ADJA	_	11	amod	_	_
+11	Jahre	Jahr	NOUN	NN	Gender=Neut|Number=Plur	8	nmod	_	_
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	gewann	gewinnen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	3	conj	_	_
+14	fünf	fünf	NUM	CARD	NumType=Card|Number=Plur	16	nummod	_	_
+15	Goldene	golden	ADJ	ADJA	Degree=Pos|Number=Plur	16	amod	_	_
+16	Himbeeren	Himbeere	NOUN	NN	Gender=Fem|Number=Plur	13	obj	_	_
+17	.	.	PUNCT	$,	PunctType=Comm	13	obl	_	_
+
+# DDC:BREAK.s[12] = 279
+# DDC:BREAK.p[5] = 279
+# text = Der Film Supernova ist der erste Post-Smithee-Film , dort führte ein gewisser Thomas Lee alias Walter Hill die Regie .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	7	nsubj	_	_
+3	Supernova	Supernova	PROPN	NE	_	2	flat:name	_	_
+4	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
+5	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	7	det	_	_
+6	erste	erst	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|NumType=Ord|Number=Sing	7	amod	_	_
+7	Post-Smithee-Film	Post-Smithee-Film	NOUN	NN	Gender=Masc|Number=Sing	0	ROOT	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	10	punct	_	_
+9	dort	dort	ADV	ADV	_	10	advmod	_	_
+10	führte	führen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	7	conj	_	_
+11	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	13	det	_	_
+12	gewisser	gewiß	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	13	amod	_	_
+13	Thomas	Thomas	PROPN	NE	Case=Nom|Gender=Masc|Number=Sing	10	nsubj	_	_
+14	Lee	Lee	PROPN	NE	Number=Sing	13	flat:name	_	_
+15	alias	alias	ADV	ADV	_	16	advmod	_	_
+16	Walter	Walter	PROPN	NE	Gender=Masc|Number=Sing	10	obl	_	_
+17	Hill	Hill	PROPN	NE	Number=Sing	16	flat:name	_	_
+18	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	19	det	_	_
+19	Regie	Regie	NOUN	NN	Gender=Fem|Number=Sing	10	obj	_	_
+20	.	.	PUNCT	$.	PunctType=Peri	7	punct	_	_
+
+# DDC:BREAK.s[13] = 299
+# DDC:BREAK.p[6] = 299
+# text = Die Verwendung dieses oder eines anderen Pseudonyms ist für Mitglieder der DGA streng reglementiert .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
+2	Verwendung	Verwendung	NOUN	NN	Gender=Fem|Number=Sing	14	nsubj:pass	_	_
+3	dieses	diese	DET	PDAT	Case=Gen|Gender=Neut|Number=Sing|PronType=Dem	7	det	_	_
+4	oder	oder	CCONJ	KON	_	5	cc	_	_
+5	eines	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	3	conj	_	_
+6	anderen	ander	DET	ADJA	Number=Sing|PronType=Ind	7	det	_	_
+7	Pseudonyms	Pseudonym	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	2	nmod	_	_
+8	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	14	aux:pass	_	_
+9	für	für	ADP	APPR	AdpType=Prep|Case=Acc	10	case	_	_
+10	Mitglieder	Mitglied	NOUN	NN	Gender=Neut|Number=Plur	14	obl	_	_
+11	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	12	det	_	_
+12	DGA	DGA	PROPN	NE	_	10	nmod	_	_
+13	streng	streng	ADJ	ADJD	Degree=Pos|Variant=Short	14	advmod	_	_
+14	reglementiert	reglementieren	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	14	punct	_	_
+
+# DDC:BREAK.s[14] = 314
+# text = Ein Regisseur , der für einen von ihm gedrehten Film seinen Namen nicht hergeben möchte , hat nach Sichtung des fertigen Films drei Tage Zeit , anzuzeigen , dass er ein Pseudonym verwenden möchte .
+1	Ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	2	det	_	_
+2	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	17	nsubj	_	SpaceAfter=No
+3	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+4	der	die	PRON	PRELS	Case=Nom|Gender=Masc|Number=Sing|PronType=Dem,Rel	14	nsubj	_	_
+5	für	für	ADP	APPR	AdpType=Prep|Case=Acc	10	case	_	_
+6	einen	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	10	det	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	ihm	er	PRON	PPER	Case=Dat|Gender=Neut|Number=Sing|Person=3|PronType=Prs	9	obl	_	_
+9	gedrehten	gedreht	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	10	amod	_	_
+10	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	14	obl	_	_
+11	seinen	seine	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	12	det	_	_
+12	Namen	Namen	NOUN	NN	Gender=Masc|Number=Sing	14	obj	_	_
+13	nicht	nicht	PART	PTKNEG	Polarity=Neg	14	advmod	_	_
+14	hergeben	hergeben	VERB	VVINF	VerbForm=Inf	2	acl	_	_
+15	möchte	mögen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	14	aux	_	SpaceAfter=No
+16	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+17	hat	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+18	nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	19	case	_	_
+19	Sichtung	Sichtung	NOUN	NN	Gender=Fem|Number=Sing	17	obl	_	_
+20	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	22	det	_	_
+21	fertigen	fertig	ADJ	ADJA	Degree=Pos|Number=Sing	22	amod	_	_
+22	Films	Film	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	19	nmod	_	_
+23	drei	drei	NUM	CARD	NumType=Card|Number=Plur	24	nummod	_	_
+24	Tage	Tag	NOUN	NN	Gender=Masc|Number=Plur	17	obl	_	_
+25	Zeit	Zeit	NOUN	NN	Gender=Fem|Number=Sing	17	obj	_	SpaceAfter=No
+26	,	,	PUNCT	$,	PunctType=Comm	27	punct	_	_
+27	anzuzeigen	anzeigen	VERB	VVIZU	VerbForm=Inf	25	xcomp	_	SpaceAfter=No
+28	,	,	PUNCT	$,	PunctType=Comm	33	punct	_	_
+29	dass	dass	SCONJ	KOUS	_	33	mark	_	_
+30	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	33	nsubj	_	_
+31	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	32	det	_	_
+32	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	33	obj	_	_
+33	verwenden	verwenden	VERB	VVINF	VerbForm=Inf	27	ccomp	_	_
+34	möchte	mögen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	33	aux	_	_
+35	.	.	PUNCT	$.	PunctType=Peri	17	punct	_	_
+
+# DDC:BREAK.s[15] = 349
+# text = Der Rat der DGA entscheidet binnen zwei Tagen über das Anliegen .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Rat	Rat	NOUN	NN	Gender=Masc|Number=Sing	5	nsubj	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	4	det	_	_
+4	DGA	DGA	PROPN	NE	_	2	nmod	_	_
+5	entscheidet	entscheiden	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	binnen	binnen	ADP	APPR	AdpType=Prep	8	case	_	_
+7	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	8	nummod	_	_
+8	Tagen	Tag	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	5	obl	_	_
+9	über	über	ADP	APPR	AdpType=Prep|Case=Acc	11	case	_	_
+10	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	11	det	_	_
+11	Anliegen	Anliegen	NOUN	NN	Gender=Neut|Number=Sing	5	obl	_	_
+12	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[16] = 361
+# text = Erhebt die Produktionsfirma Einspruch , entscheidet ein Komitee aus Mitgliedern der DGA und der Vereinigung der Film- und Fernsehproduzenten , ob der Regisseur ein Pseudonym angeben darf .
+1	Erhebt	erheben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	xcomp	_	_
+2	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
+3	Produktionsfirma	Produktionsfirma	NOUN	NN	Gender=Fem|Number=Sing	1	nsubj	_	_
+4	Einspruch	Einspruch	NOUN	NN	Gender=Masc|Number=Sing	1	obj	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	1	punct	_	_
+6	entscheidet	entscheiden	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+7	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	8	det	_	_
+8	Komitee	Komitee	NOUN	NN	Gender=Neut|Number=Sing	6	nsubj	_	_
+9	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+10	Mitgliedern	Mitglied	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	8	nmod	_	_
+11	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	12	det	_	_
+12	DGA	DGA	PROPN	NE	_	10	nmod	_	_
+13	und	und	CCONJ	KON	_	15	cc	_	_
+14	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
+15	Vereinigung	Vereinigung	NOUN	NN	Gender=Fem|Number=Sing	12	conj	_	_
+16	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	17	det	_	_
+17	Film-	film-	NOUN	TRUNC	Hyph=Yes	15	nmod	_	_
+18	und	und	CCONJ	KON	_	19	cc	_	_
+19	Fernsehproduzenten	Fernsehproduzent	NOUN	NN	Gender=Masc|Number=Plur	17	conj	_	SpaceAfter=No
+20	,	,	PUNCT	$,	PunctType=Comm	26	punct	_	_
+21	ob	ob	SCONJ	KOUS	_	26	mark	_	_
+22	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	23	det	_	_
+23	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	26	nsubj	_	_
+24	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	25	det	_	_
+25	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	26	obj	_	_
+26	angeben	angeben	VERB	VVINF	VerbForm=Inf	6	ccomp	_	_
+27	darf	dürfen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	26	aux	_	_
+28	.	.	PUNCT	$.	PunctType=Peri	6	punct	_	_
+
+# DDC:BREAK.s[17] = 389
+# text = Über die Beantragung muss der Regisseur Stillschweigen halten , ebenso darf er den fertigen Film nicht öffentlich kritisieren , wenn die DGA ihm die Verwendung eines Pseudonyms zugesteht .
+1	Über	über	ADP	APPR	AdpType=Prep|Case=Acc	3	case	_	_
+2	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
+3	Beantragung	Beantragung	NOUN	NN	Gender=Fem|Number=Sing	8	obl	_	_
+4	muss	müssen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	8	aux	_	_
+5	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	6	det	_	_
+6	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	8	nsubj	_	_
+7	Stillschweigen	Stillschweigen	NOUN	NN	Gender=Neut|Number=Sing	8	obj	_	_
+8	halten	halten	VERB	VVINF	VerbForm=Inf	0	ROOT	_	SpaceAfter=No
+9	,	,	PUNCT	$,	PunctType=Comm	18	punct	_	_
+10	ebenso	ebenso	ADV	ADV	_	18	advmod	_	_
+11	darf	dürfen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	18	aux	_	_
+12	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	18	nsubj	_	_
+13	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	15	det	_	_
+14	fertigen	fertig	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	15	amod	_	_
+15	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	18	obj	_	_
+16	nicht	nicht	PART	PTKNEG	Polarity=Neg	18	advmod	_	_
+17	öffentlich	öffentlich	ADJ	ADJD	Degree=Pos|Variant=Short	18	advmod	_	_
+18	kritisieren	kritisieren	VERB	VVINF	VerbForm=Inf	8	conj	_	SpaceAfter=No
+19	,	,	PUNCT	$,	PunctType=Comm	28	punct	_	_
+20	wenn	wenn	SCONJ	KOUS	_	28	mark	_	_
+21	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	22	det	_	_
+22	DGA	DGA	PROPN	NE	_	28	nsubj	_	_
+23	ihm	er	PRON	PPER	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs	28	obl:arg	_	_
+24	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	25	det	_	_
+25	Verwendung	Verwendung	NOUN	NN	Gender=Fem|Number=Sing	28	obj	_	_
+26	eines	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	27	det	_	_
+27	Pseudonyms	Pseudonym	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	25	nmod	_	_
+28	zugesteht	zugestehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	18	advcl	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	8	punct	_	_
+
+# DDC:BREAK.s[18] = 418
+# text = Ein Antrag des Regisseurs auf Pseudonymisierung kann abgelehnt werden , so durfte Tony Kaye den Namen Smithee bei dem Film American History X nicht einsetzen , obwohl er den Antrag stellte .
+1	Ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	2	det	_	_
+2	Antrag	Antrag	NOUN	NN	Gender=Masc|Number=Sing	8	nsubj:pass	_	_
+3	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
+4	Regisseurs	Regisseur	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	2	nmod	_	_
+5	auf	auf	ADP	APPR	AdpType=Prep|Case=Acc	6	case	_	_
+6	Pseudonymisierung	Pseudonymisierung	NOUN	NN	_	2	nmod	_	_
+7	kann	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	8	aux	_	_
+8	abgelehnt	ablehnen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+9	werden	werden	AUX	VAINF	VerbForm=Inf	8	aux:pass	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	25	punct	_	_
+11	so	so	ADV	ADV	Degree=Pos	25	advmod	_	_
+12	durfte	dürfen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|VerbType=Mod	25	aux	_	_
+13	Tony	Tony	PROPN	NE	Number=Sing	25	nsubj	_	_
+14	Kaye	Kaye	PROPN	NE	Number=Sing	13	flat:name	_	_
+15	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	16	det	_	_
+16	Namen	Namen	NOUN	NN	Gender=Masc|Number=Sing	25	obj	_	_
+17	Smithee	Smithee	PROPN	NE	_	16	flat:name	_	_
+18	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	20	case	_	_
+19	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	20	det	_	_
+20	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	25	obl	_	_
+21	American	american	X	FM	Foreign=Yes	20	appos	_	_
+22	History	history	X	FM	Foreign=Yes	21	flat	_	_
+23	X	x	NUM	CARD	NumType=Card|Number=Plur	21	flat	_	_
+24	nicht	nicht	PART	PTKNEG	Polarity=Neg	25	advmod	_	_
+25	einsetzen	einsetzen	VERB	VVINF	VerbForm=Inf	8	xcomp	_	SpaceAfter=No
+26	,	,	PUNCT	$,	PunctType=Comm	31	punct	_	_
+27	obwohl	obwohl	SCONJ	KOUS	_	31	mark	_	_
+28	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	31	nsubj	_	_
+29	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	30	det	_	_
+30	Antrag	Antrag	NOUN	NN	Gender=Masc|Number=Sing	31	obj	_	_
+31	stellte	stellen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	25	advcl	_	_
+32	.	.	PUNCT	$.	PunctType=Peri	8	punct	_	_
+
+# DDC:BREAK.s[19] = 450
+# DDC:BREAK.p[7] = 450
+# text = Auch bei nicht-US-amerikanischen Produktionen wird der Name verwendet , wie etwa beim Pilotfilm der Fernsehserie Schulmädchen .
+1	Auch	auch	ADV	ADV	_	4	advmod	_	_
+2	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+3	nicht-US-amerikanischen	Nicht-Us-Amerikanischen	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	4	amod	_	_
+4	Produktionen	Produktion	NOUN	NN	Gender=Fem|Number=Plur	8	obl	_	_
+5	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	aux:pass	_	_
+6	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	7	det	_	_
+7	Name	Name	NOUN	NN	Case=Nom|Gender=Masc|Number=Sing	8	nsubj:pass	_	_
+8	verwendet	verwenden	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	SpaceAfter=No
+9	,	,	PUNCT	$,	PunctType=Comm	13	punct	_	_
+10	wie	wie	CCONJ	KOKOM	ConjType=Comp	13	case	_	_
+11	etwa	etwa	ADV	ADV	_	13	advmod	_	_
+12	beim	beim	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	13	case	_	_
+13	Pilotfilm	Pilotfilm	NOUN	NN	Gender=Masc|Number=Sing	8	obl	_	_
+14	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	15	det	_	_
+15	Fernsehserie	Fernsehserie	NOUN	NN	Gender=Fem|Number=Sing	13	nmod	_	_
+16	Schulmädchen	Schulmädchen	NOUN	NN	Gender=Neut|Number=Plur	15	appos	_	_
+17	.	.	PUNCT	$,	PunctType=Comm	8	punct	_	_
+
+# DDC:BREAK.s[20] = 467
+# text = 2007 sendete die ARD am 8. und 9. August den zweiteiligen TV-Film Paparazzo .
+1	2007	2007	NUM	CARD	NumType=Card|Number=Plur	2	obl	_	_
+2	sendete	senden	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+3	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	ARD	Ard	NOUN	NN	_	2	nsubj	_	_
+5	am	am	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	9	case	_	_
+6	8.	8.	ADJ	ADJA	_	9	amod	_	_
+7	und	und	CCONJ	KON	_	8	cc	_	_
+8	9.	9.	ADJ	ADJA	_	6	conj	_	_
+9	August	August	NOUN	NN	Gender=Masc|Number=Sing	2	obl	_	_
+10	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	12	det	_	_
+11	zweiteiligen	zweiteilig	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	12	amod	_	_
+12	TV-Film	Tv-Film	NOUN	NN	Gender=Masc|Number=Sing	2	obj	_	_
+13	Paparazzo	Paparazzo	PROPN	NE	_	12	flat:name	_	_
+14	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[21] = 481
+# text = Auch in diesem Werk erscheint anstatt des eigentlichen Regisseurs Stephan Wagner Alan Smithee im Abspann .
+1	Auch	auch	ADV	ADV	_	4	advmod	_	_
+2	in	in	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+3	diesem	diese	DET	PDAT	Case=Dat|Gender=Neut|Number=Sing|PronType=Dem	4	det	_	_
+4	Werk	Werk	NOUN	NN	Gender=Neut|Number=Sing	5	obl	_	_
+5	erscheint	erscheinen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	anstatt	anstatt	ADP	APPR	AdpType=Prep|Case=Gen	9	case	_	_
+7	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
+8	eigentlichen	eigentlich	ADJ	ADJA	Degree=Pos|Number=Sing	9	amod	_	_
+9	Regisseurs	Regisseur	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	5	obl	_	_
+10	Stephan	Stephan	PROPN	NE	Gender=Masc|Number=Sing	9	flat:name	_	_
+11	Wagner	Wagner	PROPN	NE	Number=Sing	9	flat:name	_	_
+12	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	5	nsubj	_	_
+13	Smithee	Smithee	PROPN	NE	_	12	flat:name	_	_
+14	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	15	case	_	_
+15	Abspann	Abspann	NOUN	NN	Gender=Masc|Number=Sing	5	obl	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[22] = 497
+# DDC:BREAK.p[8] = 497
+# text = Regisseure , die das Pseudonym benutzt haben :
+1	Regisseure	Regisseur	NOUN	NN	Gender=Masc|Number=Plur	0	ROOT	_	SpaceAfter=No
+2	,	,	PUNCT	$,	PunctType=Comm	6	punct	_	_
+3	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	6	nsubj	_	_
+4	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	5	det	_	_
+5	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	6	obj	_	_
+6	benutzt	benutzen	VERB	VVPP	Aspect=Perf|VerbForm=Part	1	acl	_	_
+7	haben	haben	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	6	aux	_	_
+8	:	:	PUNCT	$.	PunctType=Peri	1	punct	_	_
+
+# DDC:BREAK.s[23] = 505
+# text = • Don Siegel und Robert Totten ( für Frank Patch – Deine Stunden sind gezählt ) • David Lynch ( für die dreistündige Fernsehfassung von Der Wüstenplanet ) • Chris Christensen ( The Omega Imperative ) • Gianni Bozzacchi ( für I Love N.Y. ) • Stuart Rosenberg ( für Let ’s Get Harry ) • Richard C. Sarafian ( für Starfire ) • Dennis Hopper ( für Catchfire ) • Arthur Hiller ( für Fahr zur Hölle Hollywood ) • Rick Rosenthal ( Die Vögel II – Die Rückkehr ) • Kevin Yagher ( Hellraiser IV – Bloodline ) • William Lustig ( Maniac Cop 3 ) • Jerrold Freedman ( für Die O. J. Simpson Story – Der Mordfall des Jahrhunderts )
+1	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+2	Don	Don	PROPN	NE	Gender=Masc|Number=Sing	1	appos	_	_
+3	Siegel	Siegel	PROPN	NE	Number=Sing	2	flat:name	_	_
+4	und	und	CCONJ	KON	_	5	cc	_	_
+5	Robert	Robert	PROPN	NE	Gender=Masc|Number=Sing	2	conj	_	_
+6	Totten	Totten	PROPN	NE	Number=Sing	5	flat:name	_	_
+7	(	(	PUNCT	$(	PunctType=Brck	9	punct	_	SpaceAfter=No
+8	für	für	ADP	APPR	AdpType=Prep|Case=Acc	9	case	_	_
+9	Frank	Frank	PROPN	NE	Gender=Masc|Number=Sing	5	nmod	_	_
+10	Patch	Patch	PROPN	NE	_	9	flat:name	_	_
+11	–	–	PUNCT	$(	PunctType=Brck	15	punct	_	_
+12	Deine	deine	DET	PPOSAT	Case=Nom|Definite=Def|Number=Plur|PronType=Art	13	det	_	_
+13	Stunden	Stunde	NOUN	NN	Gender=Fem|Number=Plur	15	nsubj:pass	_	_
+14	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	aux:pass	_	_
+15	gezählt	zählen	VERB	VVPP	Aspect=Perf|VerbForm=Part	1	parataxis	_	SpaceAfter=No
+16	)	)	PUNCT	$(	PunctType=Brck	15	punct	_	_
+17	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+18	David	David	PROPN	NE	Gender=Masc|Number=Sing	17	appos	_	_
+19	Lynch	Lynch	PROPN	NE	Case=Nom|Number=Sing	18	flat:name	_	_
+20	(	(	PUNCT	$(	PunctType=Brck	24	punct	_	SpaceAfter=No
+21	für	für	ADP	APPR	AdpType=Prep|Case=Acc	24	case	_	_
+22	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	24	det	_	_
+23	dreistündige	dreistundeig	ADJ	ADJA	_	24	amod	_	_
+24	Fernsehfassung	Fernsehfassung	NOUN	NN	Gender=Fem|Number=Sing	18	nmod	_	_
+25	von	von	ADP	APPR	AdpType=Prep|Case=Dat	27	case	_	_
+26	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	27	det	_	_
+27	Wüstenplanet	Wüstenplanet	NOUN	NN	Gender=Masc|Number=Sing	24	nmod	_	SpaceAfter=No
+28	)	)	PUNCT	$(	PunctType=Brck	24	punct	_	_
+29	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+30	Chris	Chris	PROPN	NE	Case=Nom|Number=Sing	29	flat:name	_	_
+31	Christensen	Christensen	PROPN	NE	Number=Sing	30	flat:name	_	_
+32	(	(	PUNCT	$(	PunctType=Brck	33	punct	_	SpaceAfter=No
+33	The	the	X	FM	Foreign=Yes	30	appos	_	_
+34	Omega	omega	X	FM	Foreign=Yes	33	flat	_	_
+35	Imperative	imperative	X	FM	Foreign=Yes	33	flat	_	SpaceAfter=No
+36	)	)	PUNCT	$(	PunctType=Brck	33	punct	_	_
+37	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+38	Gianni	Gianni	PROPN	NE	_	37	appos	_	_
+39	Bozzacchi	Bozzacchi	PROPN	NE	_	38	flat:name	_	_
+40	(	(	PUNCT	$(	PunctType=Brck	42	punct	_	SpaceAfter=No
+41	für	für	ADP	APPR	AdpType=Prep|Case=Acc	42	case	_	_
+42	I	i	X	FM	Foreign=Yes	38	nmod	_	_
+43	Love	love	X	FM	Foreign=Yes	42	flat	_	_
+44	N.Y.	N.Y.	PROPN	NE	_	42	flat:name	_	SpaceAfter=No
+45	)	)	PUNCT	$(	PunctType=Brck	42	punct	_	_
+46	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+47	Stuart	Stuart	PROPN	NE	Gender=Masc|Number=Sing	46	flat:name	_	_
+48	Rosenberg	Rosenberg	PROPN	NE	Number=Sing	47	flat:name	_	_
+49	(	(	PUNCT	$(	PunctType=Brck	51	punct	_	SpaceAfter=No
+50	für	für	ADP	APPR	AdpType=Prep|Case=Acc	51	case	_	_
+51	Let	let	X	FM	Foreign=Yes	47	nmod	_	SpaceAfter=No
+52	’s	’s	X	FM	Foreign=Yes	51	flat	_	_
+53	Get	get	X	FM	Foreign=Yes	51	flat	_	_
+54	Harry	Harry	PROPN	NE	Gender=Masc|Number=Sing	51	flat:name	_	SpaceAfter=No
+55	)	)	PUNCT	$(	PunctType=Brck	51	punct	_	_
+56	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+57	Richard	Richard	PROPN	NE	Gender=Masc|Number=Sing	0	ROOT	_	_
+58	C.	C.	PROPN	NE	Number=Sing	57	flat:name	_	_
+59	Sarafian	Sarafian	PROPN	NE	_	57	flat:name	_	_
+60	(	(	PUNCT	$(	PunctType=Brck	62	punct	_	SpaceAfter=No
+61	für	für	ADP	APPR	AdpType=Prep|Case=Acc	62	case	_	_
+62	Starfire	Starfire	PROPN	NE	_	57	nmod	_	SpaceAfter=No
+63	)	)	PUNCT	$(	PunctType=Brck	62	punct	_	_
+64	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+65	Dennis	Dennis	PROPN	NE	Case=Nom|Gender=Masc|Number=Sing	64	flat:name	_	_
+66	Hopper	Hopper	PROPN	NE	Number=Sing	65	flat:name	_	_
+67	(	(	PUNCT	$(	PunctType=Brck	69	punct	_	SpaceAfter=No
+68	für	für	ADP	APPR	AdpType=Prep|Case=Acc	69	case	_	_
+69	Catchfire	Catchfire	PROPN	NE	_	65	nmod	_	SpaceAfter=No
+70	)	)	PUNCT	$(	PunctType=Brck	69	punct	_	_
+71	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+72	Arthur	Arthur	PROPN	NE	Gender=Masc|Number=Sing	71	appos	_	_
+73	Hiller	Hiller	PROPN	NE	Number=Sing	72	flat:name	_	_
+74	(	(	PUNCT	$(	PunctType=Brck	76	punct	_	SpaceAfter=No
+75	für	für	ADP	APPR	AdpType=Prep|Case=Acc	76	case	_	_
+76	Fahr	Fahr	NOUN	NN	Gender=Neut|Number=Sing	72	nmod	_	_
+77	zur	zur	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	78	case	_	_
+78	Hölle	Hölle	NOUN	NN	Gender=Fem|Number=Sing	76	nmod	_	_
+79	Hollywood	Hollywood	PROPN	NE	Number=Sing	78	flat:name	_	SpaceAfter=No
+80	)	)	PUNCT	$(	PunctType=Brck	76	punct	_	_
+81	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+82	Rick	Rick	PROPN	NE	Gender=Masc|Number=Sing	81	flat:name	_	_
+83	Rosenthal	Rosenthal	PROPN	NE	Number=Sing	82	flat:name	_	_
+84	(	(	PUNCT	$(	PunctType=Brck	86	punct	_	SpaceAfter=No
+85	Die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	86	det	_	_
+86	Vögel	Vogel	NOUN	NN	Gender=Masc|Number=Plur	82	appos	_	_
+87	II	ii	NUM	CARD	NumType=Card|Number=Plur	86	flat	_	_
+88	–	–	PUNCT	$(	PunctType=Brck	90	punct	_	_
+89	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	90	det	_	_
+90	Rückkehr	Rückkehr	NOUN	NN	Gender=Fem|Number=Sing	86	appos	_	SpaceAfter=No
+91	)	)	PUNCT	$(	PunctType=Brck	90	punct	_	_
+92	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+93	Kevin	Kevin	PROPN	NE	Gender=Masc|Number=Sing	92	flat:name	_	_
+94	Yagher	Yagher	PROPN	NE	Number=Sing	93	flat:name	_	_
+95	(	(	PUNCT	$(	PunctType=Brck	96	punct	_	SpaceAfter=No
+96	Hellraiser	hellraiser	NOUN	NN	_	93	appos	_	_
+97	IV	iv	NUM	CARD	NumType=Card|Number=Plur	96	flat	_	_
+98	–	–	PUNCT	$(	PunctType=Brck	96	punct	_	_
+99	Bloodline	Bloodline	NOUN	NN	_	96	appos	_	SpaceAfter=No
+100	)	)	PUNCT	$(	PunctType=Brck	96	punct	_	_
+101	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+102	William	William	PROPN	NE	Gender=Masc|Number=Sing	101	appos	_	_
+103	Lustig	Lustig	PROPN	NE	Number=Sing	102	flat:name	_	_
+104	(	(	PUNCT	$(	PunctType=Brck	105	punct	_	SpaceAfter=No
+105	Maniac	maniac	PROPN	NE	_	102	appos	_	_
+106	Cop	cop	PROPN	NE	_	105	flat	_	_
+107	3	3	NUM	CARD	NumType=Card|Number=Plur	105	flat	_	SpaceAfter=No
+108	)	)	PUNCT	$(	PunctType=Brck	105	punct	_	_
+109	•	•	PUNCT	$.	PunctType=Peri	0	ROOT	_	_
+110	Jerrold	Jerrold	PROPN	NE	_	109	flat:name	_	_
+111	Freedman	Freedman	PROPN	NE	Number=Sing	110	flat:name	_	_
+112	(	(	PUNCT	$(	PunctType=Brck	115	case	_	SpaceAfter=No
+113	für	für	ADP	APPR	AdpType=Prep|Case=Acc	114	case	_	_
+114	Die	d	DET	ART	Case=Acc|Definite=Def|Number=Plur|PronType=Art	115	det	_	_
+115	O.	O.	PROPN	NE	_	110	nmod	_	SpaceAfter=No
+116	J.	J.	PROPN	NE	Number=Sing	115	flat:name	_	_
+117	Simpson	Simpson	PROPN	NE	Number=Sing	116	flat:name	_	_
+118	Story	Story	X	FM	Foreign=Yes	115	flat	_	_
+119	–	–	PUNCT	$(	PunctType=Brck	121	punct	_	_
+120	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	121	det	_	_
+121	Mordfall	Mordfall	NOUN	NN	Gender=Masc|Number=Sing	115	appos	_	_
+122	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	123	det	_	_
+123	Jahrhunderts	Jahrhundert	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	121	nmod	_	_
+124	)	)	PUNCT	$(	PunctType=Brck	121	punct	_	_
+
+# DDC:BREAK.s[24] = 629
+# DDC:BREAK.p[9] = 629
+# text = Der Pilotfilm der Serie MacGyver und die fünfte Folge der ersten Staffel führen einen Alan Smithee als Regisseur .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Pilotfilm	Pilotfilm	NOUN	NN	Gender=Masc|Number=Sing	13	nsubj	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	Serie	Serie	NOUN	NN	Gender=Fem|Number=Sing	2	nmod	_	_
+5	MacGyver	Macgyver	PROPN	NE	_	4	flat:name	_	_
+6	und	und	CCONJ	KON	_	9	cc	_	_
+7	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	9	det	_	_
+8	fünfte	fünft	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	9	amod	_	_
+9	Folge	Folge	NOUN	NN	Gender=Fem|Number=Sing	2	conj	_	_
+10	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	12	det	_	_
+11	ersten	erst	ADJ	ADJA	Degree=Pos|NumType=Ord|Number=Sing	12	amod	_	_
+12	Staffel	Staffel	NOUN	NN	Gender=Fem|Number=Sing	9	nmod	_	_
+13	führen	führen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+14	einen	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	15	det	_	_
+15	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	13	obj	_	_
+16	Smithee	Smithee	PROPN	NE	_	15	flat:name	_	_
+17	als	als	CCONJ	KOKOM	ConjType=Comp	18	case	_	_
+18	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	13	obl	_	_
+19	.	.	PUNCT	$.	PunctType=Peri	13	punct	_	_
+
+# DDC:BREAK.s[25] = 648
+# text = Auf der TV-Serien-Seite TV Rage wird Jerrold Freedman als Regisseur des Pilotfilms angegeben .
+1	Auf	auf	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
+3	TV-Serien-Seite	Tv-Serien-Seite	NOUN	NN	Gender=Fem|Number=Sing	13	obl	_	_
+4	TV	TV	NOUN	NN	Gender=Neut|Number=Sing	3	appos	_	_
+5	Rage	Rage	X	FM	Foreign=Yes	4	appos	_	_
+6	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	13	aux:pass	_	_
+7	Jerrold	Jerrold	PROPN	NE	Gender=Masc|Number=Sing	13	nsubj:pass	_	_
+8	Freedman	Freedman	PROPN	NE	Number=Sing	7	flat:name	_	_
+9	als	als	CCONJ	KOKOM	ConjType=Comp	10	case	_	_
+10	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	13	obl	_	_
+11	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	12	det	_	_
+12	Pilotfilms	Pilotfilm	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	10	nmod	_	_
+13	angegeben	angeben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+14	.	.	PUNCT	$,	PunctType=Comm	13	punct	_	_
+
+# DDC:BREAK.s[26] = 662
+# text = Der Regisseur der fünften Folge ist unbekannt .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	7	nsubj	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
+4	fünften	fünft	ADJ	ADJA	Degree=Pos|Number=Sing	5	amod	_	_
+5	Folge	Folge	NOUN	NN	Gender=Fem|Number=Sing	2	nmod	_	_
+6	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
+7	unbekannt	unbekannt	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+8	.	.	PUNCT	$,	PunctType=Comm	7	punct	_	_
+
+# DDC:BREAK.s[27] = 670
+# DDC:BREAK.p[10] = 670
+# text = Zu den Drehbuchautoren , die das Pseudonym benutzt haben , gehören Sam Raimi und Ivan Raimi , die das Drehbuch zu Die total beknackte Nuß als Alan Smithee , Jr. und Alan Smithee , Sr. schrieben .
+1	Zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	3	det	_	_
+3	Drehbuchautoren	Drehbuchautor	NOUN	NN	Gender=Masc|Number=Plur	11	obj	_	SpaceAfter=No
+4	,	,	PUNCT	$,	PunctType=Comm	8	punct	_	_
+5	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	8	nsubj	_	_
+6	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	7	det	_	_
+7	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	8	obj	_	_
+8	benutzt	benutzen	VERB	VVPP	Aspect=Perf|VerbForm=Part	3	acl	_	_
+9	haben	haben	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	8	aux	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	8	punct	_	_
+11	gehören	gehören	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+12	Sam	Sam	PROPN	NE	Gender=Masc|Number=Sing	11	nsubj	_	_
+13	Raimi	Raimi	PROPN	NE	_	12	flat:name	_	_
+14	und	und	CCONJ	KON	_	15	cc	_	_
+15	Ivan	Ivan	PROPN	NE	Gender=Masc|Number=Sing	12	conj	_	_
+16	Raimi	Raimi	PROPN	NE	_	15	flat:name	_	SpaceAfter=No
+17	,	,	PUNCT	$,	PunctType=Comm	36	punct	_	_
+18	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	36	nsubj	_	_
+19	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	20	det	_	_
+20	Drehbuch	Drehbuch	NOUN	NN	Gender=Neut|Number=Sing	36	obj	_	_
+21	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+22	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	25	det	_	_
+23	total	total	ADJ	ADJD	Degree=Pos|Variant=Short	24	advmod	_	_
+24	beknackte	beknackt	ADJ	ADJA	_	25	amod	_	_
+25	Nuß	Nuß	NOUN	NN	Gender=Masc|Number=Sing	20	nmod	_	_
+26	als	als	CCONJ	KOKOM	ConjType=Comp	27	case	_	_
+27	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	36	obl	_	_
+28	Smithee	Smithee	PROPN	NE	_	27	flat:name	_	SpaceAfter=No
+29	,	,	PUNCT	$,	PunctType=Comm	30	punct	_	_
+30	Jr.	Jr.	PROPN	NE	_	27	appos	_	_
+31	und	und	CCONJ	KON	_	32	cc	_	_
+32	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	30	conj	_	_
+33	Smithee	Smithee	PROPN	NE	_	32	flat:name	_	SpaceAfter=No
+34	,	,	PUNCT	$,	PunctType=Comm	32	flat	_	_
+35	Sr.	Sr.	PROPN	NE	_	32	appos	_	_
+36	schrieben	schreiben	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	15	acl	_	_
+37	.	.	PUNCT	$.	PunctType=Peri	11	punct	_	_
+
+# DDC:BREAK.s[28] = 707
+# DDC:BREAK.p[11] = 707
+# text = Auch in Computerspielen wird dieses Pseudonym angegeben :
+1	Auch	auch	ADV	ADV	_	3	advmod	_	_
+2	in	in	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+3	Computerspielen	Computerspiel	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	7	obl	_	_
+4	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_	_
+5	dieses	diese	DET	PDAT	Case=Nom|Gender=Neut|Number=Sing|PronType=Dem	6	det	_	_
+6	Pseudonym	Pseudonym	NOUN	NN	Gender=Neut|Number=Sing	7	nsubj:pass	_	_
+7	angegeben	angeben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+8	:	:	PUNCT	$.	PunctType=Peri	7	punct	_	_
+
+# DDC:BREAK.s[29] = 715
+# text = Im Abspann des Ego-Shooters Marine Sharpshooter IV aus dem Jahr 2008 wird als Art Director des Spiels Alan Smithee genannt .
+1	Im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	2	case	_	_
+2	Abspann	Abspann	NOUN	NN	Gender=Masc|Number=Sing	20	obl	_	_
+3	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	4	det	_	_
+4	Ego-Shooters	ego-shooter	NOUN	NN	_	2	nmod	_	_
+5	Marine	Marine	NOUN	NN	Gender=Fem|Number=Sing	4	appos	_	_
+6	Sharpshooter	Sharpshooter	PROPN	NE	_	5	flat:name	_	_
+7	IV	iv	NUM	CARD	NumType=Card|Number=Plur	5	flat	_	_
+8	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+9	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	10	det	_	_
+10	Jahr	Jahr	NOUN	NN	Gender=Neut|Number=Sing	4	nmod	_	_
+11	2008	2008	NUM	CARD	NumType=Card|Number=Plur	10	nmod	_	_
+12	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	20	aux:pass	_	_
+13	als	als	CCONJ	KOKOM	ConjType=Comp	14	case	_	_
+14	Art	Art	NOUN	FM	Gender=Fem|Number=Sing	20	obl	_	_
+15	Director	Director	X	FM	Foreign=Yes	14	flat	_	_
+16	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	17	det	_	_
+17	Spiels	Spiel	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	14	nmod	_	_
+18	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	20	nsubj:pass	_	_
+19	Smithee	Smithee	PROPN	NE	_	18	flat:name	_	_
+20	genannt	nennen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+21	.	.	PUNCT	$.	PunctType=Peri	20	punct	_	_
+
+# DDC:BREAK.s[30] = 736
+# DDC:BREAK.p[12] = 736
+# text = 2014 produzierte die New Yorker Performance-Kompanie Big Dance Theater Alan Smithee Directed this Play , das im August des Jahres auch in Berlin bei Tanz im August aufgeführt wurde .
+1	2014	2014	NUM	CARD	NumType=Card|Number=Plur	2	obl	_	_
+2	produzierte	produzieren	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+3	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+4	New	New	ADJ	ADJA	Degree=Pos	6	amod	_	_
+5	Yorker	Yorker	ADJ	ADJA	Degree=Pos	6	amod	_	_
+6	Performance-Kompanie	Performance-Kompanie	NOUN	NN	Gender=Fem|Number=Sing	2	nsubj	_	_
+7	Big	Big	X	FM	Foreign=Yes	6	appos	_	_
+8	Dance	Dance	X	FM	Foreign=Yes	7	flat	_	_
+9	Theater	Theater	X	FM	Foreign=Yes	7	flat	_	_
+10	Alan	Alan	PROPN	NE	Gender=Masc|Number=Sing	7	flat:name	_	_
+11	Smithee	Smithee	PROPN	NE	Number=Sing	7	flat:name	_	_
+12	Directed	directed	X	FM	Foreign=Yes	7	flat	_	_
+13	this	this	X	FM	Foreign=Yes	7	flat	_	_
+14	Play	play	X	FM	Foreign=Yes	7	flat	_	SpaceAfter=No
+15	,	,	PUNCT	$,	PunctType=Comm	28	punct	_	_
+16	das	die	PRON	PRELS	Case=Nom|Gender=Neut|Number=Sing|PronType=Dem,Rel	28	nsubj:pass	_	_
+17	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	18	case	_	_
+18	August	August	NOUN	NN	Gender=Masc|Number=Sing	28	obl	_	_
+19	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	20	det	_	_
+20	Jahres	Jahr	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	18	nmod	_	_
+21	auch	auch	ADV	ADV	_	23	advmod	_	_
+22	in	in	ADP	APPR	AdpType=Prep|Case=Dat	23	case	_	_
+23	Berlin	Berlin	PROPN	NE	Number=Sing	28	obl	_	_
+24	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+25	Tanz	Tanz	NOUN	NN	Gender=Masc|Number=Sing	28	obl	_	_
+26	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	27	case	_	_
+27	August	August	NOUN	NN	Gender=Masc|Number=Sing	25	nmod	_	_
+28	aufgeführt	aufführen	VERB	VVPP	Aspect=Perf|VerbForm=Part	7	acl	_	_
+29	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	28	aux:pass	_	_
+30	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:tokid.begin = 766
+# DDC:tokid.end = 1611
+# DDC:meta.n_ = 1
+# DDC:meta.file_ = wikipedia01/../../ddc_xml/data/0000/00000003.ddc.xml
+# DDC:meta.date_ = 2023-04-19
+# DDC:meta.page_ = -1
+# DDC:meta.access = P
+# DDC:meta.avail = -
+# DDC:meta.basename = 0000/00000003
+# DDC:meta.bibl = Actinium. In: Wikipedia: Die freie Enzyklopädie. 19.04.2023.
+# DDC:meta.biblSig = Actinium. Wikipedia-Artikel. 2023.
+# DDC:meta.collection = wikipedia
+# DDC:meta.textClass = Wissenschaft
+# DDC:meta.timestamp = 2023-11-06T15:51:08Z
+# DDC:meta.title = Actinium
+# DDC:meta.url = https://de.wikipedia.org/w/index.php?oldid=232959404
+# DDC:BREAK.s[31] = 766
+# DDC:BREAK.c[0] = 766
+# DDC:BREAK.p[13] = 766
+# DDC:BREAK.file[0] = 766
+# DDC:BREAK.textarea[0] = 766
+# text = Actinium ist ein radioaktives chemisches Element mit dem Elementsymbol Ac und der Ordnungszahl 89 .
+1	Actinium	Actinium	NOUN	NN	_	6	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
+3	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	6	det	_	_
+4	radioaktives	radioaktiv	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	6	amod	_	_
+5	chemisches	chemisch	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	6	amod	_	_
+6	Element	Element	NOUN	NN	Gender=Neut|Number=Sing	0	ROOT	_	_
+7	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	9	case	_	_
+8	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	9	det	_	_
+9	Elementsymbol	Elementsymbol	NOUN	NN	Gender=Neut|Number=Sing	6	nmod	_	_
+10	Ac	Ac	NOUN	NN	_	9	appos	_	_
+11	und	und	CCONJ	KON	_	13	cc	_	_
+12	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
+13	Ordnungszahl	Ordnungszahl	NOUN	NN	Gender=Fem|Number=Sing	9	conj	_	_
+14	89	89	NUM	CARD	NumType=Card|Number=Plur	13	flat	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	6	punct	_	_
+
+# DDC:BREAK.s[32] = 781
+# text = Im Periodensystem der Elemente steht es in der 3. IUPAC-Gruppe , der Scandiumgruppe .
+1	Im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	2	case	_	_
+2	Periodensystem	Periodensystem	NOUN	NN	Gender=Neut|Number=Sing	5	obl	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	4	det	_	_
+4	Elemente	Element	NOUN	NN	Gender=Neut|Number=Plur	2	nmod	_	_
+5	steht	stehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	5	nsubj	_	_
+7	in	in	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+8	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
+9	3.	3.	ADJ	ADJA	_	10	amod	_	_
+10	IUPAC-Gruppe	Iupac-Gruppe	NOUN	NN	Gender=Fem|Number=Sing	5	obl	_	SpaceAfter=No
+11	,	,	PUNCT	$,	PunctType=Comm	13	punct	_	_
+12	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
+13	Scandiumgruppe	Scandiumgruppe	NOUN	NN	Gender=Fem|Number=Sing	10	appos	_	_
+14	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[33] = 795
+# text = Das Element ist ein Metall und gehört zur 7. Periode , d-Block .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Element	Element	NOUN	NN	Gender=Neut|Number=Sing	5	nsubj	_	_
+3	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
+4	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	5	det	_	_
+5	Metall	Metall	NOUN	NN	Gender=Neut|Number=Sing	0	ROOT	_	_
+6	und	und	CCONJ	KON	_	7	cc	_	_
+7	gehört	gehören	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	conj	_	_
+8	zur	zur	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	case	_	_
+9	7.	7.	ADJ	ADJA	_	10	amod	_	_
+10	Periode	Periode	NOUN	NN	Gender=Fem|Number=Sing	7	obj	_	SpaceAfter=No
+11	,	,	PUNCT	$,	PunctType=Comm	12	punct	_	_
+12	d-Block	D-Block	NOUN	NN	Gender=Masc|Number=Sing	10	appos	_	_
+13	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[34] = 808
+# text = Es ist der Namensgeber der Gruppe der Actinoide , der ihm folgenden 14 Elemente .
+1	Es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+3	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
+4	Namensgeber	Namensgeber	NOUN	NN	Gender=Masc|Number=Sing	0	ROOT	_	_
+5	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+6	Gruppe	Gruppe	NOUN	NN	Gender=Fem|Number=Sing	4	nmod	_	_
+7	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	8	det	_	_
+8	Actinoide	Actinoide	NOUN	NN	_	6	nmod	_	SpaceAfter=No
+9	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+10	der	die	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	14	det	_	_
+11	ihm	er	PRON	PPER	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs	12	obj	_	_
+12	folgenden	folgend	ADJ	ADJA	Degree=Pos|Number=Plur	14	amod	_	_
+13	14	14	NUM	CARD	NumType=Card|Number=Plur	14	nummod	_	_
+14	Elemente	Element	NOUN	NN	Gender=Neut|Number=Plur	8	appos	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[35] = 823
+# DDC:BREAK.p[14] = 823
+# text = Das Actinium wurde im Jahr 1899 von dem französischen Chemiker André-Louis Debierne entdeckt , der es aus Pechblende isolierte und ihm zunächst Ähnlichkeiten mit dem Titan oder dem Thorium zuschrieb ; seine Bezeichnung leitete er wegen der Radioaktivität von griechisch ἀκτίς aktís ‚ Strahl ‘ ab .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Actinium	Actinium	NOUN	NN	_	13	nsubj:pass	_	_
+3	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	13	aux:pass	_	_
+4	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	5	case	_	_
+5	Jahr	Jahr	NOUN	NN	Gender=Neut|Number=Sing	13	obl	_	_
+6	1899	1899	NUM	CARD	NumType=Card|Number=Plur	5	nmod	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+8	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+9	französischen	französisch	ADJ	ADJA	Degree=Pos|Number=Sing	10	amod	_	_
+10	Chemiker	Chemiker	NOUN	NN	Gender=Masc|Number=Sing	13	obl	_	_
+11	André-Louis	André-Louis	PROPN	NE	Case=Nom|Gender=Masc|Number=Sing	10	flat:name	_	_
+12	Debierne	Debierne	PROPN	NE	_	10	flat:name	_	_
+13	entdeckt	entdecken	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	SpaceAfter=No
+14	,	,	PUNCT	$,	PunctType=Comm	19	punct	_	_
+15	der	die	PRON	PRELS	Case=Nom|Gender=Masc|Number=Sing|PronType=Dem,Rel	19	nsubj	_	_
+16	es	es	PRON	PPER	Case=Acc|Gender=Neut|Number=Sing|Person=3|PronType=Prs	19	obj	_	_
+17	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	18	case	_	_
+18	Pechblende	Pechblende	NOUN	NN	Gender=Fem|Number=Sing	19	obl	_	_
+19	isolierte	isoliert	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	5	acl	_	_
+20	und	und	CCONJ	KON	_	30	cc	_	_
+21	ihm	er	PRON	PPER	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs	30	obl:arg	_	_
+22	zunächst	zunächst	ADV	ADV	_	30	advmod	_	_
+23	Ähnlichkeiten	Ähnlichkeit	NOUN	NN	Gender=Fem|Number=Plur	30	obj	_	_
+24	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	26	case	_	_
+25	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	26	det	_	_
+26	Titan	Titan	NOUN	NN	_	23	nmod	_	_
+27	oder	oder	CCONJ	KON	_	29	cc	_	_
+28	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	29	det	_	_
+29	Thorium	Thorium	NOUN	NN	Gender=Neut|Number=Sing	26	conj	_	_
+30	zuschrieb	zuschreiben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	conj	_	SpaceAfter=No
+31	;	;	PUNCT	$.	PunctType=Peri	13	punct	_	_
+32	seine	seine	DET	PPOSAT	Case=Acc|Gender=Fem|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	33	det	_	_
+33	Bezeichnung	Bezeichnung	NOUN	NN	Gender=Fem|Number=Sing	34	obj	_	_
+34	leitete	leiten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	13	parataxis	_	_
+35	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	34	nsubj	_	_
+36	wegen	wegen	ADP	APPR	AdpType=Prep	38	case	_	_
+37	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	38	det	_	_
+38	Radioaktivität	Radioaktivität	NOUN	NN	Gender=Fem|Number=Sing	34	obl	_	_
+39	von	von	ADP	APPR	AdpType=Prep|Case=Dat	41	case	_	_
+40	griechisch	griechisch	ADJ	ADJD	Degree=Pos|Variant=Short	41	advmod	_	_
+41	ἀκτίς	Ἀκτίς	X	FM	Foreign=Yes	38	nmod	_	_
+42	aktís	Aktís	X	FM	Foreign=Yes	41	flat	_	_
+43	‚	‚	PUNCT	$(	PunctType=Brck	44	punct	_	SpaceAfter=No
+44	Strahl	Strahl	NOUN	NN	Gender=Masc|Number=Sing	38	appos	_	SpaceAfter=No
+45	‘	‘	PUNCT	$(	PunctType=Brck	44	punct	_	_
+46	ab	ab	ADP	PTKVZ	PartType=Vbp	34	compound:prt	_	_
+47	.	.	PUNCT	$.	PunctType=Peri	13	punct	_	_
+
+# DDC:BREAK.s[36] = 870
+# text = Friedrich Giesel entdeckte das Element unabhängig davon im Jahr 1902 und beschrieb eine Ähnlichkeit zum Lanthan ; er gab ihm den Namen Emanium , eine Bildung zu lateinisch emano ‚ ausfließen ‘ , ebenfalls mit Bezug zur abgegebenen Strahlung .
+1	Friedrich	Friedrich	PROPN	NE	Case=Nom|Gender=Masc|Number=Sing	3	nsubj	_	_
+2	Giesel	Giesel	PROPN	NE	Number=Sing	1	flat:name	_	_
+3	entdeckte	entdecken	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	5	det	_	_
+5	Element	Element	NOUN	NN	Gender=Neut|Number=Sing	3	obj	_	_
+6	unabhängig	unabhängig	ADJ	ADJD	Degree=Pos|Variant=Short	3	advcl	_	_
+7	davon	davon	ADV	PROAV	PronType=Dem	6	obj	_	_
+8	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	9	case	_	_
+9	Jahr	Jahr	NOUN	NN	Gender=Neut|Number=Sing	3	obl	_	_
+10	1902	1902	NUM	CARD	NumType=Card|Number=Plur	9	nmod	_	_
+11	und	und	CCONJ	KON	_	12	cc	_	_
+12	beschrieb	beschreiben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	3	conj	_	_
+13	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	14	det	_	_
+14	Ähnlichkeit	Ähnlichkeit	NOUN	NN	Gender=Fem|Number=Sing	12	obj	_	_
+15	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	16	case	_	_
+16	Lanthan	Lanthan	NOUN	NN	Gender=Masc|Number=Sing	14	nmod	_	SpaceAfter=No
+17	;	;	PUNCT	$.	PunctType=Peri	3	punct	_	_
+18	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	19	nsubj	_	_
+19	gab	geben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	3	parataxis	_	_
+20	ihm	er	PRON	PPER	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs	19	obl:arg	_	_
+21	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	22	det	_	_
+22	Namen	Namen	NOUN	NN	Gender=Masc|Number=Sing	19	obj	_	_
+23	Emanium	Emanium	PROPN	NN	_	22	appos	_	SpaceAfter=No
+24	,	,	PUNCT	$,	PunctType=Comm	26	punct	_	_
+25	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	26	det	_	_
+26	Bildung	Bildung	NOUN	NN	Gender=Fem|Number=Sing	23	appos	_	_
+27	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	29	case	_	_
+28	lateinisch	lateinisch	ADJ	ADJD	Degree=Pos|Variant=Short	29	advmod	_	_
+29	emano	emano	ADJ	ADJD	Degree=Pos|Variant=Short	31	advmod	_	_
+30	‚	‚	PUNCT	CARD	PunctType=Brck	31	punct	_	SpaceAfter=No
+31	ausfließen	ausfließen	VERB	VVINF	VerbForm=Inf	26	nmod	_	SpaceAfter=No
+32	‘	‘	PUNCT	$(	PunctType=Brck	26	punct	_	SpaceAfter=No
+33	,	,	PUNCT	$,	PunctType=Comm	34	punct	_	_
+34	ebenfalls	ebenfalls	ADV	ADV	_	26	advmod	_	_
+35	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	36	case	_	_
+36	Bezug	Bezug	NOUN	NN	Gender=Masc|Number=Sing	26	nmod	_	_
+37	zur	zur	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	39	case	_	_
+38	abgegebenen	abgegeben	ADJ	ADJA	Degree=Pos|Number=Sing	39	amod	_	_
+39	Strahlung	Strahlung	NOUN	NN	Gender=Fem|Number=Sing	36	nmod	_	_
+40	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[37] = 910
+# text = Nachdem Actinium und Emanium im Jahre 1904 als identisch erkannt worden waren , wurde Debiernes Namensgebung der Vorzug gegeben , da er es zuerst entdeckt hatte .
+1	Nachdem	nachdem	SCONJ	KOUS	_	10	mark	_	_
+2	Actinium	Actinium	NOUN	NN	_	10	nsubj:pass	_	_
+3	und	und	CCONJ	KON	_	4	cc	_	_
+4	Emanium	Emanium	NOUN	NN	Gender=Neut|Number=Sing	2	conj	_	_
+5	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	6	case	_	_
+6	Jahre	Jahr	NOUN	NN	Case=Dat|Gender=Neut|Number=Sing	10	obl	_	_
+7	1904	1904	NUM	CARD	NumType=Card|Number=Plur	6	nmod	_	_
+8	als	als	CCONJ	KOKOM	ConjType=Comp	9	mark	_	_
+9	identisch	identisch	ADJ	ADJD	Degree=Pos|Variant=Short	10	advcl	_	_
+10	erkannt	erkennen	VERB	VVPP	Aspect=Perf|VerbForm=Part	19	advcl	_	_
+11	worden	werden	AUX	VAPP	Aspect=Perf|VerbForm=Part	10	aux:pass	_	_
+12	waren	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	10	aux	_	SpaceAfter=No
+13	,	,	PUNCT	$,	PunctType=Comm	10	punct	_	_
+14	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	aux:pass	_	_
+15	Debiernes	Debiernes	PROPN	NE	Case=Gen	16	nmod	_	_
+16	Namensgebung	Namensgebung	NOUN	NN	Case=Dat|Gender=Fem|Number=Sing	19	obj	_	_
+17	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	18	det	_	_
+18	Vorzug	Vorzug	NOUN	NN	Gender=Masc|Number=Sing	19	nsubj:pass	_	_
+19	gegeben	geben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	SpaceAfter=No
+20	,	,	PUNCT	$,	PunctType=Comm	25	punct	_	_
+21	da	da	SCONJ	KOUS	_	25	mark	_	_
+22	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	25	nsubj	_	_
+23	es	es	PRON	PPER	Case=Acc|Gender=Neut|Number=Sing|Person=3|PronType=Prs	25	obj	_	_
+24	zuerst	zuerst	ADV	ADV	_	25	advmod	_	_
+25	entdeckt	entdecken	VERB	VVPP	Aspect=Perf|VerbForm=Part	19	advcl	_	_
+26	hatte	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	25	aux	_	_
+27	.	.	PUNCT	$.	PunctType=Peri	19	punct	_	_
+
+# DDC:BREAK.s[38] = 937
+# DDC:BREAK.p[15] = 937
+# text = Die Geschichte der Entdeckung wurde in Publikationen von 1971 und später im Jahr 2000 immer noch als fraglich beschrieben .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
+2	Geschichte	Geschichte	NOUN	NN	Gender=Fem|Number=Sing	19	nsubj:pass	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	Entdeckung	Entdeckung	NOUN	NN	Gender=Fem|Number=Sing	2	nmod	_	_
+5	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	19	aux:pass	_	_
+6	in	in	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+7	Publikationen	Publikation	NOUN	NN	Gender=Fem|Number=Plur	19	obl	_	_
+8	von	von	ADP	APPR	AdpType=Prep|Case=Dat	9	case	_	_
+9	1971	1971	NUM	CARD	NumType=Card|Number=Plur	7	nmod	_	_
+10	und	und	CCONJ	KON	_	13	cc	_	_
+11	später	spät	ADJ	ADJD	Degree=Cmp|Variant=Short	13	advmod	_	_
+12	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	13	case	_	_
+13	Jahr	Jahr	NOUN	NN	Gender=Neut|Number=Sing	9	conj	_	_
+14	2000	2000	NUM	CARD	NumType=Card|Number=Plur	13	nmod	_	_
+15	immer	immer	ADV	ADV	_	16	advmod	_	_
+16	noch	noch	ADV	ADV	_	19	advmod	_	_
+17	als	als	CCONJ	KOKOM	ConjType=Comp	18	mark	_	_
+18	fraglich	fraglich	ADJ	ADJD	Degree=Pos|Variant=Short	19	advcl	_	_
+19	beschrieben	beschreiben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+20	.	.	PUNCT	$,	PunctType=Comm	19	aux:pass	_	_
+
+# DDC:BREAK.s[39] = 957
+# text = Sie zeigen , dass die Publikationen von 1904 einerseits und die von 1899 und 1900 andererseits Widersprüche aufweisen .
+1	Sie	sie	PRON	PPER	Case=Nom|Number=Plur|Person=3|PronType=Prs	2	nsubj	_	_
+2	zeigen	zeigen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	SpaceAfter=No
+3	,	,	PUNCT	$,	PunctType=Comm	18	punct	_	_
+4	dass	dass	SCONJ	KOUS	_	18	mark	_	_
+5	die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	6	det	_	_
+6	Publikationen	Publikation	NOUN	NN	Gender=Fem|Number=Plur	18	nsubj	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	1904	1904	NUM	CARD	NumType=Card|Number=Plur	6	nmod	_	_
+9	einerseits	einerseits	ADV	ADV	_	6	advmod	_	_
+10	und	und	CCONJ	KON	_	11	cc	_	_
+11	die	d	PRON	PDS	Case=Nom|Number=Plur|PronType=Dem,Rel	6	conj	_	_
+12	von	von	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+13	1899	1899	NUM	CARD	NumType=Card|Number=Plur	11	nmod	_	_
+14	und	und	CCONJ	KON	_	15	cc	_	_
+15	1900	1900	NUM	CARD	NumType=Card|Number=Plur	13	conj	_	_
+16	andererseits	andererseits	ADV	ADV	_	15	advmod	_	_
+17	Widersprüche	Widerspruch	NOUN	NN	Gender=Masc|Number=Plur	18	obj	_	_
+18	aufweisen	aufweisen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	2	ccomp	_	_
+19	.	.	PUNCT	$,	PunctType=Comm	2	punct	_	_
+
+# DDC:BREAK.s[40] = 976
+# DDC:BREAK.p[16] = 976
+# text = Da in Uranerzen nur wenig Actinium vorhanden ist , spielt diese Quelle keine Rolle für die Gewinnung .
+1	Da	da	SCONJ	KOUS	_	7	mark	_	_
+2	in	in	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+3	Uranerzen	Uranerz	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	7	obl	_	_
+4	nur	nur	ADV	ADV	_	6	advmod	_	_
+5	wenig	wenig	ADJ	PIDAT	Degree=Pos	6	amod	_	_
+6	Actinium	Actinium	NOUN	NN	_	7	nsubj	_	_
+7	vorhanden	vorhanden	ADJ	ADJD	Degree=Pos|Variant=Short	10	advcl	_	_
+8	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	SpaceAfter=No
+9	,	,	PUNCT	$,	PunctType=Comm	7	punct	_	_
+10	spielt	spielen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+11	diese	diese	DET	PDAT	Case=Nom|Gender=Fem|Number=Sing|PronType=Dem	12	det	_	_
+12	Quelle	Quelle	NOUN	NN	Gender=Fem|Number=Sing	10	nsubj	_	_
+13	keine	keine	DET	PIAT	Case=Acc|Gender=Fem|Number=Sing|PronType=Neg	14	det	_	_
+14	Rolle	Rolle	NOUN	NN	Gender=Fem|Number=Sing	10	obj	_	_
+15	für	für	ADP	APPR	AdpType=Prep|Case=Acc	17	case	_	_
+16	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+17	Gewinnung	Gewinnung	NOUN	NN	Gender=Fem|Number=Sing	14	nmod	_	_
+18	.	.	PUNCT	$.	PunctType=Peri	10	punct	_	_
+
+# DDC:BREAK.s[41] = 994
+# text = Technisch wird das Isotop 227 Ac durch Bestrahlung von 226 Ra mit Neutronen in Kernreaktoren hergestellt .
+1	Technisch	technisch	ADJ	ADJD	Degree=Pos|Variant=Short	16	advmod	_	_
+2	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	aux:pass	_	_
+3	das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	4	det	_	_
+4	Isotop	Isotop	NOUN	NN	_	16	nsubj:pass	_	_
+5	227	227	NUM	CARD	NumType=Card|Number=Plur	4	flat	_	SpaceAfter=No
+6	Ac	Ac	NOUN	NN	_	4	appos	_	_
+7	durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	8	case	_	_
+8	Bestrahlung	Bestrahlung	NOUN	NN	Gender=Fem|Number=Sing	16	obl	_	_
+9	von	von	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+10	226	226	NUM	CARD	NumType=Card|Number=Plur	11	nummod	_	SpaceAfter=No
+11	Ra	Ra	NOUN	NN	_	8	nmod	_	_
+12	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+13	Neutronen	Neutron	NOUN	NN	Gender=Masc|Number=Plur	8	nmod	_	_
+14	in	in	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+15	Kernreaktoren	Kernreaktor	NOUN	NN	Gender=Masc|Number=Plur	16	obl	_	_
+16	hergestellt	herstellen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+17	.	.	PUNCT	$,	PunctType=Comm	16	punct	_	_
+
+# DDC:BREAK.s[42] = 1011
+# DDC:BREAK.p[17] = 1011
+# text = Die Zeitangaben sind Halbwertszeiten .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	2	det	_	_
+2	Zeitangaben	Zeitangabe	NOUN	NN	Gender=Fem|Number=Plur	4	nsubj	_	_
+3	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+4	Halbwertszeiten	Halbwertszeit	NOUN	NN	Gender=Fem|Number=Plur	0	ROOT	_	_
+5	.	.	PUNCT	$,	PunctType=Comm	4	punct	_	_
+
+# DDC:BREAK.s[43] = 1016
+# DDC:BREAK.p[18] = 1016
+# text = Durch den schnellen Zerfall des Actiniums waren stets nur geringe Mengen verfügbar .
+1	Durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	4	case	_	_
+2	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
+3	schnellen	schnell	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	4	amod	_	_
+4	Zerfall	Zerfall	NOUN	NN	Gender=Masc|Number=Sing	12	obl	_	_
+5	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	6	det	_	_
+6	Actiniums	Actiniums	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	4	nmod	_	_
+7	waren	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	12	cop	_	_
+8	stets	stets	ADV	ADV	_	12	advmod	_	_
+9	nur	nur	ADV	ADV	_	11	advmod	_	_
+10	geringe	gering	ADJ	ADJA	Degree=Pos|Number=Plur	11	amod	_	_
+11	Mengen	Menge	NOUN	NN	Gender=Fem|Number=Plur	12	nsubj	_	_
+12	verfügbar	verfügbar	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+13	.	.	PUNCT	$.	PunctType=Peri	12	punct	_	_
+
+# DDC:BREAK.s[44] = 1029
+# text = Die erste künstliche Herstellung von Actinium wurde im Argonne National Laboratory in Chicago durchgeführt .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+2	erste	erst	ADJ	ADJA	Degree=Pos|Gender=Fem|NumType=Ord|Number=Sing	4	amod	_	_
+3	künstliche	künstlich	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	4	amod	_	_
+4	Herstellung	Herstellung	NOUN	NN	Gender=Fem|Number=Sing	14	nsubj:pass	_	_
+5	von	von	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	Actinium	Actinium	NOUN	NN	_	4	nmod	_	_
+7	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	14	aux:pass	_	_
+8	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	9	case	_	_
+9	Argonne	Argonne	PROPN	NE	Number=Sing	14	obl	_	_
+10	National	National	X	FM	Foreign=Yes	9	flat	_	_
+11	Laboratory	Laboratory	X	FM	Foreign=Yes	9	flat	_	_
+12	in	in	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+13	Chicago	Chicago	PROPN	NE	Number=Sing	9	nmod	_	_
+14	durchgeführt	durchführen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	14	punct	_	_
+
+# DDC:BREAK.s[45] = 1044
+# DDC:BREAK.p[19] = 1044
+# text = Das Metall ist silberweiß glänzend und relativ weich .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Metall	Metall	NOUN	NN	Gender=Neut|Number=Sing	5	nsubj	_	_
+3	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
+4	silberweiß	silberweiß	ADJ	ADJD	Degree=Pos|Variant=Short	5	advmod	_	_
+5	glänzend	glänzend	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+6	und	und	CCONJ	KON	_	8	cc	_	_
+7	relativ	relativ	ADJ	ADJD	Degree=Pos|Variant=Short	8	advmod	_	_
+8	weich	weich	ADJ	ADJD	Degree=Pos|Variant=Short	5	conj	_	_
+9	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[46] = 1053
+# text = Aufgrund seiner starken Radioaktivität leuchtet Actinium im Dunkeln in einem hellblauen Licht .
+1	Aufgrund	aufgrund	ADP	APPR	AdpType=Prep|Case=Gen	4	case	_	_
+2	seiner	seine	DET	PPOSAT	Case=Gen|Gender=Fem|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	4	det	_	_
+3	starken	stark	ADJ	ADJA	Degree=Pos|Number=Sing	4	amod	_	_
+4	Radioaktivität	Radioaktivität	NOUN	NN	Gender=Fem|Number=Sing	5	obl	_	_
+5	leuchtet	leuchten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	Actinium	Actinium	NOUN	NN	_	5	nsubj	_	_
+7	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	8	case	_	_
+8	Dunkeln	Dunkeln	NOUN	NN	Gender=Neut|Number=Sing	5	obl	_	_
+9	in	in	ADP	APPR	AdpType=Prep|Case=Dat	12	case	_	_
+10	einem	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	12	det	_	_
+11	hellblauen	hellblau	ADJ	ADJA	Degree=Pos|Number=Sing	12	amod	_	_
+12	Licht	Licht	NOUN	NN	Gender=Neut|Number=Sing	5	obl	_	_
+13	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[47] = 1066
+# DDC:BREAK.p[20] = 1066
+# text = Actinium ist das namensgebende Element der Actinoiden , ähnlich wie Lanthan für die Lanthanoiden .
+1	Actinium	Actinium	NOUN	NE	_	5	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
+3	das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	5	det	_	_
+4	namensgebende	namensgebend	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	5	amod	_	_
+5	Element	Element	NOUN	NN	Gender=Neut|Number=Sing	0	ROOT	_	_
+6	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	7	det	_	_
+7	Actinoiden	Actinoiden	NOUN	NN	_	5	nmod	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+9	ähnlich	ähnlich	ADJ	ADJD	Degree=Pos|Variant=Short	5	advmod	_	_
+10	wie	wie	CCONJ	KOKOM	ConjType=Comp	11	case	_	_
+11	Lanthan	Lanthan	NOUN	NN	Gender=Masc|Number=Sing	9	obl	_	_
+12	für	für	ADP	APPR	AdpType=Prep|Case=Acc	14	case	_	_
+13	die	d	DET	ART	Case=Acc|Definite=Def|Number=Plur|PronType=Art	14	det	_	_
+14	Lanthanoiden	Lanthanoiden	NOUN	NN	Gender=Fem|Number=Plur	11	nmod	_	_
+15	.	.	PUNCT	$,	PunctType=Comm	5	punct	_	_
+
+# DDC:BREAK.s[48] = 1081
+# text = Die Gruppe der Elemente zeigt deutlichere Unterschiede als die Lanthanoide ; daher dauerte es bis 1945 , bis Glenn T. Seaborg die wichtigsten Änderungen zum Periodensystem von Mendelejew vorschlagen konnte : die Einführung der Actinoide .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
+2	Gruppe	Gruppe	NOUN	NN	Gender=Fem|Number=Sing	5	nsubj	_	_
+3	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	4	det	_	_
+4	Elemente	Element	NOUN	NN	Gender=Neut|Number=Plur	2	nmod	_	_
+5	zeigt	zeigen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	deutlichere	deutlich	ADJ	ADJA	Degree=Cmp|Number=Plur	7	amod	_	_
+7	Unterschiede	Unterschied	NOUN	NN	Gender=Masc|Number=Plur	5	obj	_	_
+8	als	als	CCONJ	KOKOM	ConjType=Comp	10	case	_	_
+9	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	10	det	_	_
+10	Lanthanoide	Lanthanoide	NOUN	NN	_	7	obl	_	SpaceAfter=No
+11	;	;	PUNCT	$.	PunctType=Peri	5	punct	_	_
+12	daher	daher	ADV	PROAV	PronType=Dem	13	advmod	_	_
+13	dauerte	dauern	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	parataxis	_	_
+14	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	13	nsubj	_	_
+15	bis	bis	ADP	APPR	AdpType=Prep	16	case	_	_
+16	1945	1945	NUM	CARD	NumType=Card|Number=Plur	13	obl	_	SpaceAfter=No
+17	,	,	PUNCT	$,	PunctType=Comm	29	punct	_	_
+18	bis	bis	SCONJ	KOUS	_	29	mark	_	_
+19	Glenn	Glenn	PROPN	NE	Gender=Masc|Number=Sing	29	nsubj	_	_
+20	T.	T.	PROPN	NE	Number=Sing	19	flat:name	_	_
+21	Seaborg	Seaborg	PROPN	NE	_	19	flat:name	_	_
+22	die	d	DET	ART	Case=Acc|Definite=Def|Number=Plur|PronType=Art	24	det	_	_
+23	wichtigsten	wichtig	ADJ	ADJA	Degree=Sup|Number=Plur	24	amod	_	_
+24	Änderungen	Änderung	NOUN	NN	Gender=Fem|Number=Plur	29	obj	_	_
+25	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	26	case	_	_
+26	Periodensystem	Periodensystem	NOUN	NN	Gender=Neut|Number=Sing	24	nmod	_	_
+27	von	von	ADP	APPR	AdpType=Prep|Case=Dat	28	case	_	_
+28	Mendelejew	Mendelejew	PROPN	NE	_	26	nmod	_	_
+29	vorschlagen	vorschlagen	VERB	VVINF	VerbForm=Inf	13	ccomp	_	_
+30	konnte	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|VerbType=Mod	29	aux	_	SpaceAfter=No
+31	:	:	PUNCT	$.	PunctType=Peri	13	punct	_	_
+32	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	33	det	_	_
+33	Einführung	Einführung	NOUN	NN	Gender=Fem|Number=Sing	13	obj	_	_
+34	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	35	det	_	_
+35	Actinoide	Actinoide	NOUN	NN	_	33	nmod	_	_
+36	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[49] = 1117
+# DDC:BREAK.p[21] = 1117
+# text = Es ist sehr reaktionsfähig und wird von Luft und Wasser angegriffen , überzieht sich aber mit einer Schicht von Actiniumoxid , wodurch es vor weiterer Oxidation geschützt ist .
+1	Es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+3	sehr	sehr	ADV	ADV	Degree=Pos	4	advmod	_	_
+4	reaktionsfähig	reaktionsfähig	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+5	und	und	CCONJ	KON	_	11	cc	_	_
+6	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	11	aux:pass	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	Luft	Luft	NOUN	NN	Gender=Fem|Number=Sing	11	obl	_	_
+9	und	und	CCONJ	KON	_	10	cc	_	_
+10	Wasser	Wasser	NOUN	NN	Gender=Neut|Number=Sing	8	conj	_	_
+11	angegriffen	angreifen	VERB	VVPP	Aspect=Perf|VerbForm=Part	4	conj	_	SpaceAfter=No
+12	,	,	PUNCT	$,	PunctType=Comm	13	punct	_	_
+13	überzieht	überziehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	11	conj	_	_
+14	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	13	expl:pv	_	_
+15	aber	aber	ADV	ADV	_	13	advmod	_	_
+16	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	18	case	_	_
+17	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	18	det	_	_
+18	Schicht	Schicht	NOUN	NN	Gender=Fem|Number=Sing	13	obl	_	_
+19	von	von	ADP	APPR	AdpType=Prep|Case=Dat	20	case	_	_
+20	Actiniumoxid	Actiniumoxid	NOUN	NN	Gender=Neut|Number=Sing	18	nmod	_	SpaceAfter=No
+21	,	,	PUNCT	$,	PunctType=Comm	27	punct	_	_
+22	wodurch	wodurch	ADV	PWAV	PronType=Int	27	advmod	_	_
+23	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	27	nsubj:pass	_	_
+24	vor	vor	ADP	APPR	AdpType=Prep|Case=Dat	26	case	_	_
+25	weiterer	weit	ADJ	ADJA	Degree=Cmp|Gender=Fem|Number=Sing	26	amod	_	_
+26	Oxidation	Oxidation	NOUN	NN	Gender=Fem|Number=Sing	27	obl	_	_
+27	geschützt	schützen	VERB	VVPP	Aspect=Perf|VerbForm=Part	13	acl	_	_
+28	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	27	aux:pass	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[50] = 1146
+# text = Das Ac3+-Ion ist farblos .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Ac3+-Ion	Ac3+-Ion	NOUN	NN	Gender=Neut|Number=Sing	4	nsubj	_	_
+3	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+4	farblos	farbelos	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+5	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[51] = 1151
+# text = Das chemische Verhalten von Actinium ähnelt sehr dem Lanthan .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	3	det	_	_
+2	chemische	chemisch	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	3	amod	_	_
+3	Verhalten	Verhalten	NOUN	NN	Gender=Neut|Number=Sing	6	nsubj	_	_
+4	von	von	ADP	APPR	AdpType=Prep|Case=Dat	5	case	_	_
+5	Actinium	Actinium	NOUN	NN	_	3	nmod	_	_
+6	ähnelt	ähneln	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+7	sehr	sehr	ADV	ADV	Degree=Pos	6	advmod	_	_
+8	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
+9	Lanthan	Lanthan	NOUN	NN	Gender=Masc|Number=Sing	6	obj	_	_
+10	.	.	PUNCT	$,	PunctType=Comm	9	dep	_	_
+
+# DDC:BREAK.s[52] = 1161
+# text = Actinium ist in allen zehn bekannten Verbindungen dreiwertig .
+1	Actinium	Actinium	PROPN	NE	_	8	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	cop	_	_
+3	in	in	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+4	allen	alle	DET	PIDAT	Case=Dat|Number=Plur|PronType=Tot	7	det	_	_
+5	zehn	zehn	NUM	CARD	NumType=Card|Number=Plur	7	nummod	_	_
+6	bekannten	bekannt	ADJ	ADJA	Degree=Pos|Number=Plur	7	amod	_	_
+7	Verbindungen	Verbindung	NOUN	NN	Gender=Fem|Number=Plur	8	obl	_	_
+8	dreiwertig	dreiwertig	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+9	.	.	PUNCT	$,	PunctType=Comm	8	punct	_	_
+
+# DDC:BREAK.s[53] = 1170
+# DDC:BREAK.p[22] = 1170
+# text = Bekannt sind 26 Isotope , wovon nur zwei natürlich vorkommen .
+1	Bekannt	bekannt	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+2	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	1	cop	_	_
+3	26	26	NUM	CARD	NumType=Card|Number=Plur	4	nummod	_	_
+4	Isotope	Isotop	NOUN	NN	_	1	nsubj	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	10	punct	_	_
+6	wovon	wovon	ADV	PWAV	PronType=Int	10	advmod	_	_
+7	nur	nur	ADV	ADV	_	8	advmod	_	_
+8	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	10	nsubj	_	_
+9	natürlich	natürlich	ADJ	ADJD	Degree=Pos|Variant=Short	10	xcomp	_	_
+10	vorkommen	vorkommen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	acl	_	_
+11	.	.	PUNCT	$,	PunctType=Comm	1	punct	_	_
+
+# DDC:BREAK.s[54] = 1181
+# text = Das langlebigste Isotop 227 Ac ( Halbwertszeit 21,8 Jahre ) hat zwei Zerfallskanäle : es ist ein Alpha- und Betastrahler .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	3	det	_	_
+2	langlebigste	langlebig	ADJ	ADJA	Degree=Sup|Gender=Neut|Number=Sing	3	amod	_	_
+3	Isotop	Isotop	NOUN	NN	_	11	nsubj	_	_
+4	227	227	NUM	CARD	NumType=Card|Number=Plur	3	flat	_	SpaceAfter=No
+5	Ac	Ac	NOUN	NN	_	3	appos	_	_
+6	(	(	PUNCT	$(	PunctType=Brck	7	punct	_	SpaceAfter=No
+7	Halbwertszeit	Halbwertszeit	NOUN	NN	Gender=Fem|Number=Sing	5	appos	_	_
+8	21,8	21,8	NUM	CARD	NumType=Card|Number=Plur	9	nummod	_	_
+9	Jahre	Jahr	NOUN	NN	Gender=Neut|Number=Plur	7	appos	_	SpaceAfter=No
+10	)	)	PUNCT	$(	PunctType=Brck	7	punct	_	_
+11	hat	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+12	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	13	nummod	_	_
+13	Zerfallskanäle	Zerfallskanal	NOUN	NN	Gender=Masc|Number=Plur	11	obj	_	SpaceAfter=No
+14	:	:	PUNCT	$.	PunctType=Peri	11	punct	_	_
+15	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	18	nsubj	_	_
+16	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	18	cop	_	_
+17	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	18	det	_	_
+18	Alpha-	alpha-	NOUN	TRUNC	Hyph=Yes	11	parataxis	_	_
+19	und	und	CCONJ	KON	_	20	cc	_	_
+20	Betastrahler	Betastrahler	NOUN	NN	Gender=Masc|Number=Sing	18	conj	_	_
+21	.	.	PUNCT	$.	PunctType=Peri	11	punct	_	_
+
+# DDC:BREAK.s[55] = 1202
+# text = 227 Ac ist ein Zerfallsprodukt des Uranisotops 235U und kommt zu einem kleinen Teil in Uranerzen vor .
+1	227	227	NUM	CARD	NumType=Card|Number=Plur	5	nsubj	_	SpaceAfter=No
+2	Ac	Ac	NOUN	NN	_	5	nsubj	_	_
+3	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	cop	_	_
+4	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	5	det	_	_
+5	Zerfallsprodukt	Zerfallsprodukt	NOUN	NN	Gender=Neut|Number=Sing	0	ROOT	_	_
+6	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	7	det	_	_
+7	Uranisotops	Uranisotop	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	5	nmod	_	_
+8	235U	235u	NOUN	NN	_	7	appos	_	_
+9	und	und	CCONJ	KON	_	10	cc	_	_
+10	kommt	kommen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	5	conj	_	_
+11	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+12	einem	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	14	det	_	_
+13	kleinen	klein	ADJ	ADJA	Degree=Pos|Number=Sing	14	amod	_	_
+14	Teil	Teil	NOUN	NN	Number=Sing	10	obl	_	_
+15	in	in	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+16	Uranerzen	Uranerz	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	10	obl	_	_
+17	vor	vor	ADP	PTKVZ	PartType=Vbp	10	compound:prt	_	_
+18	.	.	PUNCT	$,	PunctType=Comm	5	punct	_	_
+
+# DDC:BREAK.s[56] = 1220
+# text = Daraus lassen sich wägbare Mengen 227Ac gewinnen , die somit ein verhältnismäßig einfaches Studium dieses Elementes ermöglichen .
+1	Daraus	daraus	ADV	PROAV	PronType=Dem	2	advmod	_	_
+2	lassen	lassen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+3	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	2	obj	_	_
+4	wägbare	wägbar	ADJ	ADJA	_	5	amod	_	_
+5	Mengen	Menge	NOUN	NN	Gender=Fem|Number=Plur	2	nsubj	_	_
+6	227Ac	227ac	NOUN	NN	_	5	appos	_	_
+7	gewinnen	gewinnen	VERB	VVINF	VerbForm=Inf	2	xcomp	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	17	punct	_	_
+9	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	17	nsubj	_	_
+10	somit	somit	ADV	ADV	_	17	advmod	_	_
+11	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	14	det	_	_
+12	verhältnismäßig	verhältnismäßig	ADJ	ADJD	Degree=Pos|Variant=Short	13	advmod	_	_
+13	einfaches	einfach	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	14	amod	_	_
+14	Studium	Studium	NOUN	NN	Gender=Neut|Number=Sing	17	obj	_	_
+15	dieses	diese	DET	PDAT	Case=Gen|Gender=Neut|Number=Sing|PronType=Dem	16	det	_	_
+16	Elementes	Element	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	14	nmod	_	_
+17	ermöglichen	ermöglichen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	5	acl	_	_
+18	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[57] = 1238
+# text = Da sich unter den radioaktiven Zerfallsprodukten einige Gammastrahler befinden , sind aber aufwändige Strahlenschutzvorkehrungen nötig .
+1	Da	da	SCONJ	KOUS	_	9	mark	_	_
+2	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	9	expl:pv	_	_
+3	unter	unter	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+4	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	6	det	_	_
+5	radioaktiven	radioaktiv	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	6	amod	_	_
+6	Zerfallsprodukten	Zerfallsprodukt	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	9	obl	_	_
+7	einige	einige	DET	PIAT	Case=Nom|Number=Plur|PronType=Ind	8	det	_	_
+8	Gammastrahler	Gammastrahler	NOUN	NN	Gender=Masc|Number=Plur	9	nsubj	_	_
+9	befinden	befinden	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	ccomp	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+11	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_	_
+12	aber	aber	ADV	ADV	_	15	advmod	_	_
+13	aufwändige	aufwändig	ADJ	ADJA	Degree=Pos|Number=Plur	14	amod	_	_
+14	Strahlenschutzvorkehrungen	Strahlenschutzvorkehrung	NOUN	NN	Gender=Fem|Number=Plur	15	nsubj	_	_
+15	nötig	nötig	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	15	punct	_	_
+
+# DDC:BREAK.s[58] = 1254
+# DDC:BREAK.p[23] = 1254
+# text = Actinium wird zur Erzeugung von Neutronen eingesetzt , die bei Aktivierungsanalysen eine Rolle spielen .
+1	Actinium	Actinium	NOUN	NE	_	7	nsubj:pass	_	_
+2	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	aux:pass	_	_
+3	zur	zur	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	case	_	_
+4	Erzeugung	Erzeugung	NOUN	NN	Gender=Fem|Number=Sing	7	obl	_	_
+5	von	von	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	Neutronen	Neutron	NOUN	NN	Gender=Fem|Number=Plur	4	nmod	_	_
+7	eingesetzt	einsetzen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+9	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	14	nsubj	_	_
+10	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+11	Aktivierungsanalysen	Aktivierungsanalyse	NOUN	NN	Gender=Fem|Number=Plur	14	obl	_	_
+12	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	13	det	_	_
+13	Rolle	Rolle	NOUN	NN	Gender=Fem|Number=Sing	14	obj	_	_
+14	spielen	spielen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	6	acl	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	7	punct	_	_
+
+# DDC:BREAK.s[59] = 1269
+# text = Außerdem wird es für die thermoionische Energieumwandlung genutzt .
+1	Außerdem	außerdem	ADV	PROAV	_	8	advmod	_	_
+2	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	aux:pass	_	_
+3	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	8	nsubj:pass	_	_
+4	für	für	ADP	APPR	AdpType=Prep|Case=Acc	7	case	_	_
+5	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
+6	thermoionische	thermoionisch	ADJ	ADJA	_	7	amod	_	_
+7	Energieumwandlung	Energieumwandlung	NOUN	NN	Gender=Fem|Number=Sing	8	obl	_	_
+8	genutzt	nutzen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+9	.	.	PUNCT	$,	PunctType=Comm	3	conj	_	_
+
+# DDC:BREAK.s[60] = 1278
+# DDC:BREAK.p[24] = 1278
+# text = Beim dualen Zerfall des 227Ac geht der größte Teil unter Emission von Beta-Teilchen in das Thoriumisotop 227 Th , aber ca. 1 % zerfällt durch Alpha-Emission zu Francium 223Fr .
+1	Beim	beim	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	3	case	_	_
+2	dualen	dual	ADJ	ADJA	Degree=Pos|Number=Sing	3	amod	_	_
+3	Zerfall	Zerfall	NOUN	NN	Gender=Masc|Number=Sing	6	obl	_	_
+4	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	5	det	_	_
+5	227Ac	227ac	NOUN	NN	_	3	nmod	_	_
+6	geht	gehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+7	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
+8	größte	groß	ADJ	ADJA	Case=Nom|Degree=Sup|Gender=Masc|Number=Sing	9	amod	_	_
+9	Teil	Teil	NOUN	NN	Number=Sing	6	nsubj	_	_
+10	unter	unter	ADP	APPR	AdpType=Prep|Case=Acc	11	case	_	_
+11	Emission	Emission	NOUN	NN	Gender=Fem|Number=Sing	6	obl	_	_
+12	von	von	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+13	Beta-Teilchen	Beta-Teilchen	NOUN	NN	Gender=Neut|Number=Sing	11	nmod	_	_
+14	in	in	ADP	APPR	AdpType=Prep|Case=Acc	16	case	_	_
+15	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	16	det	_	_
+16	Thoriumisotop	Thoriumisotop	NOUN	NN	_	6	obl	_	_
+17	227	227	NUM	CARD	NumType=Card|Number=Plur	16	flat	_	SpaceAfter=No
+18	Th	Th	NOUN	NN	_	16	appos	_	SpaceAfter=No
+19	,	,	PUNCT	$,	PunctType=Comm	24	punct	_	_
+20	aber	aber	CCONJ	KON	_	24	cc	_	_
+21	ca.	ca.	ADV	ADV	_	22	advmod	_	_
+22	1	1	NUM	CARD	NumType=Card|Number=Plur	23	nummod	_	_
+23	%	%	NUM	CARD	NumType=Card|Number=Plur	24	nsubj	_	_
+24	zerfällt	zerfallen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	6	conj	_	_
+25	durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	26	case	_	_
+26	Alpha-Emission	Alpha-Emission	NOUN	NN	Gender=Fem|Number=Sing	24	obl	_	_
+27	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	28	case	_	_
+28	Francium	Francium	NOUN	NN	_	24	obl	_	_
+29	223Fr	223fr	NOUN	NN	_	28	appos	_	_
+30	.	.	PUNCT	$.	PunctType=Peri	6	punct	_	_
+
+# DDC:BREAK.s[61] = 1308
+# text = Eine Lösung von 227 Ac ist daher als Quelle für das kurzlebige 223 Fr verwendbar .
+1	Eine	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	2	det	_	_
+2	Lösung	Lösung	NOUN	NN	Gender=Fem|Number=Sing	15	nsubj	_	_
+3	von	von	ADP	APPR	AdpType=Prep|Case=Dat	5	case	_	_
+4	227	227	NUM	CARD	NumType=Card|Number=Plur	5	nummod	_	SpaceAfter=No
+5	Ac	Ac	NOUN	NN	_	2	nmod	_	_
+6	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	15	cop	_	_
+7	daher	daher	ADV	PROAV	PronType=Dem	15	advmod	_	_
+8	als	als	CCONJ	KOKOM	ConjType=Comp	9	case	_	_
+9	Quelle	Quelle	NOUN	NN	Gender=Fem|Number=Sing	15	obl	_	_
+10	für	für	ADP	APPR	AdpType=Prep|Case=Acc	14	case	_	_
+11	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	14	det	_	_
+12	kurzlebige	kurzlebig	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	14	amod	_	_
+13	223	223	NUM	CARD	NumType=Card|Number=Plur	14	nummod	_	SpaceAfter=No
+14	Fr	Fr	NOUN	NN	_	9	nmod	_	_
+15	verwendbar	verwendbar	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	15	punct	_	_
+
+# DDC:BREAK.s[62] = 1324
+# text = Letzteres kann dann regelmäßig abgetrennt und untersucht werden .
+1	Letzteres	letztere	ADJ	PIS	Case=Nom|Gender=Neut|Number=Sing	5	nsubj:pass	_	_
+2	kann	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	5	aux	_	_
+3	dann	dann	ADV	ADV	_	5	advmod	_	_
+4	regelmäßig	regelmäßig	ADJ	ADJD	Degree=Pos|Variant=Short	5	advmod	_	_
+5	abgetrennt	abtrennen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+6	und	und	CCONJ	KON	_	7	cc	_	_
+7	untersucht	untersuchen	VERB	VVPP	Aspect=Perf|VerbForm=Part	5	conj	_	_
+8	werden	werden	AUX	VAINF	VerbForm=Inf	5	aux:pass	_	_
+9	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[63] = 1333
+# DDC:BREAK.p[25] = 1333
+# text = Einstufungen nach der CLP-Verordnung liegen nicht vor , weil diese nur die chemische Gefährlichkeit umfassen und eine völlig untergeordnete Rolle gegenüber den auf der Radioaktivität beruhenden Gefahren spielen .
+1	Einstufungen	Einstufung	NOUN	NN	Gender=Fem|Number=Plur	5	nsubj	_	_
+2	nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+3	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+4	CLP-Verordnung	Clp-Verordnung	NOUN	NN	Gender=Fem|Number=Sing	1	nmod	_	_
+5	liegen	liegen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+6	nicht	nicht	PART	PTKNEG	Polarity=Neg	5	advmod	_	_
+7	vor	vor	ADP	PTKVZ	PartType=Vbp	5	compound:prt	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	15	punct	_	_
+9	weil	weil	SCONJ	KOUS	_	15	mark	_	_
+10	diese	diese	DET	PDS	Case=Nom|Number=Plur|PronType=Dem	15	nsubj	_	_
+11	nur	nur	ADV	ADV	_	14	advmod	_	_
+12	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	14	det	_	_
+13	chemische	chemisch	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	14	amod	_	_
+14	Gefährlichkeit	Gefährlichkeit	NOUN	NN	Gender=Fem|Number=Sing	15	obj	_	_
+15	umfassen	umfassen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	5	ccomp	_	_
+16	und	und	CCONJ	KON	_	28	cc	_	_
+17	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	20	det	_	_
+18	völlig	völlig	ADJ	ADJD	Degree=Pos|Variant=Short	19	advmod	_	_
+19	untergeordnete	untergeordnet	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	20	amod	_	_
+20	Rolle	Rolle	NOUN	NN	Gender=Fem|Number=Sing	28	obj	_	_
+21	gegenüber	gegenüber	ADP	APPR	AdpType=Prep|Case=Dat	27	case	_	_
+22	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	27	det	_	_
+23	auf	auf	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+24	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	25	det	_	_
+25	Radioaktivität	Radioaktivität	NOUN	NN	Gender=Fem|Number=Sing	26	obj	_	_
+26	beruhenden	beruhend	ADJ	ADJA	Degree=Pos|Number=Plur	27	amod	_	_
+27	Gefahren	Gefahr	NOUN	NN	Gender=Fem|Number=Plur	20	nmod	_	_
+28	spielen	spielen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	conj	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[64] = 1362
+# text = Auch Letzteres gilt nur , wenn es sich um eine dafür relevante Stoffmenge handelt .
+1	Auch	auch	ADV	ADV	_	2	advmod	_	_
+2	Letzteres	letztere	NOUN	NN	_	3	nsubj	_	_
+3	gilt	gelten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+4	nur	nur	ADV	ADV	_	3	advmod	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+6	wenn	wenn	SCONJ	KOUS	_	14	mark	_	_
+7	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	14	nsubj	_	_
+8	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	14	obj	_	_
+9	um	um	ADP	APPR	AdpType=Prep|Case=Acc	13	case	_	_
+10	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	13	det	_	_
+11	dafür	dafür	ADV	PROAV	PronType=Dem	12	advmod	_	_
+12	relevante	relevant	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	13	amod	_	_
+13	Stoffmenge	Stoffmenge	NOUN	NN	Gender=Fem|Number=Sing	14	obl	_	_
+14	handelt	handeln	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	ccomp	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[65] = 1377
+# DDC:BREAK.p[26] = 1377
+# text = Nur eine geringe Anzahl von Actiniumverbindungen ist bekannt .
+1	Nur	nur	ADV	ADV	_	4	advmod	_	_
+2	eine	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	4	det	_	_
+3	geringe	gering	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	4	amod	_	_
+4	Anzahl	Anzahl	NOUN	NN	Gender=Fem|Number=Sing	8	nsubj	_	_
+5	von	von	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	Actiniumverbindungen	Actiniumverbindungen	NOUN	NN	Gender=Fem|Number=Plur	4	nmod	_	_
+7	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	cop	_	_
+8	bekannt	bekannt	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+9	.	.	PUNCT	$,	PunctType=Comm	8	punct	_	_
+
+# DDC:BREAK.s[66] = 1386
+# text = Mit Ausnahme von AcPO4 sind sie alle den entsprechenden Lanthanverbindungen ähnlich und enthalten Actinium in der Oxidationsstufe +3 .
+1	Mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	2	case	_	_
+2	Ausnahme	Ausnahme	NOUN	NN	Gender=Fem|Number=Sing	11	obl	_	_
+3	von	von	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+4	AcPO4	Acpo4	PROPN	NE	_	2	nmod	_	_
+5	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	11	cop	_	_
+6	sie	sie	PRON	PPER	Case=Nom|Number=Plur|Person=3|PronType=Prs	11	nsubj	_	_
+7	alle	alle	DET	PIDAT	Case=Nom|Number=Plur|PronType=Tot	11	nsubj	_	_
+8	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	10	det	_	_
+9	entsprechenden	entsprechend	ADJ	ADJA	Degree=Pos|Number=Plur	10	amod	_	_
+10	Lanthanverbindungen	Lanthanverbindungen	NOUN	NN	Gender=Fem|Number=Plur	11	obj	_	_
+11	ähnlich	ähnlich	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	enthalten	enthalten	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	11	conj	_	_
+14	Actinium	Actinium	NOUN	NN	_	13	obj	_	_
+15	in	in	ADP	APPR	AdpType=Prep|Case=Dat	17	case	_	_
+16	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+17	Oxidationsstufe	Oxidationsstufe	NOUN	NN	Gender=Fem|Number=Sing	14	nmod	_	_
+18	+3	+3	X	FM	Foreign=Yes	13	obj	_	_
+19	.	.	PUNCT	$.	PunctType=Peri	11	punct	_	_
+
+# DDC:BREAK.s[67] = 1405
+# text = Insbesondere unterscheiden sich die Gitterkonstanten der jeweiligen Lanthan- und Actinium-Verbindungen nur in wenigen Prozent .
+1	Insbesondere	insbesondere	ADV	ADV	_	2	advmod	_	_
+2	unterscheiden	unterscheiden	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+3	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	2	expl:pv	_	_
+4	die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	5	det	_	_
+5	Gitterkonstanten	Gitterkonstante	NOUN	NN	Gender=Masc|Number=Plur	2	nsubj	_	_
+6	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	8	det	_	_
+7	jeweiligen	jeweilig	ADJ	ADJA	Degree=Pos|Number=Plur	8	amod	_	_
+8	Lanthan-	lanthan-	NOUN	TRUNC	Hyph=Yes	5	nmod	_	_
+9	und	und	CCONJ	KON	_	10	cc	_	_
+10	Actinium-Verbindungen	Actinium-Verbindungen	NOUN	NN	Gender=Fem|Number=Plur	8	conj	_	_
+11	nur	nur	ADV	ADV	_	14	advmod	_	_
+12	in	in	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+13	wenigen	wenige	ADJ	PIDAT	Case=Dat|Degree=Pos|Number=Plur	14	amod	_	_
+14	Prozent	Prozent	NOUN	NN	Gender=Neut|Number=Plur	2	obl	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[68] = 1420
+# DDC:BREAK.p[27] = 1420
+# text = Actinium( III )-oxid ( Ac2 O3 ) kann durch Erhitzen des Hydroxids bei 500 °C oder des Oxalats bei 1100 °C im Vakuum erhalten werden .
+1	Actinium(	actinium(	PROPN	NE	_	24	nsubj:pass	_	SpaceAfter=No
+2	III	iii	PROPN	NE	_	1	appos	_	SpaceAfter=No
+3	)-oxid	)-oxid	PROPN	NE	_	1	appos	_	_
+4	(	(	PUNCT	$(	PunctType=Brck	5	punct	_	SpaceAfter=No
+5	Ac2	ac2	X	FM	Foreign=Yes	3	appos	_	SpaceAfter=No
+6	O3	o3	X	FM	Foreign=Yes	5	appos	_	SpaceAfter=No
+7	)	)	PUNCT	$(	PunctType=Brck	5	punct	_	_
+8	kann	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	24	aux	_	_
+9	durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	10	case	_	_
+10	Erhitzen	Erhitzen	NOUN	NN	Gender=Neut|Number=Sing	24	obl	_	_
+11	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	12	det	_	_
+12	Hydroxids	Hydroxid	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	10	nmod	_	_
+13	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+14	500	500	NUM	CARD	NumType=Card|Number=Plur	15	nummod	_	_
+15	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	10	nmod	_	_
+16	oder	oder	CCONJ	KON	_	18	cc	_	_
+17	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	18	det	_	_
+18	Oxalats	Oxalat	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	21	nmod	_	_
+19	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+20	1100	1100	NUM	CARD	NumType=Card|Number=Plur	21	nummod	_	_
+21	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	10	nmod	_	_
+22	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	23	case	_	_
+23	Vakuum	Vakuum	NOUN	NN	Gender=Neut|Number=Sing	10	nmod	_	_
+24	erhalten	erhalten	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+25	werden	werden	AUX	VAINF	VerbForm=Inf	24	aux:pass	_	_
+26	.	.	PUNCT	$.	PunctType=Peri	24	punct	_	_
+
+# DDC:BREAK.s[69] = 1446
+# text = Das Kristallgitter ist isotyp mit den Oxiden der meisten dreiwertigen Seltenerdmetalle .
+1	Das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	2	det	_	_
+2	Kristallgitter	Kristallgitter	NOUN	NN	Gender=Neut|Number=Sing	4	nsubj	_	_
+3	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+4	isotyp	Isotyp	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+5	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+6	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	7	det	_	_
+7	Oxiden	Oxid	NOUN	NN	Gender=Masc|Number=Plur	4	obl	_	_
+8	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	11	det	_	_
+9	meisten	meiste	DET	PIDAT	Degree=Sup|Number=Plur|PronType=Ind	11	det	_	_
+10	dreiwertigen	dreiwertig	ADJ	ADJA	_	11	amod	_	_
+11	Seltenerdmetalle	Seltenerdemetall	NOUN	NN	Gender=Neut|Number=Plur	7	nmod	_	_
+12	.	.	PUNCT	$,	PunctType=Comm	4	punct	_	_
+
+# DDC:BREAK.s[70] = 1458
+# DDC:BREAK.p[28] = 1458
+# text = Actinium( III )-fluorid ( AcF3 ) kann entweder in Lösung oder durch Feststoffreaktion dargestellt werden .
+1	Actinium(	actinium(	NOUN	NN	_	14	nsubj:pass	_	SpaceAfter=No
+2	III	iii	PROPN	NE	_	1	appos	_	SpaceAfter=No
+3	)-fluorid	)-fluorid	PROPN	NE	_	1	appos	_	_
+4	(	(	PUNCT	$(	PunctType=Brck	5	punct	_	SpaceAfter=No
+5	AcF3	acf3	X	FM	Foreign=Yes	3	appos	_	SpaceAfter=No
+6	)	)	PUNCT	$(	PunctType=Brck	5	punct	_	_
+7	kann	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	14	aux	_	_
+8	entweder	entweder	CCONJ	KON	_	14	cc	_	_
+9	in	in	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+10	Lösung	Lösung	NOUN	NN	Gender=Fem|Number=Sing	14	obl	_	_
+11	oder	oder	CCONJ	KON	_	13	cc	_	_
+12	durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	13	case	_	_
+13	Feststoffreaktion	Feststoffreaktion	NOUN	NN	Gender=Fem|Number=Sing	10	conj	_	_
+14	dargestellt	darstellen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+15	werden	werden	AUX	VAINF	VerbForm=Inf	14	aux:pass	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	14	punct	_	_
+
+# DDC:BREAK.s[71] = 1474
+# text = Im ersten Fall gibt man bei Raumtemperatur Flusssäure zu einer Ac3+-Lösung und fällt das Produkt aus . im anderen Fall wird Actinium-Metall mit Fluorwasserstoff bei 700 °C in einer Platinapparatur behandelt .
+1	Im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	3	case	_	_
+2	ersten	erst	ADJ	ADJA	Degree=Pos|NumType=Ord|Number=Sing	3	amod	_	_
+3	Fall	Fall	NOUN	NN	Gender=Masc|Number=Sing	4	obl	_	_
+4	gibt	geben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+5	man	man	PRON	PIS	Case=Nom|Number=Sing|PronType=Ind	4	nsubj	_	_
+6	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+7	Raumtemperatur	Raumtemperatur	NOUN	NN	Gender=Fem|Number=Sing	4	obl	_	_
+8	Flusssäure	Flußsäure	PROPN	NN	_	4	obj	_	_
+9	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+10	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	11	det	_	_
+11	Ac3+-Lösung	Ac3+-Lösung	NOUN	NN	Gender=Fem|Number=Sing	8	nmod	_	_
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	fällt	fällen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	4	conj	_	_
+14	das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	15	det	_	_
+15	Produkt	Produkt	NOUN	NN	Gender=Neut|Number=Sing	13	nsubj	_	_
+16	aus	aus	ADP	PTKVZ	PartType=Vbp	13	compound:prt	_	SpaceAfter=No
+17	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+18	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	20	case	_	_
+19	anderen	ander	DET	ADJA	Number=Sing|PronType=Ind	20	det	_	_
+20	Fall	Fall	NOUN	NN	Gender=Masc|Number=Sing	31	obl	_	_
+21	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	31	aux:pass	_	_
+22	Actinium-Metall	Actinium-Metall	NOUN	NN	Gender=Neut|Number=Sing	31	nsubj:pass	_	_
+23	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	24	case	_	_
+24	Fluorwasserstoff	Fluorwasserstoff	NOUN	NN	Gender=Masc|Number=Sing	31	obl	_	_
+25	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	27	case	_	_
+26	700	700	NUM	CARD	NumType=Card|Number=Plur	27	nummod	_	_
+27	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	31	obl	_	_
+28	in	in	ADP	APPR	AdpType=Prep|Case=Dat	30	case	_	_
+29	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	30	det	_	_
+30	Platinapparatur	Platinapparatur	NOUN	NN	Gender=Fem|Number=Sing	31	obl	_	_
+31	behandelt	behandeln	VERB	VVPP	Aspect=Perf|VerbForm=Part	4	advcl	_	_
+32	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[72] = 1506
+# DDC:BREAK.p[29] = 1506
+# text = Actinium( III )-chlorid ( AcCl3 ) wird durch Umsetzung von Actiniumhydroxid oder -oxalat mit Tetrachlormethan bei Temperaturen oberhalb von 960 °C erhalten .
+1	Actinium(	actinium(	PROPN	NE	_	22	nsubj:pass	_	SpaceAfter=No
+2	III	iii	PROPN	NE	_	1	appos	_	SpaceAfter=No
+3	)-chlorid	)-chlorid	PROPN	NE	_	1	appos	_	_
+4	(	(	PUNCT	$(	PunctType=Brck	5	punct	_	SpaceAfter=No
+5	AcCl3	accl3	PROPN	FM	_	3	appos	_	SpaceAfter=No
+6	)	)	PUNCT	$(	PunctType=Brck	5	punct	_	_
+7	wird	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	22	aux:pass	_	_
+8	durch	durch	ADP	APPR	AdpType=Prep|Case=Acc	9	case	_	_
+9	Umsetzung	Umsetzung	NOUN	NN	Gender=Fem|Number=Sing	22	obl	_	_
+10	von	von	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+11	Actiniumhydroxid	Actiniumhydroxid	NOUN	NE	Gender=Neut|Number=Sing	9	nmod	_	_
+12	oder	oder	CCONJ	KON	_	13	cc	_	_
+13	-oxalat	-oxalat	NOUN	TRUNC	Hyph=Yes	11	conj	_	_
+14	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+15	Tetrachlormethan	Tetrachlormethan	PROPN	NE	_	9	nmod	_	_
+16	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	17	case	_	_
+17	Temperaturen	Temperatur	NOUN	NN	Gender=Fem|Number=Plur	22	obl	_	_
+18	oberhalb	oberhalb	ADP	APPR	AdpType=Prep|Case=Gen	21	case	_	_
+19	von	von	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+20	960	960	NUM	CARD	NumType=Card|Number=Plur	21	nummod	_	_
+21	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	17	nmod	_	_
+22	erhalten	erhalten	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+23	.	.	PUNCT	$.	PunctType=Peri	22	punct	_	_
+
+# DDC:BREAK.s[73] = 1529
+# DDC:BREAK.p[30] = 1529
+# text = Die Reaktion von Aluminiumbromid und Actinium( III )-oxid führt zum Actinium( III )-bromid ( AcBr3 ) und Behandlung mit feuchtem Ammoniak bei 500 °C führt zum Oxibromid AcOBr .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	2	det	_	_
+2	Reaktion	Reaktion	NOUN	NN	Gender=Fem|Number=Sing	9	nsubj	_	_
+3	von	von	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+4	Aluminiumbromid	Aluminiumbromid	PROPN	NE	_	2	nmod	_	_
+5	und	und	CCONJ	KON	_	6	cc	_	_
+6	Actinium(	Actinium(	PROPN	NN	_	4	conj	_	SpaceAfter=No
+7	III	iii	PROPN	NE	_	4	conj	_	SpaceAfter=No
+8	)-oxid	)-Oxid	NOUN	NN	Gender=Neut|Number=Sing	2	nmod	_	_
+9	führt	führen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+10	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	11	case	_	_
+11	Actinium(	Actinium(	NOUN	NN	_	9	obj	_	SpaceAfter=No
+12	III	iii	NUM	CARD	NumType=Card|Number=Plur	11	appos	_	SpaceAfter=No
+13	)-bromid	)-bromid	X	NE	Foreign=Yes	11	appos	_	_
+14	(	(	PUNCT	$(	PunctType=Brck	15	punct	_	SpaceAfter=No
+15	AcBr3	acbr3	PROPN	NE	_	13	appos	_	SpaceAfter=No
+16	)	)	PUNCT	$(	PunctType=Brck	15	punct	_	_
+17	und	und	CCONJ	KON	_	18	cc	_	_
+18	Behandlung	Behandlung	NOUN	NN	Gender=Fem|Number=Sing	25	nsubj	_	_
+19	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+20	feuchtem	feucht	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Sing	21	amod	_	_
+21	Ammoniak	Ammoniak	NOUN	NN	Gender=Neut|Number=Sing	18	nmod	_	_
+22	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	24	case	_	_
+23	500	500	NUM	CARD	NumType=Card|Number=Plur	24	nummod	_	_
+24	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	18	nmod	_	_
+25	führt	führen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	9	conj	_	_
+26	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	27	case	_	_
+27	Oxibromid	Oxibromid	NOUN	NN	Gender=Neut|Number=Sing	25	obj	_	_
+28	AcOBr	Acobr	PROPN	NE	_	27	flat:name	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	9	punct	_	_
+
+# DDC:BREAK.s[74] = 1558
+# DDC:BREAK.p[31] = 1558
+# text = Gibt man Natriumdihydrogenphosphat ( NaH2 PO4 ) zu einer Lösung von Actinium in Salzsäure , erhält man weiß gefärbtes Actiniumphosphat ( AcPO4 · 0,5 H2O ) ; ein Erhitzen von Actinium( III )-oxalat mit Schwefelwasserstoff bei 1400 °C für ein paar Minuten führt zu schwarzem Actinium( III )-sulfid ( Ac 2S3 ) .
+1	Gibt	geben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	xcomp	_	_
+2	man	man	PRON	PIS	Case=Nom|Number=Sing|PronType=Ind	1	nsubj	_	_
+3	Natriumdihydrogenphosphat	Natriumdihydrogenphosphat	PROPN	NE	_	1	obj	_	_
+4	(	(	PUNCT	$(	PunctType=Brck	5	punct	_	SpaceAfter=No
+5	NaH2	Nah2	X	FM	Foreign=Yes	3	appos	_	SpaceAfter=No
+6	PO4	Po4	X	FM	Foreign=Yes	5	appos	_	SpaceAfter=No
+7	)	)	PUNCT	$(	PunctType=Brck	5	punct	_	_
+8	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+9	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	10	det	_	_
+10	Lösung	Lösung	NOUN	NN	Gender=Fem|Number=Sing	1	obl	_	_
+11	von	von	ADP	APPR	AdpType=Prep|Case=Dat	12	case	_	_
+12	Actinium	Actinium	NOUN	NN	_	10	nmod	_	_
+13	in	in	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+14	Salzsäure	Salzsäure	NOUN	NN	Gender=Fem|Number=Sing	10	nmod	_	SpaceAfter=No
+15	,	,	PUNCT	$,	PunctType=Comm	1	punct	_	_
+16	erhält	erhalten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+17	man	man	PRON	PIS	Case=Nom|Number=Sing|PronType=Ind	16	nsubj	_	_
+18	weiß	wissen	ADJ	ADJD	Degree=Pos|Variant=Short	19	advmod	_	_
+19	gefärbtes	gefärbt	ADJ	ADJA	Degree=Pos|Gender=Neut|Number=Sing	20	amod	_	_
+20	Actiniumphosphat	Actiniumphosphat	NOUN	NN	_	16	obj	_	_
+21	(	(	PUNCT	$(	PunctType=Brck	22	punct	_	SpaceAfter=No
+22	AcPO4	acpo4	PROPN	NE	_	20	appos	_	_
+23	·	·	X	FM	Foreign=Yes	22	appos	_	_
+24	0,5	0,5	NUM	CARD	NumType=Card|Number=Plur	25	nummod	_	_
+25	H2O	h2o	NOUN	NN	_	22	appos	_	SpaceAfter=No
+26	)	)	PUNCT	$(	PunctType=Brck	22	punct	_	SpaceAfter=No
+27	;	;	PUNCT	$.	PunctType=Peri	16	punct	_	_
+28	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	29	det	_	_
+29	Erhitzen	Erhitzen	NOUN	NN	Gender=Neut|Number=Sing	43	nsubj	_	_
+30	von	von	ADP	APPR	AdpType=Prep|Case=Dat	31	case	_	_
+31	Actinium(	Actinium(	NOUN	NN	_	29	nmod	_	SpaceAfter=No
+32	III	iii	PROPN	NE	_	29	nmod	_	SpaceAfter=No
+33	)-oxalat	)-Oxalat	PROPN	NE	_	29	nmod	_	_
+34	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	35	case	_	_
+35	Schwefelwasserstoff	Schwefelwasserstoff	NOUN	NN	Gender=Masc|Number=Sing	29	nmod	_	_
+36	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	38	case	_	_
+37	1400	1400	NUM	CARD	NumType=Card|Number=Plur	38	nummod	_	_
+38	°C	°c	NOUN	NN	Gender=Neut|Number=Plur	29	nmod	_	_
+39	für	für	ADP	APPR	AdpType=Prep|Case=Acc	42	case	_	_
+40	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	41	det	_	_
+41	paar	paar	ADJ	PIDAT	Degree=Pos	42	amod	_	_
+42	Minuten	Minute	NOUN	NN	Gender=Fem|Number=Plur	29	nmod	_	_
+43	führt	führen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	parataxis	_	_
+44	zu	zu	ADP	APPR	AdpType=Prep|Case=Dat	46	case	_	_
+45	schwarzem	schwarz	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Sing	46	amod	_	_
+46	Actinium(	Actinium(	NOUN	NN	_	43	obj	_	SpaceAfter=No
+47	III	iii	PROPN	NE	_	43	conj	_	SpaceAfter=No
+48	)-sulfid	)-sulfid	PROPN	NE	_	43	obj	_	_
+49	(	(	PUNCT	$(	PunctType=Brck	50	punct	_	SpaceAfter=No
+50	Ac	ac	PROPN	NE	_	48	appos	_	SpaceAfter=No
+51	2S3	2s3	X	FM	Foreign=Yes	50	flat	_	SpaceAfter=No
+52	)	)	PUNCT	$(	PunctType=Brck	50	punct	_	_
+53	.	.	PUNCT	$.	PunctType=Peri	16	punct	_	_
+
+# DDC:tokid.begin = 1611
+# DDC:tokid.end = 3280
+# DDC:meta.n_ = 2
+# DDC:meta.file_ = wikipedia01/../../ddc_xml/data/0000/00000005.ddc.xml
+# DDC:meta.date_ = 2023-06-10
+# DDC:meta.page_ = -1
+# DDC:meta.access = P
+# DDC:meta.avail = -
+# DDC:meta.basename = 0000/00000005
+# DDC:meta.bibl = Ang Lee. In: Wikipedia: Die freie Enzyklopädie. 10.06.2023.
+# DDC:meta.biblSig = Ang Lee. Wikipedia-Artikel. 2023.
+# DDC:meta.collection = wikipedia
+# DDC:meta.textClass = Wissenschaft:Ang Lee:Drehbuchautor:Filmregisseur:Oscarpreisträger:Golden-Globe-Preisträger:Person als Namensgeber für einen Asteroiden:Mitglied der American Academy of Arts and Sciences:Taiwaner:Geboren 1954:Mann
+# DDC:meta.timestamp = 2023-11-06T15:51:08Z
+# DDC:meta.title = Ang Lee
+# DDC:meta.url = https://de.wikipedia.org/w/index.php?oldid=234473200
+# DDC:BREAK.s[75] = 1611
+# DDC:BREAK.c[1] = 1611
+# DDC:BREAK.p[32] = 1611
+# DDC:BREAK.file[1] = 1611
+# DDC:BREAK.textarea[1] = 1611
+# text = Ang Lee (李安 , Lǐ Ān , [ lʲǐːǣn ] ; * 23. Oktober 1954 in Chaozhou , Landkreis Pingtung , Taiwan ) ist ein taiwanischer Filmregisseur , Drehbuchautor und Produzent .
+1	Ang	Ang	PROPN	NE	_	0	ROOT	_	_
+2	Lee	Lee	PROPN	NE	Number=Sing	1	flat:name	_	_
+3	(李安	(李安	PUNCT	$(	PunctType=Brck	6	punct	_	SpaceAfter=No
+4	,	,	PUNCT	$,	PunctType=Comm	6	punct	_	_
+5	Lǐ	lǐ	X	FM	Foreign=Yes	6	punct	_	_
+6	Ān	ān	X	FM	Foreign=Yes	1	appos	_	SpaceAfter=No
+7	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+8	[	[	X	FM	Foreign=Yes	9	punct	_	SpaceAfter=No
+9	lʲǐːǣn	lʲǐːǣn	X	FM	Foreign=Yes	1	appos	_	SpaceAfter=No
+10	]	]	X	FM	Foreign=Yes	9	punct	_	SpaceAfter=No
+11	;	;	PUNCT	$(	PunctType=Brck	1	punct	_	_
+12	*	*	NUM	CARD	NumType=Card|Number=Plur	1	appos	_	_
+13	23.	23.	ADJ	ADJA	_	14	amod	_	_
+14	Oktober	Oktober	NOUN	NN	Gender=Masc|Number=Sing	12	obl	_	_
+15	1954	1954	NUM	CARD	NumType=Card|Number=Plur	12	obl	_	_
+16	in	in	ADP	APPR	AdpType=Prep|Case=Dat	17	case	_	_
+17	Chaozhou	Chaozhou	PROPN	NE	_	12	obl	_	SpaceAfter=No
+18	,	,	PUNCT	$,	PunctType=Comm	19	punct	_	_
+19	Landkreis	Landkreis	NOUN	NN	Gender=Masc|Number=Sing	17	appos	_	_
+20	Pingtung	Pingtung	NOUN	NN	_	19	appos	_	SpaceAfter=No
+21	,	,	PUNCT	$,	PunctType=Comm	22	punct	_	_
+22	Taiwan	Taiwan	PROPN	NE	Number=Sing	20	appos	_	SpaceAfter=No
+23	)	)	PUNCT	$(	PunctType=Brck	12	punct	_	_
+24	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	27	cop	_	_
+25	ein	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	27	det	_	_
+26	taiwanischer	taiwanisch	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	27	amod	_	_
+27	Filmregisseur	Filmregisseur	NOUN	NN	Gender=Masc|Number=Sing	0	ROOT	_	SpaceAfter=No
+28	,	,	PUNCT	$,	PunctType=Comm	29	punct	_	_
+29	Drehbuchautor	Drehbuchautor	NOUN	NN	Gender=Masc|Number=Sing	27	conj	_	_
+30	und	und	CCONJ	KON	_	31	cc	_	_
+31	Produzent	Produzent	NOUN	NN	Gender=Masc|Number=Sing	27	conj	_	_
+32	.	.	PUNCT	$.	PunctType=Peri	27	punct	_	_
+
+# DDC:BREAK.s[76] = 1643
+# text = Er ist als vielfach ausgezeichneter Regisseur bekannt für so unterschiedliche Filme wie Eat Drink Man Woman , die Jane-Austen-Adaption Sinn und Sinnlichkeit und den Martial Arts-Film Tiger and Dragon .
+1	Er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	7	nsubj	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	7	cop	_	_
+3	als	als	CCONJ	KOKOM	ConjType=Comp	6	case	_	_
+4	vielfach	vielfach	ADJ	ADJD	Degree=Pos|Variant=Short	5	advmod	_	_
+5	ausgezeichneter	ausgezeichnet	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	6	amod	_	_
+6	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	7	obl	_	_
+7	bekannt	bekannt	ADJ	ADJD	Degree=Pos|Variant=Short	0	ROOT	_	_
+8	für	für	ADP	APPR	AdpType=Prep|Case=Acc	11	case	_	_
+9	so	so	ADV	ADV	Degree=Pos	10	advmod	_	_
+10	unterschiedliche	unterschiedlich	ADJ	ADJA	Degree=Pos|Number=Plur	11	amod	_	_
+11	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	7	obl	_	_
+12	wie	wie	CCONJ	KOKOM	ConjType=Comp	13	case	_	_
+13	Eat	Eat	X	FM	Foreign=Yes	11	obl	_	_
+14	Drink	Drink	X	FM	Foreign=Yes	13	flat	_	_
+15	Man	Man	X	FM	Foreign=Yes	13	flat	_	_
+16	Woman	Woman	X	FM	Foreign=Yes	13	flat	_	SpaceAfter=No
+17	,	,	PUNCT	$,	PunctType=Comm	19	punct	_	_
+18	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	19	det	_	_
+19	Jane-Austen-Adaption	jane-austen-adaption	NOUN	NN	Gender=Fem|Number=Sing	13	conj	_	_
+20	Sinn	Sinn	NOUN	NN	Gender=Masc|Number=Sing	19	appos	_	_
+21	und	und	CCONJ	KON	_	22	cc	_	_
+22	Sinnlichkeit	Sinnlichkeit	NOUN	NN	Gender=Fem|Number=Sing	13	conj	_	_
+23	und	und	CCONJ	KON	_	25	cc	_	_
+24	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	25	det	_	_
+25	Martial	martial	X	FM	Foreign=Yes	13	conj	_	_
+26	Arts-Film	arts-film	NOUN	NN	Gender=Masc|Number=Sing	25	appos	_	_
+27	Tiger	tiger	X	FM	Foreign=Yes	26	appos	_	_
+28	and	and	X	FM	Foreign=Yes	27	flat	_	_
+29	Dragon	dragon	X	FM	Foreign=Yes	27	flat	_	_
+30	.	.	PUNCT	$.	PunctType=Peri	7	punct	_	_
+
+# DDC:BREAK.s[77] = 1673
+# text = Für seine Filme Brokeback Mountain ( 2005 ) und Life of Pi : Schiffbruch mit Tiger ( 2012 ) wurde er jeweils mit dem Oscar in der Kategorie Beste Regie ausgezeichnet .
+1	Für	für	ADP	APPR	AdpType=Prep|Case=Acc	3	case	_	_
+2	seine	seine	DET	PPOSAT	Case=Acc|Gender[psor]=Masc,Neut|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	3	det	_	_
+3	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	0	ROOT	_	_
+4	Brokeback	Brokeback	X	FM	Foreign=Yes	3	appos	_	_
+5	Mountain	Mountain	PROPN	NE	_	4	flat:name	_	_
+6	(	(	PUNCT	$(	PunctType=Brck	7	punct	_	SpaceAfter=No
+7	2005	2005	NUM	CARD	NumType=Card|Number=Plur	4	appos	_	SpaceAfter=No
+8	)	)	PUNCT	$(	PunctType=Brck	7	punct	_	_
+9	und	und	CCONJ	KON	_	10	cc	_	_
+10	Life	life	PROPN	NE	_	7	conj	_	_
+11	of	of	X	FM	Foreign=Yes	10	flat	_	_
+12	Pi	Pi	PROPN	NE	_	10	flat:name	_	SpaceAfter=No
+13	:	:	PUNCT	$.	PunctType=Peri	3	punct	_	_
+14	Schiffbruch	Schiffbruch	NOUN	NN	Gender=Masc|Number=Sing	31	nsubj:pass	_	_
+15	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+16	Tiger	Tiger	NOUN	NN	Gender=Masc|Number=Sing	14	nmod	_	_
+17	(	(	PUNCT	$(	PunctType=Brck	18	punct	_	SpaceAfter=No
+18	2012	2012	NUM	CARD	NumType=Card|Number=Plur	14	appos	_	SpaceAfter=No
+19	)	)	PUNCT	$(	PunctType=Brck	18	punct	_	_
+20	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	31	aux:pass	_	_
+21	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	31	nsubj:pass	_	_
+22	jeweils	jeweils	ADV	ADV	_	31	advmod	_	_
+23	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+24	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	25	det	_	_
+25	Oscar	Oscar	PROPN	NE	Gender=Masc|Number=Sing	31	obl	_	_
+26	in	in	ADP	APPR	AdpType=Prep|Case=Dat	28	case	_	_
+27	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	28	det	_	_
+28	Kategorie	Kategorie	NOUN	NN	Gender=Fem|Number=Sing	25	nmod	_	_
+29	Beste	Beste	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	30	amod	_	_
+30	Regie	Regie	NOUN	NN	Gender=Fem|Number=Sing	28	appos	_	_
+31	ausgezeichnet	auszeichnen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+32	.	.	PUNCT	$.	PunctType=Peri	31	punct	_	_
+
+# DDC:BREAK.s[78] = 1705
+# DDC:BREAK.p[33] = 1705
+# text = Ang Lee wurde 1954 in Taiwan geboren .
+1	Ang	Ang	PROPN	NE	Number=Sing	7	nsubj:pass	_	_
+2	Lee	Lee	PROPN	NE	Number=Sing	1	flat:name	_	_
+3	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	7	aux:pass	_	_
+4	1954	1954	NUM	CARD	NumType=Card|Number=Plur	7	obl	_	_
+5	in	in	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	Taiwan	Taiwan	PROPN	NE	Number=Sing	7	obl	_	_
+7	geboren	gebären	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+8	.	.	PUNCT	$,	PunctType=Comm	7	punct	_	_
+
+# DDC:BREAK.s[79] = 1713
+# text = Seine Eltern , Emigranten aus China , lernten sich in Taiwan kennen , Lee ist ihr ältester Sohn .
+1	Seine	seine	DET	PPOSAT	Case=Nom|Gender[psor]=Masc,Neut|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	2	det	_	_
+2	Eltern	Eltern	NOUN	NN	Gender=Neut|Number=Plur	8	nsubj	_	SpaceAfter=No
+3	,	,	PUNCT	$,	PunctType=Comm	4	punct	_	_
+4	Emigranten	Emigrant	NOUN	NN	Gender=Masc|Number=Plur	2	appos	_	_
+5	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	China	China	PROPN	NE	Number=Sing	4	nmod	_	SpaceAfter=No
+7	,	,	PUNCT	$,	PunctType=Comm	4	punct	_	_
+8	lernten	lernen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+9	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	8	obj	_	_
+10	in	in	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+11	Taiwan	Taiwan	PROPN	NE	Number=Sing	12	obl	_	_
+12	kennen	kennen	ADP	PTKVZ	PartType=Vbp	8	compound:prt	_	SpaceAfter=No
+13	,	,	PUNCT	$,	PunctType=Comm	18	punct	_	_
+14	Lee	Lee	PROPN	NE	Number=Sing	18	nsubj	_	_
+15	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	18	cop	_	_
+16	ihr	ihr	DET	PPOSAT	Case=Nom|Gender=Masc|Gender[psor]=Fem|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	18	det	_	_
+17	ältester	alt	ADJ	ADJA	Case=Nom|Degree=Sup|Gender=Masc|Number=Sing	18	amod	_	_
+18	Sohn	Sohn	NOUN	NN	Gender=Masc|Number=Sing	8	conj	_	_
+19	.	.	PUNCT	$.	PunctType=Peri	8	punct	_	_
+
+# DDC:BREAK.s[80] = 1732
+# text = Die Großeltern väterlicher- und mütterlicherseits sind im Zuge der kommunistischen Revolution in China ums Leben gekommen .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	2	det	_	_
+2	Großeltern	Großeltern	NOUN	NN	Gender=Neut|Number=Plur	16	nsubj:pass	_	_
+3	väterlicher-	väterlicher-	NOUN	TRUNC	Hyph=Yes	2	nmod	_	_
+4	und	und	CCONJ	KON	_	5	cc	_	_
+5	mütterlicherseits	mütterlicherseits	ADV	ADV	_	3	conj	_	_
+6	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	16	aux:pass	_	_
+7	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	8	case	_	_
+8	Zuge	Zug	NOUN	NN	Case=Dat|Gender=Masc|Number=Sing	16	obl	_	_
+9	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	11	det	_	_
+10	kommunistischen	kommunistisch	ADJ	ADJA	Degree=Pos|Number=Sing	11	amod	_	_
+11	Revolution	Revolution	NOUN	NN	Gender=Fem|Number=Sing	8	nmod	_	_
+12	in	in	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+13	China	China	PROPN	NE	Number=Sing	11	nmod	_	_
+14	ums	ums	ADP	APPR_ART	AdpType=Prep|Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	15	case	_	_
+15	Leben	Leben	NOUN	NN	Gender=Neut|Number=Sing	16	obl	_	_
+16	gekommen	kommen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+17	.	.	PUNCT	$.	PunctType=Peri	16	punct	_	_
+
+# DDC:BREAK.s[81] = 1749
+# text = Da sein Vater als Lehrer häufiger die Arbeitsstelle wechselte , wuchs Ang Lee in verschiedenen Städten Taiwans auf .
+1	Da	da	SCONJ	KOUS	_	9	mark	_	_
+2	sein	sein	DET	PPOSAT	Case=Nom|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	3	det	_	_
+3	Vater	Vater	NOUN	NN	Gender=Masc|Number=Sing	9	nsubj	_	_
+4	als	als	CCONJ	KOKOM	ConjType=Comp	5	case	_	_
+5	Lehrer	Lehrer	NOUN	NN	Gender=Masc|Number=Sing	9	obl	_	_
+6	häufiger	häufig	ADJ	ADJD	Degree=Cmp|Variant=Short	9	advmod	_	_
+7	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	8	det	_	_
+8	Arbeitsstelle	Arbeitsstelle	NOUN	NN	Gender=Fem|Number=Sing	9	obj	_	_
+9	wechselte	wechseln	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	11	ccomp	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+11	wuchs	wachsen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+12	Ang	Ang	PROPN	NE	_	11	nsubj	_	_
+13	Lee	Lee	PROPN	NE	Number=Sing	12	flat:name	_	_
+14	in	in	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+15	verschiedenen	verschieden	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	16	amod	_	_
+16	Städten	Stadt	NOUN	NN	Case=Dat|Gender=Fem|Number=Plur	11	obl	_	_
+17	Taiwans	Taiwan	PROPN	NE	Case=Gen|Number=Sing	16	nmod	_	_
+18	auf	auf	ADP	PTKVZ	PartType=Vbp	11	compound:prt	_	_
+19	.	.	PUNCT	$.	PunctType=Peri	11	punct	_	_
+
+# DDC:BREAK.s[82] = 1768
+# DDC:BREAK.p[34] = 1768
+# text = Entgegen den Wünschen seiner Eltern , wie sein Vater eine klassische akademische Laufbahn einzuschlagen , interessierte sich Lee für das Schauspiel und absolvierte mit ihrem Einverständnis zunächst ein Theater- und Filmstudium in Taipeh .
+1	Entgegen	entgegen	ADP	APPR	AdpType=Prep	3	case	_	_
+2	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	3	det	_	_
+3	Wünschen	Wunsch	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	16	obl	_	_
+4	seiner	seine	DET	PPOSAT	Case=Gen|Gender[psor]=Masc,Neut|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	5	det	_	_
+5	Eltern	Eltern	NOUN	NN	Gender=Neut|Number=Plur	3	nmod	_	SpaceAfter=No
+6	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+7	wie	wie	CCONJ	KOKOM	ConjType=Comp	9	case	_	_
+8	sein	sein	DET	PPOSAT	Case=Nom|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	9	det	_	_
+9	Vater	Vater	NOUN	NN	Gender=Masc|Number=Sing	14	obl	_	_
+10	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	13	det	_	_
+11	klassische	klassisch	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	13	amod	_	_
+12	akademische	akademisch	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	13	amod	_	_
+13	Laufbahn	Laufbahn	NOUN	NN	Gender=Fem|Number=Sing	14	obj	_	_
+14	einzuschlagen	einschlagen	VERB	VVIZU	VerbForm=Inf	3	xcomp	_	SpaceAfter=No
+15	,	,	PUNCT	$,	PunctType=Comm	14	punct	_	_
+16	interessierte	interessieren	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+17	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	16	expl:pv	_	_
+18	Lee	Lee	PROPN	NE	Number=Sing	16	nsubj	_	_
+19	für	für	ADP	APPR	AdpType=Prep|Case=Acc	21	case	_	_
+20	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	21	det	_	_
+21	Schauspiel	Schauspiel	NOUN	NN	Gender=Neut|Number=Sing	16	obl	_	_
+22	und	und	CCONJ	KON	_	23	cc	_	_
+23	absolvierte	absolvieren	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	16	conj	_	_
+24	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	26	case	_	_
+25	ihrem	ihr	DET	PPOSAT	Case=Dat|Gender=Neut|Gender[psor]=Fem|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	26	det	_	_
+26	Einverständnis	Einverständnis	NOUN	NN	Gender=Neut|Number=Sing	23	obl	_	_
+27	zunächst	zunächst	ADV	ADV	_	23	advmod	_	_
+28	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	29	det	_	_
+29	Theater-	theater-	NOUN	TRUNC	Hyph=Yes	23	obj	_	_
+30	und	und	CCONJ	KON	_	31	cc	_	_
+31	Filmstudium	Filmstudium	NOUN	NN	Gender=Neut|Number=Sing	29	conj	_	_
+32	in	in	ADP	APPR	AdpType=Prep|Case=Dat	33	case	_	_
+33	Taipeh	Taipeh	PROPN	NE	_	31	nmod	_	_
+34	.	.	PUNCT	$.	PunctType=Peri	16	punct	_	_
+
+# DDC:BREAK.s[83] = 1802
+# text = Im Anschluss daran ging er 1978 in die USA , um an der Universität von Illinois in Urbana-Champaign Theaterwissenschaft und -regie zu studieren .
+1	Im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	2	case	_	_
+2	Anschluss	Anschluß	NOUN	NN	Gender=Masc|Number=Sing	4	obl	_	_
+3	daran	daran	ADV	PROAV	PronType=Dem	2	advmod	_	_
+4	ging	gehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+5	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	4	nsubj	_	_
+6	1978	1978	NUM	CARD	NumType=Card|Number=Plur	4	obl	_	_
+7	in	in	ADP	APPR	AdpType=Prep|Case=Acc	9	case	_	_
+8	die	d	DET	ART	Case=Acc|Definite=Def|Number=Plur|PronType=Art	9	det	_	_
+9	USA	USA	PROPN	NE	Number=Plur	4	obl	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	23	punct	_	_
+11	um	um	SCONJ	KOUI	_	23	mark	_	_
+12	an	an	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+13	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	14	det	_	_
+14	Universität	Universität	NOUN	NN	Gender=Fem|Number=Sing	23	obl	_	_
+15	von	von	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+16	Illinois	Illinois	PROPN	NE	Case=Dat|Number=Sing	14	nmod	_	_
+17	in	in	ADP	APPR	AdpType=Prep|Case=Dat	18	case	_	_
+18	Urbana-Champaign	Urbana-Champaign	NOUN	NN	_	14	nmod	_	_
+19	Theaterwissenschaft	Theaterwissenschaft	NOUN	NN	Gender=Fem|Number=Sing	23	obj	_	_
+20	und	und	CCONJ	KON	_	21	cc	_	_
+21	-regie	-Regie	NOUN	TRUNC	Hyph=Yes	19	conj	_	_
+22	zu	zu	PART	PTKZU	PartType=Inf	23	mark	_	_
+23	studieren	studieren	VERB	VVINF	VerbForm=Inf	4	ccomp	_	_
+24	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[84] = 1826
+# text = Nach dem Erwerb seines B.A. in Illinois verlegte er sich ganz auf das Studium der Film- und Theaterproduktion an der Universität von New York , das er 1985 mit einem Master abschloss .
+1	Nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
+3	Erwerb	Erwerb	NOUN	NN	Gender=Masc|Number=Sing	8	obl	_	_
+4	seines	seine	DET	PPOSAT	Case=Gen|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	5	det	_	_
+5	B.A.	B.A.	NOUN	NN	_	3	nmod	_	_
+6	in	in	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+7	Illinois	Illinois	PROPN	NE	Case=Dat|Number=Sing	5	nmod	_	_
+8	verlegte	verlegen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+9	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	8	nsubj	_	_
+10	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	8	expl:pv	_	_
+11	ganz	ganz	ADJ	ADV	Degree=Pos|Variant=Short	8	advmod	_	_
+12	auf	auf	ADP	APPR	AdpType=Prep|Case=Acc	14	case	_	_
+13	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	14	det	_	_
+14	Studium	Studium	NOUN	NN	Gender=Neut|Number=Sing	8	obl	_	_
+15	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	16	det	_	_
+16	Film-	film-	NOUN	TRUNC	Hyph=Yes	14	nmod	_	_
+17	und	und	CCONJ	KON	_	18	cc	_	_
+18	Theaterproduktion	Theaterproduktion	NOUN	NN	Gender=Fem|Number=Sing	16	conj	_	_
+19	an	an	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+20	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	21	det	_	_
+21	Universität	Universität	NOUN	NN	Gender=Fem|Number=Sing	14	nmod	_	_
+22	von	von	ADP	APPR	AdpType=Prep|Case=Dat	23	case	_	_
+23	New	New	PROPN	NE	Number=Sing	21	nmod	_	_
+24	York	York	PROPN	NE	Number=Sing	23	flat:name	_	SpaceAfter=No
+25	,	,	PUNCT	$,	PunctType=Comm	32	punct	_	_
+26	das	die	PRON	PRELS	Case=Acc|Gender=Neut|Number=Sing|PronType=Dem,Rel	32	obj	_	_
+27	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	32	nsubj	_	_
+28	1985	1985	NUM	CARD	NumType=Card|Number=Plur	32	obl	_	_
+29	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	31	case	_	_
+30	einem	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	31	det	_	_
+31	Master	Master	NOUN	NN	Gender=Masc|Number=Sing	32	obl	_	_
+32	abschloss	abschließen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	14	acl	_	_
+33	.	.	PUNCT	$.	PunctType=Peri	8	punct	_	_
+
+# DDC:BREAK.s[85] = 1859
+# text = Danach entschloss er sich , mit seiner ebenfalls aus Taiwan stammenden Ehefrau zusammen in den USA zu bleiben .
+1	Danach	danach	ADV	PROAV	_	2	advmod	_	_
+2	entschloss	entschließen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+3	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	2	nsubj	_	_
+4	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	2	expl:pv	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	18	punct	_	_
+6	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	12	case	_	_
+7	seiner	seine	DET	PPOSAT	Case=Dat|Gender=Fem|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	12	det	_	_
+8	ebenfalls	ebenfalls	ADV	ADV	_	11	advmod	_	_
+9	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+10	Taiwan	Taiwan	PROPN	NE	Number=Sing	11	obl	_	_
+11	stammenden	stammend	ADJ	ADJA	Degree=Pos|Number=Sing	12	amod	_	_
+12	Ehefrau	Ehefrau	NOUN	NN	Gender=Fem|Number=Sing	18	obl	_	_
+13	zusammen	zusammen	ADV	ADV	_	16	advmod	_	_
+14	in	in	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+15	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	16	det	_	_
+16	USA	USA	PROPN	NE	Number=Plur	18	obl	_	_
+17	zu	zu	PART	PTKZU	PartType=Inf	18	mark	_	_
+18	bleiben	bleiben	VERB	VVINF	VerbForm=Inf	2	xcomp	_	_
+19	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[86] = 1878
+# DDC:BREAK.p[35] = 1878
+# text = Sein Interesse verschob sich trotz erster Erfahrungen mit dem Super-8-Film in Taiwan erst spät ganz auf Filmregie und -produktion – auch weil Lee seinen Berufswunsch seiner Familie und insbesondere seinem Vater gegenüber lange Zeit nicht eingestehen wollte .
+1	Sein	sein	DET	PPOSAT	Case=Nom|Gender=Neut|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	2	det	_	_
+2	Interesse	Interesse	NOUN	NN	Gender=Neut|Number=Sing	3	nsubj	_	_
+3	verschob	verschieben	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	3	expl:pv	_	_
+5	trotz	trotz	ADP	APPR	AdpType=Prep	7	case	_	_
+6	erster	erst	ADJ	ADJA	Case=Gen|Degree=Pos|NumType=Ord|Number=Plur	7	amod	_	_
+7	Erfahrungen	Erfahrung	NOUN	NN	Gender=Fem|Number=Plur	3	obl	_	_
+8	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	10	case	_	_
+9	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+10	Super-8-Film	Super-8-Film	NOUN	NN	Gender=Masc|Number=Sing	7	nmod	_	_
+11	in	in	ADP	APPR	AdpType=Prep|Case=Dat	12	case	_	_
+12	Taiwan	Taiwan	PROPN	NE	Number=Sing	10	nmod	_	_
+13	erst	erst	ADV	ADV	_	14	advmod	_	_
+14	spät	spät	ADJ	ADJD	Degree=Pos|Variant=Short	3	advmod	_	_
+15	ganz	ganz	ADJ	ADV	Degree=Pos|Variant=Short	3	advmod	_	_
+16	auf	auf	ADP	APPR	AdpType=Prep|Case=Acc	17	case	_	_
+17	Filmregie	Filmregie	NOUN	NN	Gender=Fem|Number=Sing	3	obl	_	_
+18	und	und	CCONJ	KON	_	19	cc	_	_
+19	-produktion	-produktion	NOUN	TRUNC	Hyph=Yes	17	conj	_	_
+20	–	–	PUNCT	$(	PunctType=Brck	36	punct	_	_
+21	auch	auch	ADV	ADV	_	22	advmod	_	_
+22	weil	weil	SCONJ	KOUS	_	36	mark	_	_
+23	Lee	Lee	PROPN	NE	Number=Sing	36	nsubj	_	_
+24	seinen	seine	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	25	det	_	_
+25	Berufswunsch	Berufswunsch	NOUN	NN	Gender=Masc|Number=Sing	36	obj	_	_
+26	seiner	seine	DET	PPOSAT	Case=Dat|Gender=Fem|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	27	det	_	_
+27	Familie	Familie	NOUN	NN	Gender=Fem|Number=Sing	25	nmod	_	_
+28	und	und	CCONJ	KON	_	31	cc	_	_
+29	insbesondere	insbesondere	ADV	ADV	_	31	advmod	_	_
+30	seinem	seine	DET	PPOSAT	Case=Dat|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	31	det	_	_
+31	Vater	Vater	NOUN	NN	Gender=Masc|Number=Sing	27	conj	_	_
+32	gegenüber	gegenüber	ADP	APPO	AdpType=Post|Case=Dat	27	case	_	_
+33	lange	lang	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	34	amod	_	_
+34	Zeit	Zeit	NOUN	NN	Gender=Fem|Number=Sing	36	obl	_	_
+35	nicht	nicht	PART	PTKNEG	Polarity=Neg	36	advmod	_	_
+36	eingestehen	eingestehen	VERB	VVINF	VerbForm=Inf	3	advcl	_	_
+37	wollte	wollen	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin|VerbType=Mod	36	aux	_	_
+38	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[87] = 1916
+# text = Nach dem Studium konnte er zunächst keine eigenen Projekte umsetzen .
+1	Nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	3	det	_	_
+3	Studium	Studium	NOUN	NN	Gender=Neut|Number=Sing	10	obl	_	_
+4	konnte	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|VerbType=Mod	10	aux	_	_
+5	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	10	nsubj	_	_
+6	zunächst	zunächst	ADV	ADV	_	10	advmod	_	_
+7	keine	keine	DET	PIAT	Case=Acc|Number=Plur|PronType=Neg	9	det	_	_
+8	eigenen	eigen	ADJ	ADJA	Degree=Pos|Number=Plur	9	amod	_	_
+9	Projekte	Projekt	NOUN	NN	Gender=Neut|Number=Plur	10	obj	_	_
+10	umsetzen	umsetzen	VERB	VVINF	VerbForm=Inf	0	ROOT	_	_
+11	.	.	PUNCT	$.	PunctType=Peri	10	punct	_	_
+
+# DDC:BREAK.s[88] = 1927
+# text = Erst ab 1992 , als er seinen ersten Langfilm fertigstellte , zeichnete sich eine kontinuierliche Karriere als Regisseur ab .
+1	Erst	erst	ADV	ADV	_	3	advmod	_	_
+2	ab	ab	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+3	1992	1992	NUM	CARD	NumType=Card|Number=Plur	12	obl	_	SpaceAfter=No
+4	,	,	PUNCT	$,	PunctType=Comm	12	punct	_	_
+5	als	als	SCONJ	KOUS	_	10	mark	_	_
+6	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	10	nsubj	_	_
+7	seinen	seine	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	9	det	_	_
+8	ersten	erst	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|NumType=Ord|Number=Sing	9	amod	_	_
+9	Langfilm	Langfilm	NOUN	NN	Gender=Masc|Number=Sing	10	obj	_	_
+10	fertigstellte	fertigstellen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	12	advcl	_	SpaceAfter=No
+11	,	,	PUNCT	$,	PunctType=Comm	10	punct	_	_
+12	zeichnete	zeichnen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+13	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	12	obj	_	_
+14	eine	eine	DET	ART	Case=Nom|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	16	det	_	_
+15	kontinuierliche	kontinuierlich	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	16	amod	_	_
+16	Karriere	Karriere	NOUN	NN	Gender=Fem|Number=Sing	12	nsubj	_	_
+17	als	als	CCONJ	KOKOM	ConjType=Comp	18	case	_	_
+18	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	16	obl	_	_
+19	ab	ab	ADP	PTKVZ	PartType=Vbp	12	compound:prt	_	_
+20	.	.	PUNCT	$.	PunctType=Peri	12	punct	_	_
+
+# DDC:BREAK.s[89] = 1947
+# DDC:BREAK.p[36] = 1947
+# text = Als seine bisher größte Erfolge – sowohl beim Publikum als auch bei der Kritik – gelten das Martial Arts-Drama Tiger and Dragon mit einer pan-asiatischen Starbesetzung und der Post-Western-Liebesfilm Brokeback Mountain mit Heath Ledger und Jake Gyllenhaal .
+1	Als	als	CCONJ	KOKOM	ConjType=Comp	5	case	_	_
+2	seine	seine	DET	PPOSAT	Case=Nom|Gender[psor]=Masc,Neut|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	5	det	_	_
+3	bisher	bisher	ADV	ADV	_	4	advmod	_	_
+4	größte	groß	ADJ	ADJA	Degree=Sup|Number=Plur	5	amod	_	_
+5	Erfolge	Erfolg	NOUN	NN	Gender=Masc|Number=Plur	16	obl	_	_
+6	–	–	PUNCT	$(	PunctType=Brck	7	punct	_	_
+7	sowohl	sowohl	CCONJ	KON	_	5	nmod	_	_
+8	beim	beim	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	9	case	_	_
+9	Publikum	Publikum	NOUN	NN	Gender=Neut|Number=Sing	5	nmod	_	_
+10	als	als	CCONJ	KOKOM	ConjType=Comp	14	case	_	_
+11	auch	auch	ADV	ADV	_	14	advmod	_	_
+12	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+13	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	14	det	_	_
+14	Kritik	Kritik	NOUN	NN	Gender=Fem|Number=Sing	9	obl	_	_
+15	–	–	PUNCT	$(	PunctType=Brck	5	punct	_	_
+16	gelten	gelten	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+17	das	d	DET	ART	Case=Nom|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	18	det	_	_
+18	Martial	martial	NOUN	NN	Gender=Neut|Number=Sing	16	nsubj	_	_
+19	Arts-Drama	arts-drama	NOUN	NN	Gender=Neut|Number=Sing	18	appos	_	_
+20	Tiger	tiger	X	FM	Foreign=Yes	19	appos	_	_
+21	and	and	X	FM	Foreign=Yes	20	flat	_	_
+22	Dragon	dragon	X	FM	Foreign=Yes	21	flat	_	_
+23	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	26	case	_	_
+24	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	26	det	_	_
+25	pan-asiatischen	pan-asiatischen	ADJ	ADJA	Degree=Pos|Number=Sing	26	amod	_	_
+26	Starbesetzung	Starbesetzung	NOUN	NN	Gender=Fem|Number=Sing	20	nmod	_	_
+27	und	und	CCONJ	KON	_	29	cc	_	_
+28	der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	29	det	_	_
+29	Post-Western-Liebesfilm	Post-Western-Liebesfilm	NOUN	NN	Gender=Masc|Number=Sing	18	conj	_	_
+30	Brokeback	Brokeback	PROPN	NE	_	29	flat:name	_	_
+31	Mountain	Mountain	PROPN	NE	_	30	flat:name	_	_
+32	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	33	case	_	_
+33	Heath	Heath	PROPN	NE	Number=Sing	29	nmod	_	_
+34	Ledger	Ledger	PROPN	NE	Number=Sing	33	flat:name	_	_
+35	und	und	CCONJ	KON	_	36	cc	_	_
+36	Jake	Jake	PROPN	NE	Number=Sing	33	conj	_	_
+37	Gyllenhaal	Gyllenhaal	PROPN	NE	_	36	flat:name	_	_
+38	.	.	PUNCT	$.	PunctType=Peri	16	punct	_	_
+
+# DDC:BREAK.s[90] = 1985
+# text = Für Letzteren bekam Lee 2006 als erster asiatisch-stämmiger und nicht-weißer Regisseur den Oscar für die beste Regie .
+1	Für	für	ADP	APPR	AdpType=Prep|Case=Acc	2	case	_	_
+2	Letzteren	letztere	NOUN	NN	_	3	obl	_	_
+3	bekam	bekommen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	Lee	Lee	PROPN	NE	Number=Sing	3	nsubj	_	_
+5	2006	2006	NUM	CARD	NumType=Card|Number=Plur	3	obl	_	_
+6	als	als	CCONJ	KOKOM	ConjType=Comp	11	case	_	_
+7	erster	erst	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|NumType=Ord|Number=Sing	11	amod	_	_
+8	asiatisch-stämmiger	asiatisch-stämmig	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	11	amod	_	_
+9	und	und	CCONJ	KON	_	10	cc	_	_
+10	nicht-weißer	nichte-weiß	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	8	conj	_	_
+11	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	3	obl	_	_
+12	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	13	det	_	_
+13	Oscar	Oscar	PROPN	NE	Gender=Masc|Number=Sing	3	obj	_	_
+14	für	für	ADP	APPR	AdpType=Prep|Case=Acc	17	case	_	_
+15	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+16	beste	gut	ADJ	ADJA	Degree=Sup|Gender=Fem|Number=Sing	17	amod	_	_
+17	Regie	Regie	NOUN	NN	Gender=Fem|Number=Sing	13	nmod	_	_
+18	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[91] = 2003
+# text = Außerdem wurden Lees Filme , neben vielen weiteren Preisen , mit mittlerweile zwei Goldenen Bären der Berlinale und zwei Goldenen Löwen der Filmfestspiele von Venedig ausgezeichnet .
+1	Außerdem	außerdem	ADV	PROAV	_	26	advmod	_	_
+2	wurden	werden	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	26	aux:pass	_	_
+3	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	4	nmod	_	_
+4	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	26	nsubj:pass	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+6	neben	neben	ADP	APPR	AdpType=Prep|Case=Dat	9	case	_	_
+7	vielen	viel	DET	PIDAT	Case=Dat|Number=Plur|PronType=Ind	9	det	_	_
+8	weiteren	weit	ADJ	ADJA	Case=Dat|Degree=Cmp|Number=Plur	9	amod	_	_
+9	Preisen	Preis	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	26	obl	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	9	punct	_	_
+11	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+12	mittlerweile	mittlerweile	ADV	ADV	_	13	advmod	_	_
+13	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	15	nummod	_	_
+14	Goldenen	golden	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	15	amod	_	_
+15	Bären	Bär	NOUN	NN	Gender=Masc|Number=Plur	26	obl	_	_
+16	der	d	DET	ART	Case=Gen|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	17	det	_	_
+17	Berlinale	Berlinale	PROPN	NE	_	15	nmod	_	_
+18	und	und	CCONJ	KON	_	21	cc	_	_
+19	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	21	nummod	_	_
+20	Goldenen	golden	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	21	amod	_	_
+21	Löwen	Löwe	NOUN	NN	Gender=Masc|Number=Plur	15	conj	_	_
+22	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	23	det	_	_
+23	Filmfestspiele	Filmfestspiel	NOUN	NN	Gender=Neut|Number=Plur	21	nmod	_	_
+24	von	von	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+25	Venedig	Venedig	PROPN	NE	_	23	nmod	_	_
+26	ausgezeichnet	auszeichnen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+27	.	.	PUNCT	$.	PunctType=Peri	26	punct	_	_
+
+# DDC:BREAK.s[92] = 2030
+# DDC:BREAK.p[37] = 2030
+# text = Lee ist seit 1983 mit der Mikrobiologin Jane Lin verheiratet .
+1	Lee	Lee	PROPN	NE	Number=Sing	10	nsubj:pass	_	_
+2	ist	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	10	aux:pass	_	_
+3	seit	seit	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+4	1983	1983	NUM	CARD	NumType=Card|Number=Plur	10	obl	_	_
+5	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+6	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
+7	Mikrobiologin	Mikrobiologein	NOUN	NN	Gender=Fem|Number=Sing	10	obl	_	_
+8	Jane	Jane	PROPN	NE	Number=Sing	7	flat:name	_	_
+9	Lin	Lin	PROPN	NE	Number=Sing	7	flat:name	_	_
+10	verheiratet	verheiraten	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+11	.	.	PUNCT	$,	PunctType=Comm	10	punct	_	_
+
+# DDC:BREAK.s[93] = 2041
+# text = Sie leben in White Plains , Westchester County , im Bundesstaat New York .
+1	Sie	sie	PRON	PPER	Case=Nom|Number=Plur|Person=3|PronType=Prs	2	nsubj	_	_
+2	leben	leben	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+3	in	in	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+4	White	White	X	FM	Foreign=Yes	2	obl	_	_
+5	Plains	Plain	X	FM	Foreign=Yes	4	flat	_	SpaceAfter=No
+6	,	,	PUNCT	$,	PunctType=Comm	7	punct	_	_
+7	Westchester	Westchester	PROPN	NE	Number=Sing	4	appos	_	_
+8	County	County	PROPN	NE	_	7	flat:name	_	SpaceAfter=No
+9	,	,	PUNCT	$,	PunctType=Comm	11	punct	_	_
+10	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	11	case	_	_
+11	Bundesstaat	Bundesstaat	NOUN	NN	Gender=Masc|Number=Sing	7	appos	_	_
+12	New	New	PROPN	NE	Number=Sing	11	flat:name	_	_
+13	York	York	PROPN	NE	Number=Sing	12	flat:name	_	_
+14	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[94] = 2055
+# text = Aus der Ehe stammen die Söhne Haan ( * 1984 ) und Mason ( * 1990 ) . Ang Lee besitzt eine United States Permanent Resident Card .
+1	Aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	3	det	_	_
+3	Ehe	Ehe	NOUN	NN	Gender=Fem|Number=Sing	4	obl	_	_
+4	stammen	stammen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+5	die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	6	det	_	_
+6	Söhne	Sohn	NOUN	NN	Gender=Masc|Number=Plur	4	nsubj	_	_
+7	Haan	Haan	PROPN	NE	Gender=Masc|Number=Sing	6	flat:name	_	_
+8	(	(	PUNCT	$(	PunctType=Brck	10	punct	_	SpaceAfter=No
+9	*	*	NUM	NN	NumType=Card|Number=Plur	10	case	_	_
+10	1984	1984	NUM	CARD	NumType=Card|Number=Plur	6	appos	_	SpaceAfter=No
+11	)	)	PUNCT	$(	PunctType=Brck	10	punct	_	_
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	Mason	Mason	PROPN	NE	Gender=Masc|Number=Sing	10	conj	_	_
+14	(	(	PUNCT	$(	PunctType=Brck	15	punct	_	SpaceAfter=No
+15	*	*	X	NN	Foreign=Yes	13	appos	_	_
+16	1990	1990	NUM	CARD	NumType=Card|Number=Plur	15	flat	_	SpaceAfter=No
+17	)	)	PUNCT	$(	PunctType=Brck	15	punct	_	SpaceAfter=No
+18	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+19	Ang	Ang	PROPN	NE	Number=Sing	21	nsubj	_	_
+20	Lee	Lee	PROPN	NE	Number=Sing	19	flat:name	_	_
+21	besitzt	besitzen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+22	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	23	det	_	_
+23	United	United	X	FM	Foreign=Yes	21	obj	_	_
+24	States	states	X	FM	Foreign=Yes	23	flat	_	_
+25	Permanent	permanent	X	FM	Foreign=Yes	23	flat	_	_
+26	Resident	resident	X	FM	Foreign=Yes	23	flat	_	_
+27	Card	card	X	FM	Foreign=Yes	23	flat	_	_
+28	.	.	PUNCT	$.	PunctType=Peri	21	punct	_	_
+
+# DDC:BREAK.s[95] = 2083
+# DDC:BREAK.p[38] = 2083
+# text = Nach seinen ersten Filmerfahrungen in Taiwan setzte sich Lee erst wieder während seines Studiums in den USA ernsthaft mit dem Filmemachen auseinander .
+1	Nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+2	seinen	seine	DET	PPOSAT	Case=Dat|Gender[psor]=Masc,Neut|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	4	det	_	_
+3	ersten	erst	ADJ	ADJA	Degree=Pos|NumType=Ord|Number=Plur	4	amod	_	_
+4	Filmerfahrungen	Filmerfahrung	NOUN	NN	Gender=Fem|Number=Plur	7	obl	_	_
+5	in	in	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	Taiwan	Taiwan	PROPN	NE	Number=Sing	4	nmod	_	_
+7	setzte	setzen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+8	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	7	expl:pv	_	_
+9	Lee	Lee	PROPN	NE	Number=Sing	7	nsubj	_	_
+10	erst	erst	ADV	ADV	_	11	advmod	_	_
+11	wieder	wieder	ADV	ADV	_	7	advmod	_	_
+12	während	während	ADP	APPR	AdpType=Prep	14	case	_	_
+13	seines	seine	DET	PPOSAT	Case=Gen|Gender=Neut|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	14	det	_	_
+14	Studiums	Studium	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	7	obl	_	_
+15	in	in	ADP	APPR	AdpType=Prep|Case=Dat	17	case	_	_
+16	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	17	det	_	_
+17	USA	USA	PROPN	NE	Number=Plur	14	nmod	_	_
+18	ernsthaft	ernsthaft	ADJ	ADJD	Degree=Pos|Variant=Short	7	advmod	_	_
+19	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+20	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	21	det	_	_
+21	Filmemachen	Filmemachen	NOUN	NN	Gender=Neut|Number=Sing	7	obl	_	_
+22	auseinander	auseinander	ADP	PTKVZ	PartType=Vbp	7	compound:prt	_	_
+23	.	.	PUNCT	$.	PunctType=Peri	7	punct	_	_
+
+# DDC:BREAK.s[96] = 2106
+# text = Im Rahmen seines Studiums in New York drehte er einige Kurzfilme und wirkte unter anderem beim Abschlussdreh seines Studienkollegen Spike Lee als Regieassistent mit .
+1	Im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	2	case	_	_
+2	Rahmen	Rahmen	NOUN	NN	Gender=Masc|Number=Sing	8	obl	_	_
+3	seines	seine	DET	PPOSAT	Case=Gen|Gender=Neut|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	4	det	_	_
+4	Studiums	Studium	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	2	nmod	_	_
+5	in	in	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	New	New	PROPN	NE	Number=Sing	4	nmod	_	_
+7	York	York	PROPN	NE	Number=Sing	6	flat:name	_	_
+8	drehte	drehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+9	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	8	nsubj	_	_
+10	einige	einige	DET	PIAT	Case=Acc|Number=Plur|PronType=Ind	11	det	_	_
+11	Kurzfilme	Kurzfilm	NOUN	NN	Gender=Masc|Number=Plur	8	obj	_	_
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	wirkte	wirken	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	conj	_	_
+14	unter	unter	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+15	anderem	ander	DET	PIS	Case=Dat|Gender=Neut|Number=Sing|PronType=Ind	17	det	_	_
+16	beim	beim	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	17	case	_	_
+17	Abschlussdreh	Abschlußdreh	NOUN	NN	Gender=Masc|Number=Sing	13	obl	_	_
+18	seines	seine	DET	PPOSAT	Case=Gen|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	19	det	_	_
+19	Studienkollegen	Studiumkollege	NOUN	NN	Gender=Masc|Number=Sing	17	nmod	_	_
+20	Spike	Spike	PROPN	NE	Number=Sing	19	flat:name	_	_
+21	Lee	Lee	PROPN	NE	Number=Sing	19	flat:name	_	_
+22	als	als	CCONJ	KOKOM	ConjType=Comp	23	case	_	_
+23	Regieassistent	Regieassistent	NOUN	NN	Gender=Masc|Number=Sing	13	obl	_	_
+24	mit	mit	ADP	PTKVZ	PartType=Vbp	13	compound:prt	_	_
+25	.	.	PUNCT	$,	PunctType=Comm	8	punct	_	_
+
+# DDC:BREAK.s[97] = 2131
+# text = Sein eigener Abschlussfilm Fine Line gewann 1985 zwei Preise beim renommierten Filmfest seiner Universität .
+1	Sein	sein	DET	PPOSAT	Case=Nom|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	3	det	_	_
+2	eigener	eigen	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	3	amod	_	_
+3	Abschlussfilm	Abschlußfilm	NOUN	NN	Gender=Masc|Number=Sing	6	nsubj	_	_
+4	Fine	Fine	X	FM	Foreign=Yes	3	appos	_	_
+5	Line	Line	X	FM	Foreign=Yes	4	flat	_	_
+6	gewann	gewinnen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+7	1985	1985	NUM	CARD	NumType=Card|Number=Plur	6	obl	_	_
+8	zwei	zwei	NUM	CARD	NumType=Card|Number=Plur	9	nummod	_	_
+9	Preise	Preis	NOUN	NN	Gender=Masc|Number=Plur	6	obj	_	_
+10	beim	beim	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	12	case	_	_
+11	renommierten	renommiert	ADJ	ADJA	Degree=Pos|Number=Sing	12	amod	_	_
+12	Filmfest	Filmfest	NOUN	NN	Gender=Neut|Number=Sing	6	obl	_	_
+13	seiner	seine	DET	PPOSAT	Case=Gen|Gender=Fem|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	14	det	_	_
+14	Universität	Universität	NOUN	NN	Gender=Fem|Number=Sing	12	nmod	_	_
+15	.	.	PUNCT	$.	PunctType=Peri	6	punct	_	_
+
+# DDC:BREAK.s[98] = 2146
+# text = Erst 1992 gelang es ihm , nach dem Gewinn eines hochdotierten Drehbuchwettbewerbs in Taiwan , den ersten einer Reihe von drei Filmen zu drehen , die west-östliche Konflikte taiwanischer Familien zum Thema haben .
+1	Erst	erst	ADV	ADV	_	2	advmod	_	_
+2	1992	1992	NUM	CARD	NumType=Card|Number=Plur	3	obl	_	_
+3	gelang	gelingen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	3	expl	_	_
+5	ihm	er	PRON	PPER	Case=Dat|Gender=Masc|Number=Sing|Person=3|PronType=Prs	3	obj	_	SpaceAfter=No
+6	,	,	PUNCT	$,	PunctType=Comm	24	punct	_	_
+7	nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	9	case	_	_
+8	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	9	det	_	_
+9	Gewinn	Gewinn	NOUN	NN	Gender=Masc|Number=Sing	24	obl	_	_
+10	eines	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	12	det	_	_
+11	hochdotierten	hochdotiert	ADJ	ADJA	Degree=Pos|Number=Sing	12	amod	_	_
+12	Drehbuchwettbewerbs	Drehbuchwettbewerb	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	9	nmod	_	_
+13	in	in	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+14	Taiwan	Taiwan	PROPN	NE	Number=Sing	12	nmod	_	SpaceAfter=No
+15	,	,	PUNCT	$,	PunctType=Comm	24	punct	_	_
+16	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	17	det	_	_
+17	ersten	erst	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|NumType=Ord|Number=Sing	24	obj	_	_
+18	einer	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	19	det	_	_
+19	Reihe	Reihe	NOUN	NN	Gender=Fem|Number=Sing	17	nmod	_	_
+20	von	von	ADP	APPR	AdpType=Prep|Case=Dat	22	case	_	_
+21	drei	drei	NUM	CARD	NumType=Card|Number=Plur	22	nummod	_	_
+22	Filmen	Film	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	19	nmod	_	_
+23	zu	zu	PART	PTKZU	PartType=Inf	24	mark	_	_
+24	drehen	drehen	VERB	VVINF	VerbForm=Inf	3	csubj	_	SpaceAfter=No
+25	,	,	PUNCT	$,	PunctType=Comm	33	punct	_	_
+26	die	d	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	33	nsubj	_	_
+27	west-östliche	westen-östlich	ADJ	ADJA	Degree=Pos|Number=Plur	28	amod	_	_
+28	Konflikte	Konflikt	NOUN	NN	Gender=Masc|Number=Plur	33	nsubj	_	_
+29	taiwanischer	taiwanisch	ADJ	ADJA	Case=Gen|Degree=Pos|Number=Plur	30	amod	_	_
+30	Familien	Familie	NOUN	NN	Gender=Fem|Number=Plur	28	nmod	_	_
+31	zum	zum	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	32	case	_	_
+32	Thema	Thema	NOUN	NN	Gender=Neut|Number=Sing	33	obl	_	_
+33	haben	haben	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	12	acl	_	_
+34	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[99] = 2180
+# DDC:BREAK.p[39] = 2180
+# text = Diese ersten drei Langfilme , die Lee realisieren konnte , werden im Allgemeinen unter dem Begriff Father Knows Best gefasst .
+1	Diese	diese	DET	PDAT	Case=Nom|Number=Plur|PronType=Dem	4	det	_	_
+2	ersten	erst	ADJ	ADJA	Degree=Pos|NumType=Ord|Number=Plur	4	amod	_	_
+3	drei	drei	NUM	CARD	NumType=Card|Number=Plur	4	nummod	_	_
+4	Langfilme	Langfilm	NOUN	NN	Gender=Masc|Number=Plur	20	nsubj:pass	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	8	punct	_	_
+6	die	die	PRON	PRELS	Case=Acc|Number=Plur|PronType=Dem,Rel	8	obj	_	_
+7	Lee	Lee	PROPN	NE	Number=Sing	8	nsubj	_	_
+8	realisieren	realisieren	VERB	VVINF	VerbForm=Inf	4	acl	_	_
+9	konnte	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|VerbType=Mod	8	aux	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	8	punct	_	_
+11	werden	werden	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	20	aux:pass	_	_
+12	im	im	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	13	case	_	_
+13	Allgemeinen	allgemein	NOUN	NN	Number=Sing	20	obl	_	_
+14	unter	unter	ADP	APPR	AdpType=Prep|Case=Dat	16	case	_	_
+15	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	16	det	_	_
+16	Begriff	Begriff	NOUN	NN	Gender=Masc|Number=Sing	20	obl	_	_
+17	Father	father	X	FM	Foreign=Yes	16	appos	_	_
+18	Knows	knows	X	FM	Foreign=Yes	17	flat	_	_
+19	Best	best	X	FM	Foreign=Yes	17	flat	_	_
+20	gefasst	fassen	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+21	.	.	PUNCT	$.	PunctType=Peri	20	punct	_	_
+
+# DDC:BREAK.s[100] = 2201
+# text = Diese Bezeichnung geht auf die wiederkehrende Figur des chinesischen Familienoberhaupts , gespielt jeweils vom taiwanischen Schauspieler Sihung Lung , zurück .
+1	Diese	diese	DET	PDAT	Case=Nom|Gender=Fem|Number=Sing|PronType=Dem	2	det	_	_
+2	Bezeichnung	Bezeichnung	NOUN	NN	Gender=Fem|Number=Sing	3	nsubj	_	_
+3	geht	gehen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+4	auf	auf	ADP	APPR	AdpType=Prep|Case=Acc	7	case	_	_
+5	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	_
+6	wiederkehrende	wiederkehrend	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	7	amod	_	_
+7	Figur	Figur	NOUN	NN	Gender=Fem|Number=Sing	3	obl	_	_
+8	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	10	det	_	_
+9	chinesischen	chinesisch	ADJ	ADJA	Degree=Pos|Number=Sing	10	amod	_	_
+10	Familienoberhaupts	Familienoberhaupt	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	7	nmod	_	SpaceAfter=No
+11	,	,	PUNCT	$,	PunctType=Comm	12	punct	_	_
+12	gespielt	spielen	VERB	VVPP	Aspect=Perf|VerbForm=Part	3	advcl	_	_
+13	jeweils	jeweils	ADV	ADV	_	12	advmod	_	_
+14	vom	vom	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	16	case	_	_
+15	taiwanischen	taiwanisch	ADJ	ADJA	Degree=Pos|Number=Sing	16	amod	_	_
+16	Schauspieler	Schauspieler	NOUN	NN	Gender=Masc|Number=Sing	12	obl	_	_
+17	Sihung	Sihung	PROPN	NE	_	16	flat:name	_	_
+18	Lung	Lung	PROPN	NE	_	16	flat:name	_	SpaceAfter=No
+19	,	,	PUNCT	$,	PunctType=Comm	12	punct	_	_
+20	zurück	zurück	ADP	PTKVZ	PartType=Vbp	3	compound:prt	_	_
+21	.	.	PUNCT	$.	PunctType=Peri	3	punct	_	_
+
+# DDC:BREAK.s[101] = 2222
+# text = Die drei Filme thematisieren , wie später noch öfter bei Ang Lee , familiäre Probleme , die aus dem Konflikt zwischen Selbstbestimmung und Tradition , zwischen Innen und Außen , zwischen Ost und West sowie zwischen den Generationen herrühren .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	3	det	_	_
+2	drei	drei	NUM	CARD	NumType=Card|Number=Plur	3	nummod	_	_
+3	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	4	nsubj	_	_
+4	thematisieren	thematisieren	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	SpaceAfter=No
+5	,	,	PUNCT	$,	PunctType=Comm	11	punct	_	_
+6	wie	wie	CCONJ	KOKOM	ConjType=Comp	11	case	_	_
+7	später	spät	ADJ	ADJD	Degree=Cmp|Variant=Short	11	advmod	_	_
+8	noch	noch	ADV	ADV	_	9	advmod	_	_
+9	öfter	öfter	ADJ	ADJD	Degree=Cmp|Variant=Short	11	advmod	_	_
+10	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	11	case	_	_
+11	Ang	Ang	PROPN	NE	Number=Sing	4	obl	_	_
+12	Lee	Lee	PROPN	NE	Number=Sing	11	flat:name	_	SpaceAfter=No
+13	,	,	PUNCT	$,	PunctType=Comm	11	punct	_	_
+14	familiäre	familiär	ADJ	ADJA	Degree=Pos|Number=Plur	15	amod	_	_
+15	Probleme	Problem	NOUN	NN	Gender=Neut|Number=Plur	4	obj	_	SpaceAfter=No
+16	,	,	PUNCT	$,	PunctType=Comm	39	punct	_	_
+17	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	39	nsubj	_	_
+18	aus	aus	ADP	APPR	AdpType=Prep|Case=Dat	20	case	_	_
+19	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	20	det	_	_
+20	Konflikt	Konflikt	NOUN	NN	Gender=Masc|Number=Sing	39	obl	_	_
+21	zwischen	zwischen	ADP	APPR	AdpType=Prep|Case=Dat	22	case	_	_
+22	Selbstbestimmung	Selbstbestimmung	NOUN	NN	Gender=Fem|Number=Sing	20	nmod	_	_
+23	und	und	CCONJ	KON	_	24	cc	_	_
+24	Tradition	Tradition	NOUN	NN	Gender=Fem|Number=Sing	22	conj	_	SpaceAfter=No
+25	,	,	PUNCT	$,	PunctType=Comm	27	punct	_	_
+26	zwischen	zwischen	ADP	APPR	AdpType=Prep|Case=Dat	27	case	_	_
+27	Innen	innen	NOUN	NN	_	24	conj	_	_
+28	und	und	CCONJ	KON	_	29	cc	_	_
+29	Außen	Außen	NOUN	NN	Number=Sing	27	conj	_	SpaceAfter=No
+30	,	,	PUNCT	$,	PunctType=Comm	32	punct	_	_
+31	zwischen	zwischen	ADP	APPR	AdpType=Prep|Case=Dat	32	case	_	_
+32	Ost	Ost	NOUN	NN	Gender=Neut|Number=Sing	27	conj	_	_
+33	und	und	CCONJ	KON	_	34	cc	_	_
+34	West	West	NOUN	NN	Gender=Masc|Number=Sing	32	conj	_	_
+35	sowie	sowie	CCONJ	KON	_	38	cc	_	_
+36	zwischen	zwischen	ADP	APPR	AdpType=Prep|Case=Dat	38	case	_	_
+37	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	38	det	_	_
+38	Generationen	Generation	NOUN	NN	Gender=Fem|Number=Plur	22	conj	_	_
+39	herrühren	herrühren	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	acl	_	_
+40	.	.	PUNCT	$.	PunctType=Peri	4	punct	_	_
+
+# DDC:BREAK.s[102] = 2262
+# text = Die Filme sind allesamt US-amerikanisch-taiwanische Koproduktionen .
+1	Die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	2	det	_	_
+2	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	6	nsubj	_	_
+3	sind	sein	AUX	VAFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	6	cop	_	_
+4	allesamt	allesamt	ADV	ADV	_	6	advmod	_	_
+5	US-amerikanisch-taiwanische	us-amerikanisch-taiwanische	ADJ	ADJA	Degree=Pos|Number=Plur	6	amod	_	_
+6	Koproduktionen	Koproduktion	NOUN	NN	Gender=Fem|Number=Plur	0	ROOT	_	_
+7	.	.	PUNCT	$,	PunctType=Comm	6	punct	_	_
+
+# DDC:BREAK.s[103] = 2269
+# text = Anders als bei allen bislang folgenden Projekten handelt es sich bei den ersten Filmen Lees nicht um Adaptionen , sondern um Filme nach von ihm selbst geschriebenen Originaldrehbüchern .
+1	Anders	anders	ADV	ADV	_	8	advmod	_	_
+2	als	als	CCONJ	KOKOM	ConjType=Comp	7	case	_	_
+3	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+4	allen	alle	DET	PIDAT	Case=Dat|Number=Plur|PronType=Tot	7	det	_	_
+5	bislang	bislang	ADV	ADV	_	6	advmod	_	_
+6	folgenden	folgend	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	7	amod	_	_
+7	Projekten	Projekt	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	1	obl	_	_
+8	handelt	handeln	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+9	es	es	PRON	PPER	Case=Nom|Gender=Neut|Number=Sing|Person=3|PronType=Prs	8	nsubj	_	_
+10	sich	sich	PRON	PRF	Case=Acc|Person=3|PronType=Prs|Reflex=Yes	8	obj	_	_
+11	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	14	case	_	_
+12	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	14	det	_	_
+13	ersten	erst	ADJ	ADJA	Case=Dat|Degree=Pos|NumType=Ord|Number=Plur	14	amod	_	_
+14	Filmen	Film	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	8	obl	_	_
+15	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	14	nmod	_	_
+16	nicht	nicht	PART	PTKNEG	Polarity=Neg	18	advmod	_	_
+17	um	um	ADP	APPR	AdpType=Prep|Case=Acc	18	case	_	_
+18	Adaptionen	Adaption	NOUN	NN	Gender=Fem|Number=Plur	8	obl	_	SpaceAfter=No
+19	,	,	PUNCT	$,	PunctType=Comm	22	punct	_	_
+20	sondern	sondern	CCONJ	KON	_	22	cc	_	_
+21	um	um	ADP	APPR	AdpType=Prep|Case=Acc	22	case	_	_
+22	Filme	Film	NOUN	NN	Gender=Masc|Number=Plur	18	conj	_	_
+23	nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	28	case	_	_
+24	von	von	ADP	APPR	AdpType=Prep|Case=Dat	25	case	_	_
+25	ihm	er	PRON	PPER	Case=Dat|Gender=Neut|Number=Sing|Person=3|PronType=Prs	27	obl	_	_
+26	selbst	selbst	ADV	ADV	_	25	advmod	_	_
+27	geschriebenen	geschreiben	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	28	amod	_	_
+28	Originaldrehbüchern	Originaldrehbuch	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	22	nmod	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	8	punct	_	_
+
+# DDC:BREAK.s[104] = 2298
+# DDC:BREAK.p[40] = 2298
+# text = Der erste Film , Schiebende Hände ( 1992 ) , handelt vom Einzug eines chinesischen Vaters bei seinem erwachsenen Sohn und der US-amerikanischen Schwiegertochter in New York und den interkulturellen Problemen , die in der neuen Wohngemeinschaft entstehen .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
+2	erste	erst	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|NumType=Ord|Number=Sing	3	amod	_	_
+3	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	11	nsubj	_	SpaceAfter=No
+4	,	,	PUNCT	$,	PunctType=Comm	6	punct	_	_
+5	Schiebende	schiebend	ADJ	ADJA	Degree=Pos|Number=Plur	6	amod	_	_
+6	Hände	Hand	NOUN	NN	Gender=Fem|Number=Plur	3	appos	_	_
+7	(	(	PUNCT	$(	PunctType=Brck	8	punct	_	SpaceAfter=No
+8	1992	1992	NUM	CARD	NumType=Card|Number=Plur	6	appos	_	SpaceAfter=No
+9	)	)	PUNCT	$(	PunctType=Brck	8	punct	_	SpaceAfter=No
+10	,	,	PUNCT	$,	PunctType=Comm	6	punct	_	_
+11	handelt	handeln	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+12	vom	vom	ADP	APPR_ART	AdpType=Prep|Case=Dat|Definite=Def|Gender=Masc,Neut|Number=Sing|PronType=Art	13	case	_	_
+13	Einzug	Einzug	NOUN	NN	Gender=Masc|Number=Sing	11	obj	_	_
+14	eines	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	16	det	_	_
+15	chinesischen	chinesisch	ADJ	ADJA	Degree=Pos|Number=Sing	16	amod	_	_
+16	Vaters	Vater	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	13	nmod	_	_
+17	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	20	case	_	_
+18	seinem	seine	DET	PPOSAT	Case=Dat|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	20	det	_	_
+19	erwachsenen	erwachsen	ADJ	ADJA	Degree=Pos|Number=Sing	20	amod	_	_
+20	Sohn	Sohn	NOUN	NN	Gender=Masc|Number=Sing	13	nmod	_	_
+21	und	und	CCONJ	KON	_	24	cc	_	_
+22	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	24	det	_	_
+23	US-amerikanischen	us-amerikanischen	ADJ	ADJA	Degree=Pos|Number=Sing	24	amod	_	_
+24	Schwiegertochter	Schwiegertochter	NOUN	NN	Gender=Fem|Number=Sing	20	conj	_	_
+25	in	in	ADP	APPR	AdpType=Prep|Case=Dat	26	case	_	_
+26	New	New	PROPN	NE	Number=Sing	24	nmod	_	_
+27	York	York	PROPN	NE	Number=Sing	26	flat:name	_	_
+28	und	und	CCONJ	KON	_	31	cc	_	_
+29	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	31	det	_	_
+30	interkulturellen	interkulturell	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	31	amod	_	_
+31	Problemen	Problem	NOUN	NN	Case=Dat|Gender=Neut|Number=Plur	13	conj	_	SpaceAfter=No
+32	,	,	PUNCT	$,	PunctType=Comm	38	punct	_	_
+33	die	die	PRON	PRELS	Case=Nom|Number=Plur|PronType=Dem,Rel	38	nsubj	_	_
+34	in	in	ADP	APPR	AdpType=Prep|Case=Dat	37	case	_	_
+35	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	37	det	_	_
+36	neuen	neu	ADJ	ADJA	Degree=Pos|Number=Sing	37	amod	_	_
+37	Wohngemeinschaft	Wohngemeinschaft	NOUN	NN	Gender=Fem|Number=Sing	38	obl	_	_
+38	entstehen	entstehen	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	31	acl	_	_
+39	.	.	PUNCT	$.	PunctType=Peri	11	punct	_	_
+
+# DDC:BREAK.s[105] = 2337
+# text = Dies war die erste Zusammenarbeit zwischen Lee und dem Drehbuchautor und Produzenten James Schamus – seitdem bildeten die beiden bei jedem Film Lees eine enge Arbeitsgemeinschaft .
+1	Dies	diese	DET	PDS	Case=Nom|Gender=Neut|Number=Sing|PronType=Dem	5	nsubj	_	_
+2	war	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	5	cop	_	_
+3	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
+4	erste	erst	ADJ	ADJA	Degree=Pos|Gender=Fem|NumType=Ord|Number=Sing	5	amod	_	_
+5	Zusammenarbeit	Zusammenarbeit	NOUN	NN	Gender=Fem|Number=Sing	0	ROOT	_	_
+6	zwischen	zwischen	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+7	Lee	Lee	PROPN	NE	Number=Sing	5	nmod	_	_
+8	und	und	CCONJ	KON	_	10	cc	_	_
+9	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+10	Drehbuchautor	Drehbuchautor	NOUN	NN	Gender=Masc|Number=Sing	7	conj	_	_
+11	und	und	CCONJ	KON	_	12	cc	_	_
+12	Produzenten	Produzent	NOUN	NN	Gender=Masc|Number=Sing	10	conj	_	_
+13	James	James	PROPN	NE	Case=Nom|Number=Sing	12	flat:name	_	_
+14	Schamus	Schamus	PROPN	NE	Case=Gen	12	flat:name	_	_
+15	–	–	PUNCT	$(	PunctType=Brck	5	punct	_	_
+16	seitdem	seitdem	ADV	PROAV	_	17	advmod	_	_
+17	bildeten	bilden	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	5	parataxis	_	_
+18	die	d	DET	ART	Case=Nom|Definite=Def|Number=Plur|PronType=Art	19	det	_	_
+19	beiden	beide	DET	PIS	Case=Nom|NumType=Card|Number=Plur|PronType=Tot	17	nsubj	_	_
+20	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	22	case	_	_
+21	jedem	jede	DET	PIAT	Case=Dat|Gender=Masc|Number=Sing|PronType=Tot	22	det	_	_
+22	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	17	obl	_	_
+23	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	22	nmod	_	_
+24	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	26	det	_	_
+25	enge	eng	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	26	amod	_	_
+26	Arbeitsgemeinschaft	Arbeitsgemeinschaft	NOUN	NN	Gender=Fem|Number=Sing	17	obj	_	_
+27	.	.	PUNCT	$.	PunctType=Peri	5	punct	_	_
+
+# DDC:BREAK.s[106] = 2364
+# text = Wie in den beiden folgenden Filmen schrieben sie auch gemeinsam das Drehbuch .
+1	Wie	wie	CCONJ	KOKOM	ConjType=Comp	6	case	_	_
+2	in	in	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+3	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	6	det	_	_
+4	beiden	beide	ADJ	PIDAT	Case=Dat|Number=Plur	6	amod	_	_
+5	folgenden	folgend	ADJ	ADJA	Case=Dat|Degree=Pos|Number=Plur	6	amod	_	_
+6	Filmen	Film	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	7	obl	_	_
+7	schrieben	schreiben	VERB	VVFIN	Mood=Ind|Number=Plur|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+8	sie	sie	PRON	PPER	Case=Nom|Number=Plur|Person=3|PronType=Prs	7	nsubj	_	_
+9	auch	auch	ADV	ADV	_	10	advmod	_	_
+10	gemeinsam	gemeinsam	ADJ	ADJD	Degree=Pos|Variant=Short	7	advmod	_	_
+11	das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	12	det	_	_
+12	Drehbuch	Drehbuch	NOUN	NN	Gender=Neut|Number=Sing	7	obj	_	_
+13	.	.	PUNCT	$,	PunctType=Comm	7	punct	_	_
+
+# DDC:BREAK.s[107] = 2377
+# text = In allen weiteren Filmen Lees ( mit Ausnahme des Kurzfilms The Hire : Chosen ) hat Schamus seither entscheidende Funktionen ausgeübt .
+1	In	in	ADP	APPR	AdpType=Prep|Case=Dat	4	case	_	_
+2	allen	alle	DET	PIDAT	Case=Dat|Number=Plur|PronType=Tot	4	det	_	_
+3	weiteren	weit	ADJ	ADJA	Case=Dat|Degree=Cmp|Number=Plur	4	amod	_	_
+4	Filmen	Film	NOUN	NN	Case=Dat|Gender=Masc|Number=Plur	21	obl	_	_
+5	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	4	nmod	_	_
+6	(	(	PUNCT	$(	PunctType=Brck	8	punct	_	SpaceAfter=No
+7	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	Ausnahme	Ausnahme	NOUN	NN	Gender=Fem|Number=Sing	21	obl	_	_
+9	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+10	Kurzfilms	Kurzfilm	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	8	nmod	_	_
+11	The	The	X	FM	Foreign=Yes	10	appos	_	_
+12	Hire	Hire	X	FM	Foreign=Yes	11	flat	_	SpaceAfter=No
+13	:	:	PUNCT	$.	PunctType=Peri	8	punct	_	_
+14	Chosen	Chose	NOUN	NN	_	8	appos	_	SpaceAfter=No
+15	)	)	PUNCT	$(	PunctType=Brck	8	punct	_	_
+16	hat	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	21	aux	_	_
+17	Schamus	Schamus	NOUN	NN	_	21	nsubj	_	_
+18	seither	seither	ADV	ADV	_	21	advmod	_	_
+19	entscheidende	entscheidend	ADJ	ADJA	Degree=Pos|Number=Plur	20	amod	_	_
+20	Funktionen	Funktion	NOUN	NN	Gender=Fem|Number=Plur	21	obj	_	_
+21	ausgeübt	ausüben	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+22	.	.	PUNCT	$,	PunctType=Comm	21	punct	_	_
+
+# DDC:BREAK.s[108] = 2399
+# DDC:BREAK.p[41] = 2399
+# text = Auch die regelmäßige Zusammenarbeit mit dem Filmeditor Tim Squyres nahm in Lees Erstling ihren Anfang .
+1	Auch	auch	ADV	ADV	_	4	advmod	_	_
+2	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	4	det	_	_
+3	regelmäßige	regelmäßig	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	4	amod	_	_
+4	Zusammenarbeit	Zusammenarbeit	NOUN	NN	Gender=Fem|Number=Sing	10	nsubj	_	_
+5	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	7	case	_	_
+6	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	7	det	_	_
+7	Filmeditor	Filmeditor	NOUN	NN	Gender=Masc|Number=Sing	4	nmod	_	_
+8	Tim	Tim	PROPN	NE	Gender=Masc|Number=Sing	7	flat:name	_	_
+9	Squyres	Squyres	PROPN	NE	Case=Gen	7	flat:name	_	_
+10	nahm	nehmen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+11	in	in	ADP	APPR	AdpType=Prep|Case=Dat	13	case	_	_
+12	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	13	nmod	_	_
+13	Erstling	Erstling	NOUN	NN	Gender=Masc|Number=Sing	10	obl	_	_
+14	ihren	ihr	DET	PPOSAT	Case=Acc|Gender=Masc|Gender[psor]=Fem|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	15	det	_	_
+15	Anfang	Anfang	NOUN	NN	Gender=Masc|Number=Sing	10	obj	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	10	punct	_	_
+
+# DDC:BREAK.s[109] = 2415
+# text = Mit Ausnahme des Erfolgsfilms Brokeback Mountain von 2005 hat Squires jeden Film , den Ang Lee gedreht hat , geschnitten .
+1	Mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	2	case	_	_
+2	Ausnahme	Ausnahme	NOUN	NN	Gender=Fem|Number=Sing	20	obl	_	_
+3	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	4	det	_	_
+4	Erfolgsfilms	Erfolgsfilm	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	2	nmod	_	_
+5	Brokeback	Brokeback	X	FM	Foreign=Yes	4	appos	_	_
+6	Mountain	Mountain	PROPN	NE	_	5	flat:name	_	_
+7	von	von	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	2005	2005	NUM	CARD	NumType=Card|Number=Plur	4	nmod	_	_
+9	hat	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	20	aux	_	_
+10	Squires	Squires	PROPN	NE	_	20	nsubj	_	_
+11	jeden	jede	DET	PIDAT	Case=Acc|Gender=Masc|Number=Sing|PronType=Tot	12	det	_	_
+12	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	20	obj	_	SpaceAfter=No
+13	,	,	PUNCT	$,	PunctType=Comm	17	punct	_	_
+14	den	d	PRON	PRELS	Case=Acc|Gender=Masc|Number=Sing|PronType=Dem,Rel	17	obj	_	_
+15	Ang	Ang	PROPN	NE	_	17	nsubj	_	_
+16	Lee	Lee	PROPN	NE	Number=Sing	15	flat:name	_	_
+17	gedreht	drehen	VERB	VVPP	Aspect=Perf|VerbForm=Part	12	acl	_	_
+18	hat	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	17	aux	_	SpaceAfter=No
+19	,	,	PUNCT	$,	PunctType=Comm	17	punct	_	_
+20	geschnitten	schneiden	VERB	VVPP	Aspect=Perf|VerbForm=Part	0	ROOT	_	_
+21	.	.	PUNCT	$.	PunctType=Peri	20	punct	_	_
+
+# DDC:BREAK.s[110] = 2436
+# DDC:BREAK.p[42] = 2436
+# text = Nach dem Erfolg seines Erstlings konnte Lee als Nächstes Das Hochzeitsbankett ( 1993 ) drehen , eine Komödie über die fingierte Eheschließung eines homosexuellen Exil-Taiwaners in den USA .
+1	Nach	nach	ADP	APPR	AdpType=Prep|Case=Dat	3	case	_	_
+2	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	3	det	_	_
+3	Erfolg	Erfolg	NOUN	NN	Gender=Masc|Number=Sing	9	nmod	_	_
+4	seines	seine	DET	PPOSAT	Case=Gen|Gender=Masc|Gender[psor]=Masc,Neut|Number=Sing|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	5	det	_	_
+5	Erstlings	Erstling	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	3	nmod	_	_
+6	konnte	können	AUX	VMFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|VerbType=Mod	9	aux	_	_
+7	Lee	Lee	PROPN	NE	Number=Sing	9	nsubj	_	_
+8	als	als	CCONJ	KOKOM	ConjType=Comp	9	mark	_	_
+9	Nächstes	nächst	NOUN	NN	_	0	ROOT	_	_
+10	Das	d	DET	ART	Case=Acc|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	11	det	_	_
+11	Hochzeitsbankett	Hochzeitsbankett	NOUN	NN	Gender=Neut|Number=Sing	15	obj	_	_
+12	(	(	PUNCT	$(	PunctType=Brck	13	punct	_	SpaceAfter=No
+13	1993	1993	NUM	CARD	NumType=Card|Number=Plur	11	nmod	_	SpaceAfter=No
+14	)	)	PUNCT	$(	PunctType=Brck	13	punct	_	_
+15	drehen	drehen	VERB	VVINF	VerbForm=Inf	0	ROOT	_	SpaceAfter=No
+16	,	,	PUNCT	$,	PunctType=Comm	18	punct	_	_
+17	eine	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	18	det	_	_
+18	Komödie	Komödie	NOUN	NN	Gender=Fem|Number=Sing	11	appos	_	_
+19	über	über	ADP	APPR	AdpType=Prep|Case=Acc	22	case	_	_
+20	die	d	DET	ART	Case=Acc|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	22	det	_	_
+21	fingierte	fingiert	ADJ	ADJA	Degree=Pos|Gender=Fem|Number=Sing	22	amod	_	_
+22	Eheschließung	Eheschließung	NOUN	NN	Gender=Fem|Number=Sing	18	nmod	_	_
+23	eines	eine	DET	ART	Case=Gen|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	25	det	_	_
+24	homosexuellen	homosexuell	ADJ	ADJA	Degree=Pos|Number=Sing	25	amod	_	_
+25	Exil-Taiwaners	Exil-Taiwaner	NOUN	NN	Case=Gen|Gender=Masc|Number=Sing	22	nmod	_	_
+26	in	in	ADP	APPR	AdpType=Prep|Case=Dat	28	case	_	_
+27	den	d	DET	ART	Case=Dat|Definite=Def|Number=Plur|PronType=Art	28	det	_	_
+28	USA	USA	PROPN	NE	Number=Plur	22	nmod	_	_
+29	.	.	PUNCT	$.	PunctType=Peri	15	punct	_	_
+
+# DDC:BREAK.s[111] = 2465
+# text = Erneut taucht hier die Figur des strengen , aber weisen Familienoberhaupts auf .
+1	Erneut	erneut	ADJ	ADJD	Degree=Pos|Variant=Short	2	advmod	_	_
+2	taucht	tauchen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+3	hier	hier	ADV	ADV	_	2	advmod	_	_
+4	die	d	DET	ART	Case=Nom|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	_
+5	Figur	Figur	NOUN	NN	Gender=Fem|Number=Sing	2	nsubj	_	_
+6	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	11	det	_	_
+7	strengen	streng	ADJ	ADJA	Degree=Pos|Number=Sing	11	amod	_	SpaceAfter=No
+8	,	,	PUNCT	$,	PunctType=Comm	10	punct	_	_
+9	aber	aber	CCONJ	KON	_	10	cc	_	_
+10	weisen	weisen	ADJ	ADJA	Degree=Pos|Number=Sing	7	conj	_	_
+11	Familienoberhaupts	Familienoberhaupt	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	5	nmod	_	_
+12	auf	auf	ADP	PTKVZ	PartType=Vbp	2	compound:prt	_	_
+13	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[112] = 2478
+# text = Hatte Schiebende Hände zunächst vor allem in Taiwan für Aufmerksamkeit ( und Preise ) gesorgt , wurde mit dem zweiten Langfilm Lees auch Europa auf den aufstrebenden Regisseur aufmerksam :
+1	Hatte	haben	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	15	aux	_	_
+2	Schiebende	schiebend	ADJ	ADJA	Degree=Pos|Number=Plur	3	amod	_	_
+3	Hände	Hand	NOUN	NN	Gender=Fem|Number=Plur	15	nsubj	_	_
+4	zunächst	zunächst	ADV	ADV	_	15	advmod	_	_
+5	vor	vor	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+6	allem	alle	DET	PIS	Case=Dat|Gender=Neut|Number=Sing|PronType=Tot	8	det	_	_
+7	in	in	ADP	APPR	AdpType=Prep|Case=Dat	8	case	_	_
+8	Taiwan	Taiwan	PROPN	NE	Number=Sing	15	obl	_	_
+9	für	für	ADP	APPR	AdpType=Prep|Case=Acc	10	case	_	_
+10	Aufmerksamkeit	Aufmerksamkeit	NOUN	NN	Gender=Fem|Number=Sing	15	obj	_	_
+11	(	(	PUNCT	$(	PunctType=Brck	13	punct	_	SpaceAfter=No
+12	und	und	CCONJ	KON	_	13	cc	_	_
+13	Preise	Preis	NOUN	NN	Gender=Masc|Number=Plur	10	conj	_	SpaceAfter=No
+14	)	)	PUNCT	$(	PunctType=Brck	13	punct	_	_
+15	gesorgt	sorgen	VERB	VVPP	Aspect=Perf|VerbForm=Part	17	xcomp	_	SpaceAfter=No
+16	,	,	PUNCT	$,	PunctType=Comm	15	punct	_	_
+17	wurde	werden	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+18	mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	21	case	_	_
+19	dem	d	DET	ART	Case=Dat|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	21	det	_	_
+20	zweiten	zweit	ADJ	ADJA	Degree=Pos|Number=Sing	21	amod	_	_
+21	Langfilm	Langfilm	NOUN	NN	Gender=Masc|Number=Sing	17	obl	_	_
+22	Lees	Lees	PROPN	NE	Case=Gen|Number=Sing	21	nmod	_	_
+23	auch	auch	ADV	ADV	_	24	advmod	_	_
+24	Europa	Europa	PROPN	NE	Gender=Fem|Number=Sing	17	nsubj	_	_
+25	auf	auf	ADP	APPR	AdpType=Prep|Case=Acc	28	case	_	_
+26	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	28	det	_	_
+27	aufstrebenden	aufstrebend	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	28	amod	_	_
+28	Regisseur	Regisseur	NOUN	NN	Gender=Masc|Number=Sing	29	obl	_	_
+29	aufmerksam	aufmerksam	ADJ	ADJD	Degree=Pos|Variant=Short	17	advmod	_	_
+30	:	:	PUNCT	$.	PunctType=Peri	17	punct	_	_
+
+# DDC:BREAK.s[113] = 2508
+# text = Der Film erhielt bei der Berlinale 1993 den Goldenen Bären als Bester fremdsprachiger Film und war zudem für einen Oscar nominiert .
+1	Der	d	DET	ART	Case=Nom|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	2	det	_	_
+2	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	3	nsubj	_	_
+3	erhielt	erhalten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+4	bei	bei	ADP	APPR	AdpType=Prep|Case=Dat	6	case	_	_
+5	der	d	DET	ART	Case=Dat|Definite=Def|Gender=Fem|Number=Sing|PronType=Art	6	det	_	_
+6	Berlinale	Berlinale	NOUN	NN	Gender=Fem|Number=Sing	3	obl	_	_
+7	1993	1993	NUM	CARD	NumType=Card|Number=Plur	6	nmod	_	_
+8	den	d	DET	ART	Case=Acc|Definite=Def|Gender=Masc|Number=Sing|PronType=Art	10	det	_	_
+9	Goldenen	golden	ADJ	ADJA	Case=Acc|Degree=Pos|Gender=Masc|Number=Sing	10	amod	_	_
+10	Bären	Bär	NOUN	NN	Gender=Masc|Number=Sing	3	obj	_	_
+11	als	als	CCONJ	KOKOM	ConjType=Comp	14	case	_	_
+12	Bester	Bester	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	14	amod	_	_
+13	fremdsprachiger	fremdspracheig	ADJ	ADJA	Case=Nom|Degree=Pos|Gender=Masc|Number=Sing	14	amod	_	_
+14	Film	Film	NOUN	NN	Gender=Masc|Number=Sing	10	obl	_	_
+15	und	und	CCONJ	KON	_	21	cc	_	_
+16	war	sein	AUX	VAFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	21	aux:pass	_	_
+17	zudem	zudem	ADV	PROAV	_	21	advmod	_	_
+18	für	für	ADP	APPR	AdpType=Prep|Case=Acc	20	case	_	_
+19	einen	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	20	det	_	_
+20	Oscar	Oscar	PROPN	NN	Gender=Masc|Number=Sing	21	obl	_	_
+21	nominiert	nominieren	VERB	VVPP	Aspect=Perf|VerbForm=Part	3	conj	_	_
+22	.	.	PUNCT	$,	PunctType=Comm	3	conj	_	_
+
+# DDC:BREAK.s[114] = 2530
+# text = Er gilt darüber hinaus als einer der profitabelsten Low-Budget-Filme des Jahres 1993 .
+1	Er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	2	nsubj	_	_
+2	gilt	gelten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	ROOT	_	_
+3	darüber	darüber	ADV	PROAV	PronType=Dem	2	advmod	_	_
+4	hinaus	hinaus	ADP	APZR	AdpType=Circ	3	case	_	_
+5	als	als	CCONJ	KOKOM	ConjType=Comp	6	case	_	_
+6	einer	eine	DET	PIS	Case=Nom|Definite=Ind|Gender=Masc|NumType=Card|Number=Sing|PronType=Art	2	obl	_	_
+7	der	d	DET	ART	Case=Gen|Definite=Def|Number=Plur|PronType=Art	9	det	_	_
+8	profitabelsten	profitabel	ADJ	ADJA	Degree=Sup|Number=Plur	9	amod	_	_
+9	Low-Budget-Filme	Low-Budget-Film	NOUN	NN	Gender=Masc|Number=Plur	6	nmod	_	_
+10	des	d	DET	ART	Case=Gen|Definite=Def|Gender=Neut|Number=Sing|PronType=Art	11	det	_	_
+11	Jahres	Jahr	NOUN	NN	Case=Gen|Gender=Neut|Number=Sing	9	nmod	_	_
+12	1993	1993	NUM	CARD	NumType=Card|Number=Plur	11	nmod	_	_
+13	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
+
+# DDC:BREAK.s[115] = 2543
+# text = Mit nur einer Million US-Dollar Produktionskosten erzielte er ein Einspielergebnis von über 23 Millionen US-Dollar .
+1	Mit	mit	ADP	APPR	AdpType=Prep|Case=Dat	5	case	_	_
+2	nur	nur	ADV	ADV	_	3	advmod	_	_
+3	einer	eine	DET	ART	Case=Dat|Definite=Ind|Gender=Fem|NumType=Card|Number=Sing|PronType=Art	4	det	_	_
+4	Million	Million	NOUN	NN	Gender=Fem|Number=Sing	5	nummod	_	_
+5	US-Dollar	Us-Dollar	NOUN	NN	Gender=Masc|Number=Plur	7	obl	_	_
+6	Produktionskosten	Produktionskosten	NOUN	NN	Gender=Neut|Number=Sing	5	appos	_	_
+7	erzielte	erzielen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin	0	ROOT	_	_
+8	er	er	PRON	PPER	Case=Nom|Gender=Masc|Number=Sing|Person=3|PronType=Prs	7	nsubj	_	_
+9	ein	eine	DET	ART	Case=Acc|Definite=Ind|Gender=Neut|NumType=Card|Number=Sing|PronType=Art	10	det	_	_
+10	Einspielergebnis	Einspielergebnis	NOUN	NN	Gender=Neut|Number=Sing	7	obj	_	_
+11	von	von	ADP	APPR	AdpType=Prep|Case=Dat	15	case	_	_
+12	über	über	ADV	ADV	_	13	advmod	_	_
+13	23	23	NUM	CARD	NumType=Card|Number=Plur	14	nummod	_	_
+14	Millionen	Million	NOUN	NN	Gender=Fem|Number=Plur	15	nummod	_	_
+15	US-Dollar	Us-Dollar	NOUN	NN	Gender=Masc|Number=Plur	10	nmod	_	_
+16	.	.	PUNCT	$.	PunctType=Peri	7	punct	_	_

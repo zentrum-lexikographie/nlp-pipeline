@@ -30,7 +30,7 @@
       (for [token tokens]
         [:w (cond-> {:xml:id (word-id (token :n))}
               (not (token :space-after?)) (assoc :space "no"))
-         [:t (token :text)]
+         [:t (token :form)]
          (class-prop :lemma (token :lemma))
          (into (class-prop :pos (some-> token :xpos tag->str))
                (list (feat-prop :num    (some-> token :number tag->str))

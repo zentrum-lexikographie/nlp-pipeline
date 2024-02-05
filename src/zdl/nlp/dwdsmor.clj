@@ -36,7 +36,7 @@
    "APPR"    #{"PREP"}
    "APPRART" #{"PREPART"}
    "APZR"    #{"POSTP" "PREP"}
-   "Cmp"     #{"Comp"}
+   "CMP"     #{"Comp"}
    "ITJ"     #{"INTJ"}
    "KOKOM"   #{"CONJ"}
    "KON"     #{"CONJ"}
@@ -64,8 +64,8 @@
    "PWAT"    #{"WPRO"}
    "PWAV"    #{"ADV"}
    "PWS"     #{"WPRO"}
-   "Sing"    #{"Sg"}
-   "Plur"    #{"Pl"}
+   "SING"    #{"Sg"}
+   "PLUR"    #{"Pl"}
    "VAFIN"   #{"V"}
    "VAIMP"   #{"V"}
    "VAINF"   #{"V"}

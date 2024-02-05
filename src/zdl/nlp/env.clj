@@ -39,14 +39,3 @@
 (def dwdsmor-lemmatizer-automaton
   (some-> (get-env "DWDSMOR_LEMMATIZER_AUTOMATON")
           (io/file)))
-
-(def dstar-corpora-user
-  (get-env "DSTAR_CORPORA_USER"))
-
-(def dstar-corpora-password
-  (get-env "DSTAR_CORPORA_PASSWORD"))
-
-(def dstar-corpora-credentials
-  (when (and dstar-corpora-user dstar-corpora-password)
-    {:basic-auth {:user dstar-corpora-user
-                  :pass dstar-corpora-password}}))
