@@ -1,6 +1,6 @@
 (ns zdl.nlp.dwdsmor
   (:require [clojure.set :refer [intersection]]
-            [zdl.nlp.env :as env]))
+            [zdl.env :as env]))
 
 (def transducer
   (delay

@@ -1,4 +1,5 @@
 *~
+*.temp
 
 .clerk/
 .cpcache/
@@ -10,7 +11,9 @@ __pycache__
 .pytest_cache/
 
 classes/
+jars/
 public/
 resources/
 
 .env
+

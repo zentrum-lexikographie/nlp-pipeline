@@ -52,11 +52,11 @@
 
 (defn tokenize
   [s]
-  {:text s
-   :sentences (vec (assoc-space-after (map (partial segment-tokens s)
-                                           (segment-sentences s))))})
+  (locking tokenizer
+    {:text      s
+     :sentences (vec (assoc-space-after (map (partial segment-tokens s)
+                                             (segment-sentences s))))}))
 
 (comment
-  (every?
-   schema/valid-sentence?
-   (:sentences (tokenize "Das ist ein erster Test. Das ist ein zweiter Satz!"))))
+  (schema/valid-chunk?
+   (tokenize "Das ist ein erster Test. Das ist ein zweiter Satz!")))

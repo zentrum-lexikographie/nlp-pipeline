@@ -1,32 +1,35 @@
-{:paths   ["classes" "src"]
- :deps    {org.clojure/data.csv                            {:mvn/version "1.0.1"}
-           camel-snake-kebab/camel-snake-kebab             {:mvn/version "0.4.3"}
-           io.github.cdimascio/dotenv-java                 {:mvn/version "3.0.0"}
-           hato/hato                                       {:mvn/version "0.9.0"}
-           metosin/jsonista                                {:mvn/version "0.3.8"}
-           metosin/malli                                   {:mvn/version "0.14.0"}
-           com.taoensso/timbre                             {:mvn/version "6.3.1"}
-           com.fzakaria/slf4j-timbre                       {:mvn/version "0.4.0"}
-           io.github.gremid/clj-xml                        {:git/sha "05e925830c8974fd76f8b67773e7263634e55e32"}
-           com.fasterxml.woodstox/woodstox-core            {:mvn/version "6.5.1"}
-           de.ids-mannheim.korap.tokenizer/KorAP-Tokenizer {:mvn/version "2.2.5"}
-           com.carrotsearch/langid-java                    {:mvn/version "1.0.0"}
-           com.dynatrace.hash4j/hash4j                     {:mvn/version "0.15.0"}
-           dali/dali                                       {:mvn/version "1.0.2"}
-           garden/garden                                   {:git/url "https://github.com/noprompt/garden.git"
-                                                            :git/sha "05590ecb5f6fa670856f3d1ab400aa4961047480"}
-           clj-python/libpython-clj                        {:mvn/version "2.024"}}
- :aliases {:test   {:extra-paths ["test"]}
-           :build  {:ns-default build
-                    :extra-deps {org.clojure/data.csv          {:mvn/version "1.0.1"}
-                                 io.github.clojure/tools.build {:git/tag "v0.9.6"
-                                                                :git/sha "8e78bcc"}
-                                 org.relaxng/jing              {:mvn/version "20181222"
-                                                                :exclusions  [xml-apis/xml-apis
-                                                                              net.sf.saxon/Saxon-HE]}
-                                 org.kohsuke.rngom/rngom       {:mvn/version "20100718"}}}
-           :clerk  {:extra-paths ["dev"]
-                    :extra-deps  {io.github.nextjournal/clerk {:mvn/version "0.15.957"}}}
-           :python {:jvm-opts ["--add-modules"
-                               "jdk.incubator.foreign,jdk.incubator.vector"
-                               "--enable-native-access=ALL-UNNAMED"]}}}
+{:paths   ["src"]
+ :deps    {org.clojure/data.csv                 {:mvn/version "1.0.1"}
+           camel-snake-kebab/camel-snake-kebab  {:mvn/version "0.4.3"}
+           lambdaisland/uri                     {:mvn/version "1.16.134"}
+           io.github.cdimascio/dotenv-java      {:mvn/version "3.0.0"}
+           hato/hato                            {:mvn/version "0.9.0"}
+           metosin/jsonista                     {:mvn/version "0.3.8"}
+           metosin/malli                        {:mvn/version "0.14.0"}
+           com.taoensso/timbre                  {:mvn/version "6.3.1"}
+           com.fzakaria/slf4j-timbre            {:mvn/version "0.4.0"}
+           io.github.gremid/clj-xml             {:git/sha "05e925830c8974fd76f8b67773e7263634e55e32"}
+           com.fasterxml.woodstox/woodstox-core {:mvn/version "6.5.1"}}
+ :aliases {:build    {:ns-default build
+                      :extra-deps {io.github.clojure/tools.build {:git/tag "v0.9.6"
+                                                                  :git/sha "8e78bcc"}
+                                   com.taoensso/timbre           {:mvn/version "6.3.1"}}}
+           :test     {:extra-paths ["test"]}
+           :clerk    {:extra-paths ["dev"]
+                      :extra-deps  {io.github.nextjournal/clerk {:mvn/version "0.15.957"}}}
+           :rngom    {:extra-deps {org.relaxng/jing        {:mvn/version "20181222"}
+                                   org.kohsuke.rngom/rngom {:mvn/version "20100718"}
+                                   xerces/xercesImpl       {:mvn/version "2.12.2"}}}
+           :python   {:extra-deps {clj-python/libpython-clj {:mvn/version "2.024"}}
+                      :jvm-opts   ["--add-modules"
+                                   "jdk.incubator.foreign,jdk.incubator.vector"
+                                   "--enable-native-access=ALL-UNNAMED"]}
+           :cli      {:extra-deps {org.clojure/tools.cli {:mvn/version "1.1.230"}}}
+           :hfst     {:extra-paths ["classes/hfst"]}
+           :annotate {:extra-deps {de.ids-mannheim.korap.tokenizer/KorAP-Tokenizer {:mvn/version "2.2.5"}
+                                   com.carrotsearch/langid-java                    {:mvn/version "1.0.0"}
+                                   com.dynatrace.hash4j/hash4j                     {:mvn/version "0.15.0"}}}
+           :vis      {:extra-deps {dali/dali     {:mvn/version "1.0.2"}
+                                   garden/garden {:git/url    "https://github.com/noprompt/garden.git"
+                                                  :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
+                                                  :exclusions [org.clojure/clojurescript]}}}}}

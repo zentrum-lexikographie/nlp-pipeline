@@ -107,7 +107,7 @@
 ^{::clerk/visibility {:result :hide}}
 (require '[zdl.nlp.folia :as folia]
          '[gremid.xml :as gxml]
-         '[zdl.nlp.xml :as xml])
+         '[zdl.xml :as xml])
 
 (into [] (map-indexed (fn [i s] (folia/sentence (str "s." (inc i)) s))) annotated)
 

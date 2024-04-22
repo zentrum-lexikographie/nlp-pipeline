@@ -64,4 +64,4 @@
     (into [] (map gxml/text) texts)))
 
 (comment
-  (count (texts)))
+  (rand-nth (take 100 (texts))))

@@ -83,7 +83,8 @@
   at least two consecutive spaces."
   [i s]
   (->> (str/split s #"\t| {2,}") (map decode-field) (zipmap *fields*)
-       (decode-features) (reset-n i) (reset-head)))
+       (decode-features) (reset-n i) (reset-head)
+       (reduce (fn [m [k v]] (cond-> m (some? v) (assoc k v))) {})))
 
 (defn comment-line?
   "Comment lines with sentence metadata start with a hash symbol."
@@ -92,23 +93,24 @@
 
 (defn parse-chunk
   [s]
-  (let [[metadata tokens] (split-with comment-line? s)]
-    (cond-> {}
-      (seq metadata) (merge (decode-metadata metadata))
-      (seq tokens)   (assoc :tokens (map-indexed decode-token tokens)))))
+  (let [[m t] (split-with comment-line? s)
+        m     (when (seq m) (decode-metadata m))
+        s     (when (seq t) {:tokens (map-indexed decode-token t)})]
+    (schema/decode-chunk
+     (merge m
+            {:sentences (cond-> [] s (conj s))}
+            (when-not (:text m) {:text (str/join (schema/sentence->text s))})))))
 
 (defn empty-line?
   [s]
   (= "" s))
 
-(def parse-xf
+(def lines->chunks-xf
   (comp
    (partition-by empty-line?)
-   (remove (comp empty-line? first))
-   (map parse-chunk)
-   (map schema/decode-sentence)))
+   (remove (comp empty-line? first))))
 
 (defn parse
   "Parses sentences read from a given reader and separated by empty lines."
   [lines]
-  (sequence parse-xf lines))
+  (sequence (comp lines->chunks-xf (map parse-chunk)) lines))

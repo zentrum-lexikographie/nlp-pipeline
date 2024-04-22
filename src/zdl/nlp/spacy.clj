@@ -1,8 +1,9 @@
 (ns zdl.nlp.spacy
-  (:require [zdl.nlp.env :as env]
-            [zdl.nlp.util :refer [assoc*]]
+  (:require [zdl.env :as env]
+            [zdl.util :refer [assoc*]]
             [clojure.string :as str]
-            [zdl.schema :as schema]))
+            [zdl.schema :as schema]
+            [taoensso.timbre :as log]))
 
 (require '[libpython-clj2.python :as py]
          '[libpython-clj2.require :refer [require-python]])
@@ -13,12 +14,18 @@
   (delay
     (when env/spacy-dep-model
       #_:clj-kondo/ignore
-      (spacy/load env/spacy-dep-model))))
+      (let [model (spacy/load env/spacy-dep-model)]
+        (log/infof "Loaded spaCy dependency tagger model '%s'"
+                   env/spacy-dep-model)
+        model))))
 
 (defonce ner-tagger
   (delay
     (when env/spacy-ner-model
-      (spacy/load env/spacy-ner-model))))
+      (let [model (spacy/load env/spacy-ner-model)]
+        (log/infof "Loaded spaCy NER tagger model '%s'"
+                   env/spacy-ner-model)
+        model))))
 
 (defn segment->doc
   [tagger {:keys [sentences]}]
@@ -62,15 +69,17 @@
      (let [sent-n (partial sent-n (py/py.- s "start"))]
        (->>
         (for [[token t] (map list (sentence :tokens) s)]
-          (let [t-attr (partial t-attr t)
-                t-tag  (comp schema/tag-str normalize-punct t-attr)
-                m-attr (partial m-attr (py/py.- t "morph"))
-                deprel (t-tag "dep_")
-                head   (when (not= deprel "ROOT")
-                         (sent-n (py/py.- (t-attr "head") "i")))]
+          (let [t-attr  (partial t-attr t)
+                t-tag   (comp schema/tag-str normalize-punct t-attr)
+                m-attr  (partial m-attr (py/py.- t "morph"))
+                deprel  (t-tag "dep_")
+                head    (when (not= deprel "ROOT")
+                         (sent-n (py/py.- (t-attr "head") "i")))
+                wordvec (when (t-attr "has_vector") (t-attr "vector"))]
             (-> token
                 (assoc* :deprel deprel)
                 (assoc* :head   head)
+                (assoc* :wordvec wordvec)
                 (assoc* :lemma  (t-attr "lemma_"))
                 (assoc* :oov?   (t-attr "is_oov"))
                 (assoc* :upos   (t-tag "pos_"))
@@ -92,11 +101,12 @@
      (let [sent-n (partial sent-n (py/py.- s "start"))]
        (->>
         (for [entity (py/py.- s "ents")]
-          {:label (-> entity (py/py.- "label_") schema/tag-str)
+          {:type    :entity
+           :label   (-> entity (py/py.- "label_") schema/tag-str)
            :targets (->> (range (sent-n  (py/py.- entity "start"))
                                 (sent-n  (py/py.- entity "end")))
                          (into []))})
-        (vec) (not-empty) (assoc* sentence :entities))))
+        (vec) (not-empty) (assoc* sentence :spans))))
    (vec) (assoc segment :sentences)))
 
 (defn merge-annotations
@@ -111,6 +121,6 @@
         ner-tagger @ner-tagger
         dep-docs   (map (partial segment->doc dep-tagger) segments)
         ner-docs   (map (partial segment->doc ner-tagger) segments)
-        dep-docs   (future (pipe dep-tagger dep-docs))
-        ner-docs   (future (pipe ner-tagger ner-docs))]
-    (pmap merge-annotations segments @dep-docs @ner-docs)))
+        dep-docs   (pipe dep-tagger dep-docs)
+        ner-docs   (pipe ner-tagger ner-docs)]
+    (pmap merge-annotations segments dep-docs ner-docs)))

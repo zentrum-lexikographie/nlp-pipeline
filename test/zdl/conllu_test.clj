@@ -11,5 +11,5 @@
 
 (deftest parse-sample
   (with-open [r (io/reader sample)]
-    (doseq [s (conllu/parse (line-seq r))]
-      (is (schema/valid-sentence? s) (m/explain schema/Sentence s)))))
+    (doseq [c (conllu/parse (line-seq r))]
+      (is (schema/valid-chunk? c) (m/explain schema/Chunk c)))))

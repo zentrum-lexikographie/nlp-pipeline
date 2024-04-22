@@ -158,8 +158,8 @@
     (assoc entity :start (first targets) :end (last targets))))
 
 (defn entities
-  [{:keys [entities]}]
-  (let [levels (->> entities
+  [{:keys [spans]}]
+  (let [levels (->> (filter #(= :entity (:type %)) spans)
                     (map-indexed #(assoc (entity->ranges %2) :n %1))
                     (sort-by (juxt #(- (:end %) (:start %)) :start))
                     (reduce (partial assign-range-level <) []))]
@@ -192,8 +192,8 @@
   [[(+ x1 (/ w1 2)) y] [(+ x2 (/ w2 2)) y]])
 
 (defn collocations
-  [{:keys [collocations]}]
-  (let [levels (->> collocations
+  [{:keys [spans]}]
+  (let [levels (->> (filter #(= :collocation (:type %)) spans)
                     (map-indexed #(assoc %2 :n %1))
                     (mapcat collocation->relations)
                     (map-indexed #(assoc %2 :i %1))
@@ -220,7 +220,9 @@
 ;; ## Tokens and tagging
 
 (def token->tags
-  (juxt :upos :xpos :number :gender :case :person :tense))
+  (juxt :upos :xpos
+        :number :gender :case :person :tense :mood :degree
+        :verb-form :verb-type :pron-type :num-type :part-type))
 
 (defn tagging
   [{:keys [tokens]}]

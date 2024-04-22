@@ -109,7 +109,8 @@
     (when (and (= pattern-len (count path))
                (every? identity (map collo-pattern-matches-token? pattern path))
                (matches? sentence path))
-      (list {:label k
+      (list {:type    :collocation
+             :label   k
              :targets (into [] (map :n path))}))))
 
 (defn collocations

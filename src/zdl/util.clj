@@ -1,4 +1,4 @@
-(ns zdl.nlp.util)
+(ns zdl.util)
 
 (defn assoc*
   [m k v]

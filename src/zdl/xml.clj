@@ -1,8 +1,8 @@
-(ns zdl.nlp.xml
+(ns zdl.xml
   (:require
    [clojure.java.io :as io]
-   [gremid.xml :as gxml]
-   [clojure.string :as str])
+   [clojure.string :as str]
+   [gremid.xml :as gxml])
   (:import
    (com.ctc.wstx.api WstxOutputProperties)
    (javax.xml.stream XMLInputFactory)

@@ -2,7 +2,8 @@
   (:require
    [camel-snake-kebab.core :as csk]
    [malli.core :as m]
-   [malli.transform :as mt]))
+   [malli.transform :as mt]
+   [clojure.string :as str]))
 
 (def key-keyword
   (memoize #(some-> % csk/->kebab-case-keyword)))
@@ -19,6 +20,7 @@
    [:n [:int {:min 0}]]
    [:form :string]
    [:space-after? :boolean]
+   [:hit? {:optional true} :boolean]
    [:start {:optional true} [:int {:min 0}]]
    [:end {:optional true} [:int {:min 0}]]
    [:oov? {:optional true} :boolean]
@@ -66,7 +68,7 @@
 (def Span
   [:map
    [:label [:string tag-coding]]
-   [:targets [:vector [:int {:min 1}]]]])
+   [:targets [:vector [:int {:min 0}]]]])
 
 (def Sentence
   [:map
@@ -75,8 +77,8 @@
    [:start {:optional true} [:int {:min 0}]]
    [:end {:optional true} [:int {:min 0}]]
    [:tokens {:optional true} [:vector Token]]
-   [:entities {:optional true} [:vector Span]]
-   [:collocations {:optional true} [:vector Span]]])
+   [:spans {:optional true} [:vector Span]]
+   [:gdex {:optional true} [:double]]])
 
 (def transformer
   (mt/string-transformer))
@@ -89,3 +91,27 @@
 
 (def valid-sentence?
   (m/validator Sentence))
+
+(defn token->text
+  [{:keys [form space-after?]}]
+  (str form (when space-after? " ")))
+
+(defn sentence->text
+  [{:keys [tokens]}]
+  (str/join (map token->text tokens)))
+
+(def Chunk
+  [:map
+   [:text :string]
+   [:sentences [:vector Sentence]]
+   [:lang {:optional true} :string]
+   [:fingerprint {:optional true} :string]])
+
+(def encode-chunk
+  (m/encoder Chunk transformer))
+
+(def decode-chunk
+  (m/decoder Chunk transformer))
+
+(def valid-chunk?
+  (m/validator Chunk))
