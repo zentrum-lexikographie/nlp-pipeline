@@ -5,7 +5,8 @@
             [zdl.schema :as schema]
             [taoensso.timbre :as log]))
 
-(require '[libpython-clj2.python :as py]
+(require '[zdl.python]
+         '[libpython-clj2.python :as py]
          '[libpython-clj2.require :refer [require-python]])
 
 (require-python 'spacy 'spacy.tokens)

@@ -20,15 +20,23 @@
 (def dev?
   (= "dev" environment))
 
+(def python-venv-dir
+  (io/file (get-env "PYTHON_VENV_DIR" "venv")))
+
+(def spacy-disable-model-download?
+  (some? (not-empty (get-env "SPACY_DISABLE_MODEL_DOWNLOAD"))))
+
+(def spacy-gpu?
+  (some? (not-empty (get-env "SPACY_GPU"))))
+
+(def spacy-model-suffix
+  (if spacy-gpu? "dist" "lg"))
+
 (def spacy-dep-model
-  (some->> (get-env "SPACY_DEP_MODEL" "lg")
-           (str/lower-case)
-           (str "de_dwds_dep_hdt_")))
+  (str "de_dwds_dep_hdt_" spacy-model-suffix))
 
 (def spacy-ner-model
-  (some->> (get-env "SPACY_NER_MODEL")
-           (str/lower-case)
-           (str "de_dwds_ner_")))
+  (str "de_dwds_ner_" spacy-model-suffix))
 
 (def spacy-batch-size
   (parse-long (get-env "SPACY_BATCH_SIZE" "1")))
