@@ -8,7 +8,7 @@
 
 (defn annotate-kafka
   []
-  (->> (kafka/texts) (random-sample 0.1) (take 1)
+  (->> (kafka/texts) (rand-nth) (list)
        (map tokenizer/tokenize) annotate))
 
 (deftest annotations
