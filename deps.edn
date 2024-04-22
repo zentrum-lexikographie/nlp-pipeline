@@ -29,7 +29,8 @@
            :annotate {:extra-deps {de.ids-mannheim.korap.tokenizer/KorAP-Tokenizer {:mvn/version "2.2.5"}
                                    com.carrotsearch/langid-java                    {:mvn/version "1.0.0"}
                                    com.dynatrace.hash4j/hash4j                     {:mvn/version "0.15.0"}}}
-           :vis      {:extra-deps {dali/dali     {:mvn/version "1.0.2"}
+           :vis      {:extra-deps {dali/dali     {:git/url "https://github.com/gremid/dali.git"
+                                                  :git/sha "c77492714bb20d653e77061a32d06fc121d0b94c"}
                                    garden/garden {:git/url    "https://github.com/noprompt/garden.git"
                                                   :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
                                                   :exclusions [org.clojure/clojurescript]}}}}}
