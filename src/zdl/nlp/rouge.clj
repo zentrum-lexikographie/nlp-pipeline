@@ -7,7 +7,7 @@
             [zdl.nlp.tokenizer :as tokenizer]))
 
 (defonce equivs
-  (with-open [is (io/input-stream (io/resource "zdl/nlp/germanet.edn.gz"))
+  (with-open [is (io/input-stream (io/file "data" "germanet.edn.gz"))
               is (java.util.zip.GZIPInputStream. is)
               r  (io/reader is)]
     (let [germanet  (read-string (slurp r))
