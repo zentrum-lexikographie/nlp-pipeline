@@ -151,15 +151,15 @@
 (comment
   (do
     (defonce coverage
-      (read-string (slurp (io/file "notebooks/dwdsmor-coverage.edn"))))
+      (read-string (slurp (io/file "data/dwdsmor-coverage.edn"))))
     (->>
      (for [[_pos stats] (:uncovered coverage) [form n] stats :when form] [form n])
      (reduce (fn [m [form n]] (update m form (fnil + 0) n)) {})
      (sort-by (comp - second))
      (csv/write-csv out)
-     (with-open [out (io/writer (io/file "notebooks" "dwdsmor-not-covered.csv"))]))
+     (with-open [out (io/writer (io/file "data" "dwdsmor-not-covered.csv"))]))
     (->>
      (for [[pos cov] (:coverage coverage)] [pos (cov true) (cov false)])
      (sort)
      (csv/write-csv out)
-     (with-open [out (io/writer (io/file "notebooks" "dwdsmor-coverage.csv"))]))))
+     (with-open [out (io/writer (io/file "data" "dwdsmor-coverage.csv"))]))))

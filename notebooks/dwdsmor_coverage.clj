@@ -7,7 +7,7 @@
 
 ;; # DWDSmor Coverage Report
 ;;
-;; _Gregor Middell (19.03.2024)_
+;; _Gregor Middell (23.04.2024)_
 ;;
 
 {:nextjournal.clerk/visibility {:code :hide :result :hide}}
@@ -36,7 +36,7 @@
                   fr (/ f s)]
               [pos s fr tr f t]))
           (sort-key [[pos _s fr _tr f _t]] [(- f) (- fr) pos])]
-    (with-open [in (io/reader (io/file "notebooks" "dwdsmor-coverage.csv"))]
+    (with-open [in (io/reader (io/file "data" "dwdsmor-coverage.csv"))]
       (->>
        (csv/read-csv in)
        (into [] (map parse-record))
@@ -46,7 +46,7 @@
   (reduce (fn [total [_pos s]] (+ total s)) 0 coverage))
 
 (def not-covered
-  (with-open [in (io/reader (io/file "notebooks" "dwdsmor-not-covered.csv"))]
+  (with-open [in (io/reader (io/file "data" "dwdsmor-not-covered.csv"))]
     (->>
      (csv/read-csv in)
      (map (fn [[form n]] [form (parse-long n)]))

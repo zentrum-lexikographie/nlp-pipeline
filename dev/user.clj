@@ -9,3 +9,7 @@
 
 (def build-notebooks!
   (partial clerk/build! {:paths ["notebooks/dwdsmor_coverage.clj"]}))
+
+(comment
+  (serve-notebooks!)
+  (build-notebooks!))
