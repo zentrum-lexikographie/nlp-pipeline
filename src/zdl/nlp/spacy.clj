@@ -11,6 +11,10 @@
 
 (require-python 'spacy 'spacy.tokens)
 
+(when env/spacy-gpu?
+  #_:clj-kondo/ignore
+  (spacy/prefer_gpu))
+
 (defonce dep-tagger
   (delay
     (when env/spacy-dep-model
