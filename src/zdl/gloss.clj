@@ -53,6 +53,6 @@
              (str/join "\n\n"))
         (str "\n\n––\n" (format "[%,d tokens]" tokens)))))
 
-
-(comment
-  (spit (io/file "ecke.md") (generate gpt/openai "Abseits" 100)))
+(defn -main
+  [& _]
+  (println (generate gpt/discolm "Abseits" 10)))
