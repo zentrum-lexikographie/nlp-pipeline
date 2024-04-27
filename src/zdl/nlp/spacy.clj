@@ -1,131 +1,155 @@
 (ns zdl.nlp.spacy
-  (:require [zdl.env :as env]
+  (:refer-clojure :exclude [run!])
+  (:require [babashka.process :refer [check process]]
+            [babashka.fs :as fs]
+            [zdl.nlp.tokenizer :as tokenizer]
+            [zdl.schema :refer [tag-str]]
             [zdl.util :refer [assoc*]]
+            [clojure.java.io :as io]
+            [taoensso.timbre :as log]
+            [clojure.data.csv :as csv]
             [clojure.string :as str]
-            [zdl.schema :as schema]
-            [taoensso.timbre :as log]))
+            [zdl.env :as env]
+            [zdl.schema :as schema]))
 
-(require '[zdl.python]
-         '[libpython-clj2.python :as py]
-         '[libpython-clj2.require :refer [require-python]])
+(def venv-dir
+  env/python-venv-dir)
 
-(require-python 'spacy 'spacy.tokens)
+(def venv-python-exe
+  (io/file venv-dir "bin" "python"))
 
-(when env/spacy-gpu?
-  #_:clj-kondo/ignore
-  (spacy/prefer_gpu))
+(def venv-activate
+  (io/file venv-dir "bin" "activate"))
 
-(defonce dep-tagger
-  (delay
-    (when env/spacy-dep-model
-      #_:clj-kondo/ignore
-      (let [model (spacy/load env/spacy-dep-model)]
-        (log/infof "Loaded spaCy dependency tagger model '%s'"
-                   env/spacy-dep-model)
-        model))))
+(defn venv-cmd
+  [cmd]
+  ["/bin/bash" "-c" (str "source " (str venv-activate) " && " cmd)])
 
-(defonce ner-tagger
-  (delay
-    (when env/spacy-ner-model
-      (let [model (spacy/load env/spacy-ner-model)]
-        (log/infof "Loaded spaCy NER tagger model '%s'"
-                   env/spacy-ner-model)
-        model))))
+(defn run!
+  [cmd]
+  (check (process {:err :inherit :cmd cmd})))
 
-(defn segment->doc
-  [tagger {:keys [sentences]}]
-  (when tagger
-    (let [tokens (mapcat :tokens sentences)]
-      #_:clj-kondo/ignore
-      (spacy.tokens/Doc
-       (py/py.- tagger "vocab")
-       :words (py/->py-list (map :form tokens))
-       :spaces (py/->py-list (map :space-after? tokens))
-       :sent_starts (py/->py-list (map #(zero? (:n %)) tokens))))))
+(defn pip-install
+  [reqs]
+  (let [resource     (str "zdl/nlp/spacy/requirements." reqs ".txt")
+        requirements (-> (io/resource resource) (slurp) (str/split #"\n"))
+        requirements (str/join \space (map #(str "'" % "'") requirements))]
+    (run! (venv-cmd (str "pip install " requirements)))))
 
-(defn pipe
-  [tagger docs]
-  (if tagger
-    (py/py. tagger "pipe" docs
-            :batch_size env/spacy-batch-size
-            :n_process env/spacy-parallel)
-    (repeat nil)))
+(when-not (.exists venv-python-exe)
+  (log/infof "Setting up Python virtual environment")
+  (run! ["python" "-m" "venv" (str venv-dir)])
+  (run! (venv-cmd "python -m pip install -U pip"))
+  (pip-install "base")
+  (when-not env/spacy-disable-model-download?
+    (pip-install (if env/spacy-gpu? "gpu" "cpu"))))
 
-(defn normalize-punct
+(def tagger-script-source
+  (io/resource "zdl/nlp/spacy/tagger.py"))
+
+(def tagger-script
+  (-> {:prefix "tagger-" :suffix ".py"}
+      (fs/create-temp-file)
+      (fs/delete-on-exit)))
+
+(with-open [src  (io/input-stream tagger-script-source)
+            dest (io/output-stream (fs/file tagger-script))]
+  (io/copy src dest))
+
+(def tagger-cmd
+  (->>
+   (cond-> ["python" (str tagger-script) "--batch" env/spacy-batch-size]
+     env/spacy-gpu?   (conj "--gpu")
+     env/spacy-gpu-id (conj "--gpuid" (str env/spacy-gpu-id)))
+   (str/join \space)
+   (venv-cmd)))
+
+(defn extract-spans
+  [n t]
+  (for [[label i] (partition 2 (subvec t 24))] [label i n]))
+
+(defn entity->span
+  [[[label _i] ts]]
+  {:type    :entity
+   :label   (tag-str label)
+   :targets (vec (sort (map (fn [[_label _i n]] n) ts)))})
+
+(defn merge-entity-tagging
+  [t]
+  (->> (map-indexed extract-spans t)
+       (mapcat identity)
+       (group-by #(subvec % 0 2))
+       (into [] (map entity->span))))
+
+(defn pos-tag-str
   [s]
-  (if (some-> s (str/starts-with? "$")) "PUNCT" s))
+  (if (str/starts-with? s "$") "PUNCT" (tag-str s)))
 
-(defn sent-n
-  [s-start n]
-  (- n s-start))
+(defn merge-token-tagging
+  [token [_ _ _ deprel head lemma oov? upos xpos number gender case
+          tense person mood degree punct-type verb-type verb-form
+          conj-type part-type pron-type adp-type definite]]
+  (-> token
+      (assoc* :deprel     (some-> deprel not-empty tag-str))
+      (assoc* :head       (some-> head not-empty parse-long))
+      (assoc* :lemma      (some-> lemma not-empty))
+      (assoc* :oov?       (some-> oov? (= "True")))
+      (assoc* :upos       (some-> upos not-empty pos-tag-str))
+      (assoc* :xpos       (some-> xpos not-empty pos-tag-str))
+      (assoc* :number     (some-> number not-empty tag-str))
+      (assoc* :gender     (some-> gender not-empty tag-str))
+      (assoc* :case       (some-> case not-empty tag-str))
+      (assoc* :tense      (some-> tense not-empty tag-str))
+      (assoc* :person     (some-> person not-empty tag-str))
+      (assoc* :mood       (some-> mood not-empty tag-str))
+      (assoc* :degree     (some-> degree not-empty tag-str))
+      (assoc* :punct-type (some-> punct-type not-empty tag-str))
+      (assoc* :verb-type  (some-> verb-type not-empty tag-str))
+      (assoc* :verb-form  (some-> verb-form not-empty tag-str))
+      (assoc* :conj-type  (some-> conj-type not-empty tag-str))
+      (assoc* :part-type  (some-> part-type not-empty tag-str))
+      (assoc* :pron-type  (some-> pron-type not-empty tag-str))
+      (assoc* :adp-type   (some-> adp-type not-empty tag-str))
+      (assoc* :definite   (some-> definite not-empty tag-str))))
 
-(defn t-attr
-  [t k]
-  (py/get-attr t k))
+(defn merge-sentence-tagging
+  [{:keys [tokens] :as s} t]
+  (-> s
+      (assoc :tokens (vec (mapv merge-token-tagging tokens t)))
+      (assoc :spans (vec (merge-entity-tagging t)))))
 
-(defn m-attr
-  [morph k]
-  (->> k (py/py. morph "get") (first) (schema/tag-str)))
+(defn merge-chunk-tagging
+  [{:keys [sentences] :as c} t]
+  (assoc c :sentences (vec (->> (partition-by second t)
+                                (mapv merge-sentence-tagging sentences)))))
 
-(defn merge-dep-annotations
-  [{:keys [sentences] :as segment} dep-doc]
-  (->>
-   (for [[sentence s] (map list sentences (py/py.- dep-doc "sents"))]
-     (let [sent-n (partial sent-n (py/py.- s "start"))]
-       (->>
-        (for [[token t] (map list (sentence :tokens) s)]
-          (let [t-attr  (partial t-attr t)
-                t-tag   (comp schema/tag-str normalize-punct t-attr)
-                m-attr  (partial m-attr (py/py.- t "morph"))
-                deprel  (t-tag "dep_")
-                head    (when (not= deprel "ROOT")
-                         (sent-n (py/py.- (t-attr "head") "i")))
-                wordvec (when (t-attr "has_vector") (t-attr "vector"))]
-            (-> token
-                (assoc* :deprel deprel)
-                (assoc* :head   head)
-                (assoc* :wordvec wordvec)
-                (assoc* :lemma  (t-attr "lemma_"))
-                (assoc* :oov?   (t-attr "is_oov"))
-                (assoc* :upos   (t-tag "pos_"))
-                (assoc* :xpos   (t-tag "tag_"))
-                (assoc* :number (m-attr "Number"))
-                (assoc* :gender (m-attr "Gender"))
-                (assoc* :case   (m-attr "Case"))
-                (assoc* :tense  (m-attr "Tense"))
-                (assoc* :person (m-attr "Person"))
-                (assoc* :mood   (m-attr "Mood"))
-                (assoc* :degree (m-attr "Degree")))))
-        (vec) (assoc sentence :tokens))))
-   (vec) (assoc segment :sentences)))
+(defn token->csv
+  [{:keys [form space-after?]}]
+  [form (if space-after? " " "")])
 
-(defn merge-ner-annotations
-  [{:keys [sentences] :as segment} ner-doc]
-  (->>
-   (for [[sentence s] (map list sentences (py/py.- ner-doc "sents"))]
-     (let [sent-n (partial sent-n (py/py.- s "start"))]
-       (->>
-        (for [entity (py/py.- s "ents")]
-          {:type    :entity
-           :label   (-> entity (py/py.- "label_") schema/tag-str)
-           :targets (->> (range (sent-n  (py/py.- entity "start"))
-                                (sent-n  (py/py.- entity "end")))
-                         (into []))})
-        (vec) (not-empty) (assoc* sentence :spans))))
-   (vec) (assoc segment :sentences)))
+(defn sentence->csv
+  [n {:keys [tokens]}]
+  (into [(str n)] (mapcat token->csv tokens)))
 
-(defn merge-annotations
-  [segment dep-doc ner-doc]
-  (cond-> segment
-    dep-doc (merge-dep-annotations dep-doc)
-    ner-doc (merge-ner-annotations ner-doc)))
+(defn chunk->csv
+  [n {:keys [sentences]}]
+  (map (partial sentence->csv n) sentences))
 
-(defn tag
-  [segments]
-  (let [dep-tagger @dep-tagger
-        ner-tagger @ner-tagger
-        dep-docs   (map (partial segment->doc dep-tagger) segments)
-        ner-docs   (map (partial segment->doc ner-tagger) segments)
-        dep-docs   (pipe dep-tagger dep-docs)
-        ner-docs   (pipe ner-tagger ner-docs)]
-    (pmap merge-annotations segments dep-docs ner-docs)))
+(defn write-csv
+  [out chunks]
+  (csv/write-csv out (for [c (map-indexed chunk->csv chunks) s c] s)))
+
+(defn tagged-seq
+  [chunks]
+  (let [proc (process {:err :string :cmd tagger-cmd})]
+    (future
+      (with-open [input (io/writer (:in proc))]
+        (write-csv input chunks)))
+    (future
+      (let [{:keys [cmd exit err]} @proc]
+        (when (pos? exit)
+          (log/errorf "'%s': exit status %d\n\n%s" cmd exit err))))
+    (with-open [output (io/reader (:out proc))]
+      (->> (csv/read-csv output)
+           (partition-by first)
+           (mapv merge-chunk-tagging chunks)))))

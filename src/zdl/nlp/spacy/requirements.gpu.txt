@@ -1,3 +1,3 @@
-spacy[cuda11x]==3.7.2
+spacy[cuda12x]==3.7.2
 de-dwds-dep-hdt-dist @ https://huggingface.co/zentrum-lexikographie/de_dwds_dep_hdt_dist/resolve/main/de_dwds_dep_hdt_dist-any-py3-none-any.whl#sha256=95249267f6315378a70ea11ec805bb3a261a627259c350f63f6e40531bb6a4e9
 de-dwds-ner-dist @ https://huggingface.co/zentrum-lexikographie/de_dwds_ner_dist/resolve/main/de_dwds_ner_dist-any-py3-none-any.whl#sha256=7c63b61d8c5193fdb31af4efb300ca6168d03c3f395087fb9ecfcaf1ed4a0437

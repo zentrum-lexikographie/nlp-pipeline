@@ -29,6 +29,9 @@
 (def spacy-gpu?
   (some? (not-empty (get-env "SPACY_GPU"))))
 
+(def spacy-gpu-id
+  (some-> (get-env "SPACY_GPU_ID") (parse-long)))
+
 (def spacy-model-suffix
   (if spacy-gpu? "dist" "lg"))
 

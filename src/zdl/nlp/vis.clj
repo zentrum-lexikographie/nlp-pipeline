@@ -96,7 +96,7 @@
 (defn dep-node
   [{:keys [n deprel]}]
   [:g
-   (text deprel {:id (el-id "dep-" n) :class :dep})
+   (text (or deprel "ROOT") {:id (el-id "dep-" n) :class :dep})
    [:dali/surround
     {:select (select-el "dep-" n) :padding 32 :attrs {:class :dep-box}}]])
 
@@ -231,7 +231,7 @@
      [:text {:id (el-id "tags-" ti) :class :tags :font-size 16}
       (or (not-empty (str/join ", " (remove nil? t))) "–")])
    (for [{:keys [oov? form n]} tokens]
-     [:text {:id (keyword (str "t" n))
+     [:text {:id (keyword (el-id "t-" n))
              :class (str "token " (if oov? "oov" "iv"))
              :font-size 24}
       form])

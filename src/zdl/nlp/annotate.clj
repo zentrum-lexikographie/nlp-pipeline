@@ -52,7 +52,7 @@
   (comp collocations fingerprint gdex lemmatize detect-lang))
 
 (def annotate
-  (comp (partial pmap annotate-chunk) spacy/tag))
+  (comp (partial pmap annotate-chunk) spacy/tagged-seq))
 
 (defn deduplicate
   ([chunks]
