@@ -66,7 +66,7 @@
   (get-env "DISCOLM_URL" "http://localhost:8000/v1/"))
 
 (def discolm-model
-  (get-env "DISCOLM_MODEL" "DiscoResearch/DiscoLM_German_7b_v1"))
+  (get-env "DISCOLM_MODEL" "DiscoResearch/Llama3_DiscoLM_German_8b_v0.1_experimental"))
 
 (def discolm-auth-token
   (get-env "DISCOLM_AUTH_TOKEN"))
