@@ -1,6 +1,5 @@
-(ns zdl.gloss
+(ns zdl.gloss.rag
   (:require
-   [clojure.data.csv :as csv]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [zdl.ddc.corpora :as ddc.corpora]
@@ -126,6 +125,7 @@
       (str/replace #"_+" "_")))
 
 (comment
+  (println (generate gpt/discolm "Tikitaka" "\"Tikitaka|lemma\"" 100))
   (map (juxt first (comp term->basename first)) soccer-samples))
 
 (defn -main
