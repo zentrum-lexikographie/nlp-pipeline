@@ -3,7 +3,7 @@
    [clojure.string :as str]
    [jsonista.core :as json]
    [taoensso.timbre :as log]
-   [zdl.metadata :as metadata]
+   [zdl.metadata :as md]
    [zdl.schema :as schema]
    [zdl.util :refer [assoc*]])
   (:import
@@ -54,29 +54,51 @@
 
 (defn parse-metadata
   [m]
-  (-> nil
-      ;; base
-      (assoc* :collection (-> m (get "collection") (metadata/parse-v)))
-      (assoc* :url (-> m  (get "url") (metadata/parse-v)))
-      (assoc* :file (-> m  (get "basename") (metadata/parse-v)))
-      (assoc* :bibl (-> m (get "bibl") (metadata/parse-v)))
-      (assoc* :page (or (some-> m (get "page_") (metadata/parse-page))
-                        (some-> m (get "pageRange") (metadata/parse-v))))
-      ;; classification
-      (assoc* :text-class (some->> (-> m (get "textClass") (metadata/parse-vs))
-                                   (into [])))
-      (assoc* :flags (some->> (-> m (get "flags") (metadata/parse-vs))
-                              (into (sorted-set))))
-      ;; rights
-      (assoc* :access (-> m (get "access") (metadata/parse-v)))
-      (assoc* :availability (-> m (get "avail") (metadata/parse-v)))
-      ;; time
-      (assoc* :date (-> m  (get "date_") (metadata/parse-dates) (first)))
-      (assoc* :timestamp (-> m (get "timestamp") (metadata/parse-timestamp)))
-      ;; location
-      (assoc* :country (-> m (get "country") (metadata/parse-v)))
-      (assoc* :region (-> m (get "region") (metadata/parse-v)))
-      (assoc* :subregion (-> m (get "subregion") (metadata/parse-v)))))
+  (let [collection (-> m (get "collection") (md/parse-v))
+        page       (or (some-> m (get "page_") (md/parse-page))
+                       (some-> m (get "pageRange") (md/parse-v)))
+        date       (-> m  (get "date_") (md/parse-one-date))
+        ts         (-> m (get "timestamp") (md/parse-timestamp))]
+    (-> nil
+        ;; base
+        (assoc* :collection collection)
+        (assoc* :url (-> m  (get "url") (md/parse-v)))
+        (assoc* :file (-> m  (get "basename") (md/parse-v)))
+        (assoc* :bibl (some->> (get m "bibl") (md/parse-bibl page)))
+        (assoc* :page page)
+        ;; bibl
+        (assoc* :author (or (some-> m (get "author") (md/parse-v))
+                            (some-> m (get "sentPers") (md/parse-v))))
+        (assoc* :editor (or (some-> m (get "editor") (md/parse-v))
+                            (condp = collection
+                              "wikipedia"  "Wikipedia"
+                              "wikivoyage" "Wikivoyage"
+                              nil)))
+        (assoc* :title  (some-> m (get "title") (md/parse-v)))
+        (assoc* :short-title (when (= "gesetzte" collection)
+                               (some-> m (get "biblSig") (md/parse-v))))
+        ;; classification
+        (assoc* :text-class (some->> (-> m (get "textClass") (md/parse-vs))
+                                     (into [])))
+        (assoc* :flags (some->> (-> m (get "flags") (md/parse-vs))
+                                (into (sorted-set))))
+        ;; rights
+        (assoc* :access (-> m (get "access") (md/parse-v)))
+        (assoc* :availability (-> m (get "avail") (md/parse-v)))
+        ;; time
+        (assoc* :date date)
+        (assoc* :timestamp ts)
+        (assoc* :access-date (or (some-> m (get "urlDate") (md/parse-one-date))
+                                 (some-> m (get "dump") (md/parse-one-date))
+                                 (some-> ts (md/parse-timestamp-date))))
+        (assoc* :first-published (when-let [fp (some-> m (get "firstDate")
+                                                       (md/parse-v))]
+                                   (let [year (some-> date (subs 0 4))]
+                                     (when (not= fp year) fp))))
+        ;; location
+        (assoc* :country (-> m (get "country") (md/parse-v)))
+        (assoc* :region (-> m (get "region") (md/parse-v)))
+        (assoc* :subregion (-> m (get "subregion") (md/parse-v))))))
 
 (defn parse-token
   [n [{:keys [hit?] form "w"} {space-before? "ws" :as _next-token}]]

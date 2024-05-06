@@ -2,7 +2,7 @@
   (:require
    [clojure.string :as str])
   (:import
-   (java.time Instant LocalDate)))
+   (java.time Instant LocalDate ZoneOffset)))
 
 (defn parse-v
   [s]
@@ -18,8 +18,8 @@
   (when-let [^String s (parse-v s)]
     (try
       (condp = (count s)
-        10 (LocalDate/parse s)
-        4  (LocalDate/parse (str s "-01-01"))
+        10 (str (LocalDate/parse s))
+        4  (str (LocalDate/parse (str s "-01-01")))
         nil)
       (catch Throwable _))))
 
@@ -27,11 +27,26 @@
   [s]
   (some->> (parse-vs s) (map parse-date) (remove nil?) (seq)))
 
+(defn parse-one-date
+  [s]
+  (some->> s (parse-dates) (first)))
+
 (defn parse-timestamp
   [s]
   (when-let [^String s (parse-v s)]
-    (try (Instant/parse s) (catch Throwable _))))
+    (try (str (Instant/parse s)) (catch Throwable _))))
+
+(defn parse-timestamp-date
+  [s]
+  (when-let [^String s (parse-v s)]
+    (try
+      (str (.. (Instant/parse s) (atOffset ZoneOffset/UTC) (toLocalDate)))
+      (catch Throwable _))))
 
 (defn parse-page
   [v]
   (when v (str v)))
+
+(defn parse-bibl
+  [page s]
+  (some-> s (cond-> page (str/replace #"#page#" page))))

@@ -5,6 +5,7 @@
    [jsonista.core :as json]
    [zdl.ddc :as ddc]
    [zdl.env :as env]
+   [zdl.util :refer [slurp-edn spit-edn]]
    [taoensso.timbre :as log]))
 
 (defn parse-list
@@ -63,6 +64,10 @@
        (into (sorted-set) )
        (delay)))
 
+(defn assoc-corpus
+  [corpus v]
+  (vary-meta v assoc  :corpus corpus))
+
 (def ^:dynamic *num-results-per-corpus*
   10000)
 
@@ -70,7 +75,8 @@
   [corpus & args]
   (let [results (->> (concat args (list :page-size *num-results-per-corpus*))
                      (apply ddc/query (@endpoints corpus))
-                     (into [] (take *num-results-per-corpus*)))]
+                     (into [] (comp (take *num-results-per-corpus*)
+                                    (map (partial assoc-corpus corpus)))))]
     (log/debugf "? [%15s] [%,9d] %s" corpus (count results) args)
     results))
 
@@ -82,5 +88,7 @@
 (comment
   @collections
   (binding [*num-results-per-corpus* 100]
-    (time (take 10 (query #{"dta_www"} "Pudel"))))
+    (spit-edn "sample.edn" (take 10 (query #{"kernbasis"} "Pudel"))))
+
+  (slurp-edn "sample.edn")
   (for [[id info] @infos :when (info :meta-corpus?)] id))
