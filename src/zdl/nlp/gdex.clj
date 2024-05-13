@@ -1,8 +1,8 @@
 (ns zdl.nlp.gdex
-  (:require [clojure.string :as str]
-            [clojure.data.csv :as csv]
-            [clojure.java.io :as io]
-            [taoensso.timbre :as log]))
+  (:require
+   [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clojure.string :as str]))
 
 (defn finite-verb?
   [{:keys [upos xpos verb-form] :as token}]

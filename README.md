@@ -1,7 +1,3 @@
-## Set up Python dependencies
-
-    clojure -X:python zdl.python/setup!
-
 ## Download DWDSmor/TAGH automaton
 
     mkdir -p resources/dwdsmor &&\

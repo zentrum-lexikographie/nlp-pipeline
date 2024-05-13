@@ -1,16 +1,15 @@
 (ns zdl.nlp.spacy
   (:refer-clojure :exclude [run!])
-  (:require [babashka.process :refer [check process]]
-            [babashka.fs :as fs]
-            [zdl.nlp.tokenizer :as tokenizer]
-            [zdl.schema :refer [tag-str]]
-            [zdl.util :refer [assoc*]]
-            [clojure.java.io :as io]
-            [taoensso.timbre :as log]
-            [clojure.data.csv :as csv]
-            [clojure.string :as str]
-            [zdl.env :as env]
-            [zdl.schema :as schema]))
+  (:require
+   [babashka.fs :as fs]
+   [babashka.process :refer [check process]]
+   [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [taoensso.timbre :as log]
+   [zdl.env :as env]
+   [zdl.schema :refer [tag-str]]
+   [zdl.util :refer [assoc*]]))
 
 (def venv-dir
   env/python-venv-dir)
