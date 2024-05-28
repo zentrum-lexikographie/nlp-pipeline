@@ -1,44 +1,12 @@
 (ns zdl.gloss.rag
   (:require
-   [clojure.data.csv :as csv]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [zdl.ddc.corpora :as ddc.corpora]
    [zdl.gloss.article]
    [zdl.gpt :as gpt]
    [zdl.util :refer [form->id]]
-   [zdl.nlp.annotate :refer [annotate deduplicate]]
-   [zdl.nlp.gdex :as gdex]
-   [gremid.xml :as gxml]
-   [zdl.xml])
-  (:import
-   (java.text Normalizer Normalizer$Form)))
-
-(defn gdex-score
-  [{[{:keys [gdex]}] :sentences}]
-  gdex)
-
-(defn queried-corpus
-  [result]
-  (get (meta result) :corpus))
-
-(def ^:dynamic *corpora*
-  #{"ballsport" "dta_www" "kernbasis" "zeitungenxl" "wikipedia_www" "webmonitor"})
-
-(defn good-examples
-  [n q]
-  (binding [ddc.corpora/*num-results-per-corpus* n]
-    (->> (ddc.corpora/query *corpora* q) (annotate) (deduplicate)
-         (filter (comp gdex/good? gdex-score))
-         (sort-by gdex-score #(compare %2 %1))
-         (vec))))
-
-(defn balanced-examples-by
-  [kf vs]
-  (->> (group-by kf vs) (vals)
-       (mapcat (partial map-indexed #(assoc %2 :rank %1)))
-       (sort-by (juxt :rank (comp - gdex-score)))))
-
+   [zdl.xml]))
 
 (def personality
   "Du bist ein Lexikograph und gibst kurze, genaue Antworten!")
@@ -56,10 +24,17 @@
        (->> (map-indexed (fn [n s] (str (inc n) ". " s)) examples)
             (str/join "\n\n"))))
 
+(defn queried-corpus
+  [result]
+  (get (meta result) :corpus))
+
+(def ^:dynamic *corpora*
+  #{"ballsport" "dta_www" "kernbasis" "zeitungenxl" "wikipedia_www" "webmonitor"})
+
 (defn generate
   [gpt term q num-examples]
-  (let [examples   (good-examples num-examples q)
-        examples   (balanced-examples-by queried-corpus examples)
+  (let [examples   (ddc.corpora/good-examples *corpora* num-examples q)
+        examples   (ddc.corpora/balanced-good-examples-by queried-corpus examples)
         examples   (into [] (take 100) examples)
         prompt     (prompt term (map :text examples))
         prompt     [{:role "system" :content personality}
@@ -73,6 +48,13 @@
      :examples examples
      :gloss    answer
      :tokens   tokens}))
+
+(defn dialog->str
+  [{:keys [messages tokens]}]
+  (-> (->> messages
+           (map (fn [{:keys [role content]}] (str "## " role ":\n\n" content)))
+           (str/join "\n\n"))
+      (str "\n\n––\n" (format "[%,d tokens]" tokens))))
 
 (defn gloss->str
   [{:keys [messages tokens]}]

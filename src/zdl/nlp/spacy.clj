@@ -114,8 +114,8 @@
 (defn merge-sentence-tagging
   [{:keys [tokens] :as s} t]
   (-> s
-      (assoc :tokens (vec (mapv merge-token-tagging tokens t)))
-      (assoc :spans (vec (merge-entity-tagging t)))))
+      (assoc :tokens (mapv merge-token-tagging tokens t))
+      (assoc :spans (merge-entity-tagging t))))
 
 (defn merge-chunk-tagging
   [{:keys [sentences] :as c} t]
@@ -141,15 +141,16 @@
 (defn tagged-seq
   [chunks]
   (when (seq chunks)
-    (let [proc (process {:err :string :cmd tagger-cmd})]
+    (let [proc (process {:err :string :cmd tagger-cmd})
+          output (io/reader (:out proc))]
       (future
         (with-open [input (io/writer (:in proc))]
           (write-csv input chunks)))
       (future
         (let [{:keys [cmd exit err]} @proc]
+          (.close output)
           (when (pos? exit)
             (log/errorf "'%s': exit status %d\n\n%s" cmd exit err))))
-      (with-open [output (io/reader (:out proc))]
-        (->> (csv/read-csv output)
-             (partition-by first)
-             (mapv merge-chunk-tagging chunks))))))
+      (->> (csv/read-csv output)
+           (partition-by first)
+           (map merge-chunk-tagging chunks)))))

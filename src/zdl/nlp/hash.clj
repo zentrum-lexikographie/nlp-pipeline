@@ -3,7 +3,8 @@
    (com.dynatrace.hash4j.hashing Hasher64 Hashing)
    (com.dynatrace.hash4j.similarity ElementHashProvider SimilarityHashing SimilarityHashPolicy)
    (java.util HexFormat)
-   (java.util.function ToLongFunction)))
+   (java.util.function ToLongFunction))
+  (:require [clojure.string :as str]))
 
 (def ^Hasher64 hashing
   (Hashing/komihash5_0))
@@ -35,3 +36,22 @@
 (defn distance
   [^bytes h1 ^bytes h2]
   (- sim-hash-components (. sim-hash-policy (getNumberOfEqualComponents h1 h2))))
+
+(defn fingerprint
+  [{:keys [sentences] :as chunk}]
+  (let [lemmata (->> (mapcat :tokens sentences)
+                     (remove #(= "PUNCT" (:xpos %)))
+                     (map (some-fn :lemma :form))
+                     (map str/lower-case)
+                     (into #{}))]
+    (assoc chunk :fingerprint (->hex (sim-hash lemmata)))))
+
+(defn deduplicate
+  ([chunks]
+   (deduplicate chunks #{}))
+  ([chunks seen]
+   (when-let [{:keys [fingerprint] :as chunk} (first chunks)]
+     (lazy-seq
+      (if (seen fingerprint)
+        (deduplicate (rest chunks) seen)
+        (cons chunk (deduplicate (rest chunks) (conj seen fingerprint))))))))

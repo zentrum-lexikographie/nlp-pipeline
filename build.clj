@@ -55,8 +55,8 @@
 (defn compile-hfst
   [& _]
   (let [basis   (b/create-basis {:project "deps.edn"})
-        source  (str (io/file "src"))
-        classes (str (io/file "classes" "hfst"))]
+        source  (str (io/file "java" "src"))
+        classes (str (io/file "java" "classes"))]
     (b/delete {:path classes})
     (b/javac {:src-dirs  [source]
               :class-dir classes

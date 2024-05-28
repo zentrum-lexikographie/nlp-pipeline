@@ -3,10 +3,14 @@
    [clojure.string :as str]
    [hato.client :as hc]
    [jsonista.core :as json]
+   [taoensso.timbre :as log]
    [zdl.ddc :as ddc]
    [zdl.env :as env]
+   [zdl.nlp]
+   [zdl.nlp.gdex :as gdex]
+   [zdl.nlp.hash :as hash]
    [zdl.util :refer [slurp-edn spit-edn]]
-   [taoensso.timbre :as log]))
+   [zdl.nlp.deps :as deps]))
 
 (defn parse-list
   [corpora]
@@ -68,6 +72,9 @@
   [corpus v]
   (vary-meta v assoc  :corpus corpus))
 
+(def ^:dynamic *queried*
+  #{"kernbasis" "dtaxl"})
+
 (def ^:dynamic *num-results-per-corpus*
   10000)
 
@@ -81,14 +88,34 @@
     results))
 
 (defn query
-  [corpora & args]
-  (assert (every? @endpoints corpora) (str "Could not resolve " corpora))
-  (flatten (pmap #(apply query* % args) corpora)))
+  [& args]
+  (assert (every? @endpoints *queried*) (str "Could not resolve " *queried*))
+  (flatten (pmap #(apply query* % args) *queried*)))
+
+(defn good-examples
+  [q]
+  (->> (query q) (zdl.nlp/annotate) (hash/deduplicate)
+       (filter (comp gdex/good? gdex/get-score))
+       (sort-by gdex/get-score #(compare %2 %1))
+       (vec)))
+
+(defn balanced-good-examples-by
+  [kf vs]
+  (->> (group-by kf vs) (vals)
+       (mapcat (partial map-indexed #(assoc %2 :rank %1)))
+       (sort-by (juxt :rank (comp - gdex/get-score)))
+       (vec)))
 
 (comment
   @collections
-  (binding [*num-results-per-corpus* 100]
-    (spit-edn "sample.edn" (take 10 (query #{"kernbasis"} "Pudel"))))
 
-  (slurp-edn "sample.edn")
+  (binding [*queried* #{"kernbasis"}
+            *num-results-per-corpus* 10000]
+    (spit-edn "sample.edn" (good-examples "Sinn")))
+
+  (->>
+   (for [collocation (mapcat deps/extract-collocations (slurp-edn "sample.edn"))]
+     (-> collocation :collocates last :lemma))
+   (frequencies)
+   (sort-by second #(compare %2 %1)))
   (for [[id info] @infos :when (info :meta-corpus?)] id))

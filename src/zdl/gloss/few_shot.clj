@@ -73,4 +73,4 @@
         (str "\n\n––\n" (format "[%,d tokens]" tokens)))))
 
 (comment
-  (println (generate gpt/openai "Bank")))
+  (println (generate gpt/openai "Schöffengericht")))

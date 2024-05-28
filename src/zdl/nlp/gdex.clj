@@ -145,10 +145,20 @@
       (* (deixis-factor sentence))
       (* (rare-lemmata-factor sentence))))
 
-(defn score
+(defn calc-score
   [sentence]
   (double (+ (* 0.5 (knockout-factor sentence))
              (* 0.5 (gradual-factor sentence)))))
+
+(defn score
+  [{:keys [sentences] :as chunk}]
+  (->>
+   (for [sentence sentences] (assoc sentence :gdex (calc-score sentence)))
+   (vec) (assoc chunk :sentences)))
+
+(defn get-score
+  [{[{:keys [gdex]}] :sentences}]
+  gdex)
 
 (defn good?
   [score]

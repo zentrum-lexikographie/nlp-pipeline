@@ -94,3 +94,15 @@
        (map parse-analysis)
        (sort-by (partial rank fingerprint) >)
        (first)))
+
+(defn lemmatize
+  [{:keys [sentences] :as chunk}]
+  (if @transducer
+    (->>
+     (for [{:keys [tokens] :as sentence} sentences]
+       (->>
+        (for [t tokens :let [a (analyze (fingerprint t) (t :form))]]
+          (cond-> t a (assoc :lemma (:lemma a))))
+        (vec) (assoc sentence :tokens)))
+     (vec) (assoc chunk :sentences))
+    chunk))

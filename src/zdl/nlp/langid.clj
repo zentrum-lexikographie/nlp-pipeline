@@ -15,3 +15,7 @@
 (defn classify
   [^String s]
   (.. (classifier) (classify s true) (getLangCode)))
+
+(defn detect-lang
+  [{:keys [text] :as chunk}]
+  (assoc chunk :lang (classify text)))
