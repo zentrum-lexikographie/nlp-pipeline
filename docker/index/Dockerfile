@@ -1,4 +1,4 @@
-FROM solr:8.8
+FROM solr:9
 
 USER root
 
@@ -8,7 +8,7 @@ RUN install -o $SOLR_USER -g $SOLR_GROUP\
 USER $SOLR_USER
 
 ADD --chown=8983:8983\
-    mtas/target/mtas-8.11.1.1-SNAPSHOT.jar\
+    mtas/target/mtas-9.10.0.0-SNAPSHOT.jar\
     /opt/solr/server/solr/configsets/zdl/lib/
 
 ADD --chown=8983:8983\

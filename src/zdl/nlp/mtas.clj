@@ -4,7 +4,7 @@
    [gremid.xml :as gxml]
    [hato.client :as hc]
    [jsonista.core :as json]
-   [zdl.nlp.xml :as xml]))
+   [zdl.xml :as xml]))
 
 ;; ## Solr
 
@@ -18,6 +18,7 @@
   [params]
   (->
    {:method       :get
+    :version      :http-1.1
     :as           :stream
     :url          solr-query-uri
     :query-params (merge
@@ -37,6 +38,7 @@
   (doseq [cmd-batch (partition-all update-batch-size commands)]
     (->
      {:method       :post
+      :version      :http-1.1
       :as           :stream
       :url          solr-update-uri
       :query-params {"wt" "json"}
@@ -142,5 +144,5 @@
                 "mtas.prefix.0.field" "text"
                 "mtas.prefix.0.key"   "prefixes"})
 
-  (send-mtas-query! "title:chatgpt && date_range:[2023-01 TO 2024-01}"
+  (send-mtas-query! "title:chatgpt && date_range:[2023-01 TO 2024-05}"
                     "<t=\"Ha..o\"/>"))
