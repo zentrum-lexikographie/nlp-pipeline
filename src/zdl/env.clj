@@ -1,8 +1,8 @@
 (ns zdl.env
+  (:require
+   [clojure.java.io :as io])
   (:import
-   (io.github.cdimascio.dotenv Dotenv))
-  (:require [clojure.string :as str]
-            [clojure.java.io :as io]))
+   (io.github.cdimascio.dotenv Dotenv)))
 
 (def ^Dotenv dot-env
   (.. Dotenv (configure) (ignoreIfMissing) (load)))
