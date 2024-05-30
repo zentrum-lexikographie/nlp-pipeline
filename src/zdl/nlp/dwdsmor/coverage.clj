@@ -4,6 +4,7 @@
             [zdl.conllu :as conllu]
             [taoensso.timbre :as log]
             [zdl.log]
+            [zdl.nlp]
             [zdl.nlp.dwdsmor :as dwdsmor]
             [clojure.data.csv :as csv]))
 
@@ -26,55 +27,6 @@
      (let [r (io/reader file)]
        (lazy-cat (line-seq r) [""] (files->lines (rest files) r))))))
 
-(defn update-throughput!
-  [{:keys [chunks chars sentences tokens]} {:keys [text] sentences* :sentences}]
-  {:chunks    (inc chunks)
-   :chars     (+ chars (count text))
-   :sentences (+ sentences (count sentences*))
-   :tokens    (+ tokens (count (mapcat :tokens sentences*)))})
-
-(defn log-throughput?
-  [stats]
-  (zero? (mod (:chunks (deref stats)) 100000)))
-
-(defn avg-per-sec
-  [secs n]
-  (float (/ n secs)))
-
-(def log-throughput-format
-  "%,12d/%,10.2f <p> %,12d/%,10.2f <s> %,12d/%,10.2f <w> %,12d/%,10.2f <c>")
-
-(defn log-throughput!
-  [start stats]
-  (let [millis      (- (System/currentTimeMillis) start)
-        avg-per-sec (partial avg-per-sec (/ millis 1000))
-        stats       (deref stats)
-        chunks      (:chunks stats)
-        chars       (:chars stats)
-        sentences   (:sentences stats)
-        tokens      (:tokens stats)]
-    (log/infof log-throughput-format
-               chunks    (avg-per-sec chunks)
-               sentences (avg-per-sec sentences)
-               tokens    (avg-per-sec tokens)
-               chars     (avg-per-sec chars))))
-
-(defn log-throughput-xf
-  [rf]
-  (let [start   (System/currentTimeMillis)
-        stats   (volatile! {:chunks 0 :chars 0 :sentences 0 :tokens 0})
-        update! #(vswap! stats update-throughput! %)
-        log?    (partial log-throughput? stats)
-        log!    (partial log-throughput! start stats)]
-    (fn
-      ([] (rf))
-      ([result]
-       (log!)
-       (rf result))
-      ([result c]
-       (update! c)
-       (when (log?) (log!))
-       (rf result c)))))
 
 (def dwdsmor-lookup
   (memoize (fn [s] (some? (seq (dwdsmor/lookup s))))))
@@ -139,14 +91,12 @@
           lines  (files->lines files)
           chunks (sequence conllu/lines->chunks-xf lines)
           chunks (pmap lemmatize chunks)
-          chunks (sequence log-throughput-xf chunks)]
+          chunks (sequence zdl.nlp/log-chunk-throughput-xf chunks)]
       (->> (mapcat ::lemmatized chunks)
            (reduce update-coverage {})
            (spit-coverage!)))
     (finally
       (shutdown-agents))))
-
-
 
 (comment
   (do

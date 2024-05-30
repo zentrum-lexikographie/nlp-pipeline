@@ -141,9 +141,9 @@
          :end-event   end
          :milestones  milestones}))))
 
-(defn chunks
+(defn events->chunks
   ([events]
-   (chunks events false nil 0))
+   (events->chunks events false nil 0))
   ([events text? chunk depth]
    (when-let [^XMLEvent evt (first events)]
      (let [events (rest events)]
@@ -154,12 +154,16 @@
                  chunk (conj chunk evt)]
              (lazy-cat
               (when end? (list (->chunk chunk)))
-              (chunks events text? (when-not end? chunk) depth)))
+              (events->chunks events text? (when-not end? chunk) depth)))
            (if (chunk-start? evt)
-             (chunks events text? [evt] (inc depth))
+             (events->chunks events text? [evt] (inc depth))
              (lazy-cat
               (list evt)
-              (chunks events (not (text-end? evt)) chunk depth))))
+              (events->chunks events (not (text-end? evt)) chunk depth))))
          (lazy-cat
           (list evt)
-          (chunks events (text-start? evt) chunk depth)))))))
+          (events->chunks events (text-start? evt) chunk depth)))))))
+
+(defn events->doc
+  [events]
+  {:chunks (into [] (filter map?) (events->chunks events))})

@@ -102,8 +102,8 @@
 
 (def Chunk
   [:map
-   [:text :string]
    [:sentences [:vector Sentence]]
+   [:text {:optional true} :string]
    [:lang {:optional true} :string]
    [:fingerprint {:optional true} :string]])
 
@@ -115,3 +115,36 @@
 
 (def valid-chunk?
   (m/validator Chunk))
+
+(def Doc
+  [:map
+   [:chunks [:vector Chunk]]
+   [:text {:optional true} :string]
+   [:collection {:optional true} :string]
+   [:url {:optional true} :string]
+   [:file {:optional true} :string]
+   [:bibl {:optional true} :string]
+   [:page {:optional true} :string]
+   [:author {:optional true} :string]
+   [:editor {:optional true} :string]
+   [:title {:optional true} :string]
+   [:short-title {:optional true} :string]
+   [:text-classes {:optional true} [:set :string]]
+   [:flags {:optional true} [:set :string]]
+   [:access {:optional true} :string]
+   [:availability {:optional true} :string]
+   [:date {:optional true} :string]
+   [:access-date {:optional true} :string]
+   [:first-published {:optional true} :string]
+   [:country {:optional true} :string]
+   [:region {:optional true} :string]
+   [:subregion {:optional true} :string]])
+
+(def encode-doc
+  (m/encoder Doc transformer))
+
+(def decode-doc
+  (m/decoder Doc transformer))
+
+(def valid-doc?
+  (m/validator Doc))

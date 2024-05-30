@@ -4,18 +4,14 @@
    [gremid.xml :as gxml]
    [zdl.xml.tei :as tei]))
 
-(def tei-corpora
-  (delay
-    (->> ["kafka_hungerkuenstler_1922" "kafka_prozess_1925"]
-         (map #(io/resource (format "zdl/nlp/fixture/kafka/%s.TEI-P5.xml" %)))
-         (mapcat gxml/read-events)
-         (tei/normalize-space)
-         (tei/chunks))))
+(defn tei->doc
+  [k]
+  (with-open [input (-> (format "zdl/nlp/fixture/kafka/%s.TEI-P5.xml" k)
+                        (io/resource)
+                        (io/input-stream))]
+    (-> input gxml/read-events tei/normalize-space tei/events->doc
+        (assoc :collection "dta" :file k))))
 
-(defn texts
+(defn docs
   []
-  (map :text (filter map? @tei-corpora)))
-
-(comment
-  (rand-nth @tei-corpora)
-  (rand-nth (texts)))
+  (map tei->doc ["kafka_hungerkuenstler_1922" "kafka_prozess_1925"]))

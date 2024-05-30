@@ -4,7 +4,10 @@
    [gremid.xml :as gxml]
    [hato.client :as hc]
    [jsonista.core :as json]
-   [zdl.xml :as xml]))
+   [zdl.util :refer [slurp-edn]]
+   [zdl.xml :as xml]
+   [clojure.java.io :as io]
+   [clojure.data.csv :as csv]))
 
 ;; ## Solr
 
@@ -126,7 +129,74 @@
 (def send-mtas-query!
   (comp #_parse-mtas-response send-query! build-mtas-query))
 
+(def ^:dynamic *anno-id*
+  (volatile! 0))
+
+(defn next-anno-id
+  []
+  (vswap! *anno-id* inc))
+
+(defn token-annotations
+  [s-id position {:keys [n form lemma space-after? xpos upos]}]
+  (let [pos (+ position n)]
+    (->>
+     (cond-> [[(next-anno-id) "t" form s-id pos pos]]
+       lemma                  (conj [(next-anno-id) "l" lemma s-id pos pos])
+       upos                   (conj [(next-anno-id) "upos" upos s-id pos pos])
+       xpos                   (conj [(next-anno-id) "xpos" xpos s-id pos pos])
+       (= false space-after?) (conj [(next-anno-id) "ws" "0" s-id pos pos])))))
+
+(defn deps-annotations
+  [s-id position tokens [root children]]
+  (let [root-position (+ position root)]
+    (for [child children :let [child-position (+ position child)]]
+      [(next-anno-id)
+       "dep"
+       (-> child tokens :deprel)
+       s-id
+       root-position root-position
+       child-position child-position])))
+
+(def span-type->prefix
+  {:collocation "colloc"})
+
+(defn span-annotations
+  [s-id position {:keys [type label targets]}]
+  (when-let [prefix (span-type->prefix type)]
+    (->> (map #(+ position %) targets)
+         (mapcat #(list % %))
+         (into [(next-anno-id) prefix label s-id])
+         (list))))
+
+(defn sentence->annotations
+  [p-id position {:keys [tokens deps gdex spans]}]
+  (let [s-id (next-anno-id)
+        start position
+        end (+ position (dec (count tokens)))]
+    (concat (list [s-id "s" "" p-id start end])
+            (mapcat #(token-annotations s-id position %) tokens)
+            (mapcat #(deps-annotations s-id position tokens %) deps)
+            (mapcat #(span-annotations s-id position %) spans)
+            (when gdex (list [(next-anno-id) "gdex" (str gdex) s-id start end])))))
+
+(defn chunk->annotations
+  [position {:keys [sentences]}]
+  (let [c-id    (next-anno-id)
+        offsets (reduce #(conj %1 (+ (last %1) %2)) [0]
+                        (map (comp count :tokens) sentences))
+        start   position
+        end     (+ start (dec (count (mapcat :tokens sentences))))]
+    (concat (list [c-id "p" "" 0 start end])
+            (mapcat #(sentence->annotations c-id %1 %2) offsets sentences))))
+
 (comment
+  (defonce sample
+    (slurp-edn (io/file "sample.edn")))
+  
+  (binding [*anno-id* (volatile! 0)]
+    (->> sample (take 1000) (mapcat #(chunk->annotations 0 %1))
+         (csv/write-csv *out*) (with-out-str) (count)))
+  
   (clear!)
   (let [doc [:doc
              [:field {:name "id"} (str (random-uuid))]

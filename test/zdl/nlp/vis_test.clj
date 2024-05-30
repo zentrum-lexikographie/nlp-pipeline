@@ -1,22 +1,24 @@
-(ns zdl.nlp.annotate-test
+(ns zdl.nlp.vis-test
   (:require
    [clojure.test :refer [deftest is]]
-   [zdl.nlp.annotate :refer [annotate]]
+   [zdl.nlp :refer [process-docs]]
    [zdl.nlp.fixture.kafka :as kafka]
-   [zdl.nlp.tokenizer :as tokenizer]
    [zdl.nlp.vis :as vis]))
 
 (defn annotate-kafka
   []
-  (->> (kafka/texts) (rand-nth) (list)
-       (map tokenizer/tokenize) annotate))
+  (process-docs (kafka/docs)))
 
 (deftest annotations
   (is (sequential? (doall (annotate-kafka)))))
 
-(comment
+(defn show-kafka-sentence!
+  []
   (->>
    (annotate-kafka)
+   (mapcat :chunks)
    (mapcat :sentences)
    (rand-nth)
    (vis/show!)))
+
+(comment (show-kafka-sentence!))

@@ -118,26 +118,21 @@
   (for [cp collo-patterns p (paths sentence) c (collocations* cp sentence p)] c))
 
 (defn analyze-collocations
-  [{:keys [sentences] :as chunk}]
-  (->>
-   (for [{:keys [deps] :as sentence} sentences]
-     (let [sentence (cond-> sentence (nil? deps) (assoc-deps))
-           collocs  (collocations sentence)]
-       (cond-> sentence (seq collocs) (update :spans (fnil into []) collocs))))
-   (vec) (assoc chunk :sentences)))
+  [{:keys [deps] :as sentence}]
+  (let [sentence (cond-> sentence (nil? deps) (assoc-deps))
+        collocs  (collocations sentence)]
+    (cond-> sentence (seq collocs) (update :spans (fnil into []) collocs))))
 
 (defn extract-collocations
-  [{:keys [sentences]}]
-  (for [sentence sentences
-        token    (sentence :tokens)
+  [sentence]
+  (for [token    (sentence :tokens)
         :when    (token :hit?)
         :let     [n  (token :n)
                   n? (partial = n)]
         span     (sentence :spans)
         :let     [targets (span :targets)]
         :when    (and (= :collocation (span :type)) (some n? targets))]
-    {
-     :label      (str (when-not (= n (first targets)) "~") (span :label))
+    {:label      (str (when-not (= n (first targets)) "~") (span :label))
      :token      token
      :collocates (into []
                        (comp (remove n?) (map (sentence :tokens)))

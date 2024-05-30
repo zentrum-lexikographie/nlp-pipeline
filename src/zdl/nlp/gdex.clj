@@ -151,14 +151,8 @@
              (* 0.5 (gradual-factor sentence)))))
 
 (defn score
-  [{:keys [sentences] :as chunk}]
-  (->>
-   (for [sentence sentences] (assoc sentence :gdex (calc-score sentence)))
-   (vec) (assoc chunk :sentences)))
-
-(defn get-score
-  [{[{:keys [gdex]}] :sentences}]
-  gdex)
+  [sentence]
+  (assoc sentence :gdex (calc-score sentence)))
 
 (defn good?
   [score]

@@ -7,16 +7,10 @@
 (def corpora
   #{"dtak_www" "kern_www" "bz_www" "bundestag_www"})
 
-(def endpoints
-  (into [] (map @ddc.corpora/endpoints) corpora))
-
 (defn query-corpora
   [& args]
-  (apply ddc.corpora/query corpora args))
-
-(defn total-hits
-  [total _hit]
-  (inc total))
+  (binding [ddc.corpora/*queried* corpora]
+    (apply ddc.corpora/query args)))
 
 (def sample-query
   "sein #desc_by_date #separate")

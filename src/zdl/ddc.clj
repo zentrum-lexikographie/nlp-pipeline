@@ -75,11 +75,11 @@
                               "wikivoyage" "Wikivoyage"
                               nil)))
         (assoc* :title  (some-> m (get "title") (md/parse-v)))
-        (assoc* :short-title (when (= "gesetzte" collection)
+        (assoc* :short-title (when (= "gesetze" collection)
                                (some-> m (get "biblSig") (md/parse-v))))
         ;; classification
-        (assoc* :text-class (some->> (-> m (get "textClass") (md/parse-vs))
-                                     (into [])))
+        (assoc* :text-classes (some->> (-> m (get "textClass") (md/parse-vs))
+                                       (into (sorted-set))))
         (assoc* :flags (some->> (-> m (get "flags") (md/parse-vs))
                                 (into (sorted-set))))
         ;; rights
@@ -107,15 +107,16 @@
            :space-after? (= "1" space-before?)}
     (pos? hit?) (assoc :hit? true)))
 
-(defn parse-hit
+(defn hit->doc
   [{[_ tokens _] "ctx_" {ks "indices_" :as metadata} "meta_"}]
-  (let [ks     (cons :hit? ks)
-        tokens (map #(zipmap ks %) tokens)
-        tokens (into [] (map-indexed parse-token) (partition-all 2 1 tokens))
-        text   (schema/sentence->text {:tokens tokens})]
-    {:text      text
-     :sentences [{:text text :tokens tokens}]
-     :metadata  (parse-metadata metadata)}))
+  (let [ks       (cons :hit? ks)
+        tokens   (map #(zipmap ks %) tokens)
+        tokens   (into [] (map-indexed parse-token) (partition-all 2 1 tokens))
+        sentence {:tokens tokens}
+        text     (schema/sentence->text sentence)]
+    (assoc (parse-metadata metadata)
+           :chunks [{:sentences [(assoc sentence :text text)] :text text}]
+           :text text)))
 
 (defn query
   [endpoint q & {:keys [offset page-size timeout]
@@ -133,7 +134,7 @@
          (map-indexed
           (fn [n hit]
             (with-meta
-              (parse-hit hit)
+              (hit->doc hit)
               (assoc meta :offset (+ offset n))))
           results))
        (let [offset (+ offset (count results))]
@@ -146,22 +147,15 @@
 (comment
   (request ["data.dwds.de" 52170] "info")
   (take 1 (query ["tuvok.bbaw.de" 60260] "Pudel" :page-size 1))
-  (take 2 (query ["data.dwds.de" 52170] "Hochkaräter" :page-size 2))
+  (take 2 (query ["data.dwds.de" 52170] "Hochkaräter #CNTXT 1" :page-size 2))
   (do
-    (require '[zdl.nlp.annotate :refer [annotate]]
+    (require '[zdl.nlp :refer [annotate-docs]]
              '[zdl.nlp.vis :as vis])
     (as-> "Hochkaräter #desc_by_date #separate" $
       (query ["data.dwds.de" 52170] $)
-      (take 100 $)
-      (annotate $)
-      (filter (comp (partial < 0.5) :gdex first :sentences) $)
-      (sort-by (juxt (comp :gdex first :sentences)
-                     (comp str :date :metadata))
-               #(compare %2 %1)
-               $)
-      (map (juxt (comp :gdex first :sentences)
-                 (comp :text first :sentences)
-                 (comp :bibl :metadata))
-           $)
-      #_(rand-nth $)
-      #_(vis/show! $))))
+      (take 1000 $)
+      (annotate-docs $)
+      (mapcat :chunks $)
+      (mapcat :sentences $)
+      (rand-nth $)
+      (vis/show! $))))

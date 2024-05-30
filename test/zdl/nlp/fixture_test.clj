@@ -4,4 +4,4 @@
    [zdl.nlp.fixture.political-speeches :as pol-speech]))
 
 (deftest parse-corpus
-  (is (every? map? (pol-speech/documents))))
+  (is (every? map? (pol-speech/docs))))

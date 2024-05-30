@@ -92,14 +92,14 @@
   (assert (every? @endpoints *queried*) (str "Could not resolve " *queried*))
   (flatten (pmap #(apply query* % args) *queried*)))
 
-(defn good-examples
+#_(defn good-examples
   [q]
   (->> (query q) (zdl.nlp/annotate) (hash/deduplicate)
        (filter (comp gdex/good? gdex/get-score))
        (sort-by gdex/get-score #(compare %2 %1))
        (vec)))
 
-(defn balanced-good-examples-by
+#_(defn balanced-good-examples-by
   [kf vs]
   (->> (group-by kf vs) (vals)
        (mapcat (partial map-indexed #(assoc %2 :rank %1)))
@@ -114,7 +114,7 @@
     (spit-edn "sample.edn" (good-examples "Sinn")))
 
   (->>
-   (for [collocation (mapcat deps/extract-collocations (slurp-edn "sample.edn"))]
+   (for [collocation (mapcat #_deps/extract-collocations (slurp-edn "sample.edn"))]
      (-> collocation :collocates last :lemma))
    (frequencies)
    (sort-by second #(compare %2 %1)))

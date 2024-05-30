@@ -95,14 +95,9 @@
        (sort-by (partial rank fingerprint) >)
        (first)))
 
-(defn lemmatize
-  [{:keys [sentences] :as chunk}]
+(def lemmatize
   (if @transducer
-    (->>
-     (for [{:keys [tokens] :as sentence} sentences]
-       (->>
-        (for [t tokens :let [a (analyze (fingerprint t) (t :form))]]
-          (cond-> t a (assoc :lemma (:lemma a))))
-        (vec) (assoc sentence :tokens)))
-     (vec) (assoc chunk :sentences))
-    chunk))
+    (fn [{:keys [form] :as token}]
+      (let [analyzed (analyze (fingerprint token) form)]
+        (cond-> token analyzed (assoc :lemma (:lemma analyzed)))))
+    identity))
