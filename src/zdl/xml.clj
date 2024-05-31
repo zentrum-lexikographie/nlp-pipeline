@@ -5,8 +5,9 @@
    [gremid.xml :as gxml])
   (:import
    (com.ctc.wstx.api WstxOutputProperties)
+   (javax.xml.namespace QName)
    (javax.xml.stream XMLInputFactory)
-   (javax.xml.stream.events XMLEvent)
+   (javax.xml.stream.events Attribute StartElement XMLEvent)
    (org.codehaus.stax2 XMLInputFactory2 XMLOutputFactory2)))
 
 (def input-factory
@@ -33,6 +34,51 @@
 
 (def end-document-event
   (.createEndDocument gxml/event-factory))
+
+(defn start->end-element-event
+  [^StartElement start]
+  (.createEndElement gxml/event-factory (.getName start) nil))
+
+(defn kw->qname ^QName
+  [kw]
+  (QName. (name kw)))
+
+(defn qname->kw
+  [^QName qn]
+  (keyword (.getLocalPart qn)))
+
+(defn attribute-event
+  [[k v]]
+  (.createAttribute gxml/event-factory ^QName (kw->qname k) ^String v))
+
+(defn attribute->kv
+  [^Attribute attr]
+  [(qname->kw (.getName attr)) (.getValue attr)])
+
+(defn start-element-event
+  ([tag]
+   (start-element-event tag nil))
+  ([tag attrs]
+   (.createStartElement
+    gxml/event-factory
+    (kw->qname tag)
+    (when (seq attrs) (. (into [] (map attribute-event) attrs) (iterator)))
+    nil)))
+
+(defn end-element-event
+  [tag]
+  (.createEndElement gxml/event-factory (kw->qname tag) nil))
+
+(defn chars-event
+  [^String s]
+  (.createCharacters gxml/event-factory s))
+
+(defn start-element-event->node
+  [^StartElement start]
+  (let [tag   (qname->kw (.getName start))
+        attrs (vec (iterator-seq (.getAttributes start)))]
+    (cond-> {:tag tag}
+      (seq attrs) (assoc :attrs (into {} (map attribute->kv) attrs)))))
 
 (defn write-node
   [node target]

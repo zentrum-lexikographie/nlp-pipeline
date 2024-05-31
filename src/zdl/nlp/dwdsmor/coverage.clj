@@ -91,7 +91,7 @@
           lines  (files->lines files)
           chunks (sequence conllu/lines->chunks-xf lines)
           chunks (pmap lemmatize chunks)
-          chunks (sequence zdl.nlp/log-chunk-throughput-xf chunks)]
+          chunks (sequence zdl.nlp/log-xf chunks)]
       (->> (mapcat ::lemmatized chunks)
            (reduce update-coverage {})
            (spit-coverage!)))

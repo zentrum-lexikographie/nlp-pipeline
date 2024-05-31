@@ -1,6 +1,7 @@
 (ns zdl.nlp.langid
   (:import
-   (com.carrotsearch.labs.langid LangIdV3 Model)))
+   (com.carrotsearch.labs.langid LangIdV3 Model))
+  (:require [clojure.string :as str]))
 
 (def model
   (Model/defaultModel))

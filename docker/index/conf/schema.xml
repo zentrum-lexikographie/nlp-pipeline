@@ -6,7 +6,7 @@
     <field name="title" type="text" required="false" multiValued="false" indexed="true" stored="true" />
     <field name="date" type="pdate" required="false" multiValued="true" indexed="false" stored="false" docValues="true" />
     <field name="date_range" type="date" required="false" multiValued="true" indexed="true" stored="true" />
-    <field name="text" type="mtas" required="false" multiValued="false" indexed="true" stored="true" />
+    <field name="text" type="mtas" required="false" multiValued="false" indexed="true" stored="false" />
     <field name="text_type" type="string" required="false" multiValued="false" indexed="true" stored="true" />
     <field name="text_error" type="string" indexed="true" stored="true" />
     <field name="text_number_of_tokens" type="int" indexed="true" stored="true" />

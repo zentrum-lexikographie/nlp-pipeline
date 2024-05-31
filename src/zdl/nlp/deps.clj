@@ -17,7 +17,8 @@
 
 (defn paths
   ([{:keys [tokens] :as sentence}]
-   (paths sentence nil (:n (root tokens))))
+   (when-let [root (root tokens)]
+     (paths sentence nil (root :n))))
   ([{:keys [deps tokens] :as sentence} path n]
    (let [path (cons (tokens n) path)]
      (cons path (mapcat (partial paths sentence path) (deps n))))))

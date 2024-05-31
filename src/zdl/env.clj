@@ -44,9 +44,6 @@
 (def spacy-batch-size
   (parse-long (get-env "SPACY_BATCH_SIZE" "1")))
 
-(def spacy-parallel
-  (parse-long (get-env "SPACY_PARALLEL" "1")))
-
 (def dwdsmor-lemmatizer-automaton
   (some-> (get-env "DWDSMOR_LEMMATIZER_AUTOMATON")
           (io/file)))

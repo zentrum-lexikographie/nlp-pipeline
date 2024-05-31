@@ -8,5 +8,7 @@ services:
       - index:/var/solr
     ports:
       - "8983:8983"
+    environment:
+      SOLR_JAVA_MEM: "-Xms1g -Xmx1g"
 volumes:
   index:

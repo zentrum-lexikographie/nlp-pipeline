@@ -1,16 +1,12 @@
 (ns zdl.ddc.corpora
   (:require
+   [charred.api :as charred]
    [clojure.string :as str]
    [hato.client :as hc]
-   [jsonista.core :as json]
    [taoensso.timbre :as log]
    [zdl.ddc :as ddc]
    [zdl.env :as env]
-   [zdl.nlp]
-   [zdl.nlp.gdex :as gdex]
-   [zdl.nlp.hash :as hash]
-   [zdl.util :refer [slurp-edn spit-edn]]
-   [zdl.nlp.deps :as deps]))
+   [zdl.util :refer [slurp-edn spit-edn]]))
 
 (defn parse-list
   [corpora]
@@ -29,7 +25,7 @@
 (defn request-list
   []
   (-> (hc/request list-req)
-      :body (json/read-value json/keyword-keys-object-mapper) parse-list))
+      :body (charred/read-json :key-fn keyword) parse-list))
 
 (defonce endpoints
   (delay (request-list)))

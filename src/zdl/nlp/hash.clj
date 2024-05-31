@@ -44,7 +44,7 @@
                      (map (some-fn :lemma :form))
                      (map str/lower-case)
                      (into #{}))]
-    (assoc chunk :fingerprint (->hex (sim-hash lemmata)))))
+    (cond-> chunk (seq lemmata) (assoc :fingerprint (->hex (sim-hash lemmata))))))
 
 (defn deduplicate
   ([chunks]

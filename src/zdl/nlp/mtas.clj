@@ -3,11 +3,10 @@
    [clojure.string :as str]
    [gremid.xml :as gxml]
    [hato.client :as hc]
-   [jsonista.core :as json]
-   [zdl.util :refer [slurp-edn]]
+   [charred.api :as charred]
    [zdl.xml :as xml]
-   [clojure.java.io :as io]
-   [clojure.data.csv :as csv]))
+   [clojure.data.csv :as csv]
+   [zdl.nlp.gdex :as gdex]))
 
 ;; ## Solr
 
@@ -22,7 +21,6 @@
   (->
    {:method       :get
     :version      :http-1.1
-    :as           :stream
     :url          solr-query-uri
     :query-params (merge
                    {"wt" "json"
@@ -30,7 +28,7 @@
                     "df" "id"}
                    params)}
    (hc/request)
-   (update :body json/read-value)))
+   (update :body charred/read-json)))
 
 
 (def update-batch-size
@@ -42,7 +40,6 @@
     (->
      {:method       :post
       :version      :http-1.1
-      :as           :stream
       :url          solr-update-uri
       :query-params {"wt" "json"}
       :headers      {"Content-Type" "text/xml"}
@@ -116,87 +113,123 @@
   [fq q]
   {"q"                       (mtas-cql q)
    "fq"                      fq
-   "rows"                    "100"
+   "rows"                    "10"
    "mtas"                    "true"
    "mtas.kwic"               "true"
    "mtas.kwic.0.key"         "kwic"
    "mtas.kwic.0.field"       "text"
    "mtas.kwic.0.query.type"  "cql"
    "mtas.kwic.0.query.value" q
-   "mtas.kwic.0.left"        "10"
-   "mtas.kwic.0.right"       "10"})
+   "mtas.kwic.0.output"      "hit"})
 
 (def send-mtas-query!
   (comp #_parse-mtas-response send-query! build-mtas-query))
 
-(def ^:dynamic *anno-id*
-  (volatile! 0))
+(def ^:dynamic *id*
+  (volatile! -1))
 
-(defn next-anno-id
+(defn next-id
   []
-  (vswap! *anno-id* inc))
+  (vswap! *id* inc))
 
-(defn token-annotations
+(defn token->csv
   [s-id position {:keys [n form lemma space-after? xpos upos]}]
   (let [pos (+ position n)]
     (->>
-     (cond-> [[(next-anno-id) "t" form s-id pos pos]]
-       lemma                  (conj [(next-anno-id) "l" lemma s-id pos pos])
-       upos                   (conj [(next-anno-id) "upos" upos s-id pos pos])
-       xpos                   (conj [(next-anno-id) "xpos" xpos s-id pos pos])
-       (= false space-after?) (conj [(next-anno-id) "ws" "0" s-id pos pos])))))
+     (cond-> [[(next-id) "t" form s-id pos pos]]
+       lemma                  (conj [(next-id) "l" lemma s-id pos pos])
+       upos                   (conj [(next-id) "upos" upos s-id pos pos])
+       xpos                   (conj [(next-id) "xpos" xpos s-id pos pos])
+       (= false space-after?) (conj [(next-id) "ws" "0" s-id pos pos])))))
 
-(defn deps-annotations
+(defn deps->csv
   [s-id position tokens [root children]]
-  (let [root-position (+ position root)]
-    (for [child children :let [child-position (+ position child)]]
-      [(next-anno-id)
-       "dep"
-       (-> child tokens :deprel)
-       s-id
-       root-position root-position
-       child-position child-position])))
+  (let [rp (+ position root)]
+    (mapcat
+     (fn [child]
+       (let [cp      (+ position child)
+             dep-id  (next-id)
+             dep-rel (-> child tokens :deprel)]
+         (list [dep-id "dep" dep-rel s-id rp rp cp cp]
+               [(next-id) "dep.hd" dep-rel dep-id rp rp]
+               [(next-id) "dep.cd" dep-rel dep-id cp cp])))
+     children)))
 
 (def span-type->prefix
-  {:collocation "colloc"})
+  {:collocation "colloc"
+   :entity      "entity"})
 
-(defn span-annotations
+(defn span->csv
   [s-id position {:keys [type label targets]}]
   (when-let [prefix (span-type->prefix type)]
     (->> (map #(+ position %) targets)
          (mapcat #(list % %))
-         (into [(next-anno-id) prefix label s-id])
+         (into [(next-id) prefix label s-id])
          (list))))
 
-(defn sentence->annotations
+(defn sentence->csv
   [p-id position {:keys [tokens deps gdex spans]}]
-  (let [s-id (next-anno-id)
+  (let [s-id (next-id)
         start position
         end (+ position (dec (count tokens)))]
-    (concat (list [s-id "s" "" p-id start end])
-            (mapcat #(token-annotations s-id position %) tokens)
-            (mapcat #(deps-annotations s-id position tokens %) deps)
-            (mapcat #(span-annotations s-id position %) spans)
-            (when gdex (list [(next-anno-id) "gdex" (str gdex) s-id start end])))))
+    (concat
+     (list [s-id "s" "" p-id start end])
+     (mapcat #(token->csv s-id position %) tokens)
+     (mapcat #(deps->csv s-id position tokens %) deps)
+     (mapcat #(span->csv s-id position %) spans)
+     (when gdex
+       (let [v (gdex/score->str gdex)]
+         (cond->> (list [(next-id) "gdex-score" v s-id start end])
+           (gdex/good? gdex) (cons [(next-id) "gdex" v s-id start end])))))))
 
-(defn chunk->annotations
-  [position {:keys [sentences]}]
-  (let [c-id    (next-anno-id)
-        offsets (reduce #(conj %1 (+ (last %1) %2)) [0]
+(defn chunk->csv
+  [d-id position {:keys [sentences]}]
+  (let [c-id    (next-id)
+        offsets (reduce #(conj %1 (+ (last %1) %2)) [position]
                         (map (comp count :tokens) sentences))
         start   position
-        end     (+ start (dec (count (mapcat :tokens sentences))))]
-    (concat (list [c-id "p" "" 0 start end])
-            (mapcat #(sentence->annotations c-id %1 %2) offsets sentences))))
+        end     (+ start (dec (last offsets)))]
+    (concat (list [c-id "p" "" d-id start end])
+            (mapcat #(sentence->csv c-id %1 %2) offsets sentences))))
+
+(defn doc->csv
+  [{:keys [chunks]}]
+  (binding [*id* (volatile! -1)]
+    (let [d-id    (next-id)
+          offsets (reduce #(conj %1 (+ (last %1) %2)) [0]
+                          (map #(->> (:sentences %) (mapcat :tokens) (count))
+                               chunks))
+          start   0
+          end     (dec (last offsets))]
+      (into [[d-id "doc" "" 0 start end]]
+            (mapcat #(chunk->csv d-id %1 %2) offsets chunks)))))
+
+(defn csv->str
+  [records]
+  (with-out-str (csv/write-csv *out* records)))
+
+(defn ->doc
+  [doc]
+  [:doc
+   [:field {:name "id"} (str (random-uuid))]
+   [:field {:name "timestamp"} (System/currentTimeMillis)]
+   [:field {:name "title"} "Titel"]
+   [:field {:name "date"} "2023-06-10T00:00:00Z"]
+   [:field {:name "date_range"} "2023-06"]
+   [:field {:name "text_type"} "csv"]
+   [:field {:name "text"} (->> doc doc->csv csv->str)]])
+
+(def ^:dynamic *index-batch-size*
+  10)
+
+(defn index
+  [docs]
+  (->> (map (comp (fn [doc] [:add doc]) ->doc) docs)
+       (partition-all *index-batch-size*)
+       (map send-update!)
+       (last)))
 
 (comment
-  (defonce sample
-    (slurp-edn (io/file "sample.edn")))
-  
-  (binding [*anno-id* (volatile! 0)]
-    (->> sample (take 1000) (mapcat #(chunk->annotations 0 %1))
-         (csv/write-csv *out*) (with-out-str) (count)))
-  
   (clear!)
   (let [doc [:doc
              [:field {:name "id"} (str (random-uuid))]
@@ -208,11 +241,14 @@
              [:field {:name "text"} "0,t,Test,0,0,0\n1,t,Hallo,0,1,1"]]]
     (send-update! [[:delete [:query "*:*"]] [:add doc] [:commit]]))
 
+  (send-update! [[:commit] [:optimize]])
   (send-query! {"mtas"                "true"
                 "mtas.version"        "true"
                 "mtas.prefix"         "true"
                 "mtas.prefix.0.field" "text"
                 "mtas.prefix.0.key"   "prefixes"})
 
-  (send-mtas-query! "title:chatgpt && date_range:[2023-01 TO 2024-05}"
-                    "<t=\"Ha..o\"/>"))
+  (-> 
+   (send-mtas-query! "*:*" "[l=\"sollen\"][]")
+   #_(get-in [:body "response" "numFound"])
+   (time)))

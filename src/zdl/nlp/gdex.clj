@@ -157,3 +157,7 @@
 (defn good?
   [score]
   (<= 0.5 score))
+
+(defn score->str
+  [score]
+  (format "%.2f" score))

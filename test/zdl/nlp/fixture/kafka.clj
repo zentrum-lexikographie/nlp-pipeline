@@ -15,3 +15,10 @@
 (defn docs
   []
   (map tei->doc ["kafka_hungerkuenstler_1922" "kafka_prozess_1925"]))
+
+(comment
+  (with-open [input (-> "zdl/nlp/fixture/kafka/kafka_hungerkuenstler_1922.TEI-P5.xml"
+                        (io/resource)
+                        (io/input-stream))]
+    (->> input gxml/read-events tei/normalize-space tei/parse-events
+         tei/annotate-events (filter :sentences) (last))))

@@ -1,9 +1,9 @@
 (ns zdl.gpt
   (:require
    [lambdaisland.uri :as uri]
-   [jsonista.core :as json]
    [hato.client :as hc]
-   [zdl.env :as env]))
+   [zdl.env :as env]
+   [charred.api :as charred]))
 
 (defn parse-choice
   [{{:keys [content]} :message :as choice}]
@@ -28,14 +28,14 @@
        :headers (cond-> {"Content-Type" "application/json"
                          "Accept"       "application/json"}
                   auth-token (assoc "Authorization" (str "Bearer " auth-token)))
-       :body    (json/write-value-as-string
+       :body    (charred/write-json-str
                  (merge {:model       model
                          :temperature 0.0
                          :top_p       0.75
                          :messages    messages}
                         opts))}
       (hc/request)
-      (update :body #(json/read-value % json/keyword-keys-object-mapper))
+      (update :body #(charred/read-json % :key-fn keyword))
       (parse-completion-response)
       (assoc :messages messages :model model :url url)))
 

@@ -1,11 +1,11 @@
 (ns zdl.ddc
   (:require
    [clojure.string :as str]
-   [jsonista.core :as json]
    [taoensso.timbre :as log]
    [zdl.metadata :as md]
    [zdl.schema :as schema]
-   [zdl.util :refer [assoc*]])
+   [zdl.util :refer [assoc*]]
+   [charred.api :as charred])
   (:import
    (java.io DataInputStream OutputStream)
    (java.net Socket)
@@ -48,7 +48,7 @@
       (let [result (read-str input)]
         (log/debugf ". [%15s %5d/tcp %,15d/chars] '%s'"
                     host port (count result) cmd)
-        (json/read-value result)))
+        (charred/read-json result)))
     (catch Throwable t
       (throw (ex-info "DDC request error" {:endpoint endpoint :cmd cmd} t)))))
 

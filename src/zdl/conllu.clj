@@ -2,8 +2,8 @@
   "Parses and serializes annotated sentences in CoNLL-U format."
   (:require
    [clojure.string :as str]
-   [jsonista.core :as json]
-   [zdl.schema :as schema]))
+   [zdl.schema :as schema]
+   [charred.api :as charred]))
 
 (def feature-key-patches
   {:space-after :space-after?})
@@ -51,7 +51,7 @@
 (defn decode-text
   [s]
   (try
-    (if-let [t (some-> s json/read-value)] (if (string? t) t s) s)
+    (if-let [t (some-> s charred/read-json)] (if (string? t) t s) s)
     (catch com.fasterxml.jackson.core.JsonParseException _ s)))
 
 (defn decode-metadata
