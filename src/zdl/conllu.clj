@@ -52,7 +52,7 @@
   [s]
   (try
     (if-let [t (some-> s charred/read-json)] (if (string? t) t s) s)
-    (catch com.fasterxml.jackson.core.JsonParseException _ s)))
+    (catch Throwable _ s)))
 
 (defn decode-metadata
   [lines]

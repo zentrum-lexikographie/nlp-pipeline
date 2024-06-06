@@ -41,23 +41,24 @@
               :class-dir classes
               :basis     basis})))
 
-(defn dwdsmor-coverage-jar
-  [& _]
-  (let [basis        (b/create-basis {:project "deps.edn" :aliases #{:hfst}})
-        classes      (str (io/file "classes" "dwdsmor-coverage"))
-        hfst-classes (str (io/file "classes" "hfst"))
-        jar          (str (io/file "jars" "zdl.nlp.dwdsmor.coverage.jar"))
-        main         'zdl.nlp.dwdsmor.coverage]
-    (b/delete {:path jar})
-    (b/delete {:path classes})
-    (compile-hfst)
-    (b/copy-dir {:src-dirs [hfst-classes] :target-dir classes})
-    (b/compile-clj {:basis     basis   :ns-compile [main]
-                    :class-dir classes :src-dirs   ["src"]})
-    (b/uber {:class-dir classes :basis basis :uber-file jar :main main})))
-
 (def clj-ignores
   (conj default-ignores #".*\.clj$"))
+
+(defn coverage-jar
+  [& _]
+  (let [basis        (b/create-basis {:project "deps.edn"})
+        src-dirs     ["src" "java/classes"]
+        classes      (str (io/file "classes" "coverage"))
+        jar          (str (io/file "jars" "zdl.nlp.coverage.jar"))
+        main         'zdl.nlp.coverage]
+    (b/delete {:path jar})
+    (b/delete {:path classes})
+    (b/copy-dir {:src-dirs   src-dirs
+                 :target-dir classes
+                 :ignores    clj-ignores})
+    (b/compile-clj {:basis     basis   :ns-compile [main]
+                    :class-dir classes :src-dirs   src-dirs})
+    (b/uber {:class-dir classes :basis basis :uber-file jar :main main})))
 
 (defn tei-corpus-backup-jar
   [& _]

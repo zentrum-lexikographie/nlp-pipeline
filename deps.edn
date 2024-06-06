@@ -21,15 +21,20 @@
            garden/garden                                   {:git/url    "https://github.com/noprompt/garden.git"
                                                             :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
                                                             :exclusions [org.clojure/clojurescript]}}
- :aliases {:build {:ns-default build
-                   :extra-deps {io.github.clojure/tools.build {:git/tag "v0.9.6"
-                                                               :git/sha "8e78bcc"}
-                                babashka/process              {:mvn/version "0.5.22"}
-                                com.taoensso/timbre           {:mvn/version "6.3.1"}}}
-           :test  {:extra-paths ["test"]}
-           :clerk {:extra-paths ["dev"]
-                   :extra-deps  {io.github.nextjournal/clerk {:mvn/version "0.15.957"}
-                                 org.relaxng/jing            {:mvn/version "20181222"}
-                                 org.kohsuke.rngom/rngom     {:mvn/version "20100718"}
-                                 xerces/xercesImpl           {:mvn/version "2.12.2"}}}
-           :cli   {:extra-deps {org.clojure/tools.cli {:mvn/version "1.1.230"}}}}}
+ :aliases {:build  {:ns-default build
+                    :extra-deps {io.github.clojure/tools.build {:git/tag "v0.9.6"
+                                                                :git/sha "8e78bcc"}
+                                 babashka/process              {:mvn/version "0.5.22"}
+                                 com.taoensso/timbre           {:mvn/version "6.3.1"}}}
+           :test   {:extra-paths ["test"]}
+           :clerk  {:extra-paths ["dev"]
+                    :extra-deps  {io.github.nextjournal/clerk {:mvn/version "0.15.957"}
+                                  org.relaxng/jing            {:mvn/version "20181222"}
+                                  org.kohsuke.rngom/rngom     {:mvn/version "20100718"}
+                                  xerces/xercesImpl           {:mvn/version "2.12.2"}}
+                    :jvm-opts    ["-Xmx8g"]}
+           :python {:extra-deps {clj-python/libpython-clj {:mvn/version "2.025"}}
+                    :jvm-opts   ["--add-modules"
+                                 "jdk.incubator.foreign,jdk.incubator.vector"
+                                 "--enable-native-access=ALL-UNNAMED"]}
+           :cli    {:extra-deps {org.clojure/tools.cli {:mvn/version "1.1.230"}}}}}
