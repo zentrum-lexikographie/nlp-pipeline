@@ -3,6 +3,7 @@
    [zdl.log]
    [zdl.nlp.deps :as deps]
    [zdl.nlp.dwdsmor :as dwdsmor]
+   [zdl.nlp.simplemma :as simplemma]
    [zdl.nlp.gdex :as gdex]
    [zdl.nlp.hash :as hash]
    [zdl.nlp.langid :as langid]
@@ -26,8 +27,11 @@
        (partition-by ::parent)
        (map (partial fold-layer k) coll)))
 
+(def lemmatize
+  (if @dwdsmor/transducer dwdsmor/lemmatize simplemma/lemmatize))
+
 (def annotate-tokens
-  (partial annotate-layer :tokens (partial map dwdsmor/lemmatize)))
+  (partial annotate-layer :tokens (partial map lemmatize)))
 
 (def annotate-sentences
   (partial
