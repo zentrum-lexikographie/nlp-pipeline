@@ -6,7 +6,7 @@
 
 ;; # Simplemma Coverage Report
 ;;
-;; _Gregor Middell (06.05.2024)_
+;; _Gregor Middell (06.06.2024)_
 ;;
 
 {:nextjournal.clerk/visibility {:code :hide :result :hide}}

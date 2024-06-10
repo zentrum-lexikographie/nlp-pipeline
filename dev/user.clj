@@ -5,7 +5,7 @@
   (partial clerk/serve! {:browse?        true}))
 
 (def build-notebooks!
-  (partial clerk/build! {:paths ["notebooks/dwdsmor_coverage.clj"]}))
+  (partial clerk/build! {:paths ["notebooks/simplemma_coverage.clj"]}))
 
 (comment
   (serve-notebooks!)
