@@ -243,20 +243,21 @@
 
 (defn document
   [{:keys [tokens] :as sentence}]
-  [:dali/page
-   [:defs
-    (prefab/dot-marker :dm :radius 16)
-    (d/css styles)]
-   [::stack
-    [:dali/matrix {:column-gap 32
-                   :row-gap    16
-                   :columns    (count tokens)
-                   :position   [32 0]}
-     (dep-tree-nodes sentence)
-     (tagging sentence)]
-    (some->> (entities sentence) seq (into [:g {}]))
-    (some->> (collocations sentence) seq (into [:g {}]))]
-   (dep-tree-edges sentence)])
+  (let [sentence (deps/assoc-deps sentence)]
+    [:dali/page
+     [:defs
+      (prefab/dot-marker :dm :radius 16)
+      (d/css styles)]
+     [::stack
+      [:dali/matrix {:column-gap 32
+                     :row-gap    16
+                     :columns    (count tokens)
+                     :position   [32 0]}
+       (dep-tree-nodes sentence)
+       (tagging sentence)]
+      (some->> (entities sentence) seq (into [:g {}]))
+      (some->> (collocations sentence) seq (into [:g {}]))]
+     (dep-tree-edges sentence)]))
 
 (defn svg-file
   [sentence f]

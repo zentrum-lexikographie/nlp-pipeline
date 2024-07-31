@@ -7,9 +7,11 @@
   (update m head (fnil conj []) n))
 
 (defn assoc-deps
-  [{:keys [tokens] :as sentence}]
-  (->> (reduce assoc-deps* {} (filter :head tokens))
-       (assoc sentence :deps)))
+  [{:keys [tokens deps] :as sentence}]
+  (if deps
+    sentence
+    (->> (reduce assoc-deps* {} (filter :head tokens))
+         (assoc sentence :deps))))
 
 (defn root
   [tokens]
@@ -23,105 +25,73 @@
    (let [path (cons (tokens n) path)]
      (cons path (mapcat (partial paths sentence path) (deps n))))))
 
-;; ## Wordprofile relations (Collocations)
+;; ## Collocation extraction
+;;
+;; https://www.ims.uni-stuttgart.de/documents/ressourcen/korpora/tiger-corpus/annotation/tiger_scheme-syntax.pdf
 
-(defrecord ColloPattern [k pattern matches?])
+(defn pp-collocation?
+  [{:keys [deprel] :as _head-token}]
+  (or (= "MO" deprel) (= "MDR" deprel)))
 
-(defn collo-pattern*
-  [tagsets]
-  (into []
-        (map (fn [[pos deprel]] (cond-> {:pos? pos} deprel (assoc :deprel? deprel))))
-        (partition 2 2 nil tagsets)))
+(defn kon-collocation?
+  [{:keys [deprel upos] :as _head-token}]
+  (and (= "CD" deprel) (= "CCONJ" upos)))
 
-(defn collo-pattern
-  ([k pattern]
-   (collo-pattern k pattern (constantly true)))
-  ([k pattern matches?]
-   (->ColloPattern k (collo-pattern* pattern) matches?)))
-
-;; TODO: add filter constraints!
-
-(defn case?
-  [{:keys [deprel]}]
-  (= "CASE" deprel))
-
-(defn cop?
-  [{:keys [deprel]}]
-  (= "COP" deprel))
-
-(defn aux?
-  [{:keys [upos]}]
-  (= "AUX" upos))
-
-(defn gdet?
-  [{:keys [form]}]
-  (#{"des" "der" "eines" "einer"} form))
-
-(def cop-aux?
-  (every-pred cop? aux?))
-
-(defn deps-tokens
-  [{:keys [deps tokens]} {:keys [n]}]
-  (seq (map tokens (deps n))))
-
-(defn subject-pred?
-  [sentence [_c1 c2]]
-  (let [deps  (deps-tokens sentence c2)]
-    (and (some cop-aux? deps) (every? (complement case?) deps))))
-
-(defn object-pred?
-  [sentence [c1 _c2]]
-  (let [deps (deps-tokens sentence c1)]
-    (some (fn [{:keys [form]}] (#{"als" "für"} form)) deps)))
-
-(defn gmod?
-  [sentence [c1 _c2]]
-  (let [deps (deps-tokens sentence c1)]
-    (and (every? (complement case?) deps) (some gdet? deps))))
-
-(defn subja?
-  [sentence [_c1 c2]]
-  (let [deps (deps-tokens sentence c2)]
-    (every? (complement cop?) deps)))
-
-(def collo-patterns
-  [(collo-pattern "GMOD"  [#{"NOUN"}              #{"NMOD"}         #{"NOUN"}]                                                     gmod?)           
-   (collo-pattern "OBJ"   [#{"NOUN"}              #{"OBJ" "IOBJ"}   #{"VERB"}])
-   (collo-pattern "PRED"  [#{"NOUN"}              #{"NSUBJ"}        #{"NOUN" "VERB" "ADJ"}]                                        subject-pred?)
-   (collo-pattern "PRED"  [#{"NOUN" "VERB" "ADJ"} #{"OBJ" "OBL"}    #{"VERB"}]                                                     object-pred?)
-   (collo-pattern "SUBJA" [#{"NOUN"}              #{"NSUBJ"}        #{"NOUN" "VERB" "ADJ"}]                                        subja?)
-   (collo-pattern "SUBJP" [#{"NOUN"}              #{"NSUBJ:PASS"}   #{"VERB"}])
-   (collo-pattern "ADV"   [#{"ADJ" "ADV"}         #{"ADVMOD"}       #{"VERB" "ADJ"}])
-   (collo-pattern "ATTR"  [#{"ADJ"}               #{"AMOD"}         #{"NOUN"}])
-   (collo-pattern "PP"    [#{"ADP"}               #{"CASE"}         #{"NOUN"}               #{"NMOD"}       #{"NOUN"}])
-   (collo-pattern "PP"    [#{"ADP"}               #{"CASE"}         #{"NOUN" "ADJ" "ADV"}   #{"OBL"}        #{"VERB"}])
-   (collo-pattern "VZ"    [#{"ADP"}               #{"COMPOUND:PRT"} #{"VERB" "AUX" "ADJ"}])
-   (collo-pattern "KON"   [#{"CCONJ"}             #{"CC"}           #{"NOUN" "VERB" "ADJ"}  #{"CONJ"}       #{"NOUN" "VERB" "ADJ"}])
-   (collo-pattern "KOM"   [#{"CCONJ"}             #{"CASE"}         #{"NOUN"}               #{"OBL" "NMOD"} #{"ADJ" "VERB" "NOUN"}])])
-
-(defn collo-pattern-matches-token?
-  [{:keys [pos? deprel?]} {:keys [upos deprel]}]
-  (and upos (pos? upos) (or (nil? deprel?) (and deprel (deprel? deprel)))))
-
-(defn collocations*
-  [{:keys [k pattern matches?]} sentence path]
-  (let [pattern-len (count pattern)
-        path        (take pattern-len path)]
-    (when (and (= pattern-len (count path))
-               (every? identity (map collo-pattern-matches-token? pattern path))
-               (matches? sentence path))
-      (list {:type    :collocation
-             :label   k
-             :targets (into [] (map :n path))}))))
+(defn aux-verb?
+  [aux {:keys [head deprel upos]}]
+  (and (= aux head) (= "OC" deprel) (= "VERB" upos)))
 
 (defn collocations
-  [sentence]
-  (for [cp collo-patterns p (paths sentence) c (collocations* cp sentence p)] c))
+  [{:keys [tokens]} {:keys [deprel head n upos case]}]
+  (let [head-token (some-> head tokens)
+        head-pos   (some-> head-token :upos)]
+    (condp = [deprel upos]
+      ["MO" "ADV"]  (when (or (= "VERB" head-pos) (= "ADV" head-pos))
+                      (list ["ADV" head n]))
+      ["NK" "NOUN"] (when (and (= "ADP" head-pos) (pp-collocation? head-token))
+                      (list ["PP" (-> head-token :head) head n]))
+      ["NK" "ADJ"]  (condp = head-pos
+                      "NOUN" (list ["ATTR" head n])
+                      "ADP"  (when (pp-collocation? head-token)
+                               (list ["PP" (-> head-token :head) head n]))
+                      nil)
+      ["SB" "NOUN"] (when (= "Nom" case)
+                      (condp = head-pos
+                        "VERB" (list ["SUBJA" head n])
+                        "AUX"  (when-let [verb (->> tokens
+                                                    (filter #(aux-verb? head %))
+                                                    (map :n)
+                                                    (first))]
+                                 (list ["SUBJP" verb n]))
+                        nil))
+      ["OA" "NOUN"] (when (and (= "Acc" case) (= "VERB" head-pos))
+                      (list ["OBJ" head n]))
+      ["DA" "NOUN"] (when (and (= "Dat" case) (= "VERB" head-pos))
+                      (list ["OBJO" head n]))
+      ["AG" "NOUN"] (when (and (= "Gen" case) (= "NOUN" head-pos))
+                      (list ["GMOD" head n]))
+      ["CJ" "ADJ"]  (when (kon-collocation? head-token)
+                      (list ["KON" (-> head-token :head) n]))
+      ["CJ" "ADV"]  (when (kon-collocation? head-token)
+                      (list ["KON" (-> head-token :head) n]))
+      ["CJ" "NOUN"] (when (kon-collocation? head-token)
+                      (list ["KON" (-> head-token :head) n]))
+      ["CC" "NOUN"] (when (or (= "NOUN" head-pos)
+                              (= "ADJ" head-pos)
+                              (= "ADV" head-pos)
+                              (= "VERB" head-pos))
+                      (list ["KOM" head n]))
+      ["PD" "ADV"]  (when (= "NOUN" head-pos) (list ["PRED" head n]))
+      ["PD" "NOUN"] (when (= "NOUN" head-pos) (list ["PRED" head n]))
+      nil)))
 
 (defn analyze-collocations
-  [{:keys [deps] :as sentence}]
-  (let [sentence (cond-> sentence (nil? deps) (assoc-deps))
-        collocs  (collocations sentence)]
+  [{:keys [tokens] :as sentence}]
+  (let [collocs (->> (mapcat (partial collocations sentence) tokens)
+                     (map (fn [[k & targets]]
+                            {:type    :collocation
+                             :label   k
+                             :targets (vec targets)})))]
     (cond-> sentence (seq collocs) (update :spans (fnil into []) collocs))))
 
 (defn extract-collocations

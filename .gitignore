@@ -16,7 +16,8 @@ jars/
 public/
 resources/
 test-data/
-venv/
+
+.venv/
 
 .env
 

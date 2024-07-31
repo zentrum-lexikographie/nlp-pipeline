@@ -21,10 +21,7 @@
   (= "dev" environment))
 
 (def python-venv-dir
-  (io/file (get-env "PYTHON_VENV_DIR" "venv")))
-
-(def spacy-disable-model-download?
-  (some? (not-empty (get-env "SPACY_DISABLE_MODEL_DOWNLOAD"))))
+  (io/file (get-env "PYTHON_VENV_DIR" ".venv")))
 
 (def spacy-gpu?
   (some? (not-empty (get-env "SPACY_GPU"))))

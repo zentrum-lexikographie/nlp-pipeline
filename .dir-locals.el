@@ -4,4 +4,4 @@
 ((python-mode
   (python-test-runner pytest))
  (clojure-mode . ((cider-preferred-build-tool . clojure-cli)
-                  (cider-clojure-cli-aliases . ":build:test:clerk:rngom:cli:python"))))
+                  (cider-clojure-cli-aliases . ":build:test:clerk"))))

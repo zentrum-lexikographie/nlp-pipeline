@@ -38,14 +38,14 @@
    annotate-layer
    :sentences
    (comp (partial pmap (comp deps/analyze-collocations gdex/score))
-         annotate-tokens)))
+         annotate-tokens
+         spacy/annotate)))
 
 (def annotate-chunks
   (comp
    (partial sequence zdl.log/throughput-xf)
    (partial pmap (comp langid/detect-lang hash/fingerprint))
-   annotate-sentences
-   spacy/tagged-seq))
+   annotate-sentences))
 
 (def annotate-docs
   (partial annotate-layer :chunks annotate-chunks))
@@ -68,3 +68,6 @@
 
 (def process-docs
   (comp annotate-docs tokenize-docs))
+
+(comment
+  (process-chunks [{:text "Das ist ein Test!"}]))
