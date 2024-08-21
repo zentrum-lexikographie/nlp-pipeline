@@ -3,7 +3,7 @@
    [taoensso.timbre :as log]
    [zdl.python :as python]))
 
-(when-not (python/installed "sentence_transformers")
+(when-not (python/installed? "sentence_transformers")
   (log/info "Initializing sentence-transformers")
   (python/install! "sentence-transformers"))
 
@@ -14,7 +14,7 @@
                 '[sentence_transformers.util :refer [community_detection]])
 
 (def model
-  "sentence-transformers/multi-qa-MiniLM-L6-cos-v1")
+  "sentence-transformers/all-MiniLM-L6-v2")
 
 (defonce tf
   #_:clj-kondo/ignore
