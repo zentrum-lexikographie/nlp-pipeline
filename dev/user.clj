@@ -14,12 +14,14 @@
   (serve-notebooks!)
   (build-notebooks!))
 
-(defn visualize
+(defn nlp
   [sentence]
   (->> (zdl.nlp/process-chunks [{:text sentence}])
        (mapcat :sentences)
-       (first)
-       (vis/show!)))
+       (first)))
+
+(def visualize
+  (comp vis/show! nlp))
 
 (comment
-  (visualize "Es gelang nicht, und 2004 wurde der Doktortitel per Gerichtsbeschluß aberkannt."))
+  (visualize "Es gelang nicht, und 2004 wurde in Berlin der Doktortitel per Gerichtsbeschluß aberkannt."))

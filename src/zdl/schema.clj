@@ -1,50 +1,27 @@
 (ns zdl.schema
   (:require
-   [camel-snake-kebab.core :as csk]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
    [malli.core :as m]
-   [malli.transform :as mt]
-   [clojure.string :as str]))
+   [malli.transform :as mt]))
 
-(def key-keyword
-  (memoize #(some-> % csk/->kebab-case-keyword)))
-
-(def tag-str
-  (memoize #(some-> % csk/->SCREAMING_SNAKE_CASE_STRING)))
-
-(def tag-coding
-  {:decode/string tag-str
-   :encode/string tag-str})
+(def tagging
+  (read-string (slurp (io/resource "zdl/tagging-schema.edn"))))
 
 (def Token
-  [:map
-   [:n [:int {:min 0}]]
-   [:form :string]
-   [:space-after? :boolean]
-   [:hit? {:optional true} :boolean]
-   [:start {:optional true} [:int {:min 0}]]
-   [:end {:optional true} [:int {:min 0}]]
-   [:oov? {:optional true} :boolean]
-   [:lemma {:optional true} :string]
-   [:head {:optional true} [:int {:min 0}]]
-   [:deprel {:optional true} [:string tag-coding]]
-   [:upos {:optional true} [:string tag-coding]]
-   [:xpos {:optional true} [:string tag-coding]]
-   [:case {:optional true} [:string tag-coding]]
-   [:degree {:optional true} [:string tag-coding]]
-   [:gender {:optional true} [:string tag-coding]]
-   [:mood {:optional true} [:string tag-coding]]
-   [:number {:optional true} [:string tag-coding]]
-   [:person {:optional true} [:string tag-coding]]
-   [:tense {:optional true} [:string tag-coding]]
-   [:adp-type {:optional true} [:string tag-coding]]
-   [:conj-type {:optional true} [:string tag-coding]]
-   [:num-type {:optional true} [:string tag-coding]]
-   [:part-type {:optional true} [:string tag-coding]]
-   [:pron-type {:optional true} [:string tag-coding]]
-   [:punct-type {:optional true} [:string tag-coding]]
-   [:verb-type {:optional true} [:string tag-coding]]
-   [:verb-form {:optional true} [:string tag-coding]]
-   [:definite {:optional true} [:string tag-coding]]])
+  (into
+   [:map
+    [:n [:int {:min 0}]]
+    [:form :string]
+    [:space-after? :boolean]
+    [:hit? {:optional true} :boolean]
+    [:start {:optional true} [:int {:min 0}]]
+    [:end {:optional true} [:int {:min 0}]]
+    [:oov? {:optional true} :boolean]
+    [:lemma {:optional true} :string]
+    [:head {:optional true} [:int {:min 0}]]]
+   (map (fn [k] [k {:optional true} (into [:enum nil] (sort (tagging k)))]))
+   (sort (keys tagging))))
 
 (defn assoc-space-after**
   [[t1 t2]]
@@ -67,7 +44,10 @@
 
 (def Span
   [:map
-   [:label [:string tag-coding]]
+   [:type [:enum nil :collocation :entity]]
+   [:label (into [:enum nil] (sort (concat
+                                    (tagging :collocation)
+                                    (tagging :entity))))]
    [:targets [:vector [:int {:min 0}]]]])
 
 (def Sentence

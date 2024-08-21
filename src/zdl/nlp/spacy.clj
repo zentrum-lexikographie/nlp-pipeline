@@ -5,7 +5,6 @@
    [taoensso.timbre :as log]
    [zdl.env :as env]
    [zdl.python :as python]
-   [zdl.schema :refer [tag-str]]
    [zdl.util :refer [assoc*]]
    [clojure.java.io :as io]))
 
@@ -27,7 +26,7 @@
   (spacy/load "de_core_news_sm"))
 
 (def pos-tag-str
-  (memoize (fn [s] (if (str/starts-with? s "$") "PUNCT" (tag-str s)))))
+  (memoize (fn [s] (if (str/starts-with? s "$") "PUNCT" s))))
 
 (def helper-fns
   (-> (slurp (io/resource "zdl/nlp/spacy/util.py"))
@@ -44,36 +43,32 @@
   [morph]
   (when-let [features (some-> morph (str/split #"\|"))]
     (->>
-     (for [[k vs] (map #(str/split % #"=" 2) features) :when (not-empty vs)]
-       [k (vec (str/split vs #","))])
+     (for [[k v] (map #(str/split % #"=" 2) features) :when (not-empty v)] [k v])
      (into {}))))
 
 (defn merge-token-annotations
   [token t]
   (let [dep?  (not= "ROOT" (t "dep"))
-        morph* (some-> (t "morph") morph->dict)
-        morph  (comp first morph*)]
+        morph (some-> (t "morph") morph->dict)]
     (-> token
-        (assoc* :deprel     (when dep? (some-> (t "dep") tag-str)))
+        (assoc* :deprel     (when dep? (some-> (t "dep") str/upper-case)))
         (assoc* :head       (when dep? (t "head")))
         (assoc* :lemma      (t "lemma"))
         (assoc* :upos       (some-> (t "pos") pos-tag-str))
         (assoc* :xpos       (some-> (t "tag") pos-tag-str))
-        (assoc* :number     (morph "Number"))
-        (assoc* :gender     (morph "Gender"))
         (assoc* :case       (morph "Case"))
-        (assoc* :tense      (morph "Tense"))
-        (assoc* :person     (morph "Person"))
-        (assoc* :mood       (morph "Mood"))
-        (assoc* :degree     (morph "Degree"))
         (assoc* :definite   (morph "Definite"))
-        (assoc* :verb-form  (morph "VerbForm"))
-        (assoc* :verb-type  (morph* "VerbType"))
-        (assoc* :punct-type (morph* "PunctType"))
-        (assoc* :conj-type  (morph* "ConjType"))
-        (assoc* :part-type  (morph* "PartType"))
-        (assoc* :pron-type  (morph* "PronType"))
-        (assoc* :adp-type   (morph* "AdpType")))))
+        (assoc* :degree     (morph "Degree"))
+        (assoc* :foreign    (morph "Foreign"))
+        (assoc* :gender     (morph "Gender"))
+        (assoc* :mood       (morph "Mood"))
+        (assoc* :number     (morph "Number"))
+        (assoc* :person     (morph "Person"))
+        (assoc* :poss       (morph "Poss"))
+        (assoc* :pron-type  (morph "PronType"))
+        (assoc* :reflex     (morph "Poss"))
+        (assoc* :tense      (morph "Tense"))
+        (assoc* :verb-form  (morph "VerbForm")))))
 
 (defn entity->span
   [[{ss :start} :as tokens] e]
@@ -81,7 +76,7 @@
         ee      (+ ss (e "end"))
         covers? (fn [{:keys [start end]}] (<= es start end ee))]
     {:type    :entity
-     :label   (tag-str (e "label"))
+     :label   (e "label")
      :targets (into [] (comp (filter covers?) (map :n)) tokens)}))
 
 (defn merge-annotations

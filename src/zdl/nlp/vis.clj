@@ -222,7 +222,7 @@
 (def token->tags
   (juxt :upos :xpos
         :number :gender :case :person :tense :mood :degree
-        :verb-form :verb-type :pron-type :num-type :part-type))
+        :verb-form :pron-type))
 
 (defn tagging
   [{:keys [tokens]}]
