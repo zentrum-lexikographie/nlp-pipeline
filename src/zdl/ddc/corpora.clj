@@ -6,7 +6,10 @@
    [taoensso.timbre :as log]
    [zdl.ddc :as ddc]
    [zdl.env :as env]
-   [zdl.util :refer [slurp-edn spit-edn]]))
+   [zdl.nlp :as nlp]
+   [zdl.nlp.hash :as hash]
+   [zdl.util :refer [slurp-edn spit-edn]]
+   [zdl.nlp.gdex :as gdex]))
 
 (defn parse-list
   [corpora]
@@ -64,54 +67,56 @@
        (into (sorted-set) )
        (delay)))
 
-(defn assoc-corpus
-  [corpus v]
-  (vary-meta v assoc  :corpus corpus))
-
-(def ^:dynamic *queried*
-  #{"kernbasis" "dtaxl"})
-
-(def ^:dynamic *num-results-per-corpus*
-  10000)
-
 (defn query*
-  [corpus & args]
-  (let [results (->> (concat args (list :page-size *num-results-per-corpus*))
+  [corpus max-results & args]
+  (let [results (->> (concat args (list :page-size max-results))
                      (apply ddc/query (@endpoints corpus))
-                     (into [] (comp (take *num-results-per-corpus*)
-                                    (map (partial assoc-corpus corpus)))))]
+                     (into [] (comp (take max-results)
+                                    (map #(assoc % ::corpus corpus)))))]
     (log/debugf "? [%15s] [%,9d] %s" corpus (count results) args)
     results))
 
 (defn query
-  [& args]
-  (assert (every? @endpoints *queried*) (str "Could not resolve " *queried*))
-  (flatten (pmap #(apply query* % args) *queried*)))
+  [corpora max-results-per-corpus & args]
+  (assert (every? @endpoints corpora) (str "Could not resolve " corpora))
+  (flatten (pmap #(apply query* % max-results-per-corpus args) corpora)))
 
-#_(defn good-examples
-  [q]
-  (->> (query q) (zdl.nlp/annotate) (hash/deduplicate)
-       (filter (comp gdex/good? gdex/get-score))
-       (sort-by gdex/get-score #(compare %2 %1))
-       (vec)))
+(defn deduplicate
+  ([docs]
+   (deduplicate docs #{}))
+  ([docs seen]
+   (when-let [{[{[{:keys [fingerprint]}] :sentences}] :chunks :as doc}
+              (first docs)]
+     (lazy-seq
+      (if (seen fingerprint)
+        (deduplicate (rest docs) seen)
+        (cons doc (deduplicate (rest docs) (conj seen fingerprint))))))))
 
-#_(defn balanced-good-examples-by
+(defn gdex-score
+  [{[{[{:keys [gdex]}] :sentences}] :chunks :as _doc}]
+  gdex)
+
+(def gdex-good?
+  (comp gdex/good? gdex-score))
+
+(defn good-examples
+  [corpora max-results-per-corpus q]
+  (->> (query corpora max-results-per-corpus q)
+       (nlp/annotate-docs) (deduplicate)
+       (filter gdex-good?) (sort-by gdex-score #(compare %2 %1)) (vec)))
+
+(defn balanced-good-examples-by
   [kf vs]
   (->> (group-by kf vs) (vals)
        (mapcat (partial map-indexed #(assoc %2 :rank %1)))
-       (sort-by (juxt :rank (comp - gdex/get-score)))
+       (sort-by (juxt :rank (comp - gdex-score)))
        (vec)))
 
 (comment
   @collections
 
-  (binding [*queried* #{"kernbasis"}
-            *num-results-per-corpus* 10000]
-    (spit-edn "sample.edn" (good-examples "Sinn")))
+  (binding [*queried*                #{"kernbasis"}
+            *num-results-per-corpus* 100]
+    (good-examples "Sinn"))
 
-  (->>
-   (for [collocation (mapcat #_deps/extract-collocations (slurp-edn "sample.edn"))]
-     (-> collocation :collocates last :lemma))
-   (frequencies)
-   (sort-by second #(compare %2 %1)))
   (for [[id info] @infos :when (info :meta-corpus?)] id))

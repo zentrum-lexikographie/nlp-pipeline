@@ -58,7 +58,8 @@
    [:end {:optional true} [:int {:min 0}]]
    [:tokens {:optional true} [:vector Token]]
    [:spans {:optional true} [:vector Span]]
-   [:gdex {:optional true} [:double]]])
+   [:gdex {:optional true} [:double]]
+   [:fingerprint {:optional true} :int]])
 
 (def transformer
   (mt/string-transformer))
@@ -76,16 +77,15 @@
   [{:keys [form space-after?]}]
   (str form (when space-after? " ")))
 
-(defn sentence->text
-  [{:keys [tokens]}]
+(defn tokens->text
+  [tokens]
   (str/join (map token->text tokens)))
 
 (def Chunk
   [:map
    [:sentences [:vector Sentence]]
    [:text {:optional true} :string]
-   [:lang {:optional true} :string]
-   [:fingerprint {:optional true} :string]])
+   [:lang {:optional true} :string]])
 
 (def encode-chunk
   (m/encoder Chunk transformer))

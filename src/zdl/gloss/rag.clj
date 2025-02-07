@@ -24,17 +24,13 @@
        (->> (map-indexed (fn [n s] (str (inc n) ". " s)) examples)
             (str/join "\n\n"))))
 
-(defn queried-corpus
-  [result]
-  (get (meta result) :corpus))
-
-(def ^:dynamic *corpora*
-  #{"ballsport" "dta_www" "kernbasis" "zeitungenxl" "wikipedia_www" "webmonitor"})
+(def corpora
+  #{#_"ballsport" "dta_www" "kernbasis" "zeitungenxl" #_"wikipedia_www" "webmonitor"})
 
 (defn generate
   [gpt term q num-examples]
-  (let [examples   (ddc.corpora/good-examples *corpora* num-examples q)
-        examples   (ddc.corpora/balanced-good-examples-by queried-corpus examples)
+  (let [examples   (ddc.corpora/good-examples corpora num-examples q)
+        examples   (ddc.corpora/balanced-good-examples-by :ddc.corpora/corpus examples)
         examples   (into [] (take 100) examples)
         prompt     (prompt term (map :text examples))
         prompt     [{:role "system" :content personality}
@@ -71,180 +67,10 @@
     (str/join \space $)
     (str "\"" $ "\"")))
 
-(def soccer-samples
-  #_(->>
-     (concat
-      (with-open [r (io/reader (io/file "/home/gregor/Downloads/EWA_Neu_Prio3 - EWA_Neu.csv"))]
-        (into [] (comp (drop 1) (map second))
-              (csv/read-csv r)))
-      (with-open [r (io/reader (io/file "/home/gregor/Downloads/MWA_Neu_Prio3 - MWA_Neu.csv"))]
-        (into [] (comp (drop 1)
-                       (filter (comp #{"x"} str/lower-case second))
-                       (map #(nth % 5)))
-              (csv/read-csv r))))
-     (into [] (map (juxt identity term->query))))
-  [["Abseitstreffer" "\"Abseitstreffer|lemma\""]
-   ["Ankerspieler" "\"Ankerspieler|lemma\""]
-   ["Ankerstürmer" "\"Ankerstürmer|lemma\""]
-   ["Anspielstation" "\"Anspielstation|lemma\""]
-   ["Außenpfosten" "\"Außenpfosten|lemma\""]
-   ["Ballbehauptung" "\"Ballbehauptung|lemma\""]
-   ["ballsicher" "\"ballsicher|lemma\""]
-   ["Bankdrücker" "\"Bankdrücker|lemma\""]
-   ["Chancentod" "\"Chancentod|lemma\""]
-   ["Chip-Ball" "\"Chip-Ball|lemma\""]
-   ["Diagonalflanke" "\"Diagonalflanke|lemma\""]
-   ["Direktablage" "\"Direktablage|lemma\""]
-   ["Direktpassspiel" "\"Direktpassspiel|lemma\""]
-   ["drauftreten" "\"drauftreten|lemma\""]
-   ["Dreier-Abwehrkette" "\"Dreier-Abwehrkette|lemma\""]
-   ["Dreierblock" "\"Dreierblock|lemma\""]
-   ["drüberhauen" "\"drüberhauen|lemma\""]
-   ["Einwurfflanke" "\"Einwurfflanke|lemma\""]
-   ["Elferschießen" "\"Elferschießen|lemma\""]
-   ["Ellenbogencheck" "\"Ellenbogencheck|lemma\""]
-   ["Ellbogencheck" "\"Ellbogencheck|lemma\""]
-   ["Ergebnisfußballer" "\"Ergebnisfußballer|lemma\""]
-   ["Eskortkind" "\"Eskortkind|lemma\""]
-   ["Eskortenkind" "\"Eskortenkind|lemma\""]
-   ["Fahnenpass" "\"Fahnenpass|lemma\""]
-   #_["Faller" "\"Faller|lemma\""]
-   ["Fernduell" "\"Fernduell|lemma\""]
-   ["festdribbeln" "\"festdribbeln|lemma\""]
-   ["festspielen" "\"festspielen|lemma\""]
-   ["Filigrantechniker" "\"Filigrantechniker|lemma\""]
-   ["Flatterball" "\"Flatterball|lemma\""]
-   ["Flügelposition" "\"Flügelposition|lemma\""]
-   ["freisperren" "\"freisperren|lemma\""]
-   ["Freistoßflanke" "\"Freistoßflanke|lemma\""]
-   ["Frustfoul" "\"Frustfoul|lemma\""]
-   ["Fünf-Meter-Raum" "\"Fünf-Meter-Raum|lemma\""]
-   ["gelbbelastet" "\"gelbbelastet|lemma\""]
-   ["gelbgesperrt" "\"gelbgesperrt|lemma\""]
-   ["Gelb-Rot" "\"Gelb-Rot|lemma\""]
-   ["gestaffelt" "\"gestaffelt|lemma\""]
-   ["Halbposition" "\"Halbposition|lemma\""]
-   ["Heimschiedsrichter" "\"Heimschiedsrichter|lemma\""]
-   ["Heimschlappe" "\"Heimschlappe|lemma\""]
-   ["herunterpflücken" "\"herunterpflücken|lemma\""]
-   ["Innenraumverbot" "\"Innenraumverbot|lemma\""]
-   ["Instinktfußballer" "\"Instinktfußballer|lemma\""]
-   ["Keilstürmer" "\"Keilstürmer|lemma\""]
-   ["Kick & Rush" "\"Kick|lemma \\&|lemma Rush|lemma\""]
-   ["Klein-Klein-Spiel" "\"Klein-Klein-Spiel|lemma\""]
-   ["kombinationssicher" "\"kombinationssicher|lemma\""]
-   ["Konterspiel" "\"Konterspiel|lemma\""]
-   ["Kontertor" "\"Kontertor|lemma\""]
-   ["Konzeptfußball" "\"Konzeptfußball|lemma\""]
-   ["Kopfballaufsetzer" "\"Kopfballaufsetzer|lemma\""]
-   ["Kopfball-Rückgabe" "\"Kopfball-Rückgabe|lemma\""]
-   ["Kopfballvorlage" "\"Kopfballvorlage|lemma\""]
-   ["Kreativspiel" "\"Kreativspiel|lemma\""]
-   ["Kreativspieler" "\"Kreativspieler|lemma\""]
-   ["Kullerball" "\"Kullerball|lemma\""]
-   ["Lattenabpraller" "\"Lattenabpraller|lemma\""]
-   ["Lattenknaller" "\"Lattenknaller|lemma\""]
-   ["Lattenkracher" "\"Lattenkracher|lemma\""]
-   ["Lattentreffer" "\"Lattentreffer|lemma\""]
-   ["Lucky Punch" "\"Lucky|lemma Punch|lemma\""]
-   ["Mittelfeldraute" "\"Mittelfeldraute|lemma\""]
-   ["Nickligkeiten" "\"Nickligkeiten|lemma\""]
-   ["No-Look-Pass" "\"No-Look-Pass|lemma\""]
-   ["Notabwehr" "\"Notabwehr|lemma\""]
-   ["One-Touch-Fußball" "\"One-Touch-Fußball|lemma\""]
-   ["On-Field-Review" "\"On-Field-Review|lemma\""]
-   ["Overtime" "\"Overtime|lemma\""]
-   ["Passstafette" "\"Passstafette|lemma\""]
-   ["Pflichtspielerfolg" "\"Pflichtspielerfolg|lemma\""]
-   ["Pflichtspieltor" "\"Pflichtspieltor|lemma\""]
-   ["Pfostentreffer" "\"Pfostentreffer|lemma\""]
-   ["Pressingopfer" "\"Pressingopfer|lemma\""]
-   ["Raumdeuter" "\"Raumdeuter|lemma\""]
-   ["rausfischen" "\"rausfischen|lemma\""]
-   ["Rechtsfuß" "\"Rechtsfuß|lemma\""]
-   ["reindrücken" "\"reindrücken|lemma\""]
-   ["reinjagen" "\"reinjagen|lemma\""]
-   ["Rumpfelf" "\"Rumpfelf|lemma\""]
-   ["Rumpfteam" "\"Rumpfteam|lemma\""]
-   ["Sechs-Punkte-Spiel" "\"Sechs-Punkte-Spiel|lemma\""]
-   ["semmeln" "\"semmeln|lemma\""]
-   ["Sommerfußball" "\"Sommerfußball|lemma\""]
-   ["Spielertunnel" "\"Spielertunnel|lemma\""]
-   ["Spielsperre" "\"Spielsperre|lemma\""]
-   ["Spielverlagerung" "\"Spielverlagerung|lemma\""]
-   ["Steckpass" "\"Steckpass|lemma\""]
-   ["Strafraumbeherrschung" "\"Strafraumbeherrschung|lemma\""]
-   ["Strafraumspieler" "\"Strafraumspieler|lemma\""]
-   ["Strafraumszene" "\"Strafraumszene|lemma\""]
-   ["Tikitaka" "\"Tikitaka|lemma\""]
-   ["Todesgruppe" "\"Todesgruppe|lemma\""]
-   ["Torfestival" "\"Torfestival|lemma\""]
-   ["Torkonto" "\"Torkonto|lemma\""]
-   ["Torwartecke" "\"Torwartecke|lemma\""]
-   ["Ultras" "\"Ultras|lemma\""]
-   ["Umkehrspiel" "\"Umkehrspiel|lemma\""]
-   ["ummähen" "\"ummähen|lemma\""]
-   ["umsensen" "\"umsensen|lemma\""]
-   ["unbespielbar" "\"unbespielbar|lemma\""]
-   ["VAR-Assistent" "\"VAR-Assistent|lemma\""]
-   ["verdaddeln" "\"verdaddeln|lemma\""]
-   ["Vertikalpass" "\"Vertikalpass|lemma\""]
-   ["Vertikalfußball" "\"Vertikalfußball|lemma\""]
-   ["Viererblock" "\"Viererblock|lemma\""]
-   ["vorbeiköpfen" "\"vorbeiköpfen|lemma\""]
-   ["vorbeischieben" "\"vorbeischieben|lemma\""]
-   ["vorbeispitzeln" "\"vorbeispitzeln|lemma\""]
-   ["Vorlagengeber" "\"Vorlagengeber|lemma\""]
-   ["Wechselfehler" "\"Wechselfehler|lemma\""]
-   ["Zählbares" "\"Zählbares|lemma\""]
-   ["Zeitschinden" "\"Zeitschinden|lemma\""]
-   ["Zucker-Pass" "\"Zucker-Pass|lemma\""]
-   ["Halbchance" "\"Halbchance|lemma\""]
-   ["hellwach" "\"hellwach|lemma\""]
-   ["Automatismus" "\"Automatismus|lemma\""]
-   ["gesperrt" "\"gesperrt|lemma\""]
-   ["herauseilen" "\"herauseilen|lemma\""]
-   ["Luftduell" "\"Luftduell|lemma\""]
-   ["umgrätschen" "\"umgrätschen|lemma\""]
-   ["Volleykracher" "\"Volleykracher|lemma\""]
-   ["Doppelsechser" "\"Doppelsechser|lemma\""]
-   ["Klein-Klein-Spiel" "\"Klein-Klein-Spiel|lemma\""]
-   ["Quali" "\"Quali|lemma\""]
-   ["passives Abseits" "\"passives|lemma Abseits|lemma\""]
-   ["passive Abseitsstellung" "\"passive|lemma Abseitsstellung|lemma\""]
-   ["zweiter Anzug" "\"zweiter|lemma Anzug|lemma\""]
-   ["ruhender Ball" "\"ruhender|lemma Ball|lemma\""]
-   ["gestrecktes Bein" "\"gestrecktes|lemma Bein|lemma\""]
-   ["hohes Bein" "\"hohes|lemma Bein|lemma\""]
-   ["kurzes Eck" "\"kurzes|lemma Eck|lemma\""]
-   ["langes Eck" "\"langes|lemma Eck|lemma\""]
-   ["kurze Ecke" "\"kurze|lemma Ecke|lemma\""]
-   ["lange Ecke" "\"lange|lemma Ecke|lemma\""]
-   ["falscher Einwurf" "\"falscher|lemma Einwurf|lemma\""]
-   ["kleines Finale" "\"kleines|lemma Finale|lemma\""]
-   ["direkter Freistoß" "\"direkter|lemma Freistoß|lemma\""]
-   ["indirekter Freistoß" "\"indirekter|lemma Freistoß|lemma\""]
-   ["freier Mann" "\"freier|lemma Mann|lemma\""]
-   ["letzter Mann" "\"letzter|lemma Mann|lemma\""]
-   ["zwölfter Mann" "\"zwölfter|lemma Mann|lemma\""]
-   ["defensives Mittelfeld" "\"defensives|lemma Mittelfeld|lemma\""]
-   ["offensives Mittelfeld" "\"offensives|lemma Mittelfeld|lemma\""]
-   ["zentrales Mittelfeld" "\"zentrales|lemma Mittelfeld|lemma\""]
-   ["kurzer Pfosten" "\"kurzer|lemma Pfosten|lemma\""]
-   ["langer Pfosten" "\"langer|lemma Pfosten|lemma\""]
-   ["hohes Pressing" "\"hohes|lemma Pressing|lemma\""]
-   ["heiliger Rasen" "\"heiliger|lemma Rasen|lemma\""]
-   ["freier Raum" "\"freier|lemma Raum|lemma\""]
-   ["ballorientierte Raumdeckung" "\"ballorientierte|lemma Raumdeckung|lemma\""]
-   ["zweite Reihe" "\"zweite|lemma Reihe|lemma\""]
-   ["goldenes Tor" "\"goldenes|lemma Tor|lemma\""]
-   ["direkter Vergleich" "\"direkter|lemma Vergleich|lemma\""]
-   ["vierter Offizieller" "\"vierter|lemma Offizieller|lemma\""]])
-
-(defn estimate-query-results
-  [q]
-  (binding [ddc.corpora/*num-results-per-corpus* 1]
-    (->> (ddc.corpora/query *corpora* q) (first) (meta) :total)))
+(comment
+  (->> (generate gpt/openai "Kollateralschaden" (term->query "Kollateralschaden") 10)
+       (dialog->str)
+       (println)))
 
 (defn -main
   [& _]

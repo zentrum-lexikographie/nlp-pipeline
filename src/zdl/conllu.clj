@@ -11,7 +11,7 @@
 (def feature-map-decoder-xf
   (comp
    (map #(str/split % #"=" 2))
-   (map (fn [[k v]] [(schema/key-keyword k) (schema/tag-str v)]))))
+   (map vec)))
 
 (defn decode-feature-map
   [v]
@@ -95,11 +95,12 @@
   [s]
   (let [[m t] (split-with comment-line? s)
         m     (when (seq m) (decode-metadata m))
-        s     (when (seq t) {:tokens (map-indexed decode-token t)})]
+        ts    (when (seq t) (map-indexed decode-token t))
+        s     (when ts {:tokens ts})]
     (schema/decode-chunk
      (merge m
             {:sentences (cond-> [] s (conj s))}
-            (when-not (:text m) {:text (str/join (schema/sentence->text s))})))))
+            (when-not (:text m) {:text (str/join (schema/tokens->text ts))})))))
 
 (defn empty-line?
   [s]

@@ -1,6 +1,5 @@
 (ns zdl.gloss.article
   (:require
-   [clojure.java.io :as io]
    [clojure.string :as str]
    [gremid.xml :as gxml]
    [zdl.util :refer [form->id]]
@@ -9,7 +8,7 @@
    (java.time LocalDate)
    (java.time.format DateTimeFormatter)))
 
-(defn metadata->urn
+(defn doc->urn
   [{:keys [collection file page]}]
   (->> (cond-> ["dwds" collection file] page (conj page))
        (str/join \:)))
@@ -25,28 +24,28 @@
   [v]
   (some-> v LocalDate/parse (.format short-date-formatter)))
 
-(defn chunk->xml
-  [{:keys [metadata sentences]}]
+(defn doc->xml
+  [{[{:keys [sentences]}] :chunks :as doc}]
   [:Beleg {:class "invisible"}
    [:Belegtext
     (for [s sentences t (s :tokens) xml (token->xml-list t)] xml)]
-   [:Fundstelle {:Fundort (metadata->urn metadata)}
-    (if-let [url (metadata :url)]
+   [:Fundstelle {:Fundort (doc->urn doc)}
+    (if-let [url (doc :url)]
       (list
-       (when-let [author (metadata :author)]
+       (when-let [author (doc :author)]
          [:Autor author])
-       (when-let [editor (metadata :editor)]
+       (when-let [editor (doc :editor)]
          [:Herausgeber editor])
-       [:Titel (metadata :title)]
-       (when-let [short-title (metadata :short-title)]
+       [:Titel (doc :title)]
+       (when-let [short-title (doc :short-title)]
          [:Kurztitel short-title])
-       [:Datum (some-> (metadata :date) (format-date))]
-       (when-let [first-published (metadata :first-published)]
+       [:Datum (some-> (doc :date) (format-date))]
+       (when-let [first-published (doc :first-published)]
          [:Erstpublikation first-published])
        [:URL url]
-       (when-let [access-date (metadata :access-date)]
+       (when-let [access-date (doc :access-date)]
          [:Aufrufdatum (format-date access-date)]))
-      (list (metadata :bibl)))]])
+      (list (doc :bibl)))]])
 
 (defn gloss->xml
   [form gloss examples]
@@ -78,9 +77,4 @@
       [:Kommentar gloss]
       [:Kollokationen]
       [:Verwendungsbeispiele
-       (map chunk->xml examples)]]]]))
-
-(comment
-  (->
-   
-   (zdl.xml/write-xml (io/file "sample.xml"))))
+       (map doc->xml examples)]]]]))

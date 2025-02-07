@@ -33,18 +33,24 @@
 (def annotate-tokens
   (partial annotate-layer :tokens (partial map lemmatize)))
 
+(defn fingerprint-sentence
+  [{:keys [text] :as sentence}]
+  (assoc sentence :fingerprint (hash/str->hash text)))
+
 (def annotate-sentences
   (partial
    annotate-layer
    :sentences
-   (comp (partial pmap (comp deps/analyze-collocations gdex/score))
+   (comp (partial pmap (comp deps/analyze-collocations
+                             gdex/score
+                             fingerprint-sentence))
          annotate-tokens
          spacy/annotate)))
 
 (def annotate-chunks
   (comp
    (partial sequence zdl.log/throughput-xf)
-   (partial pmap (comp langid/detect-lang hash/fingerprint))
+   (partial pmap langid/detect-lang)
    annotate-sentences))
 
 (def annotate-docs

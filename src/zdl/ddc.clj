@@ -53,13 +53,13 @@
       (throw (ex-info "DDC request error" {:endpoint endpoint :cmd cmd} t)))))
 
 (defn parse-metadata
-  [m]
+  [query-metadata m]
   (let [collection (-> m (get "collection") (md/parse-v))
         page       (or (some-> m (get "page_") (md/parse-page))
                        (some-> m (get "pageRange") (md/parse-v)))
         date       (-> m  (get "date_") (md/parse-one-date))
         ts         (-> m (get "timestamp") (md/parse-timestamp))]
-    (-> nil
+    (-> query-metadata
         ;; base
         (assoc* :collection collection)
         (assoc* :url (-> m  (get "url") (md/parse-v)))
@@ -107,15 +107,27 @@
            :space-after? (= "1" space-before?)}
     (pos? hit?) (assoc :hit? true)))
 
+(defn assoc-token-offsets
+  [tokens {:keys [form] :as token}]
+  (let [len    (count form)
+        offset (if-let [{:keys [end space-after?] :as _prev} (last tokens)]
+                 (cond-> end space-after? inc) 0)]
+    (conj tokens (assoc token
+                        :start offset
+                        :end (+ offset len)))))
+
 (defn hit->doc
-  [{[_ tokens _] "ctx_" {ks "indices_" :as metadata} "meta_"}]
+  [query-metadata {[_ tokens _] "ctx_" {ks "indices_" :as metadata} "meta_"}]
   (let [ks       (cons :hit? ks)
         tokens   (map #(zipmap ks %) tokens)
-        tokens   (into [] (map-indexed parse-token) (partition-all 2 1 tokens))
-        sentence {:tokens tokens}
-        text     (schema/sentence->text sentence)]
-    (assoc (parse-metadata metadata)
-           :chunks [{:sentences [(assoc sentence :text text)] :text text}]
+        tokens   (->> (partition-all 2 1 tokens)
+                      (map-indexed parse-token)
+                      (reduce assoc-token-offsets []))
+        text     (schema/tokens->text tokens)
+        sentence {:tokens tokens :text text :start 0 :end (count text)}]
+    (assoc (parse-metadata query-metadata metadata)
+           :chunks [{:sentences [sentence]
+                     :text      text}]
            :text text)))
 
 (defn query
@@ -130,12 +142,9 @@
         results  (get response "hits_")]
     (when (seq results)
       (lazy-cat
-       (let [meta {:endpoint endpoint :total total}]
+       (let [query-metadata {::endpoint endpoint ::total total}]
          (map-indexed
-          (fn [n hit]
-            (with-meta
-              (hit->doc hit)
-              (assoc meta :offset (+ offset n))))
+          (fn [n hit] (hit->doc (assoc query-metadata ::offset (+ offset n)) hit))
           results))
        (let [offset (+ offset (count results))]
          (when (< offset total)
@@ -146,16 +155,8 @@
 
 (comment
   (request ["data.dwds.de" 52170] "info")
-  (take 1 (query ["tuvok.bbaw.de" 60260] "Pudel" :page-size 1))
-  (take 2 (query ["data.dwds.de" 52170] "Hochkaräter #CNTXT 1" :page-size 2))
-  (do
-    (require '[zdl.nlp :refer [annotate-docs]]
-             '[zdl.nlp.vis :as vis])
-    (as-> "Hochkaräter #desc_by_date #separate" $
-      (query ["data.dwds.de" 52170] $)
-      (take 1000 $)
-      (annotate-docs $)
-      (mapcat :chunks $)
-      (mapcat :sentences $)
-      (rand-nth $)
-      (vis/show! $))))
+  (->> (query ["tuvok.bbaw.de" 60260] "Pudel" :page-size 100)
+       (take 100)
+       (every? schema/valid-doc?)
+       (time))
+  (take 2 (query ["data.dwds.de" 52170] "Hochkaräter #CNTXT 1" :page-size 2)))

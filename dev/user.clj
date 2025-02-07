@@ -1,8 +1,9 @@
 (ns user
   (:require
    [nextjournal.clerk :as clerk]
-   [zdl.nlp]
-   [zdl.nlp.vis :as vis]))
+   [zdl.ddc :as ddc]
+   [zdl.nlp.vis :as vis]
+   [zdl.nlp :as nlp]))
 
 (def serve-notebooks!
   (partial clerk/serve! {:browse?        true}))
@@ -16,12 +17,25 @@
 
 (defn nlp
   [sentence]
-  (->> (zdl.nlp/process-chunks [{:text sentence}])
+  (->> (nlp/process-chunks [{:text sentence}])
        (mapcat :sentences)
        (first)))
 
-(def visualize
-  (comp vis/show! nlp))
+(def ddc-kern-endpoint
+  ["ddc.dwds.de" 52000])
+
+(defn ddc
+  ([query]
+   (ddc ddc-kern-endpoint query))
+  ([endpoint query]
+   (->> (ddc/query endpoint query)
+        (take 1)
+        (nlp/annotate-docs)
+        (mapcat :chunks)
+        (mapcat :sentences)
+        (first))))
 
 (comment
-  (visualize "Es gelang nicht, und 2004 wurde in Berlin der Doktortitel per Gerichtsbeschluß aberkannt."))
+  (vis/show! (ddc "Erleuchtung"))
+  (nlp "Es gelang nicht, und 2004 wurde in Berlin der Doktortitel per Gerichtsbeschluß aberkannt."))
+
