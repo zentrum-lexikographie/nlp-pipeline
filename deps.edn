@@ -1,4 +1,4 @@
-{:paths   ["src" "java/classes"]
+{:paths   ["src/main/clojure" "target/classes"]
  :deps    {org.clojure/data.csv                            {:mvn/version "1.0.1"}
            camel-snake-kebab/camel-snake-kebab             {:mvn/version "0.4.3"}
            lambdaisland/uri                                {:mvn/version "1.16.134"}
@@ -29,7 +29,7 @@
                                                                :git/sha "8e78bcc"}
                                 babashka/process              {:mvn/version "0.5.22"}
                                 com.taoensso/timbre           {:mvn/version "6.3.1"}}}
-           :test  {:extra-paths ["test"]}
+           :test  {:extra-paths ["src/test/clojure"]}
            :clerk {:extra-paths ["dev"]
                    :extra-deps  {io.github.nextjournal/clerk {:mvn/version "0.15.957"}
                                  org.relaxng/jing            {:mvn/version "20181222"}

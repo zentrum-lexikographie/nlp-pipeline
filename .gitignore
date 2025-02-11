@@ -3,6 +3,7 @@
 
 .clerk/
 .cpcache/
+.idea/
 .nrepl-port
 
 .python-version
@@ -15,9 +16,9 @@ data/
 jars/
 public/
 resources/
+target/
 test-data/
 
 .venv/
-
 .env
 
