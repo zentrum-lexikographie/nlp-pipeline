@@ -8,17 +8,14 @@
 
 .python-version
 __pycache__
-*.pyc
 .pytest_cache/
+*.pyc
+*.egg-info/
 
-classes/
 data/
-jars/
 public/
-resources/
 target/
 test-data/
 
 .venv/
 .env
-

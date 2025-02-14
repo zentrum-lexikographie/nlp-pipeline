@@ -1,10 +1,6 @@
-;; # TEI-P5/XML Schema Analysis
-
-^{:nextjournal.clerk/toc true}
-(ns tei-schema-analysis
+(ns zdl.xml.tei.schema
   (:require
-   [clojure.java.io :as io]
-   [clojure.string :as str])
+   [charred.api :as charred])
   (:import
    (javax.xml.namespace QName)
    (org.kohsuke.rngom.ast.util CheckingSchemaBuilder)
@@ -17,10 +13,6 @@
    (org.xml.sax InputSource)
    (org.xml.sax.helpers DefaultHandler)))
 
-{:nextjournal.clerk/visibility {:code :show :result :hide}}
-
-;; ## Parsing the TEI-P5/XML schema for corpora
-
 (def schema-url
   "https://zentrum-lexikographie.github.io/corpus-schema/zdl.rng")
 
@@ -29,11 +21,6 @@
         eh             (proxy [DefaultHandler] [] (error [e] (throw e)))
         schema-builder (CheckingSchemaBuilder. (DSchemaBuilderImpl.) eh)]
     (.. (SAXParseable. src eh) (parse schema-builder))))
-
-;; Traverse the schema graph, starting at a given pattern, following
-;; references and returning a vector of traversed patterns. With a
-;; given predicate `descend?`, traversal stops at XML tokens not
-;; fulfilling the predicate.
 
 (defn traverse
   ([^DPattern start]
@@ -62,11 +49,8 @@
       (.accept start))
      (persistent! patterns))))
 
-^{:nextjournal.clerk/visibility {:result :show}}
 (def patterns
   (traverse schema))
-
-;; ## Extracting element definitions and names
 
 (defn local-names
   "Parses name class of a given XML Token, returning the set of
@@ -95,12 +79,8 @@
   (traverse start (some-fn #{start} (complement #(instance? DXmlTokenPattern %)))))
 
 
-^{:nextjournal.clerk/visibility {:result :show}}
 (def elements
   (into [] (filter #(instance? DElementPattern %)) patterns))
-
-;; ## Extracting element classes
-;;
 
 (defn element-by-name
   [k]
@@ -113,12 +93,6 @@
           (filter #(instance? DElementPattern %))
           (traverse-children (.getPattern define)))))
 
-;; ### Extracting container elements
-;;
-;; Patterns, which only have XML tokens as child patterns, describe
-;; container elements, i. e. elements without text content (apart from
-;; whitespace).
-
 (defn container-element?
   [^DElementPattern pattern]
   (->> (traverse-children pattern)
@@ -128,8 +102,6 @@
 
 (def containers
   (into #{} (filter container-element?) elements))
-
-;; ### Extracting milestone elements
 
 (defn empty-element?
   [^DElementPattern pattern]
@@ -142,8 +114,6 @@
 (def milestones
   (filter empty-element? (model-elements "model.milestoneLike")))
 
-;; ### Extracting chunk-level elements
-
 (def chunks
   (->>
    (concat (model-elements "model.divTop")
@@ -151,8 +121,6 @@
            (model-elements "model.common"))
    (remove (into #{} (concat (model-elements "model.oddDecl")
                              (model-elements "model.egLike"))))))
-
-;; ### Extracting paragraph-like elements
 
 (def paras
   (concat (model-elements "model.lLike")
@@ -163,13 +131,10 @@
                 (element-by-name "label")
                 (element-by-name "row"))))
 
-;; ## Write element classes to files
-(defn write-element-names->files!
-  []
-  (let [dir (doto (io/file "src" "zdl" "xml" "tei") (.mkdirs))]
-    (doseq [[k els] (zipmap ["containers" "milestones" "chunks" "paras"]
-                            [containers milestones chunks paras])]
-      (spit (io/file dir (format "%s.txt" k))
-            (str/join \newline (into (sorted-set) (mapcat local-names els)))))))
-
-#_(write-element-names->files!)
+(defn print-json
+  [& _]
+  (->> [containers milestones chunks paras]
+       (map (fn [els] (into (sorted-set) (mapcat local-names) els)))
+       (zipmap ["containers" "milestones" "chunks" "paras"])
+       (charred/write-json-str)
+       (println)))

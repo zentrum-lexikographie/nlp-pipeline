@@ -1,0 +1,8 @@
+conllu
+dwdsmor
+lingua-language-detector
+lxml
+SoMaJo
+spacy===3.7.5
+spacy-transformers
+tqdm

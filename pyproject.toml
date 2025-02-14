@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zdl-nlp"
+description = "Natural Language Processing Pipeline @ DWDS/ZDL"
+authors = [
+    {name = "Gregor Middell", email = "gregor.middell@bbaw.de"},
+    {name = "Luise Köhler", email = "luise.koehler@bbaw.de"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Text Processing :: Linguistic"
+]
+requires-python = ">=3.10"
+dynamic = ["readme", "version", "dependencies", "optional-dependencies"]
+
+[project.urls]
+Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
+
+[project.scripts]
+zdl-nlp-annotate = "zdl.nlp.annotate:main"
+zdl-nlp-colloc = "zdl.nlp.colloc:main"
+zdl-nlp-ddc2conllu = "zdl.nlp.ddc:main"
+zdl-nlp-polspeech = "zdl.nlp.polspeech:main"
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+testpaths = ["src/test/python"]
+
+[tool.mypy]
+disable_error_code = "import-untyped"
+ignore_missing_imports = true
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+version = {attr = "zdl.nlp.version.__version__"}
+dependencies = { file = ["requirements.txt"] }
+optional-dependencies.dev = { file = ["requirements.dev.txt"] }
+
+[tool.setuptools.packages.find]
+where = ["src/main/python"]

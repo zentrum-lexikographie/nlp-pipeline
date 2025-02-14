@@ -1,3 +1,13 @@
+## Development Setup
+
+    pip install -U pip pip-tools setuptools
+    pip-sync requirements.txt requirements.dev.txt
+
+
+## Analyze TEI schema (element classes)
+
+    clojure -X:tei-schema >src/main/python/zdl/xml/tei_schema.json
+
 ## Download DWDSmor/TAGH automaton
 
     mkdir -p resources/dwdsmor &&\
