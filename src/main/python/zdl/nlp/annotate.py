@@ -34,7 +34,7 @@ spacy_model_packages = {
         "resolve/main/de_hdt_lg-any-py3-none-any.whl"
         "#sha256=44bd0b0299865341ee1756efd60670fa148dbfd2a14d0c1d5ab99c61af08236a"
     ),
-    "de_wikinet_dist": (
+    "de_wikiner_dist": (
         "de_wikiner_dist @ https://huggingface.co/zentrum-lexikographie/"
         "de_wikiner_dist/resolve/main/de_wikiner_dist-any-py3-none-any.whl"
         "#sha256=70e3bb3cdb30bf7f945fa626c6edb52c1b44aaccc8dc35ea0bfb2a9f24551f4f"
