@@ -2,7 +2,6 @@ import argparse
 import itertools
 import json
 import logging
-import multiprocessing
 import subprocess
 import warnings
 
@@ -182,26 +181,16 @@ def lemmatize(lemmatizer, sentences):
         yield sentence
 
 
-def post_annotate(sentence):
-    sentence = collapse_phrasal_verbs(sentence)
-    sentence = extract_collocs(sentence)
-    return sentence
-
-
-def output(sentences, f, progress):
-    for sentence in sentences:
-        f.write(serialize(sentence))
-        if progress is not None:
-            progress.update(len(sentence))
-
-
 arg_parser = argparse.ArgumentParser(description="Add linguistic annotations")
 arg_parser.add_argument(
-    "-c",
-    "--concurrency",
-    help="# of concurrent processes (none by default)",
+    "-b",
+    "--batch-size",
+    help="# of sentences to process in one batch (128 by default)",
     type=int,
-    default="-1",
+    default="128",
+)
+arg_parser.add_argument(
+    "-d", "--dwdsmor-dwds", help="Use DWDS-Edition of DWDSmor", action="store_true"
 )
 arg_parser.add_argument(
     "-f", "--fast", help="Use CPU-optimized model", action="store_true"
@@ -234,8 +223,10 @@ def main():
     args = arg_parser.parse_args()
     logger.info("Loading spaCy models (%s mode)", "fast" if args.fast else "accurate")
     nlp = load_spacy(not args.fast, args.gpu)
-    logger.info("Loading DWDSmor lemmatizer")
-    lemmatizer = dwdsmor.lemmatizer()
+    dwdsmor_edition = "dwds" if args.dwdsmor_dwds else "open"
+    dwdsmor_edition = f"zentrum-lexikographie/dwdsmor-{dwdsmor_edition}"
+    logger.info("Loading DWDSmor lemmatizer (%s)", dwdsmor_edition)
+    lemmatizer = dwdsmor.lemmatizer(dwdsmor_edition)
     logger.info("Loading Lingua language detector")
     languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
     lang_detector = (
@@ -244,25 +235,25 @@ def main():
         .with_low_accuracy_mode()
         .build()
     )
+    batch_size = args.batch_size
+    output_file = args.output_file
     sentences = conllu.parse_incr(args.input_file)
     progress = None
     if args.progress:
         progress = tqdm(
-            desc="Annotating – POS, Deps, Lemma, NER, Collocations",
+            desc="Annotating – POS, Deps, Lemma, NER, Language, Collocations",
             unit=" tokens",
             unit_scale=True,
         )
-    sentences = spacy_nlp(nlp, sentences)
+    sentences = spacy_nlp(nlp, sentences, batch_size)
     sentences = lemmatize(lemmatizer, sentences)
-    sentences = detect_languages(lang_detector, sentences)
-    if args.concurrency < 0:
-        sentences = (post_annotate(s) for s in sentences)
-        output(sentences, args.output_file, progress)
-    else:
-        mp_ctx = multiprocessing.get_context("forkserver")
-        with mp_ctx.Pool(args.concurrency) as p:
-            sentences = p.imap(post_annotate, sentences, 128)
-            output(sentences, args.output_file, progress)
+    sentences = detect_languages(lang_detector, sentences, batch_size)
+    sentences = (collapse_phrasal_verbs(s) for s in sentences)
+    sentences = (extract_collocs(s) for s in sentences)
+    for sentence in sentences:
+        output_file.write(serialize(sentence))
+        if progress is not None:
+            progress.update(len(sentence))
 
 
 if __name__ == "__main__":
