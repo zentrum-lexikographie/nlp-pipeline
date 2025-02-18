@@ -68,6 +68,7 @@ def load_spacy(accurate=True, gpu_id=-1):
         "transformer" if accurate else "tok2vec", "ner", ("model.tok2vec",)
     )
     nlp.add_pipe("ner", source=ner, name="wikiner")
+    nlp.add_pipe("doc_cleaner")
     return nlp
 
 
