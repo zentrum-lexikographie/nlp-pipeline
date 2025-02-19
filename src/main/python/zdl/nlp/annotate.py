@@ -131,10 +131,15 @@ def lemmatize(lemmatizer, sentences):
         yield sentence
 
 
-def init_annotate(init_batch_size=128, accurate=True, gpu=-1, dwdsmor_dwds=False):
+def init_annotate(init_batch_size=128, accurate=True, gpus=None, dwdsmor_dwds=False):
     global batch_size, nlp, lemmatizer, lang_detector
     batch_size = init_batch_size
-    nlp = load_spacy(accurate, gpu)
+    gpu_id = None
+    if gpus:
+        proc_id = multiprocessing.current_process()._identity or (0,)
+        proc_n, *_ = proc_id
+        gpu_id = gpus[proc_n % len(gpus)]
+    nlp = load_spacy(accurate, gpu_id)
     lemmatizer = load_dwdsmor("dwds" if dwdsmor_dwds else "open")
     languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
     lang_detector = (
@@ -190,11 +195,7 @@ arg_parser.add_argument(
     "-f", "--fast", help="Use CPU-optimized model", action="store_true"
 )
 arg_parser.add_argument(
-    "-g",
-    "--gpu",
-    help="ID of GPU to use (default = -1 aka. CPU)",
-    type=int,
-    default="-1",
+    "-g", "--gpu", help="IDs of GPUs to use (default: none)", type=int, action="append"
 )
 arg_parser.add_argument(
     "-i",

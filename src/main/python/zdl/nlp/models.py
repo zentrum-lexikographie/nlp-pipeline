@@ -49,9 +49,8 @@ def install_spacy_models(accurate=True):
         logger.info("Installed spaCy model (%s)", model)
 
 
-def load_spacy(accurate=True, gpu_id=-1):
-    if gpu_id >= 0:
-        logger.info("Using GPU #%d", gpu_id)
+def load_spacy(accurate=True, gpu_id=None):
+    if gpu_id is not None:
         thinc.api.set_gpu_allocator("pytorch")
         thinc.api.require_gpu(gpu_id)
         spacy.prefer_gpu()
