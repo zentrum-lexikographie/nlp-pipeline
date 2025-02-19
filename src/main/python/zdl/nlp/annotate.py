@@ -101,6 +101,7 @@ def lemmatize(lemmatizer, sentences):
     for sentence in sentences:
         for token in sentence:
             token_form = token["form"]
+            token_lemma = token["lemma"]
             token_pos = token["xpos"]
             token_morph = token["feats"] or {}
             token_criteria = {
@@ -117,12 +118,13 @@ def lemmatize(lemmatizer, sentences):
                     token_morph.get("VerbForm"),
                 ).items()
             }
+            if token_lemma == "_":
+                token_lemma = token["lemma"] = token_form
             dwdsmor_result = lemmatizer(token_form, **token_criteria)
             if not dwdsmor_result:
                 continue
-            lemma = token["lemma"]
             dwdsmor_lemma = dwdsmor_result.analysis
-            if lemma == dwdsmor_lemma:
+            if token_lemma == dwdsmor_lemma:
                 continue
             # make a POS match mandatory
             if dwdsmor_result.pos not in dwdsmor.tag.hdt.pos_map[token_pos]:
