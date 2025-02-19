@@ -28,6 +28,7 @@ Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
 zdl-nlp-annotate = "zdl.nlp.annotate:main"
 zdl-nlp-colloc = "zdl.nlp.colloc:main"
 zdl-nlp-ddc2conllu = "zdl.nlp.ddc:main"
+zdl-nlp-install-models = "zdl.nlp.models:install"
 zdl-nlp-polspeech = "zdl.nlp.polspeech:main"
 
 [tool.isort]

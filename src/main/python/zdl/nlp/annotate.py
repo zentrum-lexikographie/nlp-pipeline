@@ -2,8 +2,8 @@ import argparse
 import itertools
 import json
 import logging
-import subprocess
-import warnings
+import multiprocessing
+import os
 
 import conllu
 import conllu.parser
@@ -11,65 +11,14 @@ import dwdsmor
 import dwdsmor.tag.hdt
 import spacy
 import spacy.tokens
-import thinc.api
 from lingua import Language, LanguageDetectorBuilder
 from tqdm import tqdm
 
 from .colloc import extract_collocs
 from .conllu import is_space_after, serialize, text
-
-warnings.simplefilter(action="ignore", category=FutureWarning)
+from .models import load_dwdsmor, load_spacy
 
 logger = logging.getLogger(__name__)
-
-spacy_model_packages = {
-    "de_hdt_dist": (
-        "de_hdt_dist @ https://huggingface.co/zentrum-lexikographie/de_hdt_dist/"
-        "resolve/main/de_hdt_dist-any-py3-none-any.whl"
-        "#sha256=dd54e4f75b249d401ed664c406c1a021ee6733bca7c701eb4500480d473a1a8a"
-    ),
-    "de_hdt_lg": (
-        "de_hdt_lg @ https://huggingface.co/zentrum-lexikographie/de_hdt_lg/"
-        "resolve/main/de_hdt_lg-any-py3-none-any.whl"
-        "#sha256=44bd0b0299865341ee1756efd60670fa148dbfd2a14d0c1d5ab99c61af08236a"
-    ),
-    "de_wikiner_dist": (
-        "de_wikiner_dist @ https://huggingface.co/zentrum-lexikographie/"
-        "de_wikiner_dist/resolve/main/de_wikiner_dist-any-py3-none-any.whl"
-        "#sha256=70e3bb3cdb30bf7f945fa626c6edb52c1b44aaccc8dc35ea0bfb2a9f24551f4f"
-    ),
-    "de_wikiner_lg": (
-        "de_wikiner_lg @ https://huggingface.co/zentrum-lexikographie/"
-        "de_wikiner_lg/resolve/main/de_wikiner_lg-any-py3-none-any.whl"
-        "#sha256=8305ec439cad1247bed05907b97f6db4c473d859bc4083ef4ee0f893963c5b2e"
-    ),
-}
-
-
-def spacy_model(model):
-    try:
-        return spacy.load(model)
-    except OSError:
-        assert model in spacy_model_packages, model
-        logger.debug("Downloading spaCy model '%s'", model)
-        subprocess.check_call(["pip", "install", "-qqq", spacy_model_packages[model]])
-        return spacy.load(model)
-
-
-def load_spacy(accurate=True, gpu_id=-1):
-    if gpu_id >= 0:
-        logger.info("Using GPU #%d", gpu_id)
-        thinc.api.set_gpu_allocator("pytorch")
-        thinc.api.require_gpu(gpu_id)
-        spacy.prefer_gpu()
-    nlp = spacy_model("de_hdt_dist" if accurate else "de_hdt_lg")
-    ner = spacy_model("de_wikiner_dist" if accurate else "de_wikiner_lg")
-    ner.replace_listeners(
-        "transformer" if accurate else "tok2vec", "ner", ("model.tok2vec",)
-    )
-    nlp.add_pipe("ner", source=ner, name="wikiner")
-    nlp.add_pipe("doc_cleaner")
-    return nlp
 
 
 def spacy_doc(nlp, s):
@@ -120,7 +69,7 @@ def detect_languages(lang_detector, sentences, batch_size=4096):
         for tb in texts
         for lang in lang_detector.detect_languages_in_parallel_of(tuple(tb))
     )
-    for sentence, lang in zip(sentences, langs):
+    for sentence, lang in zip(sents, langs):
         if lang and lang.iso_code_639_1:
             sentence.metadata["lang"] = lang.iso_code_639_1.name.lower()
         yield sentence
@@ -182,13 +131,57 @@ def lemmatize(lemmatizer, sentences):
         yield sentence
 
 
+def init_annotate(init_batch_size=128, accurate=True, gpu=-1, dwdsmor_dwds=False):
+    global batch_size, nlp, lemmatizer, lang_detector
+    batch_size = init_batch_size
+    nlp = load_spacy(accurate, gpu)
+    lemmatizer = load_dwdsmor("dwds" if dwdsmor_dwds else "open")
+    languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
+    lang_detector = (
+        LanguageDetectorBuilder.from_languages(*languages)
+        .with_preloaded_language_models()
+        .with_low_accuracy_mode()
+        .build()
+    )
+
+
+def annotate(chunks):
+    global batch_size, nlp, lemmatizer, lang_detector
+    sentences = (s for chunk in chunks for s in conllu.parse(chunk))
+    sentences = spacy_nlp(nlp, sentences, batch_size)
+    sentences = lemmatize(lemmatizer, sentences)
+    sentences = detect_languages(lang_detector, sentences, batch_size)
+    sentences = (collapse_phrasal_verbs(s) for s in sentences)
+    sentences = (extract_collocs(s) for s in sentences)
+    return tuple(serialize(s) for s in sentences)
+
+
+def read_chunks(lines):
+    chunk = ""
+    for line in lines:
+        if line == "\n":
+            if chunk:
+                yield chunk
+                chunk = ""
+        else:
+            chunk += line
+    if chunk:
+        yield chunk
+
+
 arg_parser = argparse.ArgumentParser(description="Add linguistic annotations")
 arg_parser.add_argument(
     "-b",
     "--batch-size",
     help="# of sentences to process in one batch (128 by default)",
     type=int,
-    default="128",
+)
+arg_parser.add_argument(
+    "-c",
+    "--concurrency",
+    help="# of parallel annotation pipelines (1 by defaul)",
+    type=int,
+    default="-1",
 )
 arg_parser.add_argument(
     "-d", "--dwdsmor-dwds", help="Use DWDS-Edition of DWDSmor", action="store_true"
@@ -222,39 +215,36 @@ arg_parser.add_argument("-p", "--progress", help="Show progress", action="store_
 
 def main():
     args = arg_parser.parse_args()
-    logger.info("Loading spaCy models (%s mode)", "fast" if args.fast else "accurate")
-    nlp = load_spacy(not args.fast, args.gpu)
-    dwdsmor_edition = "dwds" if args.dwdsmor_dwds else "open"
-    dwdsmor_edition = f"zentrum-lexikographie/dwdsmor-{dwdsmor_edition}"
-    logger.info("Loading DWDSmor lemmatizer (%s)", dwdsmor_edition)
-    lemmatizer = dwdsmor.lemmatizer(dwdsmor_edition)
-    logger.info("Loading Lingua language detector")
-    languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
-    lang_detector = (
-        LanguageDetectorBuilder.from_languages(*languages)
-        .with_preloaded_language_models()
-        .with_low_accuracy_mode()
-        .build()
-    )
-    batch_size = args.batch_size
-    output_file = args.output_file
-    sentences = conllu.parse_incr(args.input_file)
     progress = None
     if args.progress:
         progress = tqdm(
             desc="Annotating – POS, Deps, Lemma, NER, Language, Collocations",
-            unit=" tokens",
+            unit=" sentences",
             unit_scale=True,
         )
-    sentences = spacy_nlp(nlp, sentences, batch_size)
-    sentences = lemmatize(lemmatizer, sentences)
-    sentences = detect_languages(lang_detector, sentences, batch_size)
-    sentences = (collapse_phrasal_verbs(s) for s in sentences)
-    sentences = (extract_collocs(s) for s in sentences)
-    for sentence in sentences:
-        output_file.write(serialize(sentence))
-        if progress is not None:
-            progress.update(len(sentence))
+    pool = None
+    try:
+        batch_size = args.batch_size or 128
+        init_args = (batch_size, not args.fast, args.gpu, args.dwdsmor_dwds)
+        chunks = read_chunks(args.input_file)
+        batches = itertools.batched(chunks, batch_size)
+        n_procs = args.concurrency
+        if n_procs >= 0:
+            n_procs = n_procs or os.process_cpu_count()
+            mp_ctx = multiprocessing.get_context("forkserver")
+            pool = mp_ctx.Pool(n_procs, init_annotate, init_args)
+            batches = pool.imap(annotate, batches)
+        else:
+            init_annotate(*init_args)
+            batches = (annotate(batch) for batch in batches)
+        for batch in batches:
+            for chunk in batch:
+                args.output_file.write(chunk)
+            if progress is not None:
+                progress.update(len(batch))
+    finally:
+        if pool:
+            pool.terminate()
 
 
 if __name__ == "__main__":
