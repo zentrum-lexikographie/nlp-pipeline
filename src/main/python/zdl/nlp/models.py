@@ -53,7 +53,6 @@ def load_spacy(accurate=True, gpu_id=None):
     if gpu_id is not None:
         thinc.api.set_gpu_allocator("pytorch")
         thinc.api.require_gpu(gpu_id)
-        spacy.prefer_gpu()
     nlp = spacy.load("de_hdt_dist" if accurate else "de_hdt_lg")
     ner = spacy.load("de_wikiner_dist" if accurate else "de_wikiner_lg")
     ner.replace_listeners(
