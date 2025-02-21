@@ -1,19 +1,16 @@
 ## Development Setup
 
     pip install -U pip pip-tools setuptools
-    pip-sync requirements.txt requirements.dev.txt
+    pip install -e .[dev]
+
+For CUDA-based inference:
+
+    pip install -e .[dev,cuda]
 
 
 ## Analyze TEI schema (element classes)
 
     clojure -X:tei-schema >src/main/python/zdl/xml/tei_schema.json
-
-## Download DWDSmor/TAGH automaton
-
-    mkdir -p resources/dwdsmor &&\
-        curl -n -o resources/dwdsmor/dwdsmor.a\
-            https://odo.dwds.de/~nolda/dwdsmor-tagh/lib/dwdsmor.a &&\
-        clojure -T:build transpile-dwdsmor-automaton
 
 ## Import simplemma lexicons
 

@@ -38,4 +38,3 @@
 (comment
   (vis/show! (ddc "Erleuchtung"))
   (nlp "Es gelang nicht, und 2004 wurde in Berlin der Doktortitel per Gerichtsbeschluß aberkannt."))
-

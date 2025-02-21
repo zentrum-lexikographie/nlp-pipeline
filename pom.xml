@@ -13,9 +13,30 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.7.36</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.36</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.18.2</version>
+    </dependency>
+    <dependency>
       <groupId>org.textexploration.mtas</groupId>
       <artifactId>mtas</artifactId>
       <version>8.11.1.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.solr</groupId>
+          <artifactId>solr-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.carrotsearch</groupId>

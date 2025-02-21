@@ -5,7 +5,6 @@ import mtas.codec.payload.MtasPayloadEncoder;
 import mtas.codec.util.CodecInfo;
 import mtas.parser.cql.MtasCQLParser;
 import mtas.parser.cql.ParseException;
-import org.apache.logging.log4j.core.util.ExecutorServices;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -145,7 +144,6 @@ public class Index {
     public void add(Iterator<Document> documents) throws IOException {
         IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
         config.setCodec(Codec.forName("MtasCodec"));
-        config.setInfoStream(System.out);
         config.setUseCompoundFile(false);
         try (IndexWriter writer = new IndexWriter(directory, config)) {
             var pool = ForkJoinPool.commonPool();
