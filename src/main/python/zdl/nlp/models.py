@@ -49,16 +49,17 @@ def install_spacy_models(accurate=True):
         logger.info("Installed spaCy model (%s)", model)
 
 
-def load_spacy(accurate=True, gpu_id=None):
+def load_spacy(accurate=True, ner=True, gpu_id=None):
     if gpu_id is not None:
         thinc.api.set_gpu_allocator("pytorch")
         thinc.api.require_gpu(gpu_id)
     nlp = spacy.load("de_hdt_dist" if accurate else "de_hdt_lg")
-    ner = spacy.load("de_wikiner_dist" if accurate else "de_wikiner_lg")
-    ner.replace_listeners(
-        "transformer" if accurate else "tok2vec", "ner", ("model.tok2vec",)
-    )
-    nlp.add_pipe("ner", source=ner, name="wikiner")
+    if ner:
+        ner = spacy.load("de_wikiner_dist" if accurate else "de_wikiner_lg")
+        ner.replace_listeners(
+            "transformer" if accurate else "tok2vec", "ner", ("model.tok2vec",)
+        )
+        nlp.add_pipe("ner", source=ner, name="wikiner")
     nlp.add_pipe("doc_cleaner")
     return nlp
 

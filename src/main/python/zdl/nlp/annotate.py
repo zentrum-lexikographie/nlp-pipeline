@@ -4,6 +4,7 @@ import json
 import logging
 import multiprocessing
 import os
+from dataclasses import dataclass
 
 import conllu
 import conllu.parser
@@ -133,34 +134,91 @@ def lemmatize(lemmatizer, sentences):
         yield sentence
 
 
-def init_annotate(init_batch_size=128, accurate=True, gpus=None, dwdsmor_dwds=False):
-    global batch_size, nlp, lemmatizer, lang_detector
-    batch_size = init_batch_size
-    gpu_id = None
-    if gpus:
-        proc_id = multiprocessing.current_process()._identity or (0,)
-        proc_n, *_ = proc_id
-        gpu_id = gpus[proc_n % len(gpus)]
-    nlp = load_spacy(accurate, gpu_id)
-    lemmatizer = load_dwdsmor("dwds" if dwdsmor_dwds else "open")
-    languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
-    lang_detector = (
-        LanguageDetectorBuilder.from_languages(*languages)
-        .with_preloaded_language_models()
-        .with_low_accuracy_mode()
-        .build()
-    )
+languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
+
+
+@dataclass
+class Config:
+    spacy: bool = True
+    ner: bool = True
+    dwdsmor: bool = True
+    dwdsmor_dwds: bool = False
+    lang: bool = True
+    colloc: bool = True
+    verbs: bool = True
+    accurate: bool = True
+    gpus: tuple[int, ...] = tuple()
+    batch_size: int = 128
+    spacy_nlp = None
+    lemmatizer = None
+    lang_detector = None
+
+    @staticmethod
+    def from_args(args):
+        if args.all:
+            args.spacy = True
+            args.ner = True
+            args.dwdsmor = True
+            args.colloc = True
+            args.lang = True
+            args.verbs = True
+        return Config(
+            args.spacy,
+            args.ner,
+            args.dwdsmor,
+            args.dwdsmor_dwds,
+            args.lang,
+            args.colloc,
+            args.verbs,
+            not args.fast,
+            args.gpu,
+            args.batch_size or 128,
+        )
+
+    def configure(self):
+        if self.spacy or self.ner:
+            gpu_id = None
+            if self.gpus:
+                proc = multiprocessing.current_process()
+                proc_id = proc._identity or (0,)
+                proc_n, *_ = proc_id
+                n_gpus = len(config.gpus)
+                gpu_id = config.gpus[proc_n % n_gpus]
+            self.spacy_nlp = load_spacy(self.accurate, self.ner, gpu_id)
+        if self.dwdsmor:
+            dwdsmor_edition = "dwds" if self.dwdsmor_dwds else "open"
+            self.lemmatizer = load_dwdsmor(dwdsmor_edition)
+        if self.lang:
+            self.lang_detector = (
+                LanguageDetectorBuilder.from_languages(*languages)
+                .with_preloaded_language_models()
+                .with_low_accuracy_mode()
+                .build()
+            )
+        return self
+
+    def annotate(self, chunks):
+        sentences = (s for chunk in chunks for s in conllu.parse(chunk))
+        if self.spacy_nlp:
+            sentences = spacy_nlp(self.spacy_nlp, sentences, self.batch_size)
+        if self.lemmatizer:
+            sentences = lemmatize(self.lemmatizer, sentences)
+        if self.lang_detector:
+            sentences = detect_languages(self.lang_detector, sentences, self.batch_size)
+        if self.colloc:
+            sentences = (extract_collocs(s) for s in sentences)
+        if self.verbs:
+            sentences = (collapse_phrasal_verbs(s) for s in sentences)
+        return tuple(serialize(s) for s in sentences)
+
+
+def configure(config_):
+    global config
+    config = config_.configure()
 
 
 def annotate(chunks):
-    global batch_size, nlp, lemmatizer, lang_detector
-    sentences = (s for chunk in chunks for s in conllu.parse(chunk))
-    sentences = spacy_nlp(nlp, sentences, batch_size)
-    sentences = lemmatize(lemmatizer, sentences)
-    sentences = detect_languages(lang_detector, sentences, batch_size)
-    sentences = (collapse_phrasal_verbs(s) for s in sentences)
-    sentences = (extract_collocs(s) for s in sentences)
-    return tuple(serialize(s) for s in sentences)
+    return config.annotate(chunks)
 
 
 def read_chunks(lines):
@@ -178,20 +236,22 @@ def read_chunks(lines):
 
 arg_parser = argparse.ArgumentParser(description="Add linguistic annotations")
 arg_parser.add_argument(
+    "-a", "--all", help="Compute complete annotations", action="store_true"
+)
+arg_parser.add_argument(
     "-b",
     "--batch-size",
     help="# of sentences to process in one batch (128 by default)",
     type=int,
 )
 arg_parser.add_argument(
-    "-c",
-    "--concurrency",
-    help="# of parallel annotation pipelines (1 by defaul)",
-    type=int,
-    default="-1",
+    "-c", "--colloc", help="Extract collocation relations", action="store_true"
 )
 arg_parser.add_argument(
-    "-d", "--dwdsmor-dwds", help="Use DWDS-Edition of DWDSmor", action="store_true"
+    "-d", "--dwdsmor", help="Lemmatize with DWDSmor", action="store_true"
+)
+arg_parser.add_argument(
+    "--dwdsmor-dwds", help="Use DWDS-Edition of DWDSmor", action="store_true"
 )
 arg_parser.add_argument(
     "-f", "--fast", help="Use CPU-optimized model", action="store_true"
@@ -207,13 +267,32 @@ arg_parser.add_argument(
     default="-",
 )
 arg_parser.add_argument(
+    "-l", "--lang", help="Detect language of sentences", action="store_true"
+)
+arg_parser.add_argument(
+    "-n", "--ner", help="Recognize named entities (NER)", action="store_true"
+)
+arg_parser.add_argument(
     "-o",
     "--output-file",
     help="output CoNLL-U file with (updated) annotations",
     type=argparse.FileType("w"),
     default="-",
 )
-arg_parser.add_argument("-p", "--progress", help="Show progress", action="store_true")
+arg_parser.add_argument(
+    "-p",
+    "--parallel",
+    help="# of parallel annotation pipelines (1 by default)",
+    type=int,
+    default="-1",
+)
+arg_parser.add_argument("--progress", help="Show progress", action="store_true")
+arg_parser.add_argument(
+    "-s", "--spacy", help="Annotate with spaCy (HDT-based)", action="store_true"
+)
+arg_parser.add_argument(
+    "-v", "--verbs", help="Collapse phrasal verbs", action="store_true"
+)
 
 
 def main():
@@ -221,33 +300,28 @@ def main():
     progress = None
     if args.progress:
         progress = tqdm(
-            desc="Annotating – POS, Deps, Lemma, NER, Language, Collocations",
+            desc="Annotating",
             unit=" sentences",
             unit_scale=True,
+            smoothing=0.01,
         )
-    pool = None
-    try:
-        batch_size = args.batch_size or 128
-        init_args = (batch_size, not args.fast, args.gpu, args.dwdsmor_dwds)
-        chunks = read_chunks(args.input_file)
-        batches = itertools.batched(chunks, batch_size)
-        n_procs = args.concurrency
-        if n_procs >= 0:
-            n_procs = n_procs or os.process_cpu_count()
-            mp_ctx = multiprocessing.get_context("forkserver")
-            pool = mp_ctx.Pool(n_procs, init_annotate, init_args)
-            batches = pool.imap(annotate, batches)
-        else:
-            init_annotate(*init_args)
-            batches = (annotate(batch) for batch in batches)
-        for batch in batches:
-            for chunk in batch:
-                args.output_file.write(chunk)
-            if progress is not None:
-                progress.update(len(batch))
-    finally:
-        if pool:
-            pool.terminate()
+    config = Config.from_args(args)
+    chunks = read_chunks(args.input_file)
+    batches = itertools.batched(chunks, config.batch_size)
+    n_procs = args.parallel
+    if n_procs >= 0:
+        n_procs = n_procs or len(os.sched_getaffinity(0))
+        mp_ctx = multiprocessing.get_context("forkserver")
+        pool = mp_ctx.Pool(n_procs, configure, (config,))
+        batches = pool.imap(annotate, batches)
+    else:
+        configure(config)
+        batches = (annotate(batch) for batch in batches)
+    for batch in batches:
+        for chunk in batch:
+            args.output_file.write(chunk)
+        if progress is not None:
+            progress.update(len(batch))
 
 
 if __name__ == "__main__":
