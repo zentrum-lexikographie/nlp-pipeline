@@ -190,8 +190,8 @@ class Config:
                 proc = multiprocessing.current_process()
                 proc_id = proc._identity or (0,)
                 proc_n, *_ = proc_id
-                n_gpus = len(config.gpus)
-                gpu_id = config.gpus[proc_n % n_gpus]
+                n_gpus = len(self.gpus)
+                gpu_id = self.gpus[proc_n % n_gpus]
             self.spacy_nlp = load_spacy(self.accurate, self.ner, gpu_id)
         if self.dwdsmor:
             dwdsmor_edition = "dwds" if self.dwdsmor_dwds else "open"
