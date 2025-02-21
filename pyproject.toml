@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "zdl-nlp"
+name = "zdl_nlp"
 description = "Natural Language Processing Pipeline @ DWDS/ZDL"
 authors = [
     {name = "Gregor Middell", email = "gregor.middell@bbaw.de"},

@@ -1,7 +1,7 @@
 ## Installation
 
     pip install -U pip setuptools
-    pip install 'zdl-nlp[cuda] @ git+https://github.com/zentrum-lexikographie/nlp-pipeline@vx.y.z'
+    pip install 'zdl_nlp[cuda] @ git+https://github.com/zentrum-lexikographie/nlp-pipeline@vx.y.z'
 
 Replace `vx.y.z` with the current version, and optionally remove the
 extra `[cuda]` if you do not use a GPU.
