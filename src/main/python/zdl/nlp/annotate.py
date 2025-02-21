@@ -1,4 +1,5 @@
 import argparse
+import atexit
 import itertools
 import json
 import logging
@@ -322,8 +323,13 @@ def main():
     n_procs = args.parallel
     if n_procs >= 0:
         n_procs = n_procs or len(os.sched_getaffinity(0))
-        mp_ctx = multiprocessing.get_context("forkserver")
+        mp_ctx = multiprocessing.get_context("spawn")
         pool = mp_ctx.Pool(n_procs, configure, (config,))
+
+        @atexit.register
+        def terminate_pool():
+            pool.terminate
+
         batches = pool.imap(annotate, batches)
     else:
         configure(config)
