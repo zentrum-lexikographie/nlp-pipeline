@@ -10,6 +10,7 @@ import conllu
 import conllu.parser
 import dwdsmor
 import dwdsmor.tag.hdt
+import gdex
 import spacy
 import spacy.tokens
 from lingua import Language, LanguageDetectorBuilder
@@ -30,7 +31,7 @@ def spacy_doc(nlp, s):
     )
 
 
-def spacy_nlp(nlp, sentences, batch_size=128, **kwargs):
+def spacy_nlp(nlp, sentences, score_gdex=True, batch_size=128, **kwargs):
     doc_sents, sentences = itertools.tee(sentences, 2)
     docs = (spacy_doc(nlp, s) for s in doc_sents)
     docs = nlp.pipe(docs, batch_size=batch_size, **kwargs)
@@ -58,6 +59,10 @@ def spacy_nlp(nlp, sentences, batch_size=128, **kwargs):
                     for e in doc.ents
                 )
             )
+        if score_gdex:
+            doc = gdex.de_hdt(doc)
+            doc_sent, *_ = doc.sents
+            s.metadata["gdex"] = str(doc_sent._.gdex)
         yield s
 
 
@@ -141,6 +146,7 @@ languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
 class Config:
     spacy: bool = True
     ner: bool = True
+    gdex: bool = True
     dwdsmor: bool = True
     dwdsmor_dwds: bool = False
     lang: bool = True
@@ -158,6 +164,7 @@ class Config:
         if args.all:
             args.spacy = True
             args.ner = True
+            args.gdex = True
             args.dwdsmor = True
             args.colloc = True
             args.lang = True
@@ -165,6 +172,7 @@ class Config:
         return Config(
             args.spacy,
             args.ner,
+            args.gdex,
             args.dwdsmor,
             args.dwdsmor_dwds,
             args.lang,
@@ -176,7 +184,7 @@ class Config:
         )
 
     def configure(self):
-        if self.spacy or self.ner:
+        if self.spacy or self.ner or self.gdex:
             gpu_id = None
             if self.gpus:
                 proc = multiprocessing.current_process()
@@ -200,7 +208,7 @@ class Config:
     def annotate(self, chunks):
         sentences = (s for chunk in chunks for s in conllu.parse(chunk))
         if self.spacy_nlp:
-            sentences = spacy_nlp(self.spacy_nlp, sentences, self.batch_size)
+            sentences = spacy_nlp(self.spacy_nlp, sentences, self.gdex, self.batch_size)
         if self.lemmatizer:
             sentences = lemmatize(self.lemmatizer, sentences)
         if self.lang_detector:
@@ -258,6 +266,9 @@ arg_parser.add_argument(
 )
 arg_parser.add_argument(
     "-g", "--gpu", help="IDs of GPUs to use (default: none)", type=int, action="append"
+)
+arg_parser.add_argument(
+    "--gdex", help="Score good-example quality (GDEX)", action="store_true"
 )
 arg_parser.add_argument(
     "-i",
