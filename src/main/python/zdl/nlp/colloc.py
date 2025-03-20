@@ -212,13 +212,12 @@ def extract_objects(tokens):
                 if not (
                     has_case(t_dep_1, "Dat")
                     or has_case(t_dep_1, "Gen")
-                    or has_case(t_dep_1, "Acc")
                     or any(
                         t["deprel"] != "nmod"
                         and (has_case(t, "Gen") or has_case(t, "Dat"))
                         for t in t_deps_2
                     )
-                ):
+                ) or has_case(t_dep_1, "Acc"):
                     colloc = "OBJ"
             yield (colloc, t["id"], t_dep_1["id"])
 
