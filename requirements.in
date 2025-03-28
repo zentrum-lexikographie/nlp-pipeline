@@ -1,5 +1,7 @@
+beautifulsoup4
 conllu
 dwdsmor
+ebooklib
 git+https://github.com/zentrum-lexikographie/gdex.git@v1.2.1
 lingua-language-detector
 lxml
