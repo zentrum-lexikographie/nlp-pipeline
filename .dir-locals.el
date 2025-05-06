@@ -4,4 +4,4 @@
 ((python-mode . ((python-test-runner pytest)
                  (pyvenv-workon "nlp")))
  (clojure-mode . ((cider-preferred-build-tool . clojure-cli)
-                  (cider-clojure-cli-aliases . ":build:test:clerk"))))
+                  (cider-clojure-cli-aliases . ":dev:test:clerk"))))

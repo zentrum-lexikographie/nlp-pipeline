@@ -1,3 +1,5 @@
+# NLP @ ZDL
+
 ## Installation
 
     pip install -U pip setuptools
@@ -31,30 +33,4 @@ For CUDA-based inference:
 
 ## Analyze TEI schema (element classes)
 
-    clojure -X:tei-schema >src/main/python/zdl/xml/tei_schema.json
-
-## Import simplemma lexicons
-
-    $ clojure -X:python zdl.nlp.simplemma.lexicon/import!
-    WARNING: Using incubator modules: jdk.incubator.foreign, jdk.incubator.vector
-    2024-06-05T14:48:13.277Z textmaschine INFO [zdl.nlp.simplemma.lexicon:55] - Cloning simplemma repository to /tmp/73e622f0-1266-49a8-a369-523f331d690f17904144672877893130
-    2024-06-05T14:48:37.069Z textmaschine INFO [zdl.nlp.simplemma.lexicon:45] - Reading simplemma lexicon /tmp/73e622f0-1266-49a8-a369-523f331d690f17904144672877893130/simplemma/strategies/dictionaries/data/de.plzma'
-    2024-06-05T14:49:17.923Z textmaschine INFO [zdl.nlp.simplemma.lexicon:45] - Reading simplemma lexicon /tmp/73e622f0-1266-49a8-a369-523f331d690f17904144672877893130/simplemma/strategies/dictionaries/data/en.plzma'
-    2024-06-05T14:49:25.607Z textmaschine INFO [zdl.nlp.simplemma.lexicon:45] - Reading simplemma lexicon /tmp/73e622f0-1266-49a8-a369-523f331d690f17904144672877893130/simplemma/strategies/dictionaries/data/fr.plzma'
-    2024-06-05T14:49:38.767Z textmaschine INFO [zdl.nlp.simplemma.lexicon:60] - Writing 1,117,692 entries to src/zdl/nlp/simplemma/lexicon.edn
-
-## Bibliography
-
-* Elisabeth Eder, Ulrike Krieg-Holz, and Udo Hahn. 2019. At the Lower
-  End of Language—Exploring the Vulgar and Obscene Side of German. In
-  Proceedings of the Third Workshop on Abusive Language Online, pages
-  119–128, Florence, Italy. Association for Computational
-  Linguistics. [Link](https://aclanthology.org/W19-3513)
-
-## Acknowledgments
-
-The GDEX implementation makes use of
-[VulGer](https://aclanthology.org/W19-3513), a lexicon covering words
-from the lower end of the German language register — terms typically
-considered rough, vulgar, or obscene. VulGer is used under the terms
-of the CC-BY-SA license.
+    clojure -X:tei-schema >src/zdl/xml/tei_schema.json

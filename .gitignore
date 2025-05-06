@@ -12,6 +12,7 @@ __pycache__
 *.pyc
 *.egg-info/
 
+classes/
 data/
 public/
 target/

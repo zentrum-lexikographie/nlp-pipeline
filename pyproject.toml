@@ -35,7 +35,7 @@ zdl-nlp-polspeech = "zdl.nlp.polspeech:main"
 profile = "black"
 
 [tool.pytest.ini_options]
-testpaths = ["src/test/python"]
+testpaths = ["test"]
 
 [tool.mypy]
 disable_error_code = "import-untyped"
@@ -49,4 +49,4 @@ optional-dependencies.dev = { file = ["requirements.dev.txt"] }
 optional-dependencies.cuda = { file = ["requirements.cuda.txt"] }
 
 [tool.setuptools.packages.find]
-where = ["src/main/python"]
+where = ["src"]

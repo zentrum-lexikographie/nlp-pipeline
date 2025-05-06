@@ -1,4 +1,0 @@
-[submodule "docker/index/mtas"]
-	path = docker/index/mtas
-	url = git@github.com:zentrum-lexikographie/mtas.git
-	branch = develop

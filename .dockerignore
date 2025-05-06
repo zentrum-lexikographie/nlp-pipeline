@@ -1,0 +1,7 @@
+*
+!build.clj
+!deps.edn
+!public
+!pyproject.toml
+!requirements.*.txt
+!src
