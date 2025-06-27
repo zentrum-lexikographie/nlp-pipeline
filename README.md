@@ -1,12 +1,14 @@
-# NLP @ ZDL
+# NLP Pipeline @ ZDL
+
+_Combining Off-the-Shelf and Custom Components_
+
 
 ## Installation
 
     pip install -U pip setuptools
-    pip install 'zdl_nlp[cuda] @ git+https://github.com/zentrum-lexikographie/nlp-pipeline@vx.y.z'
+    pip install git+https://github.com/zentrum-lexikographie/nlp-pipeline@vx.y.z
 
-Replace `vx.y.z` with the current version, and optionally remove the
-extra `[cuda]` if you do not use a GPU.
+Replace `vx.y.z` with the current version.
 
     zdl-nlp-install-models
 
@@ -59,3 +61,18 @@ Annotate a random sentence from a corpus of political speeches:
 ## Analyze TEI schema (element classes)
 
     (cd tei-schema && clojure -X:extract) >zdl_nlp/tei_schema.json
+
+## License
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser Public License for more details.
+
+You should have received a copy of the GNU Lesser Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
