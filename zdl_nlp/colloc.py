@@ -10,37 +10,40 @@ from .conllu import serialize
 
 relations = {
     "ADV": {
+        "desc": "Adverbialbestimmung",
         "patterns": (
             ("advmod", "verb", "adv"),
             ("advmod", "adj", "adv"),
             ("advmod", "verb", "adj"),
             ("advmod", "adj", "adj"),
-        )
+        ),
     },
-    "ATTR": {"patterns": (("amod", "noun", "adj"),)},
-    "GMOD": {"tags": ("noun",)},
-    "KOM": {"tags": ("adj", "noun", "verb")},
+    "ATTR": {"desc": "Adjektivattribut", "patterns": (("amod", "noun", "adj"),)},
+    "GMOD": {"desc": "Genitivattribut", "tags": ("noun",)},
+    "KOM": {"desc": "vergleichende Wortgruppe", "tags": ("adj", "noun", "verb")},
     "KON": {
+        "desc": "Koordination",
         "patterns": (
             ("conj", "cc", "noun", "noun", "cconj"),
             ("conj", "cc", "verb", "verb", "cconj"),
             ("conj", "cc", "adj", "adj", "cconj"),
-        )
+        ),
     },
-    "OBJ": {"patterns": (("iobj", "verb", "noun"),)},
-    "OBJO": {"tags": ("noun", "verb")},
+    "OBJ": {"desc": "Akkusativ-Objekt", "tags": ("noun", "verb")},
+    "OBJO": {"desc": "Dativ-/Genitiv-Objekt", "tags": ("noun", "verb")},
     "PP": {
+        "desc": "Präpositionalgruppe",
         "patterns": (
             ("nmod", "case", "noun", "noun", "adp"),
             ("obl", "case", "verb", "noun", "adp"),
             ("obl", "case", "verb", "adj", "adp"),
             ("obl", "case", "verb", "adv", "adp"),
             ("obj", "case", "verb", "noun", "adp"),
-        )
+        ),
     },
-    "PRED": {"tags": ("adj", "noun", "verb")},
-    "SUBJA": {"tags": ("adj", "noun", "verb")},
-    "SUBJP": {"patterns": (("nsubj:pass", "verb", "noun"),)},
+    "PRED": {"desc": "Prädikativ", "tags": ("adj", "noun", "verb")},
+    "SUBJA": {"desc": "Subjekt", "tags": ("adj", "noun", "verb")},
+    "SUBJP": {"desc": "Passivsubjekt", "patterns": (("nsubj:pass", "verb", "noun"),)},
 }
 
 
@@ -176,10 +179,10 @@ def extract_genitives(tokens):
                 continue
             t_deps_2 = dependants(tokens, t_dep_1["id"])
             if not has_case(t_dep_1, "Gen") or not any(
-                has_case(t, "Gen") for t in t_deps_2
+                has_case(t_dep_2, "Gen") for t_dep_2 in t_deps_2
             ):
                 continue
-            if any(t["deprel"] == "case" for t in t_deps_2):
+            if any(t_dep_2["deprel"] == "case" for t_dep_2 in t_deps_2):
                 continue
             yield ("GMOD", t["id"], t_dep_1["id"])
 
@@ -205,7 +208,7 @@ def extract_objects(tokens):
             if t_dep_1["deprel"] not in {"obj", "obl:arg"} or t_dep_1["upos"] != "NOUN":
                 continue
             t_deps_2 = dependants(tokens, t_dep_1["id"])
-            if any(t["deprel"] == "case" for t in t_deps_2):
+            if any(t_dep_2["deprel"] == "case" for t_dep_2 in t_deps_2):
                 continue
             colloc = "OBJO"  # t_dep_1["deprel"] == "obl:arg"
             if t_dep_1["deprel"] == "obj":
@@ -213,9 +216,9 @@ def extract_objects(tokens):
                     has_case(t_dep_1, "Dat")
                     or has_case(t_dep_1, "Gen")
                     or any(
-                        t["deprel"] != "nmod"
-                        and (has_case(t, "Gen") or has_case(t, "Dat"))
-                        for t in t_deps_2
+                        t_dep_2["deprel"] != "nmod"
+                        and (has_case(t_dep_2, "Gen") or has_case(t_dep_2, "Dat"))
+                        for t_dep_2 in t_deps_2
                     )
                 ) or has_case(t_dep_1, "Acc"):
                     colloc = "OBJ"
