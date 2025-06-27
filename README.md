@@ -1,4 +1,4 @@
-# NLP Pipeline @ ZDL
+# A German NLP Pipeline for Lexicographic Use Cases
 
 _Combining Off-the-Shelf and Custom Components_
 
