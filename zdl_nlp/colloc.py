@@ -131,7 +131,7 @@ def extract_comparing_groups(tokens):
 
 
 def dependants(tokens, head_n):
-    return (t for t in tokens if t["head"] == head_n)
+    return [t for t in tokens if t["head"] == head_n]
 
 
 def extract_predicatives(tokens):
