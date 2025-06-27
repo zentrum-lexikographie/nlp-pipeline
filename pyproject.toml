@@ -30,6 +30,7 @@ zdl-nlp-colloc = "zdl_nlp.colloc:main"
 zdl-nlp-ddc2conllu = "zdl_nlp.ddc:main"
 zdl-nlp-install-models = "zdl_nlp.models:install"
 zdl-nlp-polspeech = "zdl_nlp.polspeech:main"
+zdl-nlp-segment = "zdl_nlp.segment:main"
 
 [tool.isort]
 profile = "black"

@@ -10,16 +10,11 @@ from zipfile import ZipFile
 
 from conllu.models import TokenList
 from lxml import etree
-from somajo import SoMaJo
 
 from .conllu import serialize
+from .segment import segment
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
-
-_no_whitespace = {"SpaceAfter": "No"}
-
-
-somajo = SoMaJo("de_CMC")
 
 
 def parse_doc(xml_file):
@@ -27,9 +22,7 @@ def parse_doc(xml_file):
     for text_el in xml_doc.iter("text"):
         for content in text_el.iter("rohtext"):
             content = re.sub(r"\\s+", " ", content.text.strip())
-            sentences = somajo.tokenize_text((content,))
-            for si, s in enumerate(sentences):
-                metadata = None
+            for si, s in enumerate(segment(content)):
                 if si == 0:
                     bibl = ". ".join(
                         (
@@ -40,21 +33,16 @@ def parse_doc(xml_file):
                             "",
                         )
                     )
-                    metadata = {
-                        "newdoc id": text_el.attrib.get("url"),
-                        "bibl": bibl,
-                        "date": text_el.attrib.get("datum"),
-                    }
-                tokens = []
-                for ti, t in enumerate(s):
-                    tokens.append(
+                    yield TokenList(
+                        s,
                         {
-                            "id": ti + 1,
-                            "form": t.text or "---",
-                            "misc": {} if t.space_after else _no_whitespace,
-                        }
+                            "newdoc id": text_el.attrib.get("url"),
+                            "bibl": bibl,
+                            "date": text_el.attrib.get("datum"),
+                        },
                     )
-                yield TokenList(tokens, metadata)
+                else:
+                    yield s
 
 
 def as_conll(limit=0, sample=1.0):
