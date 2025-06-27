@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v0.1.0...v1.0.0) (2025-06-27)
+
+
+### Miscellaneous Chores
+
+* Add DOI badge ([56eb214](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/56eb2147b5039803b978e34dd37524d3bd74e1c8))
+
 ## 0.1.0 (2025-06-27)
 
 
