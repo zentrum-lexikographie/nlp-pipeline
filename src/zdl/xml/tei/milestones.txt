@@ -1,6 +1,0 @@
-anchor
-cb
-gb
-lb
-milestone
-pb

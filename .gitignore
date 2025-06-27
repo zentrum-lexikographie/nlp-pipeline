@@ -1,10 +1,6 @@
 *~
 *.temp
 
-.clerk/
-.cpcache/
-.idea/
-.nrepl-port
 
 .python-version
 __pycache__
@@ -12,11 +8,7 @@ __pycache__
 *.pyc
 *.egg-info/
 
-classes/
 data/
-public/
-target/
-test-data/
 
 .venv/
 .env

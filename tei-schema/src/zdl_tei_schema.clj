@@ -1,6 +1,6 @@
-(ns zdl.xml.tei.schema
+(ns zdl-tei-schema
   (:require
-   [charred.api :as charred])
+   [jsonista.core :as json])
   (:import
    (javax.xml.namespace QName)
    (org.kohsuke.rngom.ast.util CheckingSchemaBuilder)
@@ -131,10 +131,10 @@
                 (element-by-name "label")
                 (element-by-name "row"))))
 
-(defn print-json
+(defn extract
   [& _]
   (->> [containers milestones chunks paras]
        (map (fn [els] (into (sorted-set) (mapcat local-names) els)))
        (zipmap ["containers" "milestones" "chunks" "paras"])
-       (charred/write-json-str)
+       (json/write-value-as-string)
        (println)))

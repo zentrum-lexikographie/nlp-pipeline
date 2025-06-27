@@ -1,0 +1,5 @@
+{:deps    {metosin/jsonista        {:mvn/version "0.3.13"}
+           org.relaxng/jing        {:mvn/version "20181222"}
+           org.kohsuke.rngom/rngom {:mvn/version "20100718"}
+           xerces/xercesImpl       {:mvn/version "2.12.2"}}
+ :aliases {:extract {:exec-fn zdl-tei-schema/extract}}}

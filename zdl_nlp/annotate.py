@@ -14,12 +14,13 @@ import dwdsmor.tag.hdt
 import gdex
 import spacy
 import spacy.tokens
+import zdl_spacy
 from lingua import Language, LanguageDetectorBuilder
 from tqdm import tqdm
 
 from .colloc import extract_collocs
 from .conllu import is_space_after, serialize, text
-from .models import load_dwdsmor, load_spacy
+from .models import load_dwdsmor
 
 logger = logging.getLogger(__name__)
 
@@ -123,6 +124,7 @@ def lemmatize(lemmatizer, sentences):
                     token_morph.get("Degree"),
                     token_morph.get("Mood"),
                     token_morph.get("VerbForm"),
+                    None,  # TODO: separable verbs via syninfo
                 ).items()
             }
             if token_lemma == "_":
@@ -193,7 +195,8 @@ class Config:
                 proc_n, *_ = proc_id
                 n_gpus = len(self.gpus)
                 gpu_id = self.gpus[proc_n % n_gpus]
-            self.spacy_nlp = load_spacy(self.accurate, self.ner, gpu_id)
+            model_type = "dist" if self.accurate else "lg"
+            self.spacy_nlp = zdl_spacy.load(model_type, self.ner, gpu_id)
         if self.dwdsmor:
             dwdsmor_edition = "dwds" if self.dwdsmor_dwds else "open"
             self.lemmatizer = load_dwdsmor(dwdsmor_edition)

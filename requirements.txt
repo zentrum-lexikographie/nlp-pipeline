@@ -5,253 +5,455 @@
 #    pip-compile requirements.in
 #
 annotated-types==0.7.0
-    # via pydantic
-beautifulsoup4==4.13.3
+    # via
+    #   gdex
+    #   pydantic
+    #   spacy-models
+beautifulsoup4==4.13.4
     # via -r requirements.in
-blis==0.7.11
-    # via thinc
+blessings==1.7
+    # via dwdsmor
+blis==1.2.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   thinc
+build==1.2.2.post1
+    # via
+    #   gdex
+    #   spacy-models
 catalogue==2.0.10
     # via
+    #   gdex
     #   spacy
+    #   spacy-models
     #   srsly
     #   thinc
-certifi==2025.1.31
-    # via requests
-charset-normalizer==3.4.1
-    # via requests
-click==8.1.8
-    # via typer
-cloudpathlib==0.20.0
-    # via weasel
+certifi==2025.6.15
+    # via
+    #   gdex
+    #   requests
+    #   spacy-models
+charset-normalizer==3.4.2
+    # via
+    #   gdex
+    #   requests
+    #   spacy-models
+click==8.2.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   typer
+cloudpathlib==0.21.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   weasel
 confection==0.1.5
     # via
+    #   gdex
+    #   spacy-models
     #   thinc
     #   weasel
 conllu==6.0.0
     # via -r requirements.in
+cupy-cuda12x==12.3.0
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
 cymem==2.0.11
     # via
+    #   gdex
     #   preshed
     #   spacy
+    #   spacy-models
     #   thinc
-dwdsmor==0.2.1
+dwdsmor==0.6.0
     # via -r requirements.in
-ebooklib==0.18
+ebooklib==0.19
     # via -r requirements.in
-filelock==3.17.0
+fastrlock==0.8.3
     # via
+    #   cupy-cuda12x
+    #   gdex
+    #   spacy-models
+filelock==3.18.0
+    # via
+    #   gdex
     #   huggingface-hub
+    #   spacy-models
     #   torch
     #   transformers
-fsspec==2025.2.0
+fsspec==2025.3.0
     # via
+    #   gdex
     #   huggingface-hub
+    #   spacy-models
     #   torch
-gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.2.1
+gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.4.0
     # via -r requirements.in
-huggingface-hub[cli]==0.28.1
+hf-xet==1.1.4
+    # via
+    #   gdex
+    #   huggingface-hub
+    #   spacy-models
+huggingface-hub[cli]==0.33.0
     # via
     #   dwdsmor
+    #   gdex
+    #   spacy-models
     #   tokenizers
     #   transformers
 idna==3.10
-    # via requests
+    # via
+    #   gdex
+    #   requests
+    #   spacy-models
 inquirerpy==0.3.4
     # via huggingface-hub
-jinja2==3.1.5
+jinja2==3.1.6
     # via
+    #   gdex
     #   spacy
+    #   spacy-models
     #   torch
+jsonstream==0.0.1
+    # via
+    #   gdex
+    #   spacy-models
 langcodes==3.5.0
-    # via spacy
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
 language-data==1.3.0
-    # via langcodes
-lingua-language-detector==2.0.2
+    # via
+    #   gdex
+    #   langcodes
+    #   spacy-models
+lingua-language-detector==2.1.1
     # via -r requirements.in
-lxml==5.3.1
+lxml==6.0.0
     # via
     #   -r requirements.in
     #   ebooklib
 marisa-trie==1.2.1
-    # via language-data
-markdown-it-py==3.0.0
-    # via rich
-markupsafe==3.0.2
-    # via jinja2
-mdurl==0.1.2
-    # via markdown-it-py
-mpmath==1.3.0
-    # via sympy
-murmurhash==1.0.12
     # via
+    #   gdex
+    #   language-data
+    #   spacy-models
+markupsafe==3.0.2
+    # via
+    #   gdex
+    #   jinja2
+    #   spacy-models
+mpmath==1.3.0
+    # via
+    #   gdex
+    #   spacy-models
+    #   sympy
+murmurhash==1.0.13
+    # via
+    #   gdex
     #   preshed
     #   spacy
+    #   spacy-models
     #   thinc
-networkx==3.4.2
-    # via torch
+networkx==3.5
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
 numpy==1.26.4
     # via
     #   blis
+    #   cupy-cuda12x
+    #   gdex
     #   spacy
+    #   spacy-models
     #   spacy-transformers
     #   thinc
     #   transformers
-nvidia-cublas-cu12==12.4.5.8
+nvidia-cublas-cu12==12.6.4.1
     # via
+    #   gdex
     #   nvidia-cudnn-cu12
     #   nvidia-cusolver-cu12
+    #   spacy-models
     #   torch
-nvidia-cuda-cupti-cu12==12.4.127
-    # via torch
-nvidia-cuda-nvrtc-cu12==12.4.127
-    # via torch
-nvidia-cuda-runtime-cu12==12.4.127
-    # via torch
-nvidia-cudnn-cu12==9.1.0.70
-    # via torch
-nvidia-cufft-cu12==11.2.1.3
-    # via torch
-nvidia-curand-cu12==10.3.5.147
-    # via torch
-nvidia-cusolver-cu12==11.6.1.9
-    # via torch
-nvidia-cusparse-cu12==12.3.1.170
+nvidia-cuda-cupti-cu12==12.6.80
     # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cuda-nvrtc-cu12==12.6.77
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cuda-runtime-cu12==12.6.77
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cudnn-cu12==9.5.1.17
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cufft-cu12==11.3.0.4
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cufile-cu12==1.11.1.6
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-curand-cu12==10.3.7.77
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cusolver-cu12==11.7.1.2
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-cusparse-cu12==12.5.4.2
+    # via
+    #   gdex
     #   nvidia-cusolver-cu12
+    #   spacy-models
     #   torch
-nvidia-cusparselt-cu12==0.6.2
-    # via torch
-nvidia-nccl-cu12==2.21.5
-    # via torch
-nvidia-nvjitlink-cu12==12.4.127
+nvidia-cusparselt-cu12==0.6.3
     # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-nccl-cu12==2.26.2
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+nvidia-nvjitlink-cu12==12.6.85
+    # via
+    #   gdex
+    #   nvidia-cufft-cu12
     #   nvidia-cusolver-cu12
     #   nvidia-cusparse-cu12
+    #   spacy-models
     #   torch
-nvidia-nvtx-cu12==12.4.127
-    # via torch
-packaging==24.2
+nvidia-nvtx-cu12==12.6.77
     # via
+    #   gdex
+    #   spacy-models
+    #   torch
+packaging==25.0
+    # via
+    #   build
+    #   gdex
     #   huggingface-hub
     #   spacy
+    #   spacy-models
     #   thinc
     #   transformers
     #   weasel
 pfzy==0.3.4
     # via inquirerpy
-preshed==3.0.9
+preshed==3.0.10
     # via
+    #   gdex
     #   spacy
+    #   spacy-models
     #   thinc
-prompt-toolkit==3.0.50
+prompt-toolkit==3.0.51
     # via inquirerpy
-pydantic==2.10.6
+pydantic==2.11.7
     # via
     #   confection
+    #   gdex
     #   spacy
+    #   spacy-models
     #   thinc
     #   weasel
-pydantic-core==2.27.2
-    # via pydantic
-pygments==2.19.1
-    # via rich
-python-dotenv==1.0.1
+pydantic-core==2.33.2
+    # via
+    #   gdex
+    #   pydantic
+    #   spacy-models
+pyproject-hooks==1.2.0
+    # via
+    #   build
+    #   gdex
+    #   spacy-models
+python-dotenv==1.1.1
     # via dwdsmor
 pyyaml==6.0.2
     # via
+    #   gdex
     #   huggingface-hub
+    #   spacy-models
     #   transformers
 regex==2024.11.6
     # via
+    #   gdex
     #   somajo
+    #   spacy-models
     #   transformers
-requests==2.32.3
+requests==2.32.4
     # via
+    #   gdex
     #   huggingface-hub
     #   spacy
+    #   spacy-models
     #   transformers
     #   weasel
-rich==13.9.4
-    # via typer
-safetensors==0.5.2
-    # via transformers
+safetensors==0.5.3
+    # via
+    #   gdex
+    #   spacy-models
+    #   transformers
 sfst-transduce==1.2.1
     # via dwdsmor
-shellingham==1.5.4
-    # via typer
 six==1.17.0
-    # via ebooklib
+    # via
+    #   blessings
+    #   ebooklib
 smart-open==7.1.0
-    # via weasel
+    # via
+    #   gdex
+    #   spacy-models
+    #   weasel
 somajo==2.4.3
     # via -r requirements.in
-soupsieve==2.6
+soupsieve==2.7
     # via beautifulsoup4
-spacy===3.7.5
+spacy[cuda12x,transformers]==3.8.7
+    # via
+    #   gdex
+    #   spacy-models
+    #   spacy-transformers
+spacy-alignments==0.9.2
+    # via
+    #   gdex
+    #   spacy-models
+    #   spacy-transformers
+spacy-legacy==3.0.12
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
+spacy-loggers==1.0.5
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
+spacy-models @ git+https://github.com/zentrum-lexikographie/spacy-models@v2.2.0
     # via
     #   -r requirements.in
     #   gdex
-    #   spacy-transformers
-spacy-alignments==0.9.1
-    # via spacy-transformers
-spacy-legacy==3.0.12
-    # via spacy
-spacy-loggers==1.0.5
-    # via spacy
-spacy-transformers==1.3.8
-    # via -r requirements.in
+spacy-transformers==1.3.9
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
 srsly==2.5.1
     # via
     #   confection
+    #   gdex
     #   spacy
+    #   spacy-models
     #   spacy-transformers
     #   thinc
     #   weasel
-sympy==1.13.1
-    # via torch
+sympy==1.14.0
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
 tabulate==0.9.0
     # via dwdsmor
-thinc==8.2.5
-    # via spacy
-tokenizers==0.21.0
-    # via transformers
-torch==2.6.0
-    # via spacy-transformers
+thinc==8.3.4
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
+tokenizers==0.21.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   transformers
+torch==2.7.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   spacy-transformers
 tqdm==4.67.1
     # via
     #   -r requirements.in
+    #   gdex
     #   huggingface-hub
     #   spacy
+    #   spacy-models
     #   transformers
-transformers==4.48.3
-    # via spacy-transformers
-triton==3.2.0
-    # via torch
-typer==0.15.1
+transformers==4.49.0
     # via
+    #   gdex
+    #   spacy-models
+    #   spacy-transformers
+triton==3.3.1
+    # via
+    #   gdex
+    #   spacy-models
+    #   torch
+typer==0.7.0
+    # via
+    #   gdex
     #   spacy
+    #   spacy-models
     #   weasel
-typing-extensions==4.12.2
+typing-extensions==4.14.0
     # via
     #   beautifulsoup4
+    #   gdex
     #   huggingface-hub
     #   pydantic
     #   pydantic-core
+    #   spacy-models
     #   torch
-    #   typer
-urllib3==2.3.0
-    # via requests
+    #   typing-inspection
+typing-inspection==0.4.1
+    # via
+    #   gdex
+    #   pydantic
+    #   spacy-models
+urllib3==2.5.0
+    # via
+    #   gdex
+    #   requests
+    #   spacy-models
 wasabi==1.1.3
     # via
+    #   gdex
     #   spacy
+    #   spacy-models
     #   thinc
     #   weasel
 wcwidth==0.2.13
     # via prompt-toolkit
 weasel==0.4.1
-    # via spacy
+    # via
+    #   gdex
+    #   spacy
+    #   spacy-models
 wrapt==1.17.2
-    # via smart-open
+    # via
+    #   gdex
+    #   smart-open
+    #   spacy-models
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

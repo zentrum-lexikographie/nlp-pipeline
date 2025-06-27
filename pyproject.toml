@@ -25,17 +25,17 @@ dynamic = ["readme", "version", "dependencies", "optional-dependencies"]
 Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
 
 [project.scripts]
-zdl-nlp-annotate = "zdl.nlp.annotate:main"
-zdl-nlp-colloc = "zdl.nlp.colloc:main"
-zdl-nlp-ddc2conllu = "zdl.nlp.ddc:main"
-zdl-nlp-install-models = "zdl.nlp.models:install"
-zdl-nlp-polspeech = "zdl.nlp.polspeech:main"
+zdl-nlp-annotate = "zdl_nlp.annotate:main"
+zdl-nlp-colloc = "zdl_nlp.colloc:main"
+zdl-nlp-ddc2conllu = "zdl_nlp.ddc:main"
+zdl-nlp-install-models = "zdl_nlp.models:install"
+zdl-nlp-polspeech = "zdl_nlp.polspeech:main"
 
 [tool.isort]
 profile = "black"
 
 [tool.pytest.ini_options]
-testpaths = ["test"]
+testpaths = ["tests"]
 
 [tool.mypy]
 disable_error_code = "import-untyped"
@@ -43,10 +43,9 @@ ignore_missing_imports = true
 
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
-version = {attr = "zdl.version.__version__"}
+version = {attr = "zdl_nlp.version.__version__"}
 dependencies = { file = ["requirements.txt"] }
 optional-dependencies.dev = { file = ["requirements.dev.txt"] }
-optional-dependencies.cuda = { file = ["requirements.cuda.txt"] }
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]

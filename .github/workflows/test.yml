@@ -1,0 +1,19 @@
+name: Test
+on:
+  push:
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+        cache: "pip"
+    - name: Install dependencies
+      run: |
+        pip install -U pip pip-tools setuptools wheel
+        pip install '.'
+    - name: Run annotation test
+      run: |
+        zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate -a
