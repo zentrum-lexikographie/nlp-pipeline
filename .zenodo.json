@@ -1,0 +1,30 @@
+{
+  "creators": [
+    {
+      "affiliation": "Berlin-Brandenburg Academy of Sciences and Humanities",
+      "name": "Köhler, Luise",
+      "orcid": "0000-0001-5144-1920"
+    },
+    {
+      "affiliation": "Berlin-Brandenburg Academy of Sciences and Humanities",
+      "name": "Middell, Gregor",
+      "orcid": "0009-0000-9256-4687"
+    }
+  ],
+  "description": "A pipeline adding linguistic annotations to texts, combining off-the-shelf as well as custom components and tailored to lexicographic use cases.",
+  "keywords": [
+    "collocation extraction",
+    "computational linguistics",
+    "german",
+    "lexicography",
+    "morphological analysis",
+    "nlp",
+    "sentence-scoring",
+    "spacy"
+  ],
+  "license": {
+    "id": "GPL-3.0"
+  },
+  "title": "A German NLP Pipeline for Lexicographic Use Cases",
+  "version": "1.0.0"
+}

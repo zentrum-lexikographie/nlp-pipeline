@@ -1,0 +1,25 @@
+cff-version: "1.2.0"
+title: "A German NLP Pipeline for Lexicographic Use Cases"
+version: 1.0.0
+license: "GPL-3.0"
+type: software
+abstract: "A pipeline adding linguistic annotations to texts, combining off-the-shelf as well as custom components and tailored to lexicographic use cases."
+message: "If you use this software, please cite it as below."
+authors:
+  - given-names: Luise
+    family-names: Köhler
+    affiliation: Berlin-Brandenburg Academy of Sciences and Humanities
+    orcid: "https://orcid.org/0000-0001-5144-1920"
+  - given-names: Gregor
+    family-names: Middell
+    affiliation: Berlin-Brandenburg Academy of Sciences and Humanities
+    orcid: "https://orcid.org/0009-0000-9256-4687"
+keywords:
+  - collocation extraction
+  - computational linguistics
+  - german
+  - lexicography
+  - morphological analysis
+  - nlp
+  - sentence-scoring
+  - spacy
