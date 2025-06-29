@@ -1,0 +1,18 @@
+name: zdl_nlp
+services:
+  index:
+    image: docker.zdl.org/zdl/nlp-index:latest
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM solr:9
+        ADD --chown=8983:8983\
+            solr/managed-schema.xml\
+            /opt/solr/server/solr/configsets/_default/conf/managed-schema.xml
+        CMD ["solr-precreate", "corpora"]
+    volumes:
+      - index:/var/solr
+    ports:
+      - "8983:8983"
+volumes:
+  index:
