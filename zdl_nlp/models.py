@@ -8,18 +8,7 @@ import zdl_spacy
 logger = logging.getLogger(__name__)
 
 
-def install_spacy_models(accurate=True):
-    model_type = "dist" if accurate else "lg"
-    zdl_spacy.load(model_type)
-    logger.info(f"Installed spaCy model ({model_type})")
-
-
-def install_dwdsmor_edition(edition):
-    load_dwdsmor(edition)
-    logger.info(f"Installed DWDSmor lemmatizer ({edition})")
-
-
-def load_dwdsmor(edition):
+def load_dwdsmor(edition="open"):
     edition = f"zentrum-lexikographie/dwdsmor-{edition}"
     return dwdsmor.lemmatizer(edition)
 
@@ -39,13 +28,21 @@ def install():
         level=logging.INFO,
         stream=sys.stdout,
     )
+    spacy_models = ["dist"]
+    dwds_editions = ["open"]
+
     args = arg_parser.parse_args()
-    install_spacy_models(accurate=True)
     if args.fast:
-        install_spacy_models(accurate=False)
-    install_dwdsmor_edition("open")
+        spacy_models.append("lg")
     if args.dwdsmor_dwds:
-        install_dwdsmor_edition("dwds")
+        dwds_editions.append("dwds")
+
+    for model_type in spacy_models:
+        zdl_spacy.load(model_type)
+        logger.info(f"Installed spaCy model ({model_type})")
+    for edition in dwds_editions:
+        dwdsmor.lemmatizer(f"zentrum-lexikographie/dwdsmor-{edition}")
+        logger.info(f"Installed DWDSmor lemmatizer ({edition})")
 
 
 if __name__ == "__main__":
