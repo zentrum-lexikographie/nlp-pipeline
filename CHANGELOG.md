@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.0...v1.0.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* Do not lock dependencies, so platform-dependent installs are possible ([43963f4](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/43963f4752bb129850e7264bf92f7d1a9cffb4c5))
+
+
+### Dependencies
+
+* Prepare release v1.0.1 ([d1dc95f](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/d1dc95f152791a712a49fb85995f75316e0a0846))
+
 ## [1.0.0](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v0.1.0...v1.0.0) (2025-06-27)
 
 
