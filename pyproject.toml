@@ -19,7 +19,29 @@ classifiers = [
     "Topic :: Text Processing :: Linguistic"
 ]
 requires-python = ">=3.12"
-dynamic = ["readme", "version", "dependencies", "optional-dependencies"]
+dynamic = ["readme", "version"]
+dependencies = [
+    "conllu",
+    "dwdsmor",
+    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.4.1",
+    "lingua-language-detector",
+    "lxml",
+    "requests",
+    "SoMaJo",
+    "spacy-models @ git+https://github.com/zentrum-lexikographie/spacy-models@v2.2.2",
+    "tqdm"
+]
+
+[project.optional-dependencies]
+dev = [
+    "flake8",
+    "flake8-bugbear",
+    "isort",
+    "black",
+    "mypy",
+    "pre-commit",
+    "pytest"
+]
 
 [project.urls]
 Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
@@ -45,8 +67,6 @@ ignore_missing_imports = true
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
 version = {attr = "zdl_nlp.version.__version__"}
-dependencies = { file = ["requirements.txt"] }
-optional-dependencies.dev = { file = ["requirements.dev.txt"] }
 
 [tool.setuptools.packages.find]
 where = ["."]
