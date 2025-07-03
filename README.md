@@ -2,12 +2,12 @@
 
 _Combining Off-the-Shelf and Custom Components_
 
-[![DOI](https://zenodo.org/badge/654340536.svg)](https://doi.org/10.5281/zenodo.15755337)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15755337.svg)](https://doi.org/10.5281/zenodo.15755337)
 
 ## Installation
 
     pip install -U pip setuptools
-    pip install git+https://github.com/zentrum-lexikographie/nlp-pipeline@v1.0.0
+    pip install git+https://github.com/zentrum-lexikographie/nlp-pipeline@v1.0.1
     zdl-nlp-install-models
 
 Add `-f`, if you would like to install CPU-optimized models and `-d`,
