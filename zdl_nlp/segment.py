@@ -18,7 +18,7 @@ def segment(*texts):
                 {
                     "id": ti + 1,
                     "form": t.text or "---",
-                    "misc": {} if t.space_after else _no_whitespace,
+                    "misc": {} if t.space_after else _no_whitespace.copy(),
                 }
             )
         yield TokenList(tokens)
