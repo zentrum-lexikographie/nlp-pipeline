@@ -71,47 +71,6 @@ def is_ws_element(element):
 ws_run = re.compile(r"\s+")
 
 
-def _normalize_space(text, parent_element):
-    if parent_element.tag in tag_categories["containers"]:
-        return ws_run.sub("", text)
-    if parent_element.tag in tag_categories["chunks"]:
-        return ws_run.sub(" ", text)
-    return text
-
-
-def normalize_space(root):
-    """Normalizes whitespace in given TEI element tree."""
-    for element in root.iter():
-        if has_content(element.text):
-            element.text = _normalize_space(element.text, element)
-            # leading whitespace in chunk-level elements
-            if element.tag in tag_categories["chunks"]:
-                element.text = element.text.lstrip()
-        if has_content(element.tail):
-            parent = element.getparent()
-            if parent is not None:
-                element.tail = _normalize_space(element.tail, parent)
-                # trailing whitespace in chunk-level elements
-                if element.getnext() is None and parent.tag in tag_categories["chunks"]:
-                    element.tail = element.tail.rstrip()
-        if is_ws_element(element):
-            # strip whitespace after whitespace element
-            if has_content(element.tail):
-                element.tail = element.tail.lstrip()
-            # strip whitespace before whitespace element
-            # a) in tail of previous sibling
-            prev = element.getprevious()
-            if prev is not None:
-                if has_content(prev.tail):
-                    prev.tail = prev.tail.rstrip()
-            # or b) in text of parent (ws element being the first child)
-            else:
-                parent = element.getparent()
-                if parent is not None and has_content(parent.text):
-                    parent.text = parent.text.rstrip()
-    return root
-
-
 def _add_segment(text, segment):
     segment = ws_run.sub(" ", segment)
     if text == "" or text[-1] == " ":
