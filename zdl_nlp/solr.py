@@ -1,6 +1,7 @@
 import argparse
 import itertools
 import json
+from collections import defaultdict
 
 import conllu
 import requests
@@ -98,17 +99,36 @@ def index(solr_url, solr_core, batch):
         meta_fields = []
         pn = 1
         for sn, s in enumerate(conllu.parse(doc), 1):
+            md = s.metadata
+            lemmata = defaultdict(list)
+            for ti, t in enumerate(s, 1):
+                if lemma := t.get("lemma"):
+                    lemmata[ti].append(lemma)
+                misc = t.get("misc") or {}
+                if pv := misc.get("CompoundVerb"):
+                    lemmata[ti].append(pv)
+                    lemmata[int(misc.get("CompoundPrt"))].append(pv)
+            entities = {}
+            for entity in json.loads(md.get("entities", "[]")):
+                label, *tis = entity
+                for ti in tis:
+                    entities[int(ti)] = label
+            collocations = defaultdict(list)
+            for colloc in json.loads(md.get("collocations", "[]")):
+                label, t1, t2, *_ = colloc
+                label = label.lower()
+                t1 = int(t1)
+                t2 = int(t2)
+                for l1 in lemmata[t1]:
+                    for l2 in lemmata[t2]:
+                        collocations[t1].append((f"c#{label}", f"{l1}#{l2}"))
+                        collocations[t2].append((f"c#{label}", f"{l1}#{l2}"))
+                        collocations[t1].append((f"c#{label}_", f"{l2}#{l1}"))
+                        collocations[t2].append((f"c#{label}_", f"{l2}#{l1}"))
             s_len = len(s)
             content = ""
             content_len = 0
             tokens = []
-            phrasal_verbs = {}
-            for ti, t in enumerate(s, 1):
-                misc = t.get("misc") or {}
-                pv = misc.get("CompoundVerb")
-                if pv:
-                    phrasal_verbs[ti] = pv
-                    phrasal_verbs[int(misc.get("CompoundPrt"))] = pv
             for ti, t in enumerate(s, 1):
                 start = content_len
                 form = t.get("form", "")
@@ -125,11 +145,20 @@ def index(solr_url, solr_core, batch):
                     if v:
                         tokens.append(f"{prefix}#{token(v)},i=0,{token_se}")
 
-                anno("", t.get("lemma", ""))
-                anno("", phrasal_verbs.get(ti))
-                anno("p", t.get("upos", ""))
-                anno("pos", t.get("xpos", ""))
-            md = s.metadata
+                for lemma in lemmata[ti]:
+                    anno("", lemma)
+                if entity := entities.get(ti):
+                    for lemma in lemmata[ti]:
+                        anno("e", lemma)
+                        anno(f"e#{entity}", lemma)
+                for pos in (t.get("upos"), t.get("xpos")):
+                    if not pos:
+                        continue
+                    for lemma in lemmata[ti]:
+                        anno(f"p#{pos.lower()}", lemma)
+                for prefix, collocs in collocations[ti]:
+                    anno(prefix, collocs)
+
             if sn == 1:
                 doc_urn = md["newdoc id"]
 
