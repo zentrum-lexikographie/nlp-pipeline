@@ -26,14 +26,14 @@ log into your Hugging Face account beforehand, i. e.:
 
 Annotate a random sentence from a corpus of political speeches:
 
-    $ zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate -a --dwdsmor-dwds
+    $ zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate
     # newdoc id = http://www.auswaertiges-amt.de/DE/Infoservice/Presse/Reden/2010/101014-Pieper-Dokkyo-Universität.html
     # bibl = Cornelia Pieper. Rede Staatsministerin Pieper: "150 Jahre Wissenschaftsbeziehungen Deutschland-Japan – ein Schatz für die Zukunft". 2010-10-14. o.O.
     # date = 2010-10-14
     # entities = [["ORG", 13, 14]]
-    # gdex = 0.87078857421875
+    # gdex = 0.884521484375
     # lang = de
-    # collocations = [["ADV", 2, 4], ["PP", 2, 8, 5], ["ATTR", 8, 7]]
+    # collocations = [["ADV", 2, 4], ["PP", 2, 8, 5], ["ATTR", 8, 7], ["SUBJA", 15, 13]]
     1	Ich	ich	PRON	PPER	Case=Nom|Number=Sing|Person=1|PronType=Prs	2	nsubj	_	_
     2	freue	freuen	VERB	VVFIN	Mood=Ind|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
     3	mich	ich	PRON	PRF	Case=Acc|Number=Sing|Person=1|PronType=Prs|Reflex=Yes	2	expl:pv	_	_

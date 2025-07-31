@@ -30,6 +30,7 @@ def spacy_doc(nlp, s):
         nlp.vocab,
         words=tuple(t["form"] for t in s),
         spaces=tuple(is_space_after(t) for t in s),
+        sent_starts=tuple(ti == 0 for ti, t_ in enumerate(s)),
     )
 
 
@@ -61,7 +62,7 @@ def spacy_nlp(nlp, sentences, score_gdex=True, batch_size=128, **kwargs):
                     for e in doc.ents
                 )
             )
-        if score_gdex:
+        if score_gdex and len(doc) > 0:
             doc = gdex.de_hdt(doc)
             doc_sent, *_ = doc.sents
             s.metadata["gdex"] = str(doc_sent._.gdex)
@@ -147,14 +148,12 @@ languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
 
 @dataclass
 class Config:
-    spacy: bool = True
     ner: bool = True
     gdex: bool = True
     dwdsmor: bool = True
-    dwdsmor_dwds: bool = False
+    dwdsmor_dwds: bool = True
     lang: bool = True
     colloc: bool = True
-    verbs: bool = True
     accurate: bool = True
     gpus: tuple[int, ...] = tuple()
     batch_size: int = 128
@@ -164,39 +163,28 @@ class Config:
 
     @staticmethod
     def from_args(args):
-        if args.all:
-            args.spacy = True
-            args.ner = True
-            args.gdex = True
-            args.dwdsmor = True
-            args.colloc = True
-            args.lang = True
-            args.verbs = True
         return Config(
-            args.spacy,
-            args.ner,
-            args.gdex,
-            args.dwdsmor,
-            args.dwdsmor_dwds,
-            args.lang,
-            args.colloc,
-            args.verbs,
+            not args.no_ner,
+            not args.no_gdex,
+            not args.no_dwdsmor,
+            not args.dwdsmor_open,
+            not args.no_lang,
+            not args.no_colloc,
             not args.fast,
             args.gpu,
             args.batch_size or 128,
         )
 
     def configure(self):
-        if self.spacy or self.ner or self.gdex:
-            gpu_id = None
-            if self.gpus:
-                proc = multiprocessing.current_process()
-                proc_id = proc._identity or (0,)
-                proc_n, *_ = proc_id
-                n_gpus = len(self.gpus)
-                gpu_id = self.gpus[proc_n % n_gpus]
-            model_type = "dist" if self.accurate else "lg"
-            self.spacy_nlp = zdl_spacy.load(model_type, self.ner, gpu_id)
+        gpu_id = None
+        if self.gpus:
+            proc = multiprocessing.current_process()
+            proc_id = proc._identity or (0,)
+            proc_n, *_ = proc_id
+            n_gpus = len(self.gpus)
+            gpu_id = self.gpus[proc_n % n_gpus]
+        model_type = "dist" if self.accurate else "lg"
+        self.spacy_nlp = zdl_spacy.load(model_type, self.ner, gpu_id)
         if self.dwdsmor:
             dwdsmor_edition = "dwds" if self.dwdsmor_dwds else "open"
             self.lemmatizer = load_dwdsmor(dwdsmor_edition)
@@ -219,8 +207,7 @@ class Config:
             sentences = detect_languages(self.lang_detector, sentences, self.batch_size)
         if self.colloc:
             sentences = (extract_collocs(s) for s in sentences)
-        if self.verbs:
-            sentences = (collapse_phrasal_verbs(s) for s in sentences)
+        sentences = (collapse_phrasal_verbs(s) for s in sentences)
         return tuple(serialize(s) for s in sentences)
 
 
@@ -248,22 +235,10 @@ def read_chunks(lines):
 
 arg_parser = argparse.ArgumentParser(description="Add linguistic annotations")
 arg_parser.add_argument(
-    "-a", "--all", help="Compute complete annotations", action="store_true"
-)
-arg_parser.add_argument(
     "-b",
     "--batch-size",
     help="# of sentences to process in one batch (128 by default)",
     type=int,
-)
-arg_parser.add_argument(
-    "-c", "--colloc", help="Extract collocation relations", action="store_true"
-)
-arg_parser.add_argument(
-    "-d", "--dwdsmor", help="Lemmatize with DWDSmor", action="store_true"
-)
-arg_parser.add_argument(
-    "--dwdsmor-dwds", help="Use DWDS-Edition of DWDSmor", action="store_true"
 )
 arg_parser.add_argument(
     "-f", "--fast", help="Use CPU-optimized model", action="store_true"
@@ -272,20 +247,11 @@ arg_parser.add_argument(
     "-g", "--gpu", help="IDs of GPUs to use (default: none)", type=int, action="append"
 )
 arg_parser.add_argument(
-    "--gdex", help="Score good-example quality (GDEX)", action="store_true"
-)
-arg_parser.add_argument(
     "-i",
     "--input-file",
     help="input CoNLL-U file to annotate",
     type=argparse.FileType("r"),
     default="-",
-)
-arg_parser.add_argument(
-    "-l", "--lang", help="Detect language of sentences", action="store_true"
-)
-arg_parser.add_argument(
-    "-n", "--ner", help="Recognize named entities (NER)", action="store_true"
 )
 arg_parser.add_argument(
     "-o",
@@ -303,10 +269,22 @@ arg_parser.add_argument(
 )
 arg_parser.add_argument("--progress", help="Show progress", action="store_true")
 arg_parser.add_argument(
-    "-s", "--spacy", help="Annotate with spaCy (HDT-based)", action="store_true"
+    "--no-colloc", help="Do not extract collocation relations", action="store_true"
 )
 arg_parser.add_argument(
-    "-v", "--verbs", help="Collapse phrasal verbs", action="store_true"
+    "--no-dwdsmor", help="Do not lemmatize with DWDSmor", action="store_true"
+)
+arg_parser.add_argument(
+    "--no-gdex", help="Do not score good-example quality (GDEX)", action="store_true"
+)
+arg_parser.add_argument(
+    "--dwdsmor-open", help="Use Open Edition of DWDSmor", action="store_true"
+)
+arg_parser.add_argument(
+    "--no-lang", help="Do not detect language of sentences", action="store_true"
+)
+arg_parser.add_argument(
+    "--no-ner", help="Do not recognize named entities (NER)", action="store_true"
 )
 
 
@@ -331,7 +309,7 @@ def main():
 
         @atexit.register
         def terminate_pool():
-            pool.terminate
+            pool.terminate()
 
         batches = pool.imap(annotate, batches)
     else:
