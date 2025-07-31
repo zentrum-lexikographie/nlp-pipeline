@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.1...v1.1.0) (2025-07-31)
+
+
+### Features
+
+* Convert TEI/XML sources to CoNLL-U ([2f9133c](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/2f9133c6cb237292f347e786d8ce1d26bbafba33))
+
 ## [1.0.1](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.0...v1.0.1) (2025-07-03)
 
 
