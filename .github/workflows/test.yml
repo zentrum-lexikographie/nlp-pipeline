@@ -16,4 +16,4 @@ jobs:
         pip install '.'
     - name: Run annotation test
       run: |
-        zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate -f
+        zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate -f --dwdsmor-open
