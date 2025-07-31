@@ -1,6 +1,6 @@
 import argparse
 import itertools
-import uuid
+import json
 
 import conllu
 import requests
@@ -95,18 +95,27 @@ def doc_field(k, v):
 def index(solr_url, solr_core, batch):
     index_docs = []
     for doc in batch:
-        doc_uri = f"uuid:{str(uuid.uuid1())}"
+        meta_fields = []
+        pn = 1
         for sn, s in enumerate(conllu.parse(doc), 1):
+            s_len = len(s)
             content = ""
             content_len = 0
             tokens = []
-            for t in s:
+            phrasal_verbs = {}
+            for ti, t in enumerate(s, 1):
+                misc = t.get("misc") or {}
+                pv = misc.get("CompoundVerb")
+                if pv:
+                    phrasal_verbs[ti] = pv
+                    phrasal_verbs[int(misc.get("CompoundPrt"))] = pv
+            for ti, t in enumerate(s, 1):
                 start = content_len
                 form = t.get("form", "")
                 content += form
                 content_len += len(form)
                 end = content_len
-                if is_space_after(t):
+                if not ti == s_len and is_space_after(t):
                     content += " "
                     content_len += 1
                 token_se = f"s={start},e={end}"
@@ -117,13 +126,54 @@ def index(solr_url, solr_core, batch):
                         tokens.append(f"{prefix}#{token(v)},i=0,{token_se}")
 
                 anno("", t.get("lemma", ""))
+                anno("", phrasal_verbs.get(ti))
                 anno("p", t.get("upos", ""))
                 anno("pos", t.get("xpos", ""))
+            md = s.metadata
+            if sn == 1:
+                doc_urn = md["newdoc id"]
+
+                def meta_field(k, v, meta_fields=meta_fields):
+                    if v:
+                        meta_fields.append((k, v))
+
+                meta_field("doc_s", doc_urn)
+                meta_field("bibl_s", md.get("bibl"))
+                meta_field("url_s", md.get("url"))
+                meta_field("year_i", md.get("year"))
+                meta_field("date_dt", md.get("date"))
+                meta_field("accessed_dt", md.get("accessed"))
+                meta_field("country_s", md.get("country"))
+                meta_field("metaarea_s", md.get("metaarea"))
+                meta_field("area_s", md.get("area"))
+                meta_field("subarea_s", md.get("subarea"))
+                for text_class in json.loads(md.get("textClass", "[]")):
+                    meta_field("text_class_ss", text_class)
+
+                meta_fields = tuple(meta_fields)
+            if "newpar id" in md:
+                pn = int(md["newpar id"][1:])
+
+            sentence_fields = [
+                ("id", f"{doc_urn}#{sn}"),
+                ("p_i", str(pn)),
+                ("s_i", str(sn)),
+                ("text_pre", f"1 {stored(content)} {' '.join(tokens)}"),
+            ]
+
+            def sentence_field(k, v, sentence_fields=sentence_fields):
+                if v:
+                    sentence_fields.append((k, v))
+
+            gdex = md.get("gdex")
+            sentence_field("gdex_f", gdex)
+            sentence_field("gdex_b", float(gdex) >= 0.5 if gdex else None)
+            sentence_field("lang_s", md.get("lang"))
+
             index_docs.append(
                 E.doc(
-                    doc_field("id", f"{doc_uri}#{sn}"),
-                    doc_field("doc", doc_uri),
-                    doc_field("text_pre", f"1 {stored(content)} {' '.join(tokens)}"),
+                    *(doc_field(k, v) for k, v in sentence_fields),
+                    *(doc_field(k, v) for k, v in meta_fields),
                 )
             )
     index_update(solr_url, solr_core, E.add(*index_docs))

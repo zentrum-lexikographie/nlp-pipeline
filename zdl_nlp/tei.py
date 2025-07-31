@@ -210,11 +210,11 @@ def extract_metadata(tei_header):
     return {k: v for k, v in metadata if v}
 
 
-def to_conll(xml_file, doc_urn):
-    events = ET.iterparse(xml_file, events=("start", "end"))
-    metadata_stack = []
+def to_conll(corpus, basename, xml_file):
+    doc_urn = f"urn:corpus:{corpus}:{urllib.parse.quote(basename)}"
     doc_n = 0
-    for event, element in events:
+    metadata_stack = [{"collection": corpus}]
+    for event, element in ET.iterparse(xml_file, events=("start", "end")):
         if event == "start" and element.tag in tei_tag_set("teiCorpus", "TEI"):
             metadata = {}
             for tei_header in element.iterchildren(tei_tag("teiHeader")):
@@ -230,31 +230,15 @@ def to_conll(xml_file, doc_urn):
                             doc_id = doc_urn
                             if doc_n > 1:
                                 doc_id = "/".join((doc_id, f"d{doc_n}"))
-                            s.metadata["doc id"] = doc_id
+                            s.metadata["newdoc id"] = doc_id
                             for metadata in metadata_stack:
                                 for k, v in metadata.items():
                                     s.metadata[k] = v
-                        s.metadata["par id"] = f"p{ci}"
+                        s.metadata["newpar id"] = f"p{ci}"
                     yield s
         if event == "end" and element.tag in tei_tag_set("teiCorpus", "TEI"):
             metadata_stack.pop()
             element.clear()
-
-
-def to_conll_str(xml_file, doc_urn):
-    return "".join(serialize(s) for s in to_conll(xml_file, doc_urn))
-
-
-def gen_xml_file_specs(base_urn, p, pattern="**/*.xml"):
-    if p.is_dir():
-        for f in p.glob(pattern):
-            yield (f, ":".join((base_urn, urllib.parse.quote(str(f.relative_to(p))))))
-    else:
-        yield (p, ":".join((base_urn, urllib.parse.quote(p.name))))
-
-
-def xml_file_spec_to_conll_str(xml_file_spec):
-    return to_conll_str(*xml_file_spec)
 
 
 arg_parser = argparse.ArgumentParser(description="Convert TEI/XML to CoNLL-U")
@@ -279,11 +263,6 @@ arg_parser.add_argument(
     default="-",
 )
 arg_parser.add_argument(
-    "--glob-pattern",
-    help="Glob pattern for TEI/XML files in dirs",
-    default="**/*.xml",
-)
-arg_parser.add_argument(
     "-p",
     "--parallel",
     help="# of parallel conversions (1 by default)",
@@ -302,21 +281,36 @@ arg_parser.add_argument(
 )
 
 
+def corpus_files(corpus, path):
+    if path.is_dir():
+        for dir_path, _subdirs, files in path.walk():
+            for f in files:
+                if f.endswith(".xml"):
+                    f = dir_path / f
+                    yield (corpus, str(f.relative_to(path)), f)
+    else:
+        yield (corpus, path.name, path)
+
+
+def corpus_file_to_conll_str(corpus_file):
+    corpus, basename, xml_file = corpus_file
+    return "".join(serialize(s) for s in to_conll(corpus, basename, xml_file))
+
+
 def main():
     args = arg_parser.parse_args()
-    corpus_urn = f"urn:corpus:{args.corpus}"
     if len(args.tei_xml_path) > 0:
-        xml_file_specs = (
-            f
-            for p in args.tei_xml_path
-            for f in gen_xml_file_specs(corpus_urn, p, args.glob_pattern)
-        )
+
+        def files(p):
+            return corpus_files(args.corpus, p)
+
+        input_files = (f for p in args.tei_xml_path for f in files(p))
         if args.sample < 1.0:
-            xml_file_specs = (xfs for xfs in xml_file_specs if random() < args.sample)
+            input_files = (xfs for xfs in input_files if random() < args.sample)
         if args.limit > 0:
-            xml_file_specs = itertools.islice(xml_file_specs, args.limit)
+            input_files = itertools.islice(input_files, args.limit)
     else:
-        xml_file_specs = ((argparse.FileType("rb")("-"), corpus_urn),)
+        input_files = ((args.corpus, "stdin", argparse.FileType("rb")("-")),)
     n_procs = args.parallel
     if n_procs >= 0:
         n_procs = n_procs or len(os.sched_getaffinity(0))
@@ -326,11 +320,11 @@ def main():
         def terminate_pool():
             pool.terminate()
 
-        for chunk in pool.imap(xml_file_spec_to_conll_str, xml_file_specs):
+        for chunk in pool.imap(corpus_file_to_conll_str, input_files):
             args.output_file.write(chunk)
     else:
-        for xml_file, doc_urn in xml_file_specs:
-            for s in to_conll(xml_file, doc_urn):
+        for corpus, basename, xml_file in input_files:
+            for s in to_conll(corpus, basename, xml_file):
                 args.output_file.write(serialize(s))
 
 
