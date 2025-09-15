@@ -24,7 +24,9 @@ def segment(*texts):
         yield TokenList(tokens)
 
 
-arg_parser = argparse.ArgumentParser(description="Download German Political Speeches")
+arg_parser = argparse.ArgumentParser(
+    description="Segment plain text into sentences and tokens"
+)
 arg_parser.add_argument(
     "-i",
     "--input-file",
