@@ -28,6 +28,7 @@ dependencies = [
     "lxml",
     "requests",
     "SoMaJo",
+    "sentence-transformers[openvino]",
     "spacy-models @ git+https://github.com/zentrum-lexikographie/spacy-models@v2.2.2",
     "tqdm"
 ]
