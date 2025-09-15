@@ -43,7 +43,7 @@ relations = {
     },
     "PRED": {"desc": "Prädikativ", "tags": ("adj", "noun", "verb")},
     "SUBJA": {"desc": "Subjekt", "tags": ("adj", "noun", "verb")},
-    "SUBJP": {"desc": "Passivsubjekt", "patterns": (("nsubj:pass", "verb", "noun"),)},
+    "SUBJP": {"desc": "Passivsubjekt", "tags": ("noun", "verb")},
 }
 
 
@@ -199,6 +199,21 @@ def extract_active_subjects(tokens):
                 yield ("SUBJA", t["id"], t_dep_1["id"])
 
 
+def extract_passive_subjects(tokens):
+    for t in tokens:
+        if t["upos"] != "VERB":
+            continue
+        t_deps_1 = dependants(tokens, t["id"])
+        for t_dep_1 in t_deps_1:
+            if t_dep_1["upos"] != "NOUN" or t_dep_1["deprel"] != "nsubj:pass":
+                continue
+            if any(
+                t_dep_1a["deprel"] == "aux:pass" and t_dep_1a["lemma"] == "werden"
+                for t_dep_1a in t_deps_1
+            ):
+                yield ("SUBJP", t["id"], t_dep_1["id"])
+
+
 def extract_objects(tokens):
     for t in tokens:
         if t["upos"] != "VERB":
@@ -234,6 +249,7 @@ def extract_collocs(sentence):
             extract_genitives(sentence),
             extract_comparing_groups(sentence),
             extract_active_subjects(sentence),
+            extract_passive_subjects(sentence),
         )
     )
     if collocs:
