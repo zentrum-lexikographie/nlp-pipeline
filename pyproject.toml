@@ -22,10 +22,12 @@ requires-python = ">=3.12"
 dynamic = ["readme", "version"]
 dependencies = [
     "conllu",
+    "datasketch",
     "dwdsmor",
-    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.4.1",
+    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.5.2",
     "lingua-language-detector",
     "lxml",
+    "python-dotenv",
     "requests",
     "SoMaJo",
     "sentence-transformers[openvino]",
@@ -50,7 +52,8 @@ Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
 [project.scripts]
 zdl-nlp-annotate = "zdl_nlp.annotate:main"
 zdl-nlp-colloc = "zdl_nlp.colloc:main"
-zdl-nlp-ddc2conllu = "zdl_nlp.ddc:main"
+zdl-nlp-ddc = "zdl_nlp.ddc.corpora:main"
+zdl-nlp-ddc2conllu = "zdl_nlp.ddc.tabs:main"
 zdl-nlp-install-models = "zdl_nlp.models:install"
 zdl-nlp-polspeech = "zdl_nlp.polspeech:main"
 zdl-nlp-txt2conllu = "zdl_nlp.segment:main"
@@ -61,6 +64,10 @@ profile = "black"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::FutureWarning",
+]
 
 [tool.mypy]
 disable_error_code = "import-untyped"
@@ -72,3 +79,4 @@ version = {attr = "zdl_nlp.version.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["."]
+exclude = ["tests"]
