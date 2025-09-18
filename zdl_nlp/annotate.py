@@ -146,8 +146,14 @@ def lemmatize(lemmatizer, sentences):
 languages = (Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.LATIN)
 
 
+def init_pipeline(pipeline_):
+    global pipeline
+    pipeline = pipeline_.init()
+    return pipeline
+
+
 @dataclass
-class Config:
+class Pipeline:
     ner: bool = True
     gdex: bool = True
     dwdsmor: bool = True
@@ -157,25 +163,12 @@ class Config:
     accurate: bool = True
     gpus: tuple[int, ...] = tuple()
     batch_size: int = 128
+    n_procs: int = -1
     spacy_nlp = None
     lemmatizer = None
     lang_detector = None
 
-    @staticmethod
-    def from_args(args):
-        return Config(
-            not args.no_ner,
-            not args.no_gdex,
-            not args.no_dwdsmor,
-            not args.dwdsmor_open,
-            not args.no_lang,
-            not args.no_colloc,
-            not args.fast,
-            args.gpu,
-            args.batch_size or 128,
-        )
-
-    def configure(self):
+    def init(self):
         gpu_id = None
         if self.gpus:
             proc = multiprocessing.current_process()
@@ -197,8 +190,7 @@ class Config:
             )
         return self
 
-    def annotate(self, chunks):
-        sentences = (s for chunk in chunks for s in conllu.parse(chunk))
+    def annotate(self, sentences):
         if self.spacy_nlp:
             sentences = spacy_nlp(self.spacy_nlp, sentences, self.gdex, self.batch_size)
         if self.lemmatizer:
@@ -208,16 +200,41 @@ class Config:
         if self.colloc:
             sentences = (extract_collocs(s) for s in sentences)
         sentences = (collapse_phrasal_verbs(s) for s in sentences)
-        return tuple(serialize(s) for s in sentences)
+        return sentences
 
 
-def configure(config_):
-    global config
-    config = config_.configure()
+def annotate_sentences(sentences):
+    return tuple(pipeline.annotate(sentences))
 
 
-def annotate(chunks):
-    return config.annotate(chunks)
+def setup_pipeline(**kwargs):
+    pipeline = Pipeline(**kwargs)
+    if pipeline.n_procs >= 0:
+        n_procs = pipeline.n_procs or len(os.sched_getaffinity(0))
+        mp_ctx = multiprocessing.get_context("spawn")
+        pool = mp_ctx.Pool(n_procs, init_pipeline, (pipeline,))
+
+        @atexit.register
+        def terminate_pool():
+            pool.terminate()
+
+        def annotate_parallel(sentences, pool=pool):
+            batches = itertools.batched(sentences, pipeline.batch_size)
+            for batch in pool.imap(annotate_sentences, batches):
+                for s in batch:
+                    yield s
+
+        return annotate_parallel
+    else:
+        init_pipeline(pipeline)
+
+        def annotate_serial(sentences):
+            batches = itertools.batched(sentences, pipeline.batch_size)
+            for batch in batches:
+                for s in pipeline.annotate(batch):
+                    yield s
+
+        return annotate_serial
 
 
 def read_chunks(lines):
@@ -231,6 +248,11 @@ def read_chunks(lines):
             chunk += line
     if chunk:
         yield chunk
+
+
+def annotate_chunks(chunks):
+    sentences = (s for chunk in chunks for s in conllu.parse(chunk))
+    return tuple(serialize(s) for s in pipeline.annotate(sentences))
 
 
 arg_parser = argparse.ArgumentParser(description="Add linguistic annotations")
@@ -290,6 +312,18 @@ arg_parser.add_argument(
 
 def main():
     args = arg_parser.parse_args()
+    pipeline = Pipeline(
+        not args.no_ner,
+        not args.no_gdex,
+        not args.no_dwdsmor,
+        not args.dwdsmor_open,
+        not args.no_lang,
+        not args.no_colloc,
+        not args.fast,
+        args.gpu,
+        args.batch_size or 128,
+        args.parallel or -1,
+    )
     progress = None
     if args.progress:
         progress = tqdm(
@@ -298,23 +332,22 @@ def main():
             unit_scale=True,
             smoothing=0.01,
         )
-    config = Config.from_args(args)
     chunks = read_chunks(args.input_file)
-    batches = itertools.batched(chunks, config.batch_size)
-    n_procs = args.parallel
-    if n_procs >= 0:
-        n_procs = n_procs or len(os.sched_getaffinity(0))
+    batches = itertools.batched(chunks, pipeline.batch_size)
+    if pipeline.n_procs >= 0:
+        n_procs = pipeline.n_procs or len(os.sched_getaffinity(0))
         mp_ctx = multiprocessing.get_context("spawn")
-        pool = mp_ctx.Pool(n_procs, configure, (config,))
+        pool = mp_ctx.Pool(n_procs, init_pipeline, (pipeline,))
 
         @atexit.register
         def terminate_pool():
             pool.terminate()
 
-        batches = pool.imap(annotate, batches)
+        batches = pool.imap(annotate_chunks, batches)
     else:
-        configure(config)
-        batches = (annotate(batch) for batch in batches)
+        init_pipeline(pipeline)
+        batches = (annotate_chunks(batch) for batch in batches)
+
     for batch in batches:
         for chunk in batch:
             args.output_file.write(chunk)
