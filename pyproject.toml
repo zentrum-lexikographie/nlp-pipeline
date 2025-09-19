@@ -28,6 +28,8 @@ dependencies = [
     "lingua-language-detector",
     "lxml",
     "python-dotenv",
+    "python-dateutil",
+    "ratelimit",
     "requests",
     "SoMaJo",
     "sentence-transformers[openvino]",
@@ -55,6 +57,7 @@ zdl-nlp-colloc = "zdl_nlp.colloc:main"
 zdl-nlp-ddc = "zdl_nlp.ddc.corpora:main"
 zdl-nlp-ddc2conllu = "zdl_nlp.ddc.tabs:main"
 zdl-nlp-install-models = "zdl_nlp.models:install"
+zdl-nlp-korap = "zdl_nlp.korap:main"
 zdl-nlp-polspeech = "zdl_nlp.polspeech:main"
 zdl-nlp-txt2conllu = "zdl_nlp.segment:main"
 zdl-nlp-tei2conllu = "zdl_nlp.tei:main"

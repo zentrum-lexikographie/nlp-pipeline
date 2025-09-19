@@ -110,7 +110,7 @@ def lemmatize(lemmatizer, sentences):
     for sentence in sentences:
         for token in sentence:
             token_form = token["form"]
-            token_lemma = token["lemma"]
+            token_lemma = token.get("lemma")
             token_pos = token["xpos"]
             token_morph = token["feats"] or {}
             token_criteria = {
@@ -128,7 +128,7 @@ def lemmatize(lemmatizer, sentences):
                     None,  # TODO: separable verbs via syninfo
                 ).items()
             }
-            if token_lemma == "_":
+            if not token_lemma:
                 token_lemma = token["lemma"] = token_form
             dwdsmor_result = lemmatizer(token_form, **token_criteria)
             if not dwdsmor_result:

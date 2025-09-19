@@ -214,7 +214,7 @@ def to_conll(corpus, basename, xml_file):
     doc_urn = f"urn:corpus:{corpus}:{urllib.parse.quote(basename)}"
     doc_n = 0
     metadata_stack = [{"collection": corpus}]
-    for event, element in ET.iterparse(xml_file, events=("start", "end")):
+    for event, element in ET.iterparse(xml_file, events=("start", "end"), recover=True):
         if event == "start" and element.tag in tei_tag_set("teiCorpus", "TEI"):
             metadata = {}
             for tei_header in element.iterchildren(tei_tag("teiHeader")):

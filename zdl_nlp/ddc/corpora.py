@@ -92,13 +92,14 @@ class Corpus:
                     )
                     if t.get("hit") == 1:
                         token_hits.append(tn)
-                doc_id = ":".join(
-                    (data["meta_"]["collection"], data["meta_"]["basename"])
-                )
+                collection = data["meta_"]["collection"]
+                doc_id = data["meta_"]["basename"]
+                doc_id = f"urn:ddc:{collection}/{doc_id}"
                 yield TokenList(
                     token_list,
                     {
                         "newdoc id": doc_id,
+                        "collection": collection,
                         "bibl": data["meta_"].get("bibl", ""),
                         "date": data["meta_"].get("date_", ""),
                         "hits": json.dumps(token_hits),
