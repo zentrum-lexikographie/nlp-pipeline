@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.0](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.1...v1.1.0) (2025-09-19)
+
+
+### Features
+
+* Add DDC client ([945c9a6](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/945c9a626d4695168bd0dd2556335079e266e121))
+* Add KorAP-based corpora (DeReKo and DeLiKo) ([7b4ce5c](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/7b4ce5cb023d02b44756ad74f3ad13a8266e353b))
+* Convert TEI/XML sources to CoNLL-U ([2f9133c](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/2f9133c6cb237292f347e786d8ce1d26bbafba33))
+* on-the-fly annotation and deduplication of DDC results ([9283bca](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/9283bca92804abb71fe81a9db15f5f8671e151a3))
+
 ## [1.0.1](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.0...v1.0.1) (2025-07-03)
 
 
