@@ -1,9 +1,15 @@
+import argparse
+import itertools
+import json
 import logging
 import warnings
 from typing import Dict, List, Tuple, Union
 
+import conllu
 from sentence_transformers import SentenceTransformer
 from torch import tensor
+
+from .conllu import marked_text, serialize
 
 start_tag = "<t>"
 end_tag = "</t>"
@@ -77,9 +83,47 @@ class ModelLoaderLoggingContext:
         self.st_logger.setLevel(self.st_logger_level)
 
 
-def word_transformer(gpu=True):
-    model = "zentrum-lexikographie/dwds-wic-sbert" + ("" if gpu else "-ov-q8")
-    backend = "torch" if gpu else "openvino"
+def word_transformer(quantized=False):
+    model = "zentrum-lexikographie/dwds-wic-sbert" + ("-ov-q8" if quantized else "")
+    backend = "openvino" if quantized else "torch"
     with ModelLoaderLoggingContext(), warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return WordTransformer(model, backend=backend)
+
+
+def embed(word_tf, sentences, batch_size=100):
+    for batch in itertools.batched(sentences, batch_size):
+        texts = [marked_text(s) for s in batch]
+        embeddings = word_tf.encode(texts, batch_size=batch_size)
+        for embedding, sentence in zip(embeddings, batch):
+            sentence.metadata["wic-embedding"] = json.dumps(embedding.tolist())
+            yield sentence
+
+
+arg_parser = argparse.ArgumentParser(description="Add WiC sentence embeddings")
+arg_parser.add_argument(
+    "-i",
+    "--input-file",
+    help="input CoNLL-U file to annotate",
+    type=argparse.FileType("r"),
+    default="-",
+)
+arg_parser.add_argument(
+    "-o",
+    "--output-file",
+    help="output CoNLL-U file with (updated) annotations",
+    type=argparse.FileType("w"),
+    default="-",
+)
+
+
+def main():
+    args = arg_parser.parse_args()
+    word_tf = word_transformer()
+    sentences = conllu.parse_incr(args.input_file)
+    for s in embed(word_tf, sentences, batch_size=32):
+        args.output_file.write(serialize(s))
+
+
+if __name__ == "__main__":
+    main()
