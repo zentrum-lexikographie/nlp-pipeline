@@ -23,7 +23,7 @@ def dedupe(sentences):
         for t in fingerprint(s):
             mh.update(t.encode("utf-8"))
         if lsh.query(mh):
-            # match
-            continue
-        lsh.insert(str(sn), mh)
+            s.metadata["duplicate"] = "true"
+        else:
+            lsh.insert(str(sn), mh)
         yield s

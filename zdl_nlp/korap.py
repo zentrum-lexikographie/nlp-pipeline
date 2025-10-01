@@ -137,7 +137,7 @@ class Corpus:
     @limits(calls=1, period=2)
     def _request(self, q, offset=0):
         params = {
-            "ql": "poliqarp",
+            "ql": "cosmas2",
             "q": q,
             "context": "sentence",
             "offset": str(offset),
@@ -190,7 +190,7 @@ arg_parser.add_argument(
     type=float,
     default="1.0",
 )
-arg_parser.add_argument("query", help="Poliqarp Query")
+arg_parser.add_argument("query", help="COSMAS-II Query")
 
 
 def main():

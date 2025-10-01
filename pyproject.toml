@@ -24,16 +24,18 @@ dependencies = [
     "conllu",
     "datasketch",
     "dwdsmor",
-    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.5.2",
+    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.6.0",
     "lingua-language-detector",
     "lxml",
+    "pika",
     "python-dotenv",
     "python-dateutil",
     "ratelimit",
     "requests",
+    "retry",
     "SoMaJo",
     "sentence-transformers[openvino]",
-    "spacy-models @ git+https://github.com/zentrum-lexikographie/spacy-models@v2.2.2",
+    "spacy-models @ git+https://github.com/zentrum-lexikographie/spacy-models@v2.3.0",
     "tqdm"
 ]
 
@@ -56,6 +58,7 @@ zdl-nlp-annotate = "zdl_nlp.annotate:main"
 zdl-nlp-colloc = "zdl_nlp.colloc:main"
 zdl-nlp-ddc = "zdl_nlp.ddc.corpora:main"
 zdl-nlp-ddc2conllu = "zdl_nlp.ddc.tabs:main"
+zdl-nlp-examples = "zdl_nlp.examples:main"
 zdl-nlp-install-models = "zdl_nlp.models:install"
 zdl-nlp-korap = "zdl_nlp.korap:main"
 zdl-nlp-polspeech = "zdl_nlp.polspeech:main"

@@ -19,13 +19,13 @@ from ..env import config
 logger = logging.getLogger(__name__)
 
 
-def request(endpoint, cmd):
+def request(endpoint, cmd, timeout=None):
     s = None
     try:
         host, port = endpoint
         logger.debug("[%s:%d] %s", host, port, repr(cmd))
         cmd = cmd.encode("utf-8")
-        s = socket.create_connection(endpoint)
+        s = socket.create_connection(endpoint, timeout=timeout)
         s.sendall(struct.pack("<I", len(cmd)) + cmd)
         response_len, *_ = struct.unpack("<I", s.recv(4))
         response = b""
@@ -37,10 +37,10 @@ def request(endpoint, cmd):
             s.close()
 
 
-def query(endpoint, q, offset=0, limit=10, timeout=5):
-    params = " ".join(map(str, (offset, limit, timeout)))
+def query(endpoint, q, offset=0, limit=10, timeout=None):
+    params = " ".join(map(str, (offset, limit, timeout or 5)))
     cmd = "\x01".join(("run_query Distributed", q, "json", params))
-    return request(endpoint, cmd)
+    return request(endpoint, cmd, timeout=timeout)
 
 
 _no_whitespace = {"SpaceAfter": "No"}
@@ -55,7 +55,7 @@ class Corpus:
     def info(self):
         return request(self.endpoint, "info")
 
-    def query(self, q, page_size=1000, offset=0, timeout=30):
+    def query(self, q, page_size=1000, offset=0, timeout=None):
         total = None
         while total is None or offset < total:
             result = query(self.endpoint, q, offset, page_size, timeout)
@@ -162,6 +162,9 @@ arg_parser.add_argument(
 arg_parser.add_argument(
     "-c", "--corpus", help="DDC corpora to query (dwdsxl by default)", nargs="*"
 )
+arg_parser.add_argument(
+    "-t", "--timeout", help="Socket/Query timeout in seconds", type=int
+)
 arg_parser.add_argument("ddc_query", help="DDC Query")
 
 
@@ -170,8 +173,11 @@ def main():
     sample = args.sample
     limit = args.limit
     page_size = min(limit, 1000) if limit > 0 else 1000
+    timeout = args.timeout or 5
     for corpus_name in args.corpus or ("dwdsxl",):
-        sentences = corpus(corpus_name).query(args.ddc_query, page_size)
+        sentences = corpus(corpus_name).query(
+            args.ddc_query, page_size, timeout=timeout
+        )
         if sample < 1.0:
             sentences = (s for s in sentences if random() < sample)
         if limit > 0:

@@ -12,20 +12,24 @@ def gdex_score(sentence):
     return float(sentence.metadata.get("gdex", "0.0"))
 
 
+def misc_attr(token, k, default_val=None):
+    return (token.get("misc") or {}).get(k, default_val)
+
+
+def form_text(token):
+    return token.get("form", "")
+
+
 def lemma_text(token):
-    return (
-        (token.get("misc") or {}).get("CompoundVerb")
-        or token.get("lemma")
-        or token.get("form")
-    )
+    return misc_attr(token, "CompoundVerb") or token.get("lemma") or form_text(token)
 
 
 def is_space_after(token):
-    return (token.get("misc") or {}).get("SpaceAfter", "Yes") != "No"
+    return misc_attr(token, "SpaceAfter", "Yes") != "No"
 
 
 def token_text(token):
-    return token.get("form", "") + (" " if is_space_after(token) else "")
+    return form_text(token) + (" " if is_space_after(token) else "")
 
 
 def text(sentence):
