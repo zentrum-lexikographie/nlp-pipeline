@@ -33,6 +33,10 @@ services:
     ports:
       - "5671:5671"
       - "5672:5672"
+  nlp:
+    image: docker.zdl.org/zdl/nlp:latest
+    build:
+      context: .
 volumes:
   index:
   queue:
