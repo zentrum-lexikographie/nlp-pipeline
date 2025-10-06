@@ -144,25 +144,14 @@ def extract_predicatives(tokens):
         # subject predicative
         if t["upos"] in {"NOUN", "VERB", "ADJ"}:
             t_deps = tuple(dependants(tokens, t["id"]))
-            if any(t["deprel"] == "cop" and t["upos"] == "AUX" for t in t_deps):
+            if any(
+                t["deprel"] == "cop" and t["lemma"] in {"werden", "sein", "bleiben"}
+                for t in t_deps
+            ):
                 if not any(t["deprel"] == "case" for t in t_deps):
                     for t_dep_1 in t_deps:
                         if t_dep_1["deprel"] == "nsubj" and t_dep_1["upos"] == "NOUN":
                             yield ("PRED", t_dep_1["id"], t["id"])
-        # object predicative
-        if t["upos"] == "VERB":
-            t_deps = tuple(dependants(tokens, t["id"]))
-            for t_dep_1 in t_deps:
-                if t_dep_1["upos"] not in {"VERB", "ADJ", "NOUN"}:
-                    continue
-                if t_dep_1["deprel"] not in {"obj", "obl"}:
-                    continue
-                # ++ 'advcl', 'xcomp' if any(c.token.rel in
-                # {'mark', 'case'} and c.token.tag in {'CCONJ',
-                # 'ADP'} for c in obj.children):
-                t_deps_2 = dependants(tokens, t_dep_1["id"])
-                if any(t["form"] in {"als", "für"} for t in t_deps_2):
-                    yield ("PRED", t["id"], t_dep_1["id"])
 
 
 def has_case(token, case):

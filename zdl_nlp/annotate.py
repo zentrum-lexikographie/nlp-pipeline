@@ -48,6 +48,7 @@ def spacy_nlp(nlp, sentences, score_gdex=True, batch_size=128, **kwargs):
             is_root = nlp_token.dep_ == "ROOT"
             token.update(
                 {
+                    "lemma": nlp_token.lemma_,
                     "upos": nlp_token.pos_,
                     "xpos": nlp_token.tag_,
                     "feats": feats,

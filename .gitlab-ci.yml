@@ -1,0 +1,25 @@
+default:
+  image: docker:26.1.0
+  services:
+    - docker:26.1.0-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+
+
+build:
+  stage: build
+  script:
+    - docker compose build
+    - docker compose push
+  tags:
+    - zdl
+    - build
+
+deploy:
+  stage: deploy
+  script:
+    - docker run --rm gitup.uni-potsdam.de:4567/zentrum-lexikographie/nlp-pipeline/nlp:main zdl-nlp-annotate --help
+  tags:
+    - zdl
+    - shell
+    - whorf.bbaw.de

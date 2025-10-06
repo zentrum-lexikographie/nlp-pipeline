@@ -8,12 +8,11 @@ RUN python3 -m venv /venv
 
 ENV PATH="/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir\
-    sentence-transformers[openvino]\
-    spacy[transformers]\
-    cupy-cuda12x
-
 WORKDIR /nlp
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./ .
 

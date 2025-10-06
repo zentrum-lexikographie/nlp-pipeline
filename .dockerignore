@@ -1,5 +1,6 @@
 *
-!solr
 !pyproject.toml
+!requirements.txt
+!solr
 !tests
 !zdl_nlp

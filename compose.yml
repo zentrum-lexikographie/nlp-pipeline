@@ -1,7 +1,7 @@
 name: zdl_nlp
 services:
   index:
-    image: docker.zdl.org/zdl/nlp-index:latest
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/index:${CI_COMMIT_REF_SLUG:-latest}
     build:
       context: .
       dockerfile_inline: |
@@ -34,7 +34,7 @@ services:
       - "5671:5671"
       - "5672:5672"
   nlp:
-    image: docker.zdl.org/zdl/nlp:latest
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/nlp:${CI_COMMIT_REF_SLUG:-latest}
     build:
       context: .
 volumes:
