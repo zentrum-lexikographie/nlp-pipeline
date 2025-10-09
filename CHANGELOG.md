@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.1...v1.1.0) (2025-10-09)
+
+
+### Features
+
+* Add DDC client ([945c9a6](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/945c9a626d4695168bd0dd2556335079e266e121))
+* Add KorAP-based corpora (DeReKo and DeLiKo) ([7b4ce5c](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/7b4ce5cb023d02b44756ad74f3ad13a8266e353b))
+* Add WiC sentence embeddings for semantic clustering ([943429e](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/943429eb58e2b12c54e36f1793cf1024d1ea819c))
+* Asynchronously query corpora for annotated example sentences ([33e79ec](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/33e79ec9480844145c87e597c10f3b3a8f607b2f))
+* Build Docker images as part of CI/GA workflow ([7380e7d](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/7380e7d4faa9b7b536b8c381deede6f0b2b9b366))
+* containerized version ([78e527e](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/78e527efab9b3e6fbe83a330d0b8934c75d5fda8))
+* Convert TEI/XML sources to CoNLL-U ([2f9133c](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/2f9133c6cb237292f347e786d8ce1d26bbafba33))
+* encrypted asynchronous messaging via RabbitMQ and AMQP/TLS ([7562d3d](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/7562d3db05442669376909ad5a8de542798343a6))
+* on-the-fly annotation and deduplication of DDC results ([9283bca](https://github.com/zentrum-lexikographie/nlp-pipeline/commit/9283bca92804abb71fe81a9db15f5f8671e151a3))
+
 ## [1.0.1](https://github.com/zentrum-lexikographie/nlp-pipeline/compare/v1.0.0...v1.0.1) (2025-07-03)
 
 
