@@ -1,12 +1,6 @@
-import argparse
 import json
 from collections import defaultdict
 from itertools import chain
-
-import conllu
-from tqdm import tqdm
-
-from .conllu import serialize
 
 relations = {
     "ADV": {
@@ -41,6 +35,7 @@ relations = {
             ("obj", "case", "verb", "noun", "adp"),
         ),
     },
+    "PREDC": {"desc": "Prädikativ", "tags": ("adj", "noun", "verb")},
     "PRED": {"desc": "Prädikativ", "tags": ("adj", "noun", "verb")},
     "SUBJA": {"desc": "Subjekt", "tags": ("adj", "noun", "verb")},
     "SUBJP": {"desc": "Passivsubjekt", "tags": ("noun", "verb")},
@@ -133,25 +128,9 @@ def extract_comparing_groups(tokens):
             yield ("KOM", t_head_2_n, t_head_1_n)
 
 
-def dependants(tokens, head_n):
+def dependants(tokens, head):
+    head_n = head["id"]
     return [t for t in tokens if t["head"] == head_n]
-
-
-def extract_predicatives(tokens):
-    # TODO: extend for object predicative relations
-    # (https://www.deutschplus.net/pages/Pradikativ)
-    for t in tokens:
-        # subject predicative
-        if t["upos"] in {"NOUN", "VERB", "ADJ"}:
-            t_deps = tuple(dependants(tokens, t["id"]))
-            if any(
-                t["deprel"] == "cop" and t["lemma"] in {"werden", "sein", "bleiben"}
-                for t in t_deps
-            ):
-                if not any(t["deprel"] == "case" for t in t_deps):
-                    for t_dep_1 in t_deps:
-                        if t_dep_1["deprel"] == "nsubj" and t_dep_1["upos"] == "NOUN":
-                            yield ("PRED", t_dep_1["id"], t["id"])
 
 
 def has_case(token, case):
@@ -162,11 +141,11 @@ def extract_genitives(tokens):
     for t in tokens:
         if t["upos"] != "NOUN":
             continue
-        t_deps_1 = dependants(tokens, t["id"])
+        t_deps_1 = dependants(tokens, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["deprel"] != "nmod" or t_dep_1["upos"] != "NOUN":
                 continue
-            t_deps_2 = dependants(tokens, t_dep_1["id"])
+            t_deps_2 = dependants(tokens, t_dep_1)
             if not has_case(t_dep_1, "Gen") or not any(
                 has_case(t_dep_2, "Gen") for t_dep_2 in t_deps_2
             ):
@@ -178,7 +157,7 @@ def extract_genitives(tokens):
 
 def extract_active_subjects(tokens):
     for t in tokens:
-        t_deps_1 = dependants(tokens, t["id"])
+        t_deps_1 = dependants(tokens, t)
         if any(t["deprel"] == "cop" for t in t_deps_1):
             continue
         if t["upos"] not in {"NOUN", "VERB", "ADJ"}:
@@ -192,7 +171,7 @@ def extract_passive_subjects(tokens):
     for t in tokens:
         if t["upos"] != "VERB":
             continue
-        t_deps_1 = dependants(tokens, t["id"])
+        t_deps_1 = dependants(tokens, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["upos"] != "NOUN" or t_dep_1["deprel"] != "nsubj:pass":
                 continue
@@ -207,11 +186,11 @@ def extract_objects(tokens):
     for t in tokens:
         if t["upos"] != "VERB":
             continue
-        t_deps_1 = dependants(tokens, t["id"])
+        t_deps_1 = dependants(tokens, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["deprel"] not in {"obj", "obl:arg"} or t_dep_1["upos"] != "NOUN":
                 continue
-            t_deps_2 = dependants(tokens, t_dep_1["id"])
+            t_deps_2 = dependants(tokens, t_dep_1)
             if any(t_dep_2["deprel"] == "case" for t_dep_2 in t_deps_2):
                 continue
             colloc = "OBJO"  # t_dep_1["deprel"] == "obl:arg"
@@ -229,58 +208,52 @@ def extract_objects(tokens):
             yield (colloc, t["id"], t_dep_1["id"])
 
 
+def extract_predicatives(tokens):
+    # The list of verbs for object predicative relations is guided by
+    # information from E-VALBU on verbs with 'prd' complements (cf.
+    # https://grammis.ids-mannheim.de/verbs/search?komplemente[]=praed&suchtabelle=lesart)
+    for t in tokens:
+        # subject predicative
+        if t["upos"] in {"NOUN", "VERB", "ADJ"}:
+            t_deps = dependants(tokens, t)
+            if any(
+                t["deprel"] == "cop" and t["lemma"] in {"werden", "sein", "bleiben"}
+                for t in t_deps
+            ):
+                if not any(t["deprel"] == "case" for t in t_deps):
+                    for t_dep_1 in t_deps:
+                        if t_dep_1["deprel"] == "nsubj" and t_dep_1["upos"] == "NOUN":
+                            yield ("PREDC", t_dep_1["id"], t["id"])
+        # TODO: port completely from wordprofile.extract!
+        continue
+        if t["upos"] == "VERB":
+            t_deps = dependants(tokens, t)
+            for t_dep_1 in t_deps:
+                if t_dep_1["upos"] == "VERB":
+                    if (t_dep_1["feats"] or {}).get("VerbForm", "") in {"Fin", "Part"}:
+                        if any(
+                            t_dep_2["upos"] == "AUX"
+                            for t_dep_2 in dependants(tokens, t_dep_1)
+                        ):
+                            # skip subclauses: full verbs, particle + aux
+                            continue
+                    if t_dep_1["upos"] == "NOUN" and t_dep_1["deprel"] == "obl":
+                        # case 1: als + NOUN > obl
+                        continue
+
+
 def extract_collocs(sentence):
     collocs = tuple(
         chain(
             extract_by_patterns(sentence),
-            extract_objects(sentence),
-            extract_predicatives(sentence),
-            extract_genitives(sentence),
             extract_comparing_groups(sentence),
+            extract_genitives(sentence),
             extract_active_subjects(sentence),
             extract_passive_subjects(sentence),
+            extract_objects(sentence),
+            extract_predicatives(sentence),
         )
     )
     if collocs:
         sentence.metadata["collocations"] = json.dumps(collocs)
     return sentence
-
-
-arg_parser = argparse.ArgumentParser(description="Add collocation annotations")
-arg_parser.add_argument(
-    "-i",
-    "--input-file",
-    help="input CoNLL-U file to annotate",
-    type=argparse.FileType("r"),
-    default="-",
-)
-arg_parser.add_argument(
-    "-o",
-    "--output-file",
-    help="output CoNLL-U file with (updated) annotations",
-    type=argparse.FileType("w"),
-    default="-",
-)
-arg_parser.add_argument("-p", "--progress", help="Show progress", action="store_true")
-
-
-def main():
-    args = arg_parser.parse_args()
-    sentences = conllu.parse_incr(args.input_file)
-    progress = None
-    if args.progress:
-        progress = tqdm(
-            desc="Extracting collocations",
-            unit=" tokens",
-            unit_scale=True,
-        )
-    sentences = (extract_collocs(s) for s in sentences)
-    out = args.output_file
-    for sentence in sentences:
-        out.write(serialize(sentence))
-        if progress is not None:
-            progress.update(len(sentence))
-
-
-if __name__ == "__main__":
-    main()
