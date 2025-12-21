@@ -23,9 +23,9 @@ dynamic = ["readme", "version"]
 dependencies = [
     "conllu",
     "datasketch",
-    "de_zdl_lg @ https://repo.zdl.org/repository/pypi/packages/de-zdl-lg/3.0.0/de_zdl_lg-3.0.0-py3-none-any.whl",
-    "dwdsmor",
-    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.6.0",
+    "de_zdl_lg",
+    "dwdsmor-dwds",
+    "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.7.0",
     "lingua-language-detector",
     "lxml",
     "pika",
@@ -35,16 +35,15 @@ dependencies = [
     "requests",
     "retry",
     "SoMaJo",
-    "sentence-transformers[openvino]",
     "spacy",
     "tqdm"
 ]
 
 [project.optional-dependencies]
 gpu = [
-    "de_zdl_dist @ https://repo.zdl.org/repository/pypi/packages/de-zdl-dist/3.0.0/de_zdl_dist-3.0.0-py3-none-any.whl",
-    "spacy[cuda12x]",
-    "spacy-transformers",
+    "de_zdl_dist",
+    "dwds-wic-sbert",
+    "spacy[cuda12x,transformers]",
 ]
 dev = [
     "flake8",
