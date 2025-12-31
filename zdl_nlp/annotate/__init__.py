@@ -1,9 +1,9 @@
 import atexit
-import itertools
 import json
 import multiprocessing
 import os
 from dataclasses import dataclass
+from itertools import batched, tee
 
 import conllu
 import conllu.parser
@@ -20,7 +20,7 @@ from ..conllu import is_space_after, text
 
 
 def spacy_pipe(nlp, sentences, batch_size=128, **kwargs):
-    doc_sents, sentences = itertools.tee(sentences, 2)
+    doc_sents, sentences = tee(sentences, 2)
     docs = (
         spacy.tokens.Doc(
             nlp.vocab,
@@ -64,9 +64,9 @@ def spacy_pipe(nlp, sentences, batch_size=128, **kwargs):
 
 
 def lingua_detect(lang_detector, sentences, batch_size=4096):
-    sentences, sents = itertools.tee(sentences, 2)
+    sentences, sents = tee(sentences, 2)
     texts = (text(s) for s in sentences)
-    texts = itertools.batched(texts, batch_size)
+    texts = batched(texts, batch_size)
     langs = (
         lang
         for tb in texts
@@ -198,7 +198,7 @@ def create_pipe(*args, **kwargs):
         pool.terminate()
 
     def pooled_pipe(sentences, pool=pool):
-        batches = itertools.batched(sentences, p.batch_size)
+        batches = batched(sentences, p.batch_size)
         for batch in pool.imap(as_tuple, batches):
             for s in batch:
                 yield s
