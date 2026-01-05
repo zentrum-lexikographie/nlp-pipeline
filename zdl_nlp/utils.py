@@ -1,3 +1,4 @@
+import json
 import re
 
 from dateutil.parser import ParserError as DateParserError
@@ -32,6 +33,24 @@ def norm_str_set(strs):
 
 def join_strs(sep, strs):
     return sep.join(strs) if strs else None
+
+
+_puncts = "!,-./:;?[]{}"
+_puncts_re = re.compile(f"([{re.escape(_puncts)}])\\.")
+
+
+def norm_title(s):
+    s = norm_str(s)
+    return _puncts_re.sub(r"\1", s) if s else None
+
+
+_tag_split_re = re.compile(r"[:\s]")
+
+
+def tags(s, split_re=_tag_split_re):
+    s = norm_str(s)
+    strs = norm_strs(split_re.split(s)) if s else None
+    return json.dumps(sorted(strs)) if strs else None
 
 
 _year_re = re.compile(r"^[12][0-9]{3}$")

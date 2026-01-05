@@ -1,20 +1,23 @@
-import itertools
+import datetime
 import json
 import logging
 import re
-import ssl
+import sys
+from itertools import batched, chain, islice
+from time import sleep
 
-from pika import BlockingConnection, ConnectionParameters, PlainCredentials, SSLOptions
-from pika.exceptions import AMQPConnectionError
+import backoff
+import psycopg
+from dwds_wic_sbert import WiCTransformer
+from pgvector.psycopg import register_vector
 from requests.exceptions import RequestException
-from retry import retry
 
-import zdl_nlp.annotate
-import zdl_nlp.ddc.corpora
-import zdl_nlp.dedupe
-import zdl_nlp.korap
+from zdl_nlp.annotate import create_pipe
+from zdl_nlp.ddc import dstar_collections
+from zdl_nlp.dedupe import dedupe
+from zdl_nlp.korap import korap_instances
 
-from .conllu import form_text, hit_set, lemma_text, serialize
+from .conllu import form_text, hit_collocs, hit_set, lemma_text, marked_text, serialize
 from .env import config
 
 logger = logging.getLogger(__name__)
@@ -26,26 +29,19 @@ def escape_ddc_term(s):
     return _quotes_re.sub(r"\\\1", s)
 
 
-def ddc_query(lemmata):
+def query_dstar(collections, lemmata, limit=1000):
     q_lemmata = (escape_ddc_term(ql) for ql in lemmata)
-    q_lemmata = (f"('{ql}' || '@{ql}')" for ql in q_lemmata)
-    q = " && ".join(q_lemmata)
-    return q
-
-
-def query_ddc(ddc_corpora, lemmata, limit=1000):
-    q = ddc_query(lemmata)
+    q = " && ".join((f"('{ql}' || '@{ql}')" for ql in q_lemmata))
     page_size = min(limit, 1000) if limit > 0 else 1000
-    for corpus in ddc_corpora:
+    for c in collections:
         try:
-            sentences = corpus.query(q, page_size, timeout=5)
-            sentences = itertools.islice(sentences, limit)
+            sentences = c.query(q, page_size, timeout=5)
+            sentences = dedupe(sentences, filter_duplicates=True)
+            sentences = islice(sentences, limit)
             for sentence in sentences:
                 yield sentence
         except TimeoutError:
-            logger.exception(
-                "Timeout querying DDC instance '%s' with '%s'", corpus.corpus_name, q
-            )
+            logger.exception("Timeout querying DDC instance '%s' with '%s'", c.name, q)
 
 
 _cosmas_reserved_re = re.compile(r"[ ()#,\"]")
@@ -55,30 +51,24 @@ def escape_korap_term(s):
     return _cosmas_reserved_re.sub("", s)
 
 
-def korap_query(lemmata):
-    q_lemmata = (escape_korap_term(ql) for ql in lemmata)
-    q_lemmata = (f"(&{ql} or {ql})" for ql in q_lemmata)
-    q = " /s0 ".join(q_lemmata)
-    return q
-
-
 def is_large_sentence(sentence):
     return len(sentence) > 100
 
 
-def query_korap(korap_corpora, lemmata, limit=100):
-    q = korap_query(lemmata)
-    for corpus in korap_corpora:
+def query_korap(instances, lemmata, limit=100):
+    q_lemmata = (escape_korap_term(ql) for ql in lemmata)
+    q = " /s0 ".join((f"(&{ql} or {ql})" for ql in q_lemmata))
+    for ki in instances:
         try:
-            sentences = corpus.query(q)
+            sentences = ki.query(q)
             sentences = (s for s in sentences if not is_large_sentence(s))
-            sentences = itertools.islice(sentences, limit)
+            # TODO: COSMAS disjunction queries yield duplicate results
+            sentences = dedupe(sentences, filter_duplicates=True)
+            sentences = islice(sentences, limit)
             for sentence in sentences:
                 yield sentence
         except RequestException:
-            logger.exception(
-                "Error querying KorAP instance '%s' with '%s'", corpus.corpus_name, q
-            )
+            logger.exception("Error querying KorAP instance '%s' with '%s'", ki.name, q)
 
 
 def is_korap_hit(sentence):
@@ -106,85 +96,148 @@ def fix_korap_hits(sentence, lemma_set):
 
 
 def main():
-    korap_corpora = tuple()
-    if not config.get("ZDL_NLP_NO_KORAP"):
-        deliko = zdl_nlp.korap.deliko
-        dereko = zdl_nlp.korap.dereko
-        korap_corpora = (deliko, dereko) if dereko else (deliko,)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="[%(asctime)s] %(levelname)s - %(message)s",
+        handlers=(logging.StreamHandler(stream=sys.stderr),),
+    )
 
-    ddc_corpora_config = config.get("ZDL_NLP_DDC_CORPORA", "dwdsxl")
-    ddc_corpora = tuple(map(zdl_nlp.ddc.corpora.corpus, ddc_corpora_config.split(",")))
-    assert all(ddc_corpora), ddc_corpora_config
+    dstar_config = config.get("ZDL_NLP_DSTAR_COLLECTIONS", "dwdsxl")
+    dstar = tuple(dstar_collections().get(c) for c in dstar_config.split(","))
+    assert all(dstar), dstar_config
 
-    corpus_query_limit = int(config.get("ZDL_NLP_QUERY_LIMIT", "100"))
+    korap = korap_instances.values() if not config.get("ZDL_NLP_NO_KORAP") else None
 
-    nlp_accurate = False if config.get("ZDL_NLP_CPU", "") else True
-    nlp_parallel = int(config.get("ZDL_NLP_PARALLEL", "-1"))
+    dstar_limit = int(config.get("ZDL_NLP_DSTAR_QUERY_LIMIT", "1000"))
+    korap_limit = int(config.get("ZDL_NLP_KORAP_QUERY_LIMIT", "100"))
+
     nlp_batch_size = int(config.get("ZDL_NLP_BATCH_SIZE", "128"))
+    nlp_parallel = int(config.get("ZDL_NLP_PARALLEL", "-1"))
     nlp_gpus_config = config.get("ZDL_NLP_GPU_IDS", "")
     nlp_gpus = tuple(int(g.strip()) for g in nlp_gpus_config.split(",") if g)
-    nlp_dwdsmor_dwds = False if config.get("ZDL_NLP_DWDSMOR_OPEN", "") else True
 
-    nlp = zdl_nlp.annotate.setup_pipeline(
-        accurate=nlp_accurate,
-        n_procs=nlp_parallel,
-        batch_size=nlp_batch_size,
-        gpus=nlp_gpus,
-        dwdsmor_dwds=nlp_dwdsmor_dwds,
-    )
+    nlp = create_pipe(gpus=nlp_gpus, batch_size=nlp_batch_size, n_procs=nlp_parallel)
 
-    def get_examples(ch, method, properties, body):
-        lemmata = body.decode("utf-8").splitlines()
+    wic_tf = WiCTransformer.load()
+
+    def query_examples(c, lemmata):
         lemma_set = set(lemmata)
-        preamble = f"# lemmata = {json.dumps(lemmata)}"
-        sentences = itertools.chain(
-            query_ddc(ddc_corpora, lemmata, corpus_query_limit),
-            query_korap(korap_corpora, lemmata, corpus_query_limit),
-        )
+        sentences = query_dstar(dstar, lemmata, dstar_limit)
+        if korap:
+            sentences = chain(sentences, query_korap(korap, lemmata, korap_limit))
+
         sentences = nlp(sentences)
-        sentences = zdl_nlp.dedupe.dedupe(sentences)
+        sentences = dedupe(sentences, filter_duplicates=True)
         sentences = (fix_korap_hits(s, lemma_set) for s in sentences)
-        for batch in itertools.batched(sentences, 100):
-            body = "\n".join((preamble, "".join((serialize(s) for s in batch))))
-            body = body.encode("utf-8")
-            ch.basic_publish(exchange="examples", routing_key="", body=body)
 
-    queue_host = config.get("ZDL_NLP_QUEUE_HOST", "localhost")
-    queue_user = config.get("ZDL_NLP_QUEUE_USER", "nlp")
-    queue_password = config.get("ZDL_NLP_QUEUE_PASSWORD", "nlp")
-    queue_ssl_options = None
-    if config.get("ZDL_NLP_QUEUE_TLS"):
-        ssl_context = ssl.create_default_context()
-        ssl_context.check_hostname = False
-        ssl_context.verify_mode = ssl.CERT_NONE
-        queue_ssl_options = SSLOptions(context=ssl_context)
+        for s_batch in batched(sentences, 32):
+            embeddings = wic_tf.encode(
+                [marked_text(s) for s in s_batch],
+                batch_size=nlp_batch_size,
+                show_progress_bar=False,
+            )
+            for sentence, embedding in zip(s_batch, embeddings):
+                yield (sentence, embedding.tolist())
 
-    con_credentials = PlainCredentials(queue_user, queue_password)
-    con_params = ConnectionParameters(
-        host=queue_host,
-        credentials=con_credentials,
-        ssl_options=queue_ssl_options,
-        heartbeat=600,
-        blocked_connection_timeout=300,
+    sql_select_job = """
+    SELECT id, lexemes from example_request WHERE retrieved IS NULL
+    ORDER BY requested ASC LIMIT 1
+    FOR UPDATE SKIP LOCKED
+    """
+    sql_update_job_status = """
+    UPDATE example_request SET retrieved = NOW() WHERE id = %s
+    """
+    sql_insert_collocations = """
+    INSERT INTO example_collocs (req_id, n, collocation) VALUES (%s, %s, %s)
+    """
+    sql_copy_examples = """
+    COPY example (req_id, n, txt, gdex, doc, bibl, conll, ex_year, ex_date, embedding)
+    FROM STDIN WITH (FORMAT BINARY)
+    """
+    sql_copy_example_types = [
+        "int4",
+        "int4",
+        "text",
+        "float8",
+        "varchar",
+        "text",
+        "text",
+        "int2",
+        "date",
+        "vector",
+    ]
+
+    def process_db_job(db):
+        with db.transaction(), db.cursor() as c:
+            next_request = c.execute(sql_select_job).fetchone()
+            if not next_request:
+                return False
+            req_id, lexemes = next_request
+            logger.info(f"Processing job #{req_id:,d}: {repr(lexemes)}")
+            examples = query_examples(c, lexemes)
+            n = 0
+            for example_batch in batched(examples, 128):
+                collocations = []
+                with c.copy(sql_copy_examples) as db_examples:
+                    db_examples.set_types(sql_copy_example_types)
+                    for sentence, embedding in example_batch:
+                        n += 1
+                        meta = sentence.metadata
+                        year = meta.get("year")
+                        year = int(year) if year else None
+                        date = meta.get("date")
+                        date = datetime.date.fromisoformat(date) if date else None
+                        db_examples.write_row(
+                            [
+                                req_id,
+                                n,
+                                marked_text(sentence, mark_collocations=True),
+                                float(meta.get("gdex", "0.0")),
+                                meta.get("newdoc id"),
+                                meta.get("bibl"),
+                                serialize(sentence).strip(),
+                                year,
+                                date,
+                                embedding,
+                            ]
+                        )
+                        s_collocations = set()
+                        for t, _c in hit_collocs(sentence):
+                            s_collocations.add(
+                                "_".join((lemma_text(t), t.get("upos", "XY")))
+                            )
+                        for sc in sorted(s_collocations):
+                            collocations.append((req_id, n, sc))
+                if collocations:
+                    c.executemany(sql_insert_collocations, collocations)
+                logger.info(f"[{req_id:>10,d}] {n:,d} examples …")
+            c.execute(sql_update_job_status, (req_id,))
+            logger.info(f"[{req_id:>10,d}] {n:,d} examples.")
+            return True
+
+    db_conn_info = psycopg.conninfo.make_conninfo(
+        "",
+        host=config.get("ZDL_NLP_DB_HOST", "localhost"),
+        port=int(config.get("ZDL_NLP_DB_PORT", "5432")),
+        dbname=config.get("ZDL_NLP_DB_NAME", "lex"),
+        user=config.get("ZDL_NLP_DB_USER", "lex"),
+        password=config.get("ZDL_NLP_DB_PASSWORD", "lex"),
+        connect_timeout=int(config.get("ZDL_NLP_DB_CONNECT_TIMEOUT", "5")),
+        sslmode="require",
     )
 
-    @retry(AMQPConnectionError, delay=5, jitter=(1, 3))
-    def consume():
-        con = BlockingConnection(con_params)
-        ch = con.channel()
-        try:
-            ch.exchange_declare(exchange="examples", exchange_type="fanout")
-            ch.queue_declare(queue="example_queries", durable=True)
-            ch.basic_qos(prefetch_count=1)
-            ch.basic_consume("example_queries", get_examples, auto_ack=True)
-            ch.start_consuming()
-        except BaseException:
-            ch.stop_consuming()
-            con.close()
-            raise
+    @backoff.on_exception(backoff.expo, psycopg.errors.Error)
+    def process_db_jobs():
+        with psycopg.connect(db_conn_info) as db:
+            register_vector(db)
+            while True:
+                if not process_db_job(db):
+                    logger.info("Pausing")
+                    sleep(10)
 
     try:
-        consume()
+        while True:
+            process_db_jobs()
     except KeyboardInterrupt:
         pass
 

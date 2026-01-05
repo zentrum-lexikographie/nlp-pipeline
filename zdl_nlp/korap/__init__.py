@@ -1,19 +1,27 @@
-import argparse
-import itertools
 import json
-import re
+import logging
 from dataclasses import dataclass
-from random import random
 
 import requests
 import requests.auth
 from lxml import etree as ET
 from ratelimit import limits, sleep_and_retry
 
-from .conllu import is_space_after, serialize
-from .env import config
-from .segment import segment
-from .utils import format_date, join_strs, norm_date, norm_str, norm_strs, norm_year
+from ..conllu import is_space_after
+from ..env import config
+from ..segment import segment
+from ..utils import (
+    format_date,
+    join_strs,
+    norm_date,
+    norm_str,
+    norm_strs,
+    norm_title,
+    norm_year,
+    tags,
+)
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -23,24 +31,6 @@ class OAuth(requests.auth.AuthBase):
     def __call__(self, r):
         r.headers["Authorization"] = f"Bearer {self.token}"
         return r
-
-
-_puncts = "!,-./:;?[]{}"
-_puncts_re = re.compile(f"([{re.escape(_puncts)}])\\.")
-
-
-def norm_title(s):
-    s = norm_str(s)
-    return _puncts_re.sub(r"\1", s) if s else None
-
-
-_split_re = re.compile(r"[:\s]")
-
-
-def tags(s):
-    s = norm_str(s)
-    strs = norm_strs(_split_re.split(s)) if s else None
-    return json.dumps(sorted(strs)) if strs else None
 
 
 def parse_bibl(match, date, year):
@@ -88,9 +78,9 @@ def parse_snippet(s):
 
 
 @dataclass
-class Corpus:
-    corpus_name: str
-    endpoint_url: str
+class KorapInstance:
+    name: str
+    url: str
     corpus_query: str | None = None
     oauth_token: str | None = None
 
@@ -103,15 +93,18 @@ class Corpus:
             matches = r.get("matches", tuple())
             if not matches:
                 break
+            logger.debug(
+                f"[{self.name:>20s}][@{offset:>6,d}][={len(matches):>6,d}] {q}"
+            )
             for match in matches:
                 doc_id = norm_str(match.get("textSigle"))
-                doc_id = f"urn:korap:{self.corpus_name}/{doc_id}"
+                doc_id = f"urn:korap:{self.name}/{doc_id}"
                 date = norm_date(match.get("pubDate"))
                 year = norm_year(match.get("pubDate"))
                 sentence, hits = parse_snippet(match.get("snippet"))
                 required_fields = {
                     "newdoc id": doc_id,
-                    "collection": self.corpus_name,
+                    "collection": self.name,
                     "bibl": parse_bibl(match, date, year),
                     "hits": json.dumps(hits),
                 }
@@ -151,62 +144,21 @@ class Corpus:
         headers = {"user-agent": "zdl-nlp-pipeline/1.0 (https://www.zdl.org/)"}
         auth = OAuth(self.oauth_token) if self.oauth_token else None
 
-        r = requests.get(self.endpoint_url, params=params, headers=headers, auth=auth)
+        r = requests.get(self.url, params=params, headers=headers, auth=auth)
         r.raise_for_status()
         r = r.json()
         return r
 
 
-deliko = Corpus(corpus_name="dnb", endpoint_url="https://korap.dnb.de/api/v1.0/search")
+korap_instances = dict()
+korap_instances["deliko"] = KorapInstance(
+    name="deliko", url="https://korap.dnb.de/api/v1.0/search"
+)
 
-dereko = None
 if dereko_oauth_token := config.get("DEREKO_OAUTH_TOKEN"):
-    dereko = Corpus(
-        corpus_name="dereko",
-        endpoint_url="https://korap.ids-mannheim.de/api/v1.0/search",
+    korap_instances["dereko"] = KorapInstance(
+        name="dereko",
+        url="https://korap.ids-mannheim.de/api/v1.0/search",
         corpus_query="corpusSigle != /W[UDP]D.*/",
         oauth_token=dereko_oauth_token,
     )
-
-arg_parser = argparse.ArgumentParser(description="Query KorAP corpora")
-arg_parser.add_argument(
-    "-l",
-    "--limit",
-    help="limit # of sentences (100 per corpus by default)",
-    type=int,
-    default="100",
-)
-arg_parser.add_argument(
-    "-o",
-    "--output-file",
-    help="output CoNLL-U file",
-    type=argparse.FileType("w"),
-    default="-",
-)
-arg_parser.add_argument(
-    "-s",
-    "--sample",
-    help="sample ratio [0.0,1.0] (all sentences by default)",
-    type=float,
-    default="1.0",
-)
-arg_parser.add_argument("query", help="COSMAS-II Query")
-
-
-def main():
-    args = arg_parser.parse_args()
-    sample = args.sample
-    limit = args.limit
-    corpora = (deliko, dereko) if dereko else (deliko,)
-    for corpus in corpora:
-        sentences = corpus.query(args.query)
-        if sample < 1.0:
-            sentences = (s for s in sentences if random() < sample)
-        if limit > 0:
-            sentences = itertools.islice(sentences, limit)
-        for s in sentences:
-            args.output_file.write(serialize(s))
-
-
-if __name__ == "__main__":
-    main()

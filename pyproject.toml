@@ -21,6 +21,7 @@ classifiers = [
 requires-python = ">=3.12"
 dynamic = ["readme", "version"]
 dependencies = [
+    "backoff",
     "conllu",
     "datasketch",
     "de_zdl_lg",
@@ -28,7 +29,9 @@ dependencies = [
     "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.7.0",
     "lingua-language-detector",
     "lxml",
+    "pgvector",
     "pika",
+    "psycopg[binary]",
     "python-dotenv",
     "python-dateutil",
     "ratelimit",
