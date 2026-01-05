@@ -29,9 +29,6 @@ dependencies = [
     "gdex @ git+https://github.com/zentrum-lexikographie/gdex.git@v1.7.0",
     "lingua-language-detector",
     "lxml",
-    "pgvector",
-    "pika",
-    "psycopg[binary]",
     "python-dotenv",
     "python-dateutil",
     "ratelimit",
@@ -43,6 +40,11 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+lex = [
+    "pika",
+    "pgvector",
+    "psycopg[binary]",
+]
 gpu = [
     "de_zdl_dist",
     "dwds-wic-sbert",
