@@ -5,8 +5,8 @@ from pathlib import Path
 
 from conllu.models import Metadata, Token, TokenList
 
-from .conllu import serialize, text
-from .utils import look_ahead
+from ..conllu import serialize, text
+from ..utils import look_ahead
 
 
 def metadata_val(line, prefix):
@@ -35,6 +35,7 @@ def parse(lines):
         corpus = None
         basename = None
         bibl = None
+        rights = None
         date = None
         _fields = list()
         for line in metadata:
@@ -42,6 +43,7 @@ def parse(lines):
             basename = metadata_val(line, "basename") or basename
             bibl = metadata_val(line, "bibl") or bibl
             date = metadata_val(line, "date_") or date
+            rights = metadata_val(line, "avail") or rights
             if line.startswith("%%$DDC:index["):
                 _, vs = line.split("=", 1)
                 _fields.append(vs.split(" ")[-1])
@@ -50,11 +52,16 @@ def parse(lines):
         tokens = tuple(dict(zip(fields, line.split("\t"))) for line in tokens)
         metadata = None
         if corpus:
-            metadata = {"newdoc id": f"{corpus}:{basename}", "bibl": bibl, "date": date}
+            metadata = {
+                "newdoc id": f"{corpus}:{basename}",
+                "bibl": bibl,
+                "date": date,
+                "rights": rights,
+            }
         yield (tokens, metadata)
 
 
-def as_conll(lines):
+def ddc_tabs_to_conll(lines):
     sentences = parse(lines)
     for sentence, next_sentence in look_ahead(sentences):
         tokens, metadata = sentence
@@ -82,8 +89,8 @@ def as_conll(lines):
 _xml_frag = re.compile(r"</?[^>]+>")
 
 
-def is_clean(sentence):
-    return _xml_frag.search(text(sentence)) is None
+def is_xml_frag(sentence):
+    return _xml_frag.search(text(sentence)) is not None
 
 
 arg_parser = argparse.ArgumentParser(description="Convert DDC-Tabs to CoNLL-U")
@@ -111,8 +118,8 @@ def main():
         tabs_files = path.glob(args.pattern) if path.is_dir() else (path,)
         for tabs_file in sorted(tabs_files):
             with tabs_file.open("rt") as f:
-                for sentence in as_conll(f):
-                    if not is_clean(sentence):
+                for sentence in ddc_tabs_to_conll(f):
+                    if is_xml_frag(sentence):
                         if sentence.metadata:
                             sentence = TokenList(
                                 [Token({"id": "1", "form": "---"})], sentence.metadata
