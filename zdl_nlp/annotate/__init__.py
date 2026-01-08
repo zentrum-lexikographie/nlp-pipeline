@@ -157,6 +157,7 @@ class Pipeline:
             thinc.api.set_gpu_allocator("pytorch")
             thinc.api.require_gpu(gpu_id)
         self.spacy = spacy.load("de_zdl_lg" if gpu_id is None else "de_zdl_dist")
+        self.spacy.add_pipe("doc_cleaner")
         self.dwdsmor = dwdsmor.lemmatizer()
         self.lingua = (
             LanguageDetectorBuilder.from_languages(
