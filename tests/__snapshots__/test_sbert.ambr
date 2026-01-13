@@ -1,0 +1,15 @@
+# serializer version: 1
+# name: test_clustering
+  tuple(
+    tuple(
+      'Ich bringe Dich noch zur <t>Bahn</t>, damit Du rechtzeitig ankommst.',
+      'Mit der <t>Bahn/<t> fährt man bequem von Berlin nach Frankfurt.',
+    ),
+    tuple(
+      'Kreisend um die Sonne zog die Erde ihre <t>Bahn</t> wie andere Planeten.',
+    ),
+    tuple(
+      'Die Bowlingkugel rollte geradewegs die <t>Bahn</t> hinunter.',
+    ),
+  )
+# ---

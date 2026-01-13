@@ -59,7 +59,8 @@ dev = [
     "black",
     "mypy",
     "pre-commit",
-    "pytest"
+    "pytest",
+    "syrupy"
 ]
 
 [project.urls]
