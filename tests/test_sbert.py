@@ -1,16 +1,17 @@
 from collections import defaultdict
 
-from dwds_wic_sbert import WiCTransformer
-from pytest import fixture
-from sklearn.cluster import KMeans
+from pytest import mark
+
+wic_tf_available = True
+try:
+    from dwds_wic_sbert import WiCTransformer
+except ImportError:
+    wic_tf_available = False
 
 
-@fixture
-def model():
-    return WiCTransformer.load()
-
-
-def test_clustering(model, snapshot):
+@mark.skipif(not wic_tf_available, reason="DWDS-WiC-SBERT not installed")
+def test_clustering(snapshot):
+    model = WiCTransformer.load()
     sentences = (
         "Ich bringe Dich noch zur <t>Bahn</t>, damit Du rechtzeitig ankommst.",
         "Mit der <t>Bahn/<t> fährt man bequem von Berlin nach Frankfurt.",
@@ -18,6 +19,9 @@ def test_clustering(model, snapshot):
         "Die Bowlingkugel rollte geradewegs die <t>Bahn</t> hinunter.",
     )
     embeddings = model.encode(sentences)
+
+    from sklearn.cluster import KMeans
+
     km = KMeans(n_clusters=3)
     km.fit(embeddings)
     clusters = defaultdict(list)
