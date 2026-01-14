@@ -2,6 +2,8 @@ import json
 from collections import defaultdict
 from itertools import chain
 
+from .conllu import feat, form_text, lemma_text
+
 relations = {
     "ADV": {
         "desc": "Adverbialbestimmung",
@@ -72,14 +74,14 @@ for colloc, desc in relations.items():
         pattern_index[r_k][t_k] = colloc
 
 
-def extract_by_patterns(tokens):
-    for t_idx, t in enumerate(tokens):
+def extract_by_patterns(s):
+    for t_idx, t in enumerate(s):
         t_n = t_idx + 1
         t_head_1_n = int(t["head"])
         if t_head_1_n <= 0:
             # token is root
             continue
-        t_head_1 = tokens[t_head_1_n - 1]
+        t_head_1 = s[t_head_1_n - 1]
         t_deprel = t["deprel"]
         if pattern := pattern_index.get(t_deprel):
             if colloc := pattern[(t_head_1["upos"], t["upos"])]:
@@ -89,7 +91,7 @@ def extract_by_patterns(tokens):
             # token head is root, cannot make ternary relation
             continue
         if pattern := pattern_index.get((t_head_1["deprel"], t_deprel)):
-            t_head_2 = tokens[t_head_2_n - 1]
+            t_head_2 = s[t_head_2_n - 1]
             if colloc := pattern.get((t_head_2["upos"], t_head_1["upos"], t["upos"])):
                 if colloc == "KON":
                     yield (colloc, t_head_2_n, t_head_1_n)
@@ -97,8 +99,8 @@ def extract_by_patterns(tokens):
                     yield (colloc, t_head_2_n, t_head_1_n, t_n)
 
 
-def extract_comparing_groups(tokens):
-    for t in tokens:
+def extract_comparing_groups(s):
+    for t in s:
         t_head_1_n = int(t["head"])
         if (
             t_head_1_n <= 0
@@ -108,7 +110,7 @@ def extract_comparing_groups(tokens):
         ):
             # token is root
             continue
-        t_head_1 = tokens[t_head_1_n - 1]
+        t_head_1 = s[t_head_1_n - 1]
         t_head_2_n = int(t_head_1["head"])
         if (
             t_head_2_n <= 0
@@ -117,7 +119,7 @@ def extract_comparing_groups(tokens):
         ):
             # token head is root, cannot make ternary relation
             continue
-        t_head_2 = tokens[int(t_head_2_n) - 1]
+        t_head_2 = s[int(t_head_2_n) - 1]
         if t["form"] == "als":
             # and t_head_2["upos"] != 'ADJ':
             # expect relations with 'als' to relate to an adjective
@@ -128,24 +130,24 @@ def extract_comparing_groups(tokens):
             yield ("KOM", t_head_2_n, t_head_1_n)
 
 
-def dependants(tokens, head):
+def dependants(s, head):
     head_n = head["id"]
-    return [t for t in tokens if t["head"] == head_n]
+    return [t for t in s if t["head"] == head_n]
 
 
 def has_case(token, case):
-    return (token["feats"] or {}).get("Case") == case
+    return feat(token, "Case") == case
 
 
-def extract_genitives(tokens):
-    for t in tokens:
+def extract_genitives(s):
+    for t in s:
         if t["upos"] != "NOUN":
             continue
-        t_deps_1 = dependants(tokens, t)
+        t_deps_1 = dependants(s, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["deprel"] != "nmod" or t_dep_1["upos"] != "NOUN":
                 continue
-            t_deps_2 = dependants(tokens, t_dep_1)
+            t_deps_2 = dependants(s, t_dep_1)
             if not has_case(t_dep_1, "Gen") or not any(
                 has_case(t_dep_2, "Gen") for t_dep_2 in t_deps_2
             ):
@@ -155,9 +157,9 @@ def extract_genitives(tokens):
             yield ("GMOD", t["id"], t_dep_1["id"])
 
 
-def extract_active_subjects(tokens):
-    for t in tokens:
-        t_deps_1 = dependants(tokens, t)
+def extract_active_subjects(s):
+    for t in s:
+        t_deps_1 = dependants(s, t)
         if any(t["deprel"] == "cop" for t in t_deps_1):
             continue
         if t["upos"] not in {"NOUN", "VERB", "ADJ"}:
@@ -167,11 +169,11 @@ def extract_active_subjects(tokens):
                 yield ("SUBJA", t["id"], t_dep_1["id"])
 
 
-def extract_passive_subjects(tokens):
-    for t in tokens:
+def extract_passive_subjects(s):
+    for t in s:
         if t["upos"] != "VERB":
             continue
-        t_deps_1 = dependants(tokens, t)
+        t_deps_1 = dependants(s, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["upos"] != "NOUN" or t_dep_1["deprel"] != "nsubj:pass":
                 continue
@@ -182,15 +184,15 @@ def extract_passive_subjects(tokens):
                 yield ("SUBJP", t["id"], t_dep_1["id"])
 
 
-def extract_objects(tokens):
-    for t in tokens:
+def extract_objects(s):
+    for t in s:
         if t["upos"] != "VERB":
             continue
-        t_deps_1 = dependants(tokens, t)
+        t_deps_1 = dependants(s, t)
         for t_dep_1 in t_deps_1:
             if t_dep_1["deprel"] not in {"obj", "obl:arg"} or t_dep_1["upos"] != "NOUN":
                 continue
-            t_deps_2 = dependants(tokens, t_dep_1)
+            t_deps_2 = dependants(s, t_dep_1)
             if any(t_dep_2["deprel"] == "case" for t_dep_2 in t_deps_2):
                 continue
             colloc = "OBJO"  # t_dep_1["deprel"] == "obl:arg"
@@ -208,52 +210,208 @@ def extract_objects(tokens):
             yield (colloc, t["id"], t_dep_1["id"])
 
 
-def extract_predicatives(tokens):
-    # The list of verbs for object predicative relations is guided by
-    # information from E-VALBU on verbs with 'prd' complements (cf.
-    # https://grammis.ids-mannheim.de/verbs/search?komplemente[]=praed&suchtabelle=lesart)
-    for t in tokens:
+# List of verbs for object predicative relations, guided by
+# information from E-VALBU on verbs with 'prd' complements:
+#
+# https://grammis.ids-mannheim.de/verbs/search?komplemente[]=praed&suchtabelle=lesart
+#
+_pred_verbs = {
+    "für_adj-noun": {"befinden", "halten"},
+    "als_adj": {
+        "annehmen",
+        "ansehen",
+        "ausgeben",
+        "befinden",
+        "bezeichnen",
+        "empfehlen",
+        "erfahren",
+        "erkennen",
+        "erklären",
+        "erleben",
+        "erscheinen",
+        "fürchten",
+        "kennen",
+        "kennenlernen",
+        "kritisieren",
+        "missverstehen",
+        "nehmen",
+        "rechnen",
+        "verkaufen",
+        "wirken",
+        "zeichnen",
+        "zählen",
+    },
+    "als_noun": {
+        "ablehnen",
+        "anfangen",
+        "beginnen",
+        "behalten",
+        "behandeln",
+        "benutzen",
+        "bestimmen",
+        "bestätigen",
+        "bewerben",
+        "buchstabieren",
+        "dienen",
+        "drucken",
+        "eignen",
+        "einsetzen",
+        "enden",
+        "entdecken",
+        "erhalten",
+        "finden",
+        "funktionieren",
+        "fühlen",
+        "gebrauchen",
+        "gehen",
+        "gewinnen",
+        "haben",
+        "handeln",
+        "kandidieren",
+        "laufen",
+        "lesen",
+        "malen",
+        "meinen",
+        "nennen",
+        "nutzen",
+        "organisieren",
+        "planen",
+        "sehen",
+        "tragen",
+        "verbringen",
+        "verstehen",
+        "verwenden",
+        "vorkommen",
+        "vorschlagen",
+        "vorstellen",
+        "wirken",
+        "wählen",
+        "zeichnen",
+        "zählen",
+        "überraschen",
+    },
+    "wie_adj-noun": {
+        "aussehen",
+        "behandeln",
+        "bleiben",
+        "erscheinen",
+        "fühlen",
+        "gebrauchen",
+        "malen",
+        "organisieren",
+        "vorkommen",
+        "vorstellen",
+        "wirken",
+    },
+}
+
+
+def _is_probably_comparative(s, token):
+    deps = dependants(s, token)
+    return any(
+        form_text(c) == "mehr" and c["deprel"] in {"advmod", "obj"}
+        for c in chain(deps, chain.from_iterable(dependants(s, d) for d in deps))
+    )
+
+
+def extract_predicatives(s):
+    for t in s:
+        lemma = lemma_text(t)
         # subject predicative
         if t["upos"] in {"NOUN", "VERB", "ADJ"}:
-            t_deps = dependants(tokens, t)
+            t_deps = dependants(s, t)
             if any(
-                t["deprel"] == "cop" and t["lemma"] in {"werden", "sein", "bleiben"}
-                for t in t_deps
+                c["deprel"] == "cop" and lemma_text(c) in {"werden", "sein", "bleiben"}
+                for c in t_deps
             ):
-                if not any(t["deprel"] == "case" for t in t_deps):
+                if not any(c["deprel"] == "case" for c in t_deps):
                     for t_dep_1 in t_deps:
                         if t_dep_1["deprel"] == "nsubj" and t_dep_1["upos"] == "NOUN":
                             yield ("PREDC", t_dep_1["id"], t["id"])
-        # TODO: port completely from wordprofile.extract!
-        continue
+        # object predicative
         if t["upos"] == "VERB":
-            t_deps = dependants(tokens, t)
+            t_deps = dependants(s, t)
             for t_dep_1 in t_deps:
-                if t_dep_1["upos"] == "VERB":
-                    if (t_dep_1["feats"] or {}).get("VerbForm", "") in {"Fin", "Part"}:
-                        if any(
-                            t_dep_2["upos"] == "AUX"
-                            for t_dep_2 in dependants(tokens, t_dep_1)
-                        ):
-                            # skip subclauses: full verbs, particle + aux
+
+                def t_dep_1_pattern(pos=None, deprel=None, t_dep_1=t_dep_1):
+                    if pos and t_dep_1["upos"] not in pos:
+                        return False
+                    if deprel and t_dep_1["deprel"] not in deprel:
+                        return False
+                    return True
+
+                def t_dep_2_pattern(lemma=None, deprel=None, pos=None, t_dep_1=t_dep_1):
+                    for t_dep_2 in dependants(s, t_dep_1):
+                        if lemma and lemma_text(t_dep_2) not in lemma:
                             continue
-                    if t_dep_1["upos"] == "NOUN" and t_dep_1["deprel"] == "obl":
-                        # case 1: als + NOUN > obl
-                        continue
+                        if deprel and t_dep_2["deprel"] not in deprel:
+                            continue
+                        if pos and t_dep_2["upos"] not in pos:
+                            continue
+                        return True
+                    return False
+
+                if t_dep_1_pattern({"VERB"}):
+                    # skip full verbs/particle  + aux
+                    if feat(t_dep_1, "VerbForm") in {"Fin", "Part"}:
+                        if t_dep_2_pattern(pos={"AUX"}):
+                            continue
+                if t_dep_1_pattern({"NOUN"}, {"obl"}):
+                    # case 1: als + NOUN > obl
+                    if (
+                        lemma in _pred_verbs["als_noun"]
+                        or lemma in _pred_verbs["als_adj"]
+                    ):
+                        if _is_probably_comparative(s, t):
+                            continue
+                        if t_dep_2_pattern({"als"}, {"case"}):
+                            yield ("PRED", t_dep_1["id"], t["id"])
+                if t_dep_1_pattern({"ADJ", "VERB"}, {"advcl", "xcomp"}):
+                    # case 2 : als + ADJ > advcl
+                    if lemma in _pred_verbs["als_adj"]:
+                        if _is_probably_comparative(s, t):
+                            continue
+                        if t_dep_2_pattern({"als"}, {"mark", "case"}):
+                            yield ("PRED", t_dep_1["id"], t["id"])
+                if t_dep_1_pattern({"ADJ", "NOUN"}, {"obl", "obj", "xcomp"}):
+                    # case 3: für + ADJ/NOUN > obl/obj/xcomp
+                    if lemma in _pred_verbs["für_adj-noun"]:
+                        if t_dep_2_pattern({"für"}, {"case"}):
+                            yield ("PRED", t_dep_1["id"], t["id"])
+                if t_dep_1_pattern({"ADJ", "VERB"}, {"advcl"}):
+                    # case 4: wie + NOUN/ADJ/VERB > obl/advcl
+                    if lemma in _pred_verbs["wie_adj-noun"]:
+                        if t_dep_2_pattern({"wie"}, {"case", "mark"}):
+                            yield ("PRED", t_dep_1["id"], t["id"])
+                if t_dep_1_pattern({"ADJ"}) and not t_dep_2_pattern({"als", "wie"}):
+                    # case 5: verb + adj ohne als/wie
+                    if lemma == "lassen" and t_dep_1["deprel"] == "xcomp":
+                        yield ("PRED", t_dep_1["id"], t["id"])
+                    elif lemma == "aussehen" and t_dep_1["deprel"] == "advcl":
+                        yield ("PRED", t_dep_1["id"], t["id"])
+                    elif lemma == "bleiben" and t_dep_1["deprel"] == "xcomp":
+                        subjects = [
+                            subj
+                            for subj in t_deps
+                            if subj["upos"] in {"ADJ", "NOUN", "VERB"}
+                            and subj["deprel"] == "nsubj"
+                        ]
+                        if len(subjects) == 1:
+                            yield ("PREDC", t_dep_1["id"], subjects[0]["id"])
 
 
-def extract_collocs(sentence):
+def extract_collocs(s):
     collocs = tuple(
         chain(
-            extract_by_patterns(sentence),
-            extract_comparing_groups(sentence),
-            extract_genitives(sentence),
-            extract_active_subjects(sentence),
-            extract_passive_subjects(sentence),
-            extract_objects(sentence),
-            extract_predicatives(sentence),
+            extract_by_patterns(s),
+            extract_comparing_groups(s),
+            extract_genitives(s),
+            extract_active_subjects(s),
+            extract_passive_subjects(s),
+            extract_objects(s),
+            extract_predicatives(s),
         )
     )
     if collocs:
-        sentence.metadata["collocations"] = json.dumps(collocs)
-    return sentence
+        s.metadata["collocations"] = json.dumps(collocs)
+    return s

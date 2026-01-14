@@ -27,6 +27,10 @@ def hit_collocs(sentence, hits=None, collocations=None):
                 yield (sentence[c - 1], collocation)
 
 
+def feat(token, k, default_val=None):
+    return (token.get("feats") or {}).get(k, default_val)
+
+
 def misc_attr(token, k, default_val=None):
     return (token.get("misc") or {}).get(k, default_val)
 
