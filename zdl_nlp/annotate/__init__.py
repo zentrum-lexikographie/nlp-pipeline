@@ -102,11 +102,14 @@ def collapse_phrasal_verbs(sentence):
 
 def dwdsmor_lemmatize(lemmatizer, sentences):
     for sentence in sentences:
-        for token in sentence:
+        sep_idxs = {t["head"] for t in sentence if t["deprel"] == "compound:prt"}
+        for ti, token in enumerate(sentence, 1):
             token_form = token["form"]
             token_lemma = token.get("lemma")
             token_pos = token["xpos"]
             token_morph = token["feats"] or {}
+            is_sep = ti in sep_idxs
+            is_prt = token["deprel"] == "compound:prt"
             token_criteria = {
                 k: frozenset(v) if v else None
                 for k, v in dwdsmor.tag.hdt.criteria(
@@ -114,12 +117,12 @@ def dwdsmor_lemmatize(lemmatizer, sentences):
                     token_morph.get("Number"),
                     token_morph.get("Gender"),
                     token_morph.get("Case"),
-                    token_morph.get("Person"),
+                    token_morph.get("Person") or ("UnmPers" if is_sep else None),
                     token_morph.get("Tense"),
                     token_morph.get("Degree"),
                     token_morph.get("Mood"),
                     token_morph.get("VerbForm"),
-                    None,  # TODO: separable verbs via syninfo
+                    "SEP" if (is_prt or is_sep) else None,
                 ).items()
             }
             if not token_lemma:
@@ -129,7 +132,7 @@ def dwdsmor_lemmatize(lemmatizer, sentences):
                 token["misc"] = (token["misc"] or {}) | {"DWDSmor": "No"}
                 continue
             dwdsmor_lemma = dwdsmor_result.analysis
-            if token_lemma == dwdsmor_lemma:
+            if token_lemma == dwdsmor_lemma and ti not in sep_idxs:
                 continue
             # make a POS match mandatory
             if dwdsmor_result.pos not in dwdsmor.tag.hdt.pos_map[token_pos]:

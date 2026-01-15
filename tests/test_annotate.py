@@ -14,6 +14,8 @@ def test_phrasal_verb_lemmatization(annotate):
         ("vorbeifahren", "Der Fahrer fuhr an dem Polizisten vorbei."),
         ("dazutun", "Die Klimakrise tut ihr übriges dazu."),
         ("offenstehen", "Die Tür steht offen."),
+        ("weitermachen", "Er macht mal weiter."),
+        ("abzweigen", "Sie zweigt etwas ab."),
         # ("leerstehen", "Das Haus steht leer."), FIXME
     )
     simple_verbs = (
