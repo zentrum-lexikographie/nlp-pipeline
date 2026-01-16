@@ -14,42 +14,9 @@ services:
       - index:/var/solr
     ports:
       - "8983:8983"
-  queue:
-    image: rabbitmq:4.1
-    environment:
-      - "RABBITMQ_DEFAULT_USER=nlp"
-      - "RABBITMQ_DEFAULT_PASS=nlp"
-    volumes:
-      - queue:/var/lib/rabbitmq
-    configs:
-      - source: rabbitmq_config
-        target: /etc/rabbitmq/rabbitmq.conf
-      - source: rabbitmq_tls_ca
-        target: /etc/rabbitmq/ca.pem
-      - source: rabbitmq_tls_cert
-        target: /etc/rabbitmq/cert.pem
-      - source: rabbitmq_tls_key
-        target: /etc/rabbitmq/key.pem
-    ports:
-      - "5671:5671"
-      - "5672:5672"
   nlp:
     image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/nlp:${CI_COMMIT_REF_SLUG:-latest}
     build:
       context: .
 volumes:
   index:
-  queue:
-configs:
-  rabbitmq_config:
-    content: |
-      listeners.ssl.default  = 5671
-      ssl_options.cacertfile = /etc/rabbitmq/ca.pem
-      ssl_options.certfile   = /etc/rabbitmq/cert.pem
-      ssl_options.keyfile    = /etc/rabbitmq/key.pem
-  rabbitmq_tls_ca:
-    file: ./certs/ca.pem
-  rabbitmq_tls_cert:
-    file: ./certs/queue.pem
-  rabbitmq_tls_key:
-    file: ./certs/queue-key.pem
