@@ -9,3 +9,19 @@ test:
   tags:
     - zdl
     - build
+
+deploy:
+  stage: deploy
+  image: docker:26.1.0
+  services:
+    - docker:26.1.0-dind
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker compose -f compose.prod.yml pull
+    - docker compose -f compose.prod.yml down --remove-orphans
+    - docker compose -f compose.prod.yml up -d
+  tags:
+    - zdl-gpu01.bbaw.de
+    - shell
+  only:
+    - main
