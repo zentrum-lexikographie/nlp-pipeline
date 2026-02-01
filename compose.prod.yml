@@ -22,7 +22,7 @@ services:
               count: 1
               capabilities: [gpu]
   gpt-gateway:
-    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/gpt-gateway:${CI_COMMIT_REF_SLUG:-latest}
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/gpt-gateway:${CI_COMMIT_SHORT_SHA:-latest}
     environment:
       - "ZDL_NLP_GPT_GW_DEBUG=1"
       - "ZDL_NLP_GPT_GW_API_KEY=${ZDL_NLP_GPT_GW_API_KEY}"

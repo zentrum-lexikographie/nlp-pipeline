@@ -1,7 +1,7 @@
 name: zdl_nlp
 services:
   index:
-    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/index:${CI_COMMIT_REF_SLUG:-latest}
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/index:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
       dockerfile_inline: |
@@ -15,11 +15,11 @@ services:
     ports:
       - "8983:8983"
   nlp:
-    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/nlp:${CI_COMMIT_REF_SLUG:-latest}
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/nlp:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
   gpt-gateway:
-    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/gpt-gateway:${CI_COMMIT_REF_SLUG:-latest}
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/gpt-gateway:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: gpt-gateway
     network_mode: host
