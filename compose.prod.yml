@@ -21,6 +21,12 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  gpt-gateway:
+    image: ${CI_REGISTRY_IMAGE:-docker.zdl.org/zdl/nlp}/gpt-gateway:${CI_COMMIT_REF_SLUG:-latest}
+    environment:
+      - "ZDL_NLP_GPT_GW_DEBUG=1"
+      - "ZDL_NLP_GPT_GW_API_KEY=${ZDL_NLP_GPT_GW_API_KEY}"
+      - "ZDL_NLP_GPT_GW_QUEUE_PASSWORD=${ZDL_LEX_QUEUE_PASSWORD}"
   http:
     image: caddy
     restart: unless-stopped

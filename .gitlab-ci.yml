@@ -1,3 +1,18 @@
+build:
+  stage: build
+  image: docker:26.1.0
+  services:
+    - docker:26.1.0-dind
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+    - docker compose build gpt-gateway
+    - docker compose push gpt-gateway
+  only:
+    - main
+  tags:
+    - zdl
+    - build
+
 test:
   stage: test
   image: python:3.13
@@ -6,6 +21,8 @@ test:
     - python3 -m venv .venv && source .venv/bin/activate
     - pip install -r requirements.test.txt
     - pytest --snapshot-warn-unused
+  only:
+    - main
   tags:
     - zdl
     - build
@@ -20,8 +37,8 @@ deploy:
     - docker compose -f compose.prod.yml pull
     - docker compose -f compose.prod.yml down --remove-orphans
     - docker compose -f compose.prod.yml up -d
+  only:
+    - main
   tags:
     - zdl-gpu01.bbaw.de
     - shell
-  only:
-    - main

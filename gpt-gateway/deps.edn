@@ -1,0 +1,13 @@
+{:deps    {com.rabbitmq/amqp-client           {:mvn/version "5.27.0"}
+           com.taoensso/telemere              {:mvn/version "1.0.1"}
+           com.taoensso/telemere-slf4j        {:mvn/version "1.0.1"}
+           http-kit/http-kit                  {:mvn/version "2.8.1"}
+           integrant/integrant                {:mvn/version "1.0.1"}
+           io.dropwizard.metrics/metrics-core {:mvn/version "4.2.0"}
+           io.github.cdimascio/dotenv-java    {:mvn/version "3.2.0"}
+           metosin/jsonista                   {:mvn/version "0.3.13"}
+           org.clojure/core.async             {:mvn/version "1.8.741"}
+           org.slf4j/slf4j-api                {:mvn/version "2.0.17"}}
+ :aliases {:dev  {:extra-paths ["dev"]
+                  :extra-deps  {integrant/repl {:mvn/version "0.5.0"}}}
+           :test {:extra-paths ["test"]}}}
