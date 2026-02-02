@@ -1,19 +1,12 @@
-import argparse
-import atexit
 import datetime
-import itertools
 import json
-import multiprocessing
-import os
 import re
 import urllib.parse
 from functools import cache
 from pathlib import Path
-from random import random
 
 import lxml.etree as ET
 
-from .conllu import serialize
 from .segment import segment
 
 
@@ -210,8 +203,8 @@ def extract_metadata(tei_header):
     return {k: v for k, v in metadata if v}
 
 
-def to_conll(corpus, basename, xml_file):
-    doc_urn = f"urn:corpus:{corpus}:{urllib.parse.quote(basename)}"
+def to_conll(corpus, path, xml_file):
+    doc_urn = f"urn:corpus:{corpus}:{urllib.parse.quote(path)}"
     doc_n = 0
     metadata_stack = [{"collection": corpus}]
     for event, element in ET.iterparse(xml_file, events=("start", "end"), recover=True):
@@ -223,8 +216,13 @@ def to_conll(corpus, basename, xml_file):
             metadata_stack.append(metadata)
         if event == "start" and element.tag == tei_tag("TEI"):
             doc_n += 1
-            for ci, c in enumerate(iter_chunks(element), 1):
-                for si, s in enumerate(segment(extract_text(c)), 1):
+            ci = 0
+            for c in iter_chunks(element):
+                text = extract_text(c)
+                if not text:
+                    continue
+                ci += 1
+                for si, s in enumerate(segment(text), 1):
                     if si == 1:
                         if ci == 1:
                             doc_id = doc_urn
@@ -239,94 +237,3 @@ def to_conll(corpus, basename, xml_file):
         if event == "end" and element.tag in tei_tag_set("teiCorpus", "TEI"):
             metadata_stack.pop()
             element.clear()
-
-
-arg_parser = argparse.ArgumentParser(description="Convert TEI/XML to CoNLL-U")
-arg_parser.add_argument(
-    "-c",
-    "--corpus",
-    help="base URN of converted corpus",
-    default="zdl",
-)
-arg_parser.add_argument(
-    "-l",
-    "--limit",
-    help="limit # of documents (no limit by default)",
-    type=int,
-    default="0",
-)
-arg_parser.add_argument(
-    "-o",
-    "--output-file",
-    help="output CoNLL-U file (defaults to stdout)",
-    type=argparse.FileType("w"),
-    default="-",
-)
-arg_parser.add_argument(
-    "-p",
-    "--parallel",
-    help="# of parallel conversions (1 by default)",
-    type=int,
-    default="-1",
-)
-arg_parser.add_argument(
-    "-s",
-    "--sample",
-    help="sample ratio [0.0,1.0] (all documents by default)",
-    type=float,
-    default="1.0",
-)
-arg_parser.add_argument(
-    "tei_xml_path", help="input TEI/XML dirs/files", type=Path, nargs="*"
-)
-
-
-def corpus_files(corpus, path):
-    if path.is_dir():
-        for dir_path, _subdirs, files in path.walk():
-            for f in files:
-                if f.endswith(".xml"):
-                    f = dir_path / f
-                    yield (corpus, str(f.relative_to(path)), f)
-    else:
-        yield (corpus, path.name, path)
-
-
-def corpus_file_to_conll_str(corpus_file):
-    corpus, basename, xml_file = corpus_file
-    return "".join(serialize(s) for s in to_conll(corpus, basename, xml_file))
-
-
-def main():
-    args = arg_parser.parse_args()
-    if len(args.tei_xml_path) > 0:
-
-        def files(p):
-            return corpus_files(args.corpus, p)
-
-        input_files = (f for p in args.tei_xml_path for f in files(p))
-        if args.sample < 1.0:
-            input_files = (xfs for xfs in input_files if random() < args.sample)
-        if args.limit > 0:
-            input_files = itertools.islice(input_files, args.limit)
-    else:
-        input_files = ((args.corpus, "stdin", argparse.FileType("rb")("-")),)
-    n_procs = args.parallel
-    if n_procs >= 0:
-        n_procs = n_procs or len(os.sched_getaffinity(0))
-        pool = multiprocessing.Pool(n_procs)
-
-        @atexit.register
-        def terminate_pool():
-            pool.terminate()
-
-        for chunk in pool.imap(corpus_file_to_conll_str, input_files):
-            args.output_file.write(chunk)
-    else:
-        for corpus, basename, xml_file in input_files:
-            for s in to_conll(corpus, basename, xml_file):
-                args.output_file.write(serialize(s))
-
-
-if __name__ == "__main__":
-    main()

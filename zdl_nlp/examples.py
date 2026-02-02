@@ -1,8 +1,6 @@
 import datetime
 import json
-import logging
 import re
-import sys
 from itertools import batched, chain, islice
 from time import sleep
 
@@ -12,15 +10,13 @@ from dwds_wic_sbert import WiCTransformer
 from pgvector.psycopg import register_vector
 from requests.exceptions import RequestException
 
-from zdl_nlp.annotate import create_pipe
-from zdl_nlp.ddc import dstar_collections
-from zdl_nlp.dedupe import dedupe
-from zdl_nlp.korap import korap_instances
-
+from .annotate import create_pipe
 from .conllu import form_text, hit_collocs, hit_set, lemma_text, marked_text, serialize
+from .ddc import dstar_collections
+from .dedupe import dedupe
 from .env import config
-
-logger = logging.getLogger(__name__)
+from .korap import korap_instances
+from .log import logger
 
 _quotes_re = re.compile(r"(['\"])")
 
@@ -96,12 +92,6 @@ def fix_korap_hits(sentence, lemma_set):
 
 
 def main():
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="[%(asctime)s] %(levelname)s - %(message)s",
-        handlers=(logging.StreamHandler(stream=sys.stderr),),
-    )
-
     dstar_config = config.get("ZDL_NLP_DSTAR_COLLECTIONS", "dwdsxl")
     dstar = tuple(dstar_collections().get(c) for c in dstar_config.split(","))
     assert all(dstar), dstar_config
@@ -217,7 +207,7 @@ def main():
 
     db_conn_info = psycopg.conninfo.make_conninfo(
         "",
-        host=config.get("ZDL_NLP_DB_HOST", "localhost"),
+        host=config.get("ZDL_NLP_DB_HOST", "labor.dwds.de"),
         port=int(config.get("ZDL_NLP_DB_PORT", "5432")),
         dbname=config.get("ZDL_NLP_DB_NAME", "lex"),
         user=config.get("ZDL_NLP_DB_USER", "lex"),
