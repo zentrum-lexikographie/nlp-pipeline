@@ -66,19 +66,6 @@ dev = [
 [project.urls]
 Homepage = "https://github.com/zentrum-lexikographie/nlp-pipeline"
 
-[project.scripts]
-zdl-nlp-annotate = "zdl_nlp.annotate:main"
-zdl-nlp-colloc = "zdl_nlp.colloc:main"
-zdl-nlp-ddc = "zdl_nlp.ddc.corpora:main"
-zdl-nlp-ddc2conllu = "zdl_nlp.ddc.tabs:main"
-zdl-nlp-examples = "zdl_nlp.examples:main"
-zdl-nlp-install-models = "zdl_nlp.models:install"
-zdl-nlp-korap = "zdl_nlp.korap:main"
-zdl-nlp-polspeech = "zdl_nlp.polspeech:main"
-zdl-nlp-sbert = "zdl_nlp.sbert:main"
-zdl-nlp-txt2conllu = "zdl_nlp.segment:main"
-zdl-nlp-tei2conllu = "zdl_nlp.tei:main"
-
 [tool.isort]
 profile = "black"
 

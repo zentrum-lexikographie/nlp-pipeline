@@ -4,29 +4,17 @@ _Combining Off-the-Shelf and Custom Components_
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15755337.svg)](https://doi.org/10.5281/zenodo.15755337)
 
-## Installation
+## Installation / Development Setup
 
     pip install -U pip setuptools
-    pip install git+https://github.com/zentrum-lexikographie/nlp-pipeline@v1.0.1
-    zdl-nlp-install-models
-
-Add `-f`, if you would like to install CPU-optimized models and `-d`,
-if you have access to the DWDS edition of DWDSmor. In the latter case,
-log into your Hugging Face account beforehand, i. e.:
-
-    $ huggingface-cli login
-    […]
-    $ zdl-nlp-install-models -d -f
-    2025-06-27 12:58:02,352 – INFO – Installed spaCy model (dist)
-    2025-06-27 12:58:11,420 – INFO – Installed spaCy model (lg)
-    2025-06-27 12:58:11,963 – INFO – Installed DWDSmor lemmatizer (open)
-    2025-06-27 12:58:12,309 – INFO – Installed DWDSmor lemmatizer (dwds)
+    pip install -r requirements.dev.txt
+    pre-commit install
 
 ## Usage Example
 
 Annotate a random sentence from a corpus of political speeches:
 
-    $ zdl-nlp-polspeech -s 0.01 -l 1 | zdl-nlp-annotate
+    $ python -m zdl_nlp.polspeech -s 0.01 -l 1 | python -m zdl_nlp.annotate
     # newdoc id = http://www.auswaertiges-amt.de/DE/Infoservice/Presse/Reden/2010/101014-Pieper-Dokkyo-Universität.html
     # bibl = Cornelia Pieper. Rede Staatsministerin Pieper: "150 Jahre Wissenschaftsbeziehungen Deutschland-Japan – ein Schatz für die Zukunft". 2010-10-14. o.O.
     # date = 2010-10-14
@@ -51,14 +39,9 @@ Annotate a random sentence from a corpus of political speeches:
     15	bereitet	bereiten	VERB	VVFIN	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	acl	_	SpaceAfter=No
     16	.	.	PUNCT	$.	PunctType=Peri	2	punct	_	_
 
-## Development Setup
-
-    pip install -U pip pip-tools setuptools
-    pip install -e .[dev]
-
 ## Analyze TEI schema (element classes)
 
-    (cd tei-schema && clojure -X:extract) >zdl_nlp/tei_schema.json
+    (cd tei-schema && clojure -X:extract) >zdl_nlp/tei/schema.json
 
 ## License
 

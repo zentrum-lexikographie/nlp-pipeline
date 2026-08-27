@@ -16,7 +16,7 @@ def tei_tag(tag):
     return "{http://www.tei-c.org/ns/1.0}" + tag
 
 
-tag_schema_file = (Path(__file__) / ".." / "tei_schema.json").resolve()
+tag_schema_file = (Path(__file__) / ".." / "schema.json").resolve()
 tag_categories = {}
 
 for category, tags in json.loads(tag_schema_file.read_text()).items():
