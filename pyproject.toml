@@ -47,7 +47,7 @@ lex = [
 ]
 gpu = [
     "de_zdl_dist",
-    "spacy[cuda12x,transformers]",
+    "spacy[cuda13x,transformers]",
 ]
 sbert = [
     "dwds-wic-sbert",
